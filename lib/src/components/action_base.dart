@@ -1,7 +1,8 @@
+import 'package:flutter/services.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
-class BaseButton extends StatefulWidget {
-  const BaseButton({
+class ActionBase extends StatefulWidget {
+  const ActionBase({
     // Press
     this.onPressed,
     this.onTapDown,
@@ -15,6 +16,12 @@ class BaseButton extends StatefulWidget {
     this.onHorizontalDragStart,
     this.onHorizontalDragUpdate,
     this.onHorizontalDragEnd,
+    // Pointer events
+    this.onEnter,
+    this.onHover,
+    this.onExit,
+    // Cursor
+    this.cursor,
     // FocusNode
     this.focusNode,
     this.autofocus = false,
@@ -42,6 +49,12 @@ class BaseButton extends StatefulWidget {
   final GestureDragUpdateCallback? onHorizontalDragUpdate;
   final GestureDragEndCallback? onHorizontalDragEnd;
 
+  final PointerEnterEventListener? onEnter;
+  final PointerHoverEventListener? onHover;
+  final PointerExitEventListener? onExit;
+
+  final MouseCursor? cursor;
+
   final FocusNode? focusNode;
   final bool autofocus;
   final ValueChanged<bool>? onFocusChange;
@@ -53,10 +66,10 @@ class BaseButton extends StatefulWidget {
   final Widget? child;
 
   @override
-  _BaseButtonState createState() => _BaseButtonState();
+  _ActionBaseState createState() => _ActionBaseState();
 }
 
-class _BaseButtonState extends State<BaseButton> {
+class _ActionBaseState extends State<ActionBase> {
   late FocusNode node;
 
   @override
@@ -66,7 +79,7 @@ class _BaseButtonState extends State<BaseButton> {
   }
 
   @override
-  void didUpdateWidget(BaseButton oldWidget) {
+  void didUpdateWidget(ActionBase oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.focusNode != oldWidget.focusNode) {
       node = widget.focusNode ?? node;
@@ -95,6 +108,7 @@ class _BaseButtonState extends State<BaseButton> {
           enabled: true,
           focusable: true,
           focused: node.hasFocus,
+
           child: FocusableActionDetector(
             mouseCursor: SystemMouseCursors.click,
             focusNode: node,
@@ -103,23 +117,33 @@ class _BaseButtonState extends State<BaseButton> {
             enabled: true,
             onFocusChange: widget.onFocusChange,
 
-            child: GestureDetector(
-              // Behavior
-              behavior: HitTestBehavior.opaque,
-              // Press
-              onTap: widget.onPressed,
-              onTapDown: (_) => widget.onTapDown?.call(),
-              onTapUp: (_) => widget.onTapUp?.call(),
-              // Long Press
-              onLongPress: widget.onLongPress,
-              onLongPressStart: (_) => widget.onLongPressStart?.call(),
-              onLongPressEnd: (_) => widget.onLongPressEnd?.call(),
-              // Drag
-              onHorizontalDragStart: widget.onHorizontalDragStart,
-              onHorizontalDragUpdate: widget.onHorizontalDragUpdate,
-              onHorizontalDragEnd: widget.onHorizontalDragEnd,
-              // Child
-              child: widget.child,
+            child: MouseRegion(
+              // Mouse pointer events
+              onEnter: widget.onEnter,
+              onHover: widget.onHover,
+              onExit: widget.onExit,
+
+              // Cursor
+              cursor: widget.cursor ?? MouseCursor.defer,
+
+              child: GestureDetector(
+                // Behavior
+                behavior: HitTestBehavior.opaque,
+                // Press
+                onTap: widget.onPressed,
+                onTapDown: (_) => widget.onTapDown?.call(),
+                onTapUp: (_) => widget.onTapUp?.call(),
+                // Long Press
+                onLongPress: widget.onLongPress,
+                onLongPressStart: (_) => widget.onLongPressStart?.call(),
+                onLongPressEnd: (_) => widget.onLongPressEnd?.call(),
+                // Drag
+                onHorizontalDragStart: widget.onHorizontalDragStart,
+                onHorizontalDragUpdate: widget.onHorizontalDragUpdate,
+                onHorizontalDragEnd: widget.onHorizontalDragEnd,
+                // Child
+                child: widget.child,
+              ),
             ),
           ),
         ),
