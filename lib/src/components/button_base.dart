@@ -66,11 +66,13 @@ class _ButtonBaseState extends State<ButtonBase> {
       onPressed: () async {
         if (_enabled) {
           setState(() => _buttonColor =
-              Color.alphaBlend(Constants.focusMixinColor, _backgroundColor));
+                Color.alphaBlend(Constants.focusMixinColor, _backgroundColor),
+          );
           widget.onPressed?.call();
           await Future.delayed(const Duration(milliseconds: 100));
           setState(() => _buttonColor =
-              Color.alphaBlend(Constants.hoverMixinColor, _backgroundColor));
+                Color.alphaBlend(Constants.hoverMixinColor, _backgroundColor),
+          );
         }
       },
       cursor: _enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
@@ -90,7 +92,6 @@ class _ButtonBaseState extends State<ButtonBase> {
         }
       },
       child: PhysicalModel(
-        elevation: 0.0,
         borderRadius: BorderRadius.circular(8),
         color: _buttonColor,
         child: Padding(
