@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool value = true;
   @override
   Widget build(BuildContext context) {
     return material.MaterialApp(
@@ -25,7 +26,15 @@ class _MyAppState extends State<MyApp> {
                 child: Center(
                   child: Transform.scale(
                     scale: 1.5,
-                    child: PrimaryButton(
+                    child: Switch(
+                      onChanged: (val) {
+                        setState(() {
+                          value = val;
+                        });
+                      },
+                      value: value,
+                    ),
+                    /* child: PrimaryButton(
                       enabled: false,
                       onPressed: () => print("test"),
                       backgroundColor: const Color(0xFF009966),
@@ -33,7 +42,7 @@ class _MyAppState extends State<MyApp> {
                       child: const Text(
                         "Disabled Button",
                       ),
-                    ),
+                    ), */
                   ),
                 ),
               ),
