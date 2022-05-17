@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'
-    show FlutterLogo, IconButton, Icons, Theme;
+    show FlutterLogo, IconButton, Icons;
 import 'package:zenit_ui/src/components/action_base.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -41,8 +41,6 @@ class Tab extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 if (icon != null)
                   Padding(
@@ -62,7 +60,7 @@ class Tab extends StatelessWidget {
                 ), */
                 Text(
                   "Tab",
-                  style: Theme.of(context).textTheme.subtitle2,
+                  style: Theme.of(context).materialTheme.textTheme.subtitle2,
                 ),
                 const Spacer(),
                 IconButton(

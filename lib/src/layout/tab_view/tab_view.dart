@@ -1,5 +1,3 @@
-import 'package:zenit_ui/src/layout/tab_view/tab.dart';
-import 'package:zenit_ui/src/layout/tab_view/tab_page.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class TabView extends StatefulWidget {
@@ -43,7 +41,7 @@ class _TabViewState extends State<TabView> {
           right: 0,
           bottom: 0,
           child: Container(
-            color: Colors.red,
+            color: Colors.blue,
           ),
         )
       ],

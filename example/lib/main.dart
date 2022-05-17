@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' as material;
 import 'package:zenit_ui/zenit_ui.dart';
 
 void main() {
@@ -16,8 +15,9 @@ class _MyAppState extends State<MyApp> {
   bool value = true;
   @override
   Widget build(BuildContext context) {
-    return material.MaterialApp(
-      home: material.Scaffold(
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Colors.materialColors.brown),
+      home: Scaffold(
         body: Row(
           children: [
             Expanded(
@@ -25,24 +25,36 @@ class _MyAppState extends State<MyApp> {
                 color: const Color(0xffffffff),
                 child: Center(
                   child: Transform.scale(
-                    scale: 1.5,
-                    child: Switch(
+                    scale: 1,
+                    /* child: Switch(
                       onChanged: (val) {
                         setState(() {
                           value = val;
                         });
                       },
                       value: value,
-                    ),
-                    /* child: PrimaryButton(
-                      enabled: false,
-                      onPressed: () => print("test"),
-                      backgroundColor: const Color(0xFF009966),
-                      foregroundColor: const Color(0xfffafafa),
-                      child: const Text(
-                        "Disabled Button",
-                      ),
                     ), */
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PrimaryButton(
+                          onPressed: () => print("PrimaryButton was clicked"),
+                          backgroundColor: Colors.blue,
+                          foregroundColor: const Color(0xffffffff),
+                          child: const Text(
+                            "Primary Button",
+                          ),
+                        ),
+                        const Gap(8),
+                        SecondaryButton(
+                          onPressed: () => print("SecondaryButton was clicked"),
+                          foregroundColor: const Color(0xff000000),
+                          child: const Text(
+                            "Secondary Button",
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -56,47 +68,6 @@ class _MyAppState extends State<MyApp> {
                 ),
               ],
             )
-                /* child: Container(
-                color: const Color(0xff121212),
-                child: material.Theme(
-                  data: material.ThemeData(
-                    brightness: material.Brightness.dark,
-                  ),
-                  child: Center(
-                    child: Transform.scale(
-                      scale: 1.0,
-                      child: /* PrimaryButton(
-                        enabled: false,
-                        debugDarkMode: true,
-                        onPressed: () => print("test"),
-                        backgroundColor: const Color(0xFF009966),
-                        foregroundColor: const Color(0xff212121),
-                        child: const Text(
-                          "Disabled Button",
-                        ),
-                      ), */
-                          material.Row(
-                        mainAxisAlignment: material.MainAxisAlignment.center,
-                        children: [
-                          Tab(
-                            onClose: () {},
-                            enabled: true,
-                          ),
-                          Tab(
-                            onClose: () {},
-                          ),
-                          Tab(
-                            onClose: () {},
-                          ),
-                          Tab(
-                            onClose: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ), */
                 ),
           ],
         ),

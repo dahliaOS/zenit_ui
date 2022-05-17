@@ -1,8 +1,7 @@
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenit_ui/src/components/action_base.dart';
-import 'package:zenit_ui/src/debug/constants.dart';
 import 'package:zenit_ui/src/types/button_type.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class ButtonBase extends StatefulWidget {
   const ButtonBase({
@@ -11,7 +10,6 @@ class ButtonBase extends StatefulWidget {
     this.onPressed,
     this.foregroundColor,
     this.backgroundColor,
-    this.enabled,
     this.debugDarkMode,
     required this.type,
   }) : super(key: key);
@@ -26,7 +24,6 @@ class ButtonBase extends StatefulWidget {
 
   final ButtonType type;
 
-  final bool? enabled;
   final bool? debugDarkMode;
 
   @override
@@ -34,30 +31,40 @@ class ButtonBase extends StatefulWidget {
 }
 
 class _ButtonBaseState extends State<ButtonBase> {
-  late Color _backgroundColor;
-  late Color _buttonColor;
-  late Color _flatButtonColor;
-  late Color _disabledTextColor;
   late bool _enabled;
-  late bool _debugDarkMode;
-  @override
-  void initState() {
-    _enabled = widget.enabled ?? true;
-    _debugDarkMode = widget.debugDarkMode ?? false;
-    _flatButtonColor =
-        _debugDarkMode ? const Color(0xff262626) : const Color(0xffE5E5E5);
 
-    if (_enabled) {
-      _backgroundColor = widget.backgroundColor ?? const Color(0xFF009966);
+  late Color backgroundColor;
+  late Color textColor;
+
+  late Color buttonColor;
+
+  void loadColors() {
+    _enabled = widget.onPressed != null;
+
+    if (!_enabled) {
+      backgroundColor = const Color(0xFFE5E5E5);
+      textColor = const Color(0xFFFFFFFF).withOpacity(0.75);
+    } else if (!(widget.type == ButtonType.primary)) {
+      backgroundColor = const Color(0xFFE5E5E5);
     } else {
-      _backgroundColor = _flatButtonColor;
+      backgroundColor =
+          widget.backgroundColor ?? Theme.of(context).primaryColor;
     }
 
-    _disabledTextColor = _debugDarkMode
-        ? Color.alphaBlend(const Color(0x75212121), const Color(0x75fafafa))
-        : Color.alphaBlend(const Color(0x75fafafa), const Color(0x75212121));
-    _buttonColor = _backgroundColor;
-    super.initState();
+    buttonColor = backgroundColor;
+    textColor = widget.foregroundColor ?? const Color(0xFF000000);
+  }
+
+  @override
+  void didChangeDependencies() {
+    loadColors();
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(ButtonBase oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    loadColors();
   }
 
   @override
@@ -65,13 +72,17 @@ class _ButtonBaseState extends State<ButtonBase> {
     return ActionBase(
       onPressed: () async {
         if (_enabled) {
-          setState(() => _buttonColor =
-                Color.alphaBlend(Constants.focusMixinColor, _backgroundColor),
+          setState(
+            () => buttonColor =
+                Color.alphaBlend(Constants.focusMixinColor, backgroundColor),
           );
           widget.onPressed?.call();
           await Future.delayed(const Duration(milliseconds: 100));
-          setState(() => _buttonColor =
-                Color.alphaBlend(Constants.hoverMixinColor, _backgroundColor),
+          setState(
+            () => buttonColor = Color.alphaBlend(
+              Constants.hoverMixinColor,
+              backgroundColor,
+            ),
           );
         }
       },
@@ -79,24 +90,25 @@ class _ButtonBaseState extends State<ButtonBase> {
       onEnter: (_) {
         if (_enabled) {
           setState(() {
-            _buttonColor =
-                Color.alphaBlend(Constants.hoverMixinColor, _backgroundColor);
+            buttonColor =
+                Color.alphaBlend(Constants.hoverMixinColor, backgroundColor);
           });
         }
       },
       onExit: (_) {
         if (_enabled) {
           setState(() {
-            _buttonColor = _backgroundColor;
+            buttonColor = backgroundColor;
           });
         }
       },
       child: PhysicalModel(
         borderRadius: BorderRadius.circular(8),
-        color: _buttonColor,
+        color: buttonColor,
+        clipBehavior: Clip.antiAlias,
         child: Padding(
           padding: widget.child != null
-              ? const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0)
+              ? const EdgeInsets.symmetric(horizontal: 16, vertical: 12.0)
               : EdgeInsets.zero,
           child: IconTheme.merge(
             data: IconThemeData(
@@ -104,9 +116,10 @@ class _ButtonBaseState extends State<ButtonBase> {
             ),
             child: DefaultTextStyle(
               style: TextStyle(
-                color: _enabled ? widget.foregroundColor : _disabledTextColor,
+                color: textColor,
                 fontFamily: GoogleFonts.manrope().fontFamily,
                 fontWeight: FontWeight.w500,
+                fontSize: 12,
                 letterSpacing: 0.8,
                 backgroundColor: Constants.transparent,
               ),
