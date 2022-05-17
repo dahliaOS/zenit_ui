@@ -40,19 +40,19 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   void loadColors() {
     _enabled = widget.onPressed != null;
+    textColor = widget.foregroundColor ?? const Color(0xFF000000);
 
     if (!_enabled) {
       backgroundColor = const Color(0xFFE5E5E5);
-      textColor = const Color(0xFFFFFFFF).withOpacity(0.75);
-    } else if (!(widget.type == ButtonType.primary)) {
-      backgroundColor = const Color(0xFFE5E5E5);
-    } else {
+      textColor = const Color(0xFF212121).withOpacity(0.25);
+    } else if (widget.type == ButtonType.primary) {
       backgroundColor =
           widget.backgroundColor ?? Theme.of(context).primaryColor;
+    } else {
+      backgroundColor = const Color(0xFFE6E6E6);
     }
 
     buttonColor = backgroundColor;
-    textColor = widget.foregroundColor ?? const Color(0xFF000000);
   }
 
   @override

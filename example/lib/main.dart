@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.materialColors.brown),
+      theme: ThemeData(primaryColor: Colors.blue),
       home: Scaffold(
         body: Row(
           children: [
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
                       value: value,
                     ), */
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,  
                       children: [
                         PrimaryButton(
                           onPressed: () => print("PrimaryButton was clicked"),
