@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: Colors.blue),
+      theme: ThemeData(primaryColor: ZenitColors.blue),
       home: Scaffold(
         body: Row(
           children: [
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                       children: [
                         PrimaryButton(
                           onPressed: () => print("PrimaryButton was clicked"),
-                          backgroundColor: Colors.blue,
+                          backgroundColor: ZenitColors.blue,
                           foregroundColor: const Color(0xffffffff),
                           child: const Text(
                             "Primary Button",

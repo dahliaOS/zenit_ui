@@ -1,6 +1,6 @@
 library zenit_ui;
 
-export 'package:flutter/material.dart' hide Colors, Chip, Switch, Tab, Theme;
+export 'package:flutter/material.dart' hide Chip, Switch, Tab, Theme;
 export 'package:flutter/widgets.dart';
 export 'package:gap/gap.dart';
 export 'package:zenit_ui/src/controls/buttons/buttons.dart';

@@ -41,7 +41,7 @@ class _TabViewState extends State<TabView> {
           right: 0,
           bottom: 0,
           child: Container(
-            color: Colors.blue,
+            color: ZenitColors.blue,
           ),
         )
       ],
