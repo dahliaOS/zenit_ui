@@ -1,39 +1,54 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<div>
+  <h1 align="center">ZenitUI</h1>
+  <p align="center">
+  Design beautiful apps using Flutter
+  </p>
+</div>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+### What is ZenitUI
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+ZenitUI is a UI library for Flutter meant to be used besides the Material library
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+### Content:
+- [Installation](#installation)
+- [Components](#components)
+    - [Button](#button)
+    - [Switch](#switch)
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+### Installation
+Add the package to your dependencies:
+```yaml
+dependencies:
+  zenit_ui: 
+    git: https://github.com/larsb24/zenit_ui
 ```
+### Components
+#### Button
+A button gives the user a way to trigger an immediate action.
+There are two types of Buttons. Primary and Secondary.
 
-## Additional information
+Here is an example of how to create a basic Primary Button:
+```dart
+PrimaryButton(
+  onPressed: () => print("PrimaryButton was clicked"),
+  backgroundColor: ZenitColors.blue,
+  foregroundColor: const Color(0xffffffff),
+  child: const Text(
+    "Primary Button",
+  ),
+),
+```
+For a SecondaryButton just change the keyword to SecondaryButton.
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+#### Switch
+A Switch is a component which allows you to toggle things on and off.
+
+Here is an example of how to create a basic Switch:
+```dart
+bool _checked = false;
+
+Switch(
+  value: _checked,
+  onChanged: (value) => setState(() => _checked = value),
+),
+```

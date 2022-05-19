@@ -53,6 +53,8 @@ class _MyAppState extends State<MyApp> {
                             "Secondary Button",
                           ),
                         ),
+                        const Gap(8),
+                        Switch(value: true, onChanged: (val) {})
                       ],
                     ),
                   ),
