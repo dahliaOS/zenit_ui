@@ -9,14 +9,12 @@ class PrimaryButton extends ButtonBase {
     Color? backgroundColor,
     Color? foregroundColor,
     Widget? child,
-    bool? debugDarkMode,
   }) : super(
           key: key,
           type: ButtonType.primary,
           onPressed: onPressed,
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
-          debugDarkMode: debugDarkMode,
           child: child,
         );
 }
@@ -27,13 +25,11 @@ class SecondaryButton extends ButtonBase {
     VoidCallback? onPressed,
     Color? foregroundColor,
     Widget? child,
-    bool? debugDarkMode,
   }) : super(
           key: key,
           type: ButtonType.secondary,
           onPressed: onPressed,
           foregroundColor: foregroundColor,
-          debugDarkMode: debugDarkMode,
           child: child,
         );
 }

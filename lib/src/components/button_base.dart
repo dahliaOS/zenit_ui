@@ -38,9 +38,18 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   late Color buttonColor;
 
+  late Color focusMixin;
+  late Color hoverMixin;
+
   void loadColors() {
     _enabled = widget.onPressed != null;
-    textColor = widget.foregroundColor ?? const Color(0xFF000000);
+    textColor = widget.foregroundColor ?? Theme.of(context).textColor;
+    focusMixin = Theme.of(context).darkMode
+        ? const Color(0xFFFFFFFF).withOpacity(0.2)
+        : const Color(0xFF000000).withOpacity(0.2);
+    hoverMixin = Theme.of(context).darkMode
+        ? const Color(0xFFFFFFFF).withOpacity(0.1)
+        : const Color(0xFF000000).withOpacity(0.1);
 
     if (!_enabled) {
       backgroundColor = const Color(0xFFE5E5E5);
@@ -49,7 +58,7 @@ class _ButtonBaseState extends State<ButtonBase> {
       backgroundColor =
           widget.backgroundColor ?? Theme.of(context).primaryColor;
     } else {
-      backgroundColor = const Color(0xFFE6E6E6);
+      backgroundColor = Theme.of(context).surfaceColor;
     }
 
     buttonColor = backgroundColor;
@@ -74,13 +83,13 @@ class _ButtonBaseState extends State<ButtonBase> {
         if (_enabled) {
           setState(
             () => buttonColor =
-                Color.alphaBlend(Constants.focusMixinColor, backgroundColor),
+                Color.alphaBlend(focusMixin, backgroundColor),
           );
           widget.onPressed?.call();
           await Future.delayed(const Duration(milliseconds: 100));
           setState(
             () => buttonColor = Color.alphaBlend(
-              Constants.hoverMixinColor,
+              hoverMixin,
               backgroundColor,
             ),
           );
@@ -91,7 +100,7 @@ class _ButtonBaseState extends State<ButtonBase> {
         if (_enabled) {
           setState(() {
             buttonColor =
-                Color.alphaBlend(Constants.hoverMixinColor, backgroundColor);
+                Color.alphaBlend(hoverMixin, backgroundColor);
           });
         }
       },
@@ -121,7 +130,7 @@ class _ButtonBaseState extends State<ButtonBase> {
                 fontWeight: FontWeight.w500,
                 fontSize: 12,
                 letterSpacing: 0.8,
-                backgroundColor: Constants.transparent,
+                backgroundColor: Colors.transparent,
               ),
               child: widget.child ?? const SizedBox.shrink(),
             ),

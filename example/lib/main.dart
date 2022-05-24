@@ -1,4 +1,5 @@
 import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui_example/theme/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,65 +13,47 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool value = true;
+  bool value = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primaryColor: ZenitColors.blue),
+      themeMode: value ? ThemeMode.dark : ThemeMode.light,
+      theme: ExampleTheme.lightTheme,
+      darkTheme: ExampleTheme.darkTheme,
       home: Scaffold(
-        body: Row(
+        
+        body: zenitComponents(),
+      ),
+    );
+  }
+
+  Widget zenitComponents() {
+    return Center(
+      child: Transform.scale(
+        scale: 1.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: Container(
-                color: const Color(0xffffffff),
-                child: Center(
-                  child: Transform.scale(
-                    scale: 1,
-                    /* child: Switch(
-                      onChanged: (val) {
-                        setState(() {
-                          value = val;
-                        });
-                      },
-                      value: value,
-                    ), */
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,  
-                      children: [
-                        PrimaryButton(
-                          onPressed: () => print("PrimaryButton was clicked"),
-                          backgroundColor: ZenitColors.blue,
-                          foregroundColor: const Color(0xffffffff),
-                          child: const Text(
-                            "Primary Button",
-                          ),
-                        ),
-                        const Gap(8),
-                        SecondaryButton(
-                          onPressed: () => print("SecondaryButton was clicked"),
-                          foregroundColor: const Color(0xff000000),
-                          child: const Text(
-                            "Secondary Button",
-                          ),
-                        ),
-                        const Gap(8),
-                        Switch(value: true, onChanged: (val) {})
-                      ],
-                    ),
-                  ),
-                ),
+            PrimaryButton(
+              onPressed: () => print("PrimaryButton was clicked"),
+              backgroundColor: ZenitColors.blue,
+              foregroundColor: const Color(0xffffffff),
+              child: const Text(
+                "Primary Button",
               ),
             ),
-            Expanded(
-                child: TabView(
-              tabs: [
-                TabViewPage(
-                  title: 'Test',
-                  view: const SizedBox(),
-                ),
-              ],
-            )
-                ),
+            const Gap(16),
+            SecondaryButton(
+              onPressed: () => print("SecondaryButton was clicked"),
+              child: const Text(
+                "Secondary Button",
+              ),
+            ),
+            const Gap(16),
+            Switch(
+              value: value,
+              onChanged: (val) => setState(() => value = val),
+            ),
           ],
         ),
       ),

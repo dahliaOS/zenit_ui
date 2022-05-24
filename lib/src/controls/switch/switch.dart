@@ -1,7 +1,6 @@
-
 //Credits: @HrX03 - for the base (which was slightly altered)
 
-import 'package:flutter/material.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class Switch extends StatefulWidget {
   final bool value;
@@ -46,7 +45,7 @@ class _SwitchState extends State<Switch> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    const Color activeTrackColor = Colors.red;
+    final Color activeTrackColor = Theme.of(context).primaryColor;
     final Color inactiveTrackColor = Colors.grey[700]!;
     const Color thumbColor = Colors.white;
 
