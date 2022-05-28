@@ -21,7 +21,9 @@ class Theme {
 
   Color get areaColor => materialTheme.cardColor;
 
-  Color get textColor =>
+  Color get backgroundColor => materialTheme.backgroundColor;
+
+  Color get foregroundColor =>
       materialTheme.textTheme.button?.color ?? m.Colors.white;
 }
 

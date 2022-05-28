@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart'
-    show FlutterLogo, IconButton, Icons;
 import 'package:zenit_ui/src/components/action_base.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -14,53 +12,47 @@ class Tab extends StatelessWidget {
     ),
     this.closeIcon,
     this.onClose,
+    this.onPressed,
   }) : super(key: key);
 
-  final Widget? title;
+  final String? title;
   //final Widget? subtitle;
   final Widget? icon;
 
   final IconData? closeIcon;
 
   final VoidCallback? onClose;
+  final VoidCallback? onPressed;
 
   final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return ActionBase(
+      onTapDown: onPressed,
       margin: const EdgeInsets.symmetric(horizontal: 4),
       child: SizedBox(
-        height: 40,
+        height: 36,
         width: 184,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: enabled ? Constants.darkSurfaceColor : Constants.transparent,
+            borderRadius: BorderRadius.circular(6),
+            color: enabled
+                ? Theme.of(context).surfaceColor
+                : Constants.transparent,
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: [
                 if (icon != null)
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 12, 8),
-                    child: icon!,
+                    padding: const EdgeInsets.fromLTRB(12, 4, 8, 4),
+                    child: icon,
                   ),
-                /* Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    title ??
-                        Text(
-                          "Tab",
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
-                    subtitle ?? const SizedBox()
-                  ],
-                ), */
                 Text(
-                  "Tab",
-                  style: Theme.of(context).materialTheme.textTheme.subtitle2,
+                  title ?? "Tab",
+                  style: TextStyle(color: Theme.of(context).foregroundColor),
                 ),
                 const Spacer(),
                 IconButton(
@@ -68,7 +60,8 @@ class Tab extends StatelessWidget {
                   onPressed: onClose,
                   icon: Icon(
                     closeIcon ?? Icons.close,
-                    size: 16,
+                    size: 14,
+                    color: Theme.of(context).foregroundColor,
                   ),
                 ),
               ],

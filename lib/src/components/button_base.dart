@@ -43,7 +43,7 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   void loadColors() {
     _enabled = widget.onPressed != null;
-    textColor = widget.foregroundColor ?? Theme.of(context).textColor;
+    textColor = widget.foregroundColor ?? Theme.of(context).foregroundColor;
     focusMixin = Theme.of(context).darkMode
         ? const Color(0xFFFFFFFF).withOpacity(0.2)
         : const Color(0xFF000000).withOpacity(0.2);
