@@ -39,7 +39,7 @@ class Tab extends StatelessWidget {
             borderRadius: BorderRadius.circular(6),
             color: enabled
                 ? Theme.of(context).surfaceColor
-                : Constants.transparent,
+                : Colors.transparent,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),

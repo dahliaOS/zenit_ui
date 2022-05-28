@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/widgets.dart';
+import 'package:zenit_ui/src/theme/colors.dart';
 
 typedef MaterialThemeData = m.ThemeData;
 
@@ -54,4 +55,19 @@ class ThemeEngine {
       ),
     );
   }
+
+  static MaterialThemeData get zenitDefaultLightTheme => ThemeEngine.create(
+        darkVariant: false,
+        primaryColor: ZenitColors.blue,
+        backgroundColor: const Color(0xFFFFFFFF),
+        surfaceColor: const Color(0xFFE5E5E5),
+        textColor: m.Colors.black,
+      );
+  static MaterialThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
+        darkVariant: true,
+        primaryColor: ZenitColors.blue,
+        backgroundColor: const Color(0xFF121212),
+        surfaceColor: const Color(0xFF262626),
+        textColor: m.Colors.white,
+      );
 }
