@@ -79,7 +79,6 @@ build/
 # unused
 /example/windows/
 /example/winuwp/
-/example/web/
 /example/android/
 /example/ios/
 /example/test/
