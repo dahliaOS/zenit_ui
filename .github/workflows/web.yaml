@@ -23,6 +23,6 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email "action@github.com"
-          git --work-tree build/web add --all
+          git --work-tree example/build/web add --all
           git commit -m "Automatic deployment by github-actions"
           git push origin HEAD:gh-pages --force
