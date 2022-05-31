@@ -7,6 +7,7 @@ class TabView extends StatefulWidget {
     this.onNewPage,
     this.onPageChanged,
     this.onPageClosed,
+    this.excludeFocus,
   }) : super(key: key);
 
   final List<TabViewPage> pages;
@@ -16,6 +17,8 @@ class TabView extends StatefulWidget {
   final ValueChanged<int>? onPageChanged;
 
   final ValueChanged<int>? onPageClosed;
+
+  final bool? excludeFocus;
 
   @override
   State<TabView> createState() => _TabViewState();
@@ -27,70 +30,73 @@ class _TabViewState extends State<TabView> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 44,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Theme.of(context).backgroundColor,
-            ),
-            child: Row(
-              children: [
-                ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 48,
-                  ),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: widget.pages.length,
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    itemBuilder: (context, index) {
-                      final e = widget.pages[index];
-                      return Tab(
-                        title: e.title,
-                        enabled: currentTabIndex == index,
-                        onClose: () {
-                          setState(() {
-                            if (widget.pages.length > 1) {
-                              widget.pages.removeAt(index);
-                              widget.onPageClosed?.call(index);
-                              if (currentTabIndex != index) {
-                                currentTabIndex = currentTabIndex - 1;
-                              } else if (index == widget.pages.length) {
-                                currentTabIndex = index - 1;
-                              }
-                            }
-                          });
-                        },
-                        onPressed: () {
-                          if (currentTabIndex != index) {
+        ExcludeFocus(
+          excluding: widget.excludeFocus ?? false,
+          child: Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 44,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+              ),
+              child: Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width - 48,
+                    ),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: widget.pages.length,
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      itemBuilder: (context, index) {
+                        final e = widget.pages[index];
+                        return Tab(
+                          title: e.title,
+                          enabled: currentTabIndex == index,
+                          onClose: () {
                             setState(() {
-                              currentTabIndex = index;
-                              widget.onPageChanged?.call(index);
+                              if (widget.pages.length > 1) {
+                                widget.pages.removeAt(index);
+                                widget.onPageClosed?.call(index);
+                                if (currentTabIndex != index) {
+                                  currentTabIndex = currentTabIndex - 1;
+                                } else if (index == widget.pages.length) {
+                                  currentTabIndex = index - 1;
+                                }
+                              }
                             });
-                          }
-                        },
-                      );
-                    },
+                          },
+                          onPressed: () {
+                            if (currentTabIndex != index) {
+                              setState(() {
+                                currentTabIndex = index;
+                                widget.onPageChanged?.call(index);
+                              });
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      widget.onNewPage?.call();
-                      widget.onPageChanged?.call(widget.pages.length);
-                      setState(() {
-                        currentTabIndex = widget.pages.length;
-                      });
-                    },
-                    child: const Icon(Icons.add),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {
+                        widget.onNewPage?.call();
+                        widget.onPageChanged?.call(widget.pages.length);
+                        setState(() {
+                          currentTabIndex = widget.pages.length;
+                        });
+                      },
+                      child: const Icon(Icons.add),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
