@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
         color: Colors.red,
         child: Center(
           child: TabView(
+            onNewPage: () {},
             pages: List.generate(
               10,
               (index) => TabViewPage(

@@ -20,7 +20,7 @@ Add the package to your dependencies:
 ```yaml
 dependencies:
   zenit_ui: 
-    git: https://github.com/larsb24/zenit_ui
+    git: https://github.com/dahliaOS/zenit_ui
 ```
 ### Components
 #### Button

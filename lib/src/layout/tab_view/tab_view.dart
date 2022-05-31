@@ -1,9 +1,21 @@
 import 'package:zenit_ui/zenit_ui.dart';
 
 class TabView extends StatefulWidget {
-  const TabView({Key? key, required this.pages}) : super(key: key);
+  const TabView({
+    Key? key,
+    required this.pages,
+    this.onNewPage,
+    this.onPageChanged,
+    this.onPageClosed,
+  }) : super(key: key);
 
   final List<TabViewPage> pages;
+
+  final VoidCallback? onNewPage;
+
+  final ValueChanged<int>? onPageChanged;
+
+  final ValueChanged<int>? onPageClosed;
 
   @override
   State<TabView> createState() => _TabViewState();
@@ -24,36 +36,61 @@ class _TabViewState extends State<TabView> {
             decoration: BoxDecoration(
               color: Theme.of(context).backgroundColor,
             ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: widget.pages
-                    .asMap()
-                    .map(
-                      (index, TabViewPage e) => MapEntry(
-                        index,
-                        Tab(
-                          title: e.title,
-                          enabled: currentTabIndex == index,
-                          onClose: () {
-                            setState(() {
+            child: Row(
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 48,
+                  ),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.pages.length,
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    itemBuilder: (context, index) {
+                      final e = widget.pages[index];
+                      return Tab(
+                        title: e.title,
+                        enabled: currentTabIndex == index,
+                        onClose: () {
+                          setState(() {
+                            if (widget.pages.length > 1) {
                               widget.pages.removeAt(index);
-                              if (index == widget.pages.length) {
+                              widget.onPageClosed?.call(index);
+                              if (currentTabIndex != index) {
+                                currentTabIndex = currentTabIndex - 1;
+                              } else if (index == widget.pages.length) {
                                 currentTabIndex = index - 1;
                               }
-                            });
-                          },
-                          onPressed: () {
+                            }
+                          });
+                        },
+                        onPressed: () {
+                          if (currentTabIndex != index) {
                             setState(() {
                               currentTabIndex = index;
+                              widget.onPageChanged?.call(index);
                             });
-                          },
-                        ),
-                      ),
-                    )
-                    .values
-                    .toList(),
-              ),
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: InkWell(
+                    onTap: () {
+                      widget.onNewPage?.call();
+                      widget.onPageChanged?.call(widget.pages.length);
+                      setState(() {
+                        currentTabIndex = widget.pages.length;
+                      });
+                    },
+                    child: const Icon(Icons.add),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
