@@ -1,22 +1,19 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/material.dart' as m;
+import 'package:flutter/material.dart'
+    show ThemeData, Theme, Brightness, Colors, TextTheme, TextStyle;
 import 'package:flutter/widgets.dart';
 import 'package:zenit_ui/src/theme/colors.dart';
 
-typedef MaterialThemeData = m.ThemeData;
-
-typedef MaterialTheme = m.Theme;
-
-class Theme {
+class ZenitTheme {
   late BuildContext context;
-  Theme.of(this.context);
+  ZenitTheme.of(this.context);
 
-  MaterialThemeData get materialTheme => m.Theme.of(context);
+  ThemeData get materialTheme => Theme.of(context);
 
   Color get primaryColor => materialTheme.primaryColor;
 
-  bool get darkMode => materialTheme.brightness == m.Brightness.dark;
+  bool get darkMode => materialTheme.brightness == Brightness.dark;
 
   Color get surfaceColor => materialTheme.cardColor;
 
@@ -25,49 +22,67 @@ class Theme {
   Color get backgroundColor => materialTheme.backgroundColor;
 
   Color get foregroundColor =>
-      materialTheme.textTheme.button?.color ?? m.Colors.white;
+      materialTheme.textTheme.button?.color ?? Colors.white;
+
+  ZenitSwitchTheme get switchTheme => ZenitSwitchTheme(
+        activeTrackColor: primaryColor,
+        inactiveTrackColor: surfaceColor,
+        activeThumbColor: backgroundColor,
+        inactiveThumbColor: darkMode
+            ? const Color(0xFFFAFAFA).withOpacity(0.75)
+            : const Color(0xFF212121).withOpacity(0.75),
+      );
 }
 
 // ignore: avoid_classes_with_only_static_members
 class ThemeEngine {
-  static MaterialThemeData create({
+  static ThemeData create({
     Color? primaryColor,
     Color? backgroundColor,
     Color? surfaceColor,
     bool? darkVariant,
     Color? textColor,
   }) {
-    return MaterialThemeData(
+    return ThemeData(
       primaryColor: primaryColor,
       backgroundColor: backgroundColor,
       scaffoldBackgroundColor: backgroundColor,
       cardColor: surfaceColor,
       brightness: darkVariant != null
-          ? (darkVariant ? m.Brightness.dark : m.Brightness.light)
+          ? (darkVariant ? Brightness.dark : Brightness.light)
           : null,
-      colorScheme: darkVariant != null
-          ? (darkVariant
-              ? const m.ColorScheme.dark()
-              : const m.ColorScheme.light())
-          : null,
-      textTheme: m.TextTheme(
-        button: m.TextStyle(color: textColor),
+      textTheme: TextTheme(
+        button: TextStyle(color: textColor),
       ),
     );
   }
 
-  static MaterialThemeData get zenitDefaultLightTheme => ThemeEngine.create(
+  static ThemeData get zenitDefaultLightTheme => ThemeEngine.create(
         darkVariant: false,
         primaryColor: ZenitColors.blue,
         backgroundColor: const Color(0xFFFFFFFF),
         surfaceColor: const Color(0xFFE5E5E5),
-        textColor: m.Colors.black,
+        textColor: Colors.black,
       );
-  static MaterialThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
+  static ThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
         darkVariant: true,
         primaryColor: ZenitColors.blue,
         backgroundColor: const Color(0xFF121212),
         surfaceColor: const Color(0xFF262626),
-        textColor: m.Colors.white,
+        textColor: Colors.white,
       );
+}
+
+class ZenitSwitchTheme {
+  final Color activeTrackColor;
+  final Color inactiveTrackColor;
+  final Color activeThumbColor;
+  final Color inactiveThumbColor;
+
+  const ZenitSwitchTheme({
+    required this.activeTrackColor,
+    required this.inactiveTrackColor,
+    required this.activeThumbColor,
+    required this.inactiveThumbColor,
+  });
 }

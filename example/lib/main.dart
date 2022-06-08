@@ -85,6 +85,14 @@ class _MyAppState extends State<MyApp> {
                 value: value,
                 onChanged: (val) => setState(() => value = val),
               ),
+              const Gap(16),
+              SizedBox(
+                width: 300,
+                child: TextField(
+                  controller: TextEditingController(),
+                  decoration: const InputDecoration(label: Text("Text Box")),
+                ),
+              )
             ],
           ),
         ),

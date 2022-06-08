@@ -2,21 +2,22 @@
 
 import 'package:zenit_ui/zenit_ui.dart';
 
-class Switch extends StatefulWidget {
+class ZenitSwitch extends StatefulWidget {
   final bool value;
   final ValueChanged<bool>? onChanged;
 
-  const Switch({
+  const ZenitSwitch({
     required this.value,
     required this.onChanged,
     Key? key,
   }) : super(key: key);
 
   @override
-  _SwitchState createState() => _SwitchState();
+  _ZenitSwitchState createState() => _ZenitSwitchState();
 }
 
-class _SwitchState extends State<Switch> with TickerProviderStateMixin {
+class _ZenitSwitchState extends State<ZenitSwitch>
+    with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 150),
@@ -34,7 +35,7 @@ class _SwitchState extends State<Switch> with TickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(covariant Switch old) {
+  void didUpdateWidget(covariant ZenitSwitch old) {
     _positionController.animateTo(
       widget.value ? 1 : 0,
       curve: Curves.easeOut,
@@ -45,9 +46,11 @@ class _SwitchState extends State<Switch> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final Color activeTrackColor = Theme.of(context).primaryColor;
-    final Color inactiveTrackColor = Colors.grey[700]!;
-    const Color thumbColor = Colors.white;
+    final ZenitSwitchTheme switchTheme = Theme.of(context).switchTheme;
+    final Color activeTrackColor = switchTheme.activeTrackColor;
+    final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
+    final Color activeThumbColor = switchTheme.activeThumbColor;
+    final Color inactiveThumbColor = switchTheme.inactiveThumbColor;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -83,9 +86,9 @@ class _SwitchState extends State<Switch> with TickerProviderStateMixin {
                 child: Container(
                   width: 16,
                   height: 16,
-                  decoration: const ShapeDecoration(
-                    shape: CircleBorder(),
-                    color: thumbColor,
+                  decoration: ShapeDecoration(
+                    shape: const CircleBorder(),
+                    color: widget.value ? activeThumbColor : inactiveThumbColor,
                   ),
                 ),
               ),
