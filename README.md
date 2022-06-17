@@ -52,3 +52,14 @@ Switch(
   onChanged: (value) => setState(() => _checked = value),
 ),
 ```
+
+## License
+
+<p align="left">
+  <img width="40%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/monochrome_dark.svg#gh-dark-mode-only"/>
+  <img width="40%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/monochrome_light.svg#gh-light-mode-only"/>
+</p>
+
+Copyright @ 2019-2022 - The dahliaOS Authors - contact@dahliaos.io
+
+This project is licensed under the [Apache 2.0 license](/LICENSE)
