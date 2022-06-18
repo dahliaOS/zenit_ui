@@ -20,6 +20,8 @@ class ActionBase extends StatefulWidget {
     this.onEnter,
     this.onHover,
     this.onExit,
+    // Tertiary actions
+    this.onTertiaryTapDown,
     // Cursor
     this.cursor,
     // FocusNode
@@ -64,6 +66,8 @@ class ActionBase extends StatefulWidget {
   final String? semanticLabel;
 
   final Widget? child;
+
+  final GestureTapDownCallback? onTertiaryTapDown;
 
   @override
   _ActionBaseState createState() => _ActionBaseState();
@@ -113,8 +117,6 @@ class _ActionBaseState extends State<ActionBase> {
             mouseCursor: SystemMouseCursors.click,
             focusNode: node,
             autofocus: widget.autofocus,
-            //TODO enabled property
-            enabled: true,
             onFocusChange: widget.onFocusChange,
 
             child: MouseRegion(
@@ -141,6 +143,8 @@ class _ActionBaseState extends State<ActionBase> {
                 onHorizontalDragStart: widget.onHorizontalDragStart,
                 onHorizontalDragUpdate: widget.onHorizontalDragUpdate,
                 onHorizontalDragEnd: widget.onHorizontalDragEnd,
+                //Tertiary Tap
+                onTertiaryTapDown: widget.onTertiaryTapDown,
                 // Child
                 child: widget.child,
               ),

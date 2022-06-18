@@ -1,3 +1,17 @@
+<p align="center">
+  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/colored.svg#gh-dark-mode-only" />
+  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/colored.svg#gh-light-mode-only" />
+  
+</p>
+
+<p align="center">
+<a href="https://dahliaos.io">Website</a> ●
+<a href="https://discord.gg/7qVbJHR">Discord</a> ●
+<a href="https://github.com/dahliaos/releases/releases">Releases</a> ●
+<a href="https://paypal.me/officialdahliaos">Donate</a> ●
+<a href="https://github.com/dahliaos/documentation">Documentation</a>
+
+
 <div>
   <h1 align="center">ZenitUI</h1>
   <p align="center">

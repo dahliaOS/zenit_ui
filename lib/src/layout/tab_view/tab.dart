@@ -30,6 +30,7 @@ class Tab extends StatelessWidget {
   Widget build(BuildContext context) {
     return ActionBase(
       onTapDown: onPressed,
+      onTertiaryTapDown: (details) => onClose?.call(),
       margin: const EdgeInsets.symmetric(horizontal: 4),
       child: SizedBox(
         height: 36,

@@ -16,6 +16,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool value = false;
+  double val = 0.5;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +24,6 @@ class _MyAppState extends State<MyApp> {
       theme: ExampleTheme.lightTheme,
       darkTheme: ExampleTheme.darkTheme,
       home: Scaffold(
-        
         body: Column(
           children: [
             tabView(),
@@ -40,17 +40,18 @@ class _MyAppState extends State<MyApp> {
         color: Colors.red,
         child: Center(
           child: TabView(
-            onNewPage: () {},
-            pages: List.generate(
-              10,
-              (index) => TabViewPage(
-                title: "Tab $index",
-                view: Container(
-                  color: Colors
-                      .primaries[Random().nextInt(Colors.primaries.length)],
+            onNewPage: () {
+              _tabs.add(
+                TabViewPage(
+                  title: "Tab ${_tabs.length}",
+                  view: Container(
+                    color: Colors
+                        .primaries[Random().nextInt(Colors.primaries.length)],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
+            pages: _tabs,
           ),
         ),
       ),
@@ -90,9 +91,18 @@ class _MyAppState extends State<MyApp> {
                 width: 300,
                 child: TextField(
                   controller: TextEditingController(),
-                  decoration: const InputDecoration(label: Text("Text Box")),
+                  decoration: const InputDecoration(
+                    label: Text("Text Box"),
+                  ),
                 ),
-              )
+              ),
+              const Gap(16),
+              SizedBox(
+                  width: 325,
+                  child: Slider(
+                    value: val,
+                    onChanged: (value) => setState(() => val = value),
+                  )),
             ],
           ),
         ),
@@ -100,3 +110,13 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+final _tabs = List.generate(
+  3,
+  (index) => TabViewPage(
+    title: "Tab $index",
+    view: Container(
+      color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+    ),
+  ),
+);

@@ -62,11 +62,11 @@ class _TabViewState extends State<TabView> {
                               if (widget.pages.length > 1) {
                                 widget.pages.removeAt(index);
                                 widget.onPageClosed?.call(index);
-                                if (currentTabIndex != index) {
-                                  currentTabIndex = currentTabIndex - 1;
-                                } else if (index == widget.pages.length) {
+                                if (index == widget.pages.length) {
                                   currentTabIndex = index - 1;
+                                  return;
                                 }
+                                currentTabIndex = index;
                               }
                             });
                           },
@@ -89,7 +89,7 @@ class _TabViewState extends State<TabView> {
                         widget.onNewPage?.call();
                         widget.onPageChanged?.call(widget.pages.length);
                         setState(() {
-                          currentTabIndex = widget.pages.length;
+                          currentTabIndex = widget.pages.length - 1;
                         });
                       },
                       child: const Icon(Icons.add),

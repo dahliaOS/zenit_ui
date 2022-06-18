@@ -32,6 +32,11 @@ class ZenitTheme {
             ? const Color(0xFFFAFAFA).withOpacity(0.75)
             : const Color(0xFF212121).withOpacity(0.75),
       );
+
+  ZenitSliderTheme get sliderTheme => ZenitSliderTheme(
+        activeTrackColor: primaryColor,
+        trackColor: primaryColor.withOpacity(0.25),
+      );
 }
 
 // ignore: avoid_classes_with_only_static_members
@@ -84,5 +89,15 @@ class ZenitSwitchTheme {
     required this.inactiveTrackColor,
     required this.activeThumbColor,
     required this.inactiveThumbColor,
+  });
+}
+
+class ZenitSliderTheme {
+  final Color activeTrackColor;
+  final Color trackColor;
+
+  const ZenitSliderTheme({
+    required this.activeTrackColor,
+    required this.trackColor,
   });
 }

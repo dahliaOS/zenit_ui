@@ -287,7 +287,7 @@ class ZenitTextField extends StatelessWidget {
       smartDashesType: smartDashesType,
       smartQuotesType: smartQuotesType,
       strutStyle: strutStyle,
-      style: style,
+      style: const TextStyle(fontSize: 14).merge(style),
       textAlign: textAlign,
       textAlignVertical: textAlignVertical,
       textCapitalization: textCapitalization,
@@ -330,6 +330,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
     ),
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
     floatingLabelStyle: TextStyle(color: theme.primaryColor),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
   );
 
   return _kDefaultInputDecorationTheme;

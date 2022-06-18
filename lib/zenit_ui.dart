@@ -1,6 +1,7 @@
 library zenit_ui;
 
 import 'package:flutter/material.dart' as material;
+import 'package:zenit_ui/src/controls/slider/slider.dart';
 import 'package:zenit_ui/src/controls/switch/switch.dart';
 import 'package:zenit_ui/src/controls/textfield/text_flield.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
@@ -10,6 +11,7 @@ export 'package:flutter/widgets.dart';
 export 'package:gap/gap.dart';
 export 'package:zenit_ui/src/controls/buttons/buttons.dart';
 export 'package:zenit_ui/src/controls/chip/chip.dart';
+export 'package:zenit_ui/src/controls/slider/slider.dart';
 export 'package:zenit_ui/src/controls/switch/switch.dart';
 export 'package:zenit_ui/src/controls/textfield/text_flield.dart';
 export 'package:zenit_ui/src/layout/tab_view/tab.dart';
@@ -31,3 +33,7 @@ typedef MaterialTheme = material.Theme;
 //TextField
 typedef TextField = ZenitTextField;
 typedef MaterialTextField = material.TextField;
+
+//Slider
+typedef Slider = ZenitSlider;
+typedef MaterialSlider = material.Slider;
