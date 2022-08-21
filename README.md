@@ -1,10 +1,4 @@
 <p align="center">
-  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/colored.svg#gh-dark-mode-only" />
-  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/colored.svg#gh-light-mode-only" />
-  
-</p>
-
-<p align="center">
 <a href="https://dahliaos.io">Website</a> ●
 <a href="https://discord.gg/7qVbJHR">Discord</a> ●
 <a href="https://github.com/dahliaos/releases/releases">Releases</a> ●
@@ -70,8 +64,8 @@ Switch(
 ## License
 
 <p align="left">
-  <img width="40%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/monochrome_dark.svg#gh-dark-mode-only"/>
-  <img width="40%" src="https://github.com/dahliaOS/brand/blob/main/assets/dahliaos/banner/monochrome_light.svg#gh-light-mode-only"/>
+  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/dahliaOS/logotype/svg/logotype-dark.svg#gh-dark-mode-only"/>
+  <img width="30%" src="https://github.com/dahliaOS/brand/blob/main/dahliaOS/logotype/svg/logotype-light.svg#gh-light-mode-only"/>
 </p>
 
 Copyright @ 2019-2022 - The dahliaOS Authors - contact@dahliaos.io
