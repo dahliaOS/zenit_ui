@@ -15,6 +15,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
   bool value = false;
   double val = 0.5;
   @override
@@ -23,13 +24,29 @@ class _MyAppState extends State<MyApp> {
       themeMode: value ? ThemeMode.dark : ThemeMode.light,
       theme: ExampleTheme.lightTheme,
       darkTheme: ExampleTheme.darkTheme,
-      home: Scaffold(
-        body: Column(
-          children: [
-            tabView(),
-            zenitComponents(),
+      home: ResponsivePlatform(
+          appBar: AppBar(
+            elevation: 0.0,
+            title: const Text("Zenit UI Responsive Platform"),
+            centerTitle: true,
+          ),
+          selectedIndex: _selectedIndex,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          navigationElements: [
+            NavigationElement(
+                title: "Elements", icon: Icons.toggle_on_outlined),
+            NavigationElement(title: "Tabs", icon: Icons.tab),
+            NavigationElement(title: "Emptyness", icon: Icons.pages),
           ],
-        ),
+          body: [
+            zenitComponents(),
+            tabView(),
+            const SizedBox(),
+          ].elementAt(_selectedIndex)
       ),
     );
   }
