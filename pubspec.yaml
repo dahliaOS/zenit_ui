@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   gap: ^2.0.0
-  google_fonts: ^2.3.2 
+  google_fonts: ">=2.3.2 <4.0.0" 
 
 dev_dependencies:
   dahlia_lint:
