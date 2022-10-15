@@ -1,7 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart'
-    show ThemeData, Theme, Brightness, Colors, TextTheme, TextStyle;
+    show ThemeData, Theme, Brightness, Colors, TextTheme, TextStyle, AppBarTheme;
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:zenit_ui/src/theme/colors.dart';
 
@@ -58,6 +59,10 @@ class ThemeEngine {
           : null,
       textTheme: TextTheme(
         button: TextStyle(color: textColor),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: surfaceColor,
+        titleTextStyle: TextStyle(color: textColor, fontSize: 17, fontWeight: FontWeight.w600),
       ),
     );
   }

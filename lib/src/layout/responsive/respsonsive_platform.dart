@@ -35,8 +35,7 @@ late AnimationController _controller;
 late Animation<Offset> _railAnimation;
 late Animation<Offset> _bottomnavigationAnimation;
 
-class _ResponsivePlatformState extends State<ResponsivePlatform>
-    with SingleTickerProviderStateMixin {
+class _ResponsivePlatformState extends State<ResponsivePlatform> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -45,12 +44,9 @@ class _ResponsivePlatformState extends State<ResponsivePlatform>
       duration: const Duration(milliseconds: 150),
     );
 
-    _railAnimation =
-        Tween<Offset>(begin: Offset.zero, end: const Offset(-1.0, 0.0))
-            .animate(_controller);
+    _railAnimation = Tween<Offset>(begin: Offset.zero, end: const Offset(-1.0, 0.0)).animate(_controller);
     _bottomnavigationAnimation =
-        Tween<Offset>(begin: const Offset(0.0, 1.0), end: Offset.zero)
-            .animate(_controller);
+        Tween<Offset>(begin: const Offset(0.0, 1.0), end: Offset.zero).animate(_controller);
   }
 
   @override
@@ -58,31 +54,43 @@ class _ResponsivePlatformState extends State<ResponsivePlatform>
     return LayoutBuilder(
       key: layoutKey,
       builder: (BuildContext context, BoxConstraints constraints) {
-        final bool isExpanded = constraints.maxWidth > 650;
+        final ExpansionState expansionState;
+        if (constraints.maxWidth < 650) {
+          expansionState = ExpansionState.small;
+        } else if (constraints.maxWidth > 650 && constraints.maxWidth < 1000) {
+          expansionState = ExpansionState.medium;
+        } else {
+          expansionState = ExpansionState.large;
+        }
+
+        final bool isExpanded =
+            expansionState == ExpansionState.large || expansionState == ExpansionState.medium;
 
         isExpanded ? _controller.reverse() : _controller.forward();
+
+        final double navRailPadding = expansionState == ExpansionState.large ? 256 : 80.0;
+
+        final bool railIsExpanded = expansionState == ExpansionState.large;
 
         return Scaffold(
           appBar: widget.appBar,
           floatingActionButton: widget.floatingActionButton,
           body: Stack(
-            fit: StackFit.expand,
             clipBehavior: Clip.antiAlias,
             children: [
               AnimatedBuilder(
                 animation: _controller,
                 builder: (BuildContext context, Widget? child) => Padding(
                   padding: EdgeInsets.only(
-                    left: Tween<double>(begin: 72.0, end: 0.0)
-                        .animate(_controller)
-                        .value,
-                    bottom: Tween<double>(begin: 0.0, end: 56.0)
-                        .animate(_controller)
-                        .value,
+                    left: Tween<double>(begin: navRailPadding, end: 0.0).animate(_controller).value,
+                    bottom: Tween<double>(begin: 0.0, end: 56.0).animate(_controller).value,
                   ),
                   child: child,
                 ),
-                child: widget.body,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: widget.body,
+                ),
               ),
               Positioned(
                 left: 0.0,
@@ -94,6 +102,8 @@ class _ResponsivePlatformState extends State<ResponsivePlatform>
                     selectedIndex: widget.selectedIndex,
                     onTap: widget.onTap,
                     navigationElements: widget.navigationElements,
+                    railWidth: navRailPadding,
+                    isExpanded: railIsExpanded,
                   ),
                 ),
               ),
@@ -124,30 +134,45 @@ class _NavigationRail extends StatelessWidget {
     required this.selectedIndex,
     required this.onTap,
     required this.navigationElements,
+    required this.isExpanded,
+    required this.railWidth,
   }) : super(key: key);
 
   final int selectedIndex;
   final ValueChanged<int>? onTap;
   final List<NavigationElement> navigationElements;
+  final bool isExpanded;
+  final double railWidth;
 
   @override
   Widget build(BuildContext context) {
     final ZenitTheme theme = ZenitTheme.of(context);
 
-    return NavigationRail(
-      backgroundColor: theme.surfaceColor,
-      selectedIndex: selectedIndex,
-      indicatorColor: theme.primaryColor,
-      onDestinationSelected: onTap,
-      labelType: NavigationRailLabelType.all,
-      destinations: navigationElements.map(
-        (NavigationElement element) {
-          return NavigationRailDestination(
-            icon: Icon(element.icon),
-            label: Text(element.title),
-          );
-        },
-      ).toList(),
+
+    return SizedBox(
+      width: railWidth,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          useMaterial3: true,
+        ),
+        child: NavigationRail(
+          extended: isExpanded,
+          backgroundColor: theme.surfaceColor,
+          selectedIndex: selectedIndex,
+          indicatorColor: theme.primaryColor,
+          onDestinationSelected: onTap,
+          labelType: isExpanded ? NavigationRailLabelType.none : NavigationRailLabelType.all,
+          destinations: navigationElements.map(
+            (NavigationElement element) {
+              return NavigationRailDestination(
+                icon: Icon(element.icon),
+                label: Text(element.title),
+                selectedIcon: Icon(element.selectedIcon),
+              );
+            },
+          ).toList(),
+        ),
+      ),
     );
   }
 }
@@ -167,24 +192,43 @@ class _BottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ZenitTheme theme = ZenitTheme.of(context);
-    return BottomNavigationBar(
-      backgroundColor: theme.surfaceColor,
-      elevation: 0.0,
-      type: BottomNavigationBarType.fixed,
-      currentIndex: selectedIndex,
-      onTap: onTap,
-      selectedItemColor: theme.primaryColor,
-      items: navigationElements
-          .map(
-            (NavigationElement element) => BottomNavigationBarItem(
-              icon: Icon(element.icon),
-              label: element.title,
-            ),
-          )
-          .toList(),
+
+    IconThemeData? getIconTheme(Set<MaterialState> states) {
+      if (states.any([MaterialState.selected].contains)) {
+        return IconThemeData(
+          color: theme.backgroundColor,
+        );
+      }
+      return null;
+    }
+
+    return NavigationBarTheme(
+      data: NavigationBarThemeData(
+        indicatorColor: theme.primaryColor,
+        iconTheme: MaterialStateProperty.resolveWith(getIconTheme),
+        labelTextStyle: const MaterialStatePropertyAll(TextStyle(fontSize: 12)),
+      ),
+      child: NavigationBar(
+        backgroundColor: theme.surfaceColor,
+        elevation: 0.0,
+        height: 64,
+        selectedIndex: selectedIndex,
+        onDestinationSelected: onTap,
+        destinations: navigationElements
+            .map(
+              (NavigationElement element) => NavigationDestination(
+                icon: Icon(element.icon),
+                label: element.title,
+                selectedIcon: Icon(element.selectedIcon),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 }
 
 //TODO Implement this
 enum DesktopNavigationType { rail, top }
+
+enum ExpansionState { small, medium, large }
