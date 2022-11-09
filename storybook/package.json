@@ -1,0 +1,13 @@
+{
+  "name": "zenit_ui",
+  "version": "1.0.0",
+  "description": "Zenit UI Storybook",
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "lit": "^2.4.1",
+    "typescript": "^4.8.4"
+  }
+}
