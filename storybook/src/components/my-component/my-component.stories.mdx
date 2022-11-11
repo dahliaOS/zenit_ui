@@ -1,0 +1,19 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs';
+
+import { MyComponent } from './my-component';
+
+<Meta title="Components/Button" component={MyComponent} />
+
+export const Template = (args) => <MyComponent {...args} />;
+
+# MyComponent
+
+<Canvas>
+  <Story 
+    name="Unchecked"
+    args={{ 
+      label: 'Unchecked',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
