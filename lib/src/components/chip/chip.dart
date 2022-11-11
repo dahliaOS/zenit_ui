@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:zenit_ui/src/components/action_base.dart';
+import 'package:zenit_ui/src/base/action_base.dart';
 import 'package:zenit_ui/src/debug/constants.dart';
 
 class Chip extends StatefulWidget {
   const Chip({
-    Key? key,
+    super.key,
     this.label,
     this.enabled,
     this.color,
@@ -12,7 +12,7 @@ class Chip extends StatefulWidget {
     this.splashColor,
     this.leading,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String? label;
 
@@ -48,12 +48,14 @@ class _ChipState extends State<Chip> {
     return ActionBase(
       onPressed: () async {
         if (_enabled) {
-          setState(() => _chipColor =
-              Color.alphaBlend(Constants.focusMixinColor, _defaultColor));
+          setState(
+            () => _chipColor = Color.alphaBlend(Constants.focusMixinColor, _defaultColor),
+          );
           widget.onPressed?.call();
           await Future.delayed(const Duration(milliseconds: 100));
-          setState(() => _chipColor =
-              Color.alphaBlend(Constants.hoverMixinColor, _defaultColor));
+          setState(
+            () => _chipColor = Color.alphaBlend(Constants.hoverMixinColor, _defaultColor),
+          );
         }
       },
       child: MouseRegion(
@@ -61,8 +63,7 @@ class _ChipState extends State<Chip> {
         onEnter: (_) {
           if (_enabled) {
             setState(() {
-              _chipColor =
-                  Color.alphaBlend(Constants.hoverMixinColor, _defaultColor);
+              _chipColor = Color.alphaBlend(Constants.hoverMixinColor, _defaultColor);
             });
           }
         },

@@ -13,6 +13,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   zenit_ui:
     path: ../
+  zenit_window:
+    path: ../zenit_window
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -20,3 +22,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/icon_light.png
+    - assets/banner.png

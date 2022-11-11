@@ -1,16 +1,12 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/material.dart'
-    show ThemeData, Theme, Brightness, Colors, TextTheme, TextStyle, AppBarTheme;
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:zenit_ui/src/theme/colors.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitTheme {
   late BuildContext context;
   ZenitTheme.of(this.context);
 
-  ThemeData get materialTheme => Theme.of(context);
+  ThemeData get materialTheme => MaterialTheme.of(context);
 
   Color get primaryColor => materialTheme.primaryColor;
 
@@ -18,45 +14,57 @@ class ZenitTheme {
 
   Color get surfaceColor => materialTheme.cardColor;
 
-  Color get areaColor => materialTheme.cardColor;
-
   Color get backgroundColor => materialTheme.backgroundColor;
 
-  Color get foregroundColor =>
-      materialTheme.textTheme.button?.color ?? Colors.white;
+  Color get foregroundColor => materialTheme.textTheme.button?.color ?? Colors.white;
+
+  Color get disabledColor => materialTheme.disabledColor;
 
   ZenitSwitchTheme get switchTheme => ZenitSwitchTheme(
         activeTrackColor: primaryColor,
         inactiveTrackColor: surfaceColor,
         activeThumbColor: backgroundColor,
-        inactiveThumbColor: darkMode
-            ? const Color(0xFFFAFAFA).withOpacity(0.75)
-            : const Color(0xFF212121).withOpacity(0.75),
+        inactiveThumbColor: darkMode ? foregroundColor.withOpacity(0.35) : foregroundColor.withOpacity(0.35),
+        disabledTrackColor: disabledColor,
+        disabledThumbColor: backgroundColor,
       );
 
   ZenitSliderTheme get sliderTheme => ZenitSliderTheme(
         activeTrackColor: primaryColor,
         trackColor: primaryColor.withOpacity(0.25),
       );
+
+  ZenitRadioButtonTheme get radioButtonTheme => ZenitRadioButtonTheme(
+        activeBackgroundColor: primaryColor,
+        inactiveBackgroundColor: surfaceColor,
+        activeThumbColor: backgroundColor,
+        inactiveThumbColor: surfaceColor,
+        disabledBackgroundColor: disabledColor,
+      );
+
+  ZenitCheckboxTheme get checkboxTheme => ZenitCheckboxTheme(
+        activeBackgroundColor: primaryColor,
+        inactiveBackgroundColor: surfaceColor,
+        foregroundColor: backgroundColor,
+        disabledBackgroundColor: disabledColor,
+      );
 }
 
 // ignore: avoid_classes_with_only_static_members
 class ThemeEngine {
   static ThemeData create({
-    Color? primaryColor,
-    Color? backgroundColor,
-    Color? surfaceColor,
-    bool? darkVariant,
-    Color? textColor,
+    required Color primaryColor,
+    required Color backgroundColor,
+    required Color surfaceColor,
+    required Color textColor,
+    required ThemeVariant variant,
   }) {
     return ThemeData(
       primaryColor: primaryColor,
       backgroundColor: backgroundColor,
       scaffoldBackgroundColor: backgroundColor,
       cardColor: surfaceColor,
-      brightness: darkVariant != null
-          ? (darkVariant ? Brightness.dark : Brightness.light)
-          : null,
+      brightness: _resolveThemeBrightness(variant),
       textTheme: TextTheme(
         button: TextStyle(color: textColor),
       ),
@@ -64,21 +72,40 @@ class ThemeEngine {
         backgroundColor: surfaceColor,
         titleTextStyle: TextStyle(color: textColor, fontSize: 17, fontWeight: FontWeight.w600),
       ),
+      iconTheme: IconThemeData(color: textColor),
+      cardTheme: CardTheme(
+        clipBehavior: Clip.antiAlias,
+        color: backgroundColor,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(color: surfaceColor, width: 2),
+        ),
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: primaryColor,
+        foregroundColor: backgroundColor,
+        elevation: 0,
+        focusElevation: 0,
+        hoverElevation: 0,
+        disabledElevation: 0,
+        highlightElevation: 0,
+      ),
     );
   }
 
   static ThemeData get zenitDefaultLightTheme => ThemeEngine.create(
-        darkVariant: false,
+        variant: ThemeVariant.light,
         primaryColor: ZenitColors.blue,
-        backgroundColor: const Color(0xFFFFFFFF),
-        surfaceColor: const Color(0xFFE5E5E5),
+        backgroundColor: const Color(0xFFFAFAFA),
+        surfaceColor: const Color(0xFFD9D9D9),
         textColor: Colors.black,
       );
   static ThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
-        darkVariant: true,
+        variant: ThemeVariant.dark,
         primaryColor: ZenitColors.blue,
         backgroundColor: const Color(0xFF121212),
-        surfaceColor: const Color(0xFF262626),
+        surfaceColor: const Color(0xFF3D3D3D),
         textColor: Colors.white,
       );
 }
@@ -88,12 +115,16 @@ class ZenitSwitchTheme {
   final Color inactiveTrackColor;
   final Color activeThumbColor;
   final Color inactiveThumbColor;
+  final Color disabledTrackColor;
+  final Color disabledThumbColor;
 
   const ZenitSwitchTheme({
     required this.activeTrackColor,
     required this.inactiveTrackColor,
     required this.activeThumbColor,
     required this.inactiveThumbColor,
+    required this.disabledTrackColor,
+    required this.disabledThumbColor,
   });
 }
 
@@ -106,3 +137,46 @@ class ZenitSliderTheme {
     required this.trackColor,
   });
 }
+
+class ZenitRadioButtonTheme {
+  final Color activeBackgroundColor;
+  final Color inactiveBackgroundColor;
+  final Color activeThumbColor;
+  final Color inactiveThumbColor;
+  final Color disabledBackgroundColor;
+
+  const ZenitRadioButtonTheme({
+    required this.activeBackgroundColor,
+    required this.inactiveBackgroundColor,
+    required this.activeThumbColor,
+    required this.inactiveThumbColor,
+    required this.disabledBackgroundColor,
+  });
+}
+
+class ZenitCheckboxTheme {
+  final Color activeBackgroundColor;
+  final Color inactiveBackgroundColor;
+  final Color foregroundColor;
+  final Color disabledBackgroundColor;
+
+  const ZenitCheckboxTheme({
+    required this.activeBackgroundColor,
+    required this.inactiveBackgroundColor,
+    required this.foregroundColor,
+    required this.disabledBackgroundColor,
+  });
+}
+
+Brightness _resolveThemeBrightness(ThemeVariant? variant) {
+  switch (variant) {
+    case ThemeVariant.light:
+      return Brightness.light;
+    case ThemeVariant.dark:
+      return Brightness.dark;
+    default:
+      return Brightness.light;
+  }
+}
+
+enum ThemeVariant { light, dark }

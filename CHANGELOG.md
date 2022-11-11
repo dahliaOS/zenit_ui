@@ -1,3 +1,24 @@
+v0.0.8 / 2022-11-11
+===================
+
+ * Repository: file restructuring
+ * ZenitUI: add RadioButton
+ * ZenitUI: add Checkbox
+ * ZenitUI: add SwitchListTile
+ * ZenitSwitch: add Theme support
+ * ZenitTheme: add disabledColor
+ * ZenitUI: migrate to super.key
+ * ButtonBase: use theme colours
+ * ResponsivePlatform: add a background colour
+ * ResponsivePlatform: fix body positioning
+ * Dependencies: temporarily use a fork of Gap
+ * ZenitWindow: initial release based on window_manager
+ * ZenitTheme: add ThemeVariant variable
+ * ZenitTheme: set theme preset for FloatingActionButtons, Cards and Icons
+ * Example: use ZenitWindow
+ * Example: add FloatingActionButton to toggle the theme
+ * Example: add new logo
+
 
 v0.0.7 / 2022-10-15
 ===================

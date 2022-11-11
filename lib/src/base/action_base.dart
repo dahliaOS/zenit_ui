@@ -35,8 +35,8 @@ class ActionBase extends StatefulWidget {
     // Child
     this.child,
     // Key
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   final VoidCallback? onPressed;
   final VoidCallback? onTapDown;
@@ -118,7 +118,6 @@ class _ActionBaseState extends State<ActionBase> {
             focusNode: node,
             autofocus: widget.autofocus,
             onFocusChange: widget.onFocusChange,
-
             child: MouseRegion(
               // Mouse pointer events
               onEnter: widget.onEnter,

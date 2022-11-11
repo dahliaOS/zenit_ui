@@ -5,19 +5,20 @@ import 'package:zenit_ui/zenit_ui.dart';
 class ZenitSwitch extends StatefulWidget {
   final bool value;
   final ValueChanged<bool>? onChanged;
+  final ZenitSwitchTheme? theme;
 
   const ZenitSwitch({
+    super.key,
     required this.value,
     required this.onChanged,
-    Key? key,
-  }) : super(key: key);
+    this.theme,
+  });
 
   @override
   _ZenitSwitchState createState() => _ZenitSwitchState();
 }
 
-class _ZenitSwitchState extends State<ZenitSwitch>
-    with TickerProviderStateMixin {
+class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 150),
@@ -46,7 +47,7 @@ class _ZenitSwitchState extends State<ZenitSwitch>
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSwitchTheme switchTheme = Theme.of(context).switchTheme;
+    final ZenitSwitchTheme switchTheme = widget.theme ?? Theme.of(context).switchTheme;
     final Color activeTrackColor = switchTheme.activeTrackColor;
     final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
     final Color activeThumbColor = switchTheme.activeThumbColor;
@@ -78,8 +79,7 @@ class _ZenitSwitchState extends State<ZenitSwitch>
                 animation: _positionController,
                 builder: (context, child) {
                   return Align(
-                    alignment:
-                        _thumbPositionTween.evaluate(_positionController)!,
+                    alignment: _thumbPositionTween.evaluate(_positionController)!,
                     child: child,
                   );
                 },

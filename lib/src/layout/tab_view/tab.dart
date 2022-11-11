@@ -1,9 +1,9 @@
-import 'package:zenit_ui/src/components/action_base.dart';
+import 'package:zenit_ui/src/base/action_base.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class Tab extends StatelessWidget {
   const Tab({
-    Key? key,
+    super.key,
     this.title,
     this.enabled = true,
     //this.subtitle,
@@ -13,7 +13,7 @@ class Tab extends StatelessWidget {
     this.closeIcon,
     this.onClose,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   final String? title;
   //final Widget? subtitle;
@@ -38,9 +38,7 @@ class Tab extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color: enabled
-                ? Theme.of(context).surfaceColor
-                : Colors.transparent,
+            color: enabled ? Theme.of(context).surfaceColor : Colors.transparent,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),

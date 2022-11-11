@@ -1,18 +1,18 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zenit_ui/src/components/action_base.dart';
+import 'package:zenit_ui/src/base/action_base.dart';
 import 'package:zenit_ui/src/types/button_type.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ButtonBase extends StatefulWidget {
   const ButtonBase({
-    Key? key,
+    super.key,
     this.child,
     this.onPressed,
     this.foregroundColor,
     this.backgroundColor,
     this.debugDarkMode,
     required this.type,
-  }) : super(key: key);
+  });
 
   final Widget? child;
 
@@ -44,19 +44,14 @@ class _ButtonBaseState extends State<ButtonBase> {
   void loadColors() {
     _enabled = widget.onPressed != null;
     textColor = widget.foregroundColor ?? Theme.of(context).foregroundColor;
-    focusMixin = Theme.of(context).darkMode
-        ? const Color(0xFFFFFFFF).withOpacity(0.2)
-        : const Color(0xFF000000).withOpacity(0.2);
-    hoverMixin = Theme.of(context).darkMode
-        ? const Color(0xFFFFFFFF).withOpacity(0.1)
-        : const Color(0xFF000000).withOpacity(0.1);
+    focusMixin = MaterialTheme.of(context).focusColor;
+    hoverMixin = MaterialTheme.of(context).hoverColor;
 
     if (!_enabled) {
       backgroundColor = const Color(0xFFE5E5E5);
       textColor = const Color(0xFF212121).withOpacity(0.25);
     } else if (widget.type == ButtonType.primary) {
-      backgroundColor =
-          widget.backgroundColor ?? Theme.of(context).primaryColor;
+      backgroundColor = widget.backgroundColor ?? Theme.of(context).primaryColor;
     } else {
       backgroundColor = Theme.of(context).surfaceColor;
     }
@@ -82,8 +77,7 @@ class _ButtonBaseState extends State<ButtonBase> {
       onPressed: () async {
         if (_enabled) {
           setState(
-            () => buttonColor =
-                Color.alphaBlend(focusMixin, backgroundColor),
+            () => buttonColor = Color.alphaBlend(focusMixin, backgroundColor),
           );
           widget.onPressed?.call();
           await Future.delayed(const Duration(milliseconds: 100));
@@ -99,8 +93,7 @@ class _ButtonBaseState extends State<ButtonBase> {
       onEnter: (_) {
         if (_enabled) {
           setState(() {
-            buttonColor =
-                Color.alphaBlend(hoverMixin, backgroundColor);
+            buttonColor = Color.alphaBlend(hoverMixin, backgroundColor);
           });
         }
       },
@@ -112,7 +105,7 @@ class _ButtonBaseState extends State<ButtonBase> {
         }
       },
       child: PhysicalModel(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(24),
         color: buttonColor,
         clipBehavior: Clip.antiAlias,
         child: Padding(

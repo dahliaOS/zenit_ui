@@ -6,12 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 export 'package:flutter/services.dart'
-    show
-        TextInputType,
-        TextInputAction,
-        TextCapitalization,
-        SmartQuotesType,
-        SmartDashesType;
+    show TextInputType, TextInputAction, TextCapitalization, SmartQuotesType, SmartDashesType;
 
 class ZenitTextField extends StatelessWidget {
   const ZenitTextField({
@@ -69,11 +64,12 @@ class ZenitTextField extends StatelessWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contextMenuBuilder,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType = smartDashesType ??
-            (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ??
-            (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType =
+            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType =
+            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -89,9 +85,7 @@ class ZenitTextField extends StatelessWidget {
           'Obscured fields cannot be multiline.',
         ),
         assert(
-          maxLength == null ||
-              maxLength == TextField.noMaxLength ||
-              maxLength > 0,
+          maxLength == null || maxLength == TextField.noMaxLength || maxLength > 0,
         ),
         assert(
           !identical(textInputAction, TextInputAction.newline) ||
@@ -99,10 +93,8 @@ class ZenitTextField extends StatelessWidget {
               !identical(keyboardType, TextInputType.text),
           'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
         ),
-        keyboardType = keyboardType ??
-            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        enableInteractiveSelection =
-            enableInteractiveSelection ?? (!readOnly || !obscureText),
+        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText),
         toolbarOptions = toolbarOptions ??
             (obscureText
                 ? (readOnly
@@ -233,10 +225,12 @@ class ZenitTextField extends StatelessWidget {
 
   final bool enableIMEPersonalizedLearning;
 
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
+
   @override
   Widget build(BuildContext context) {
     final ZenitTheme theme = ZenitTheme.of(context);
-    final _kDefaultInputDecoration = zenitInputDecorationTheme(theme);
+    final kDefaultInputDecoration = zenitInputDecorationTheme(theme);
 
     return TextField(
       autocorrect: autocorrect,
@@ -249,8 +243,8 @@ class ZenitTextField extends StatelessWidget {
       cursorHeight: cursorHeight,
       cursorRadius: cursorRadius,
       cursorWidth: cursorWidth,
-      decoration: decoration?.applyDefaults(_kDefaultInputDecoration) ??
-          const InputDecoration().applyDefaults(_kDefaultInputDecoration),
+      decoration: decoration?.applyDefaults(kDefaultInputDecoration) ??
+          const InputDecoration().applyDefaults(kDefaultInputDecoration),
       dragStartBehavior: dragStartBehavior,
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
@@ -293,6 +287,7 @@ class ZenitTextField extends StatelessWidget {
       textCapitalization: textCapitalization,
       textDirection: textDirection,
       textInputAction: textInputAction,
+      contextMenuBuilder: contextMenuBuilder,
       toolbarOptions: toolbarOptions,
     );
   }
@@ -306,26 +301,26 @@ const BorderSide _kDefaultBorderSideInactive = BorderSide(
   width: _kDefaultBorderWidth,
 );
 
-const OutlineInputBorder _kDefaultOutlineInputBorderInactive =
-    OutlineInputBorder(
+const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorder(
   borderSide: _kDefaultBorderSideInactive,
   borderRadius: _kDefaultBorderRadius,
 );
 
 InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
-  final BorderSide _kDefaultBorderSideActive = BorderSide(
+  final BorderSide kDefaultBorderSideActive = BorderSide(
     color: theme.primaryColor,
     width: _kDefaultBorderWidth,
   );
 
-  final _kDefaultInputDecorationTheme = InputDecorationTheme(
+  final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
+    constraints: const BoxConstraints(maxHeight: 40),
     fillColor: theme.surfaceColor,
     border: _kDefaultOutlineInputBorderInactive,
     enabledBorder: _kDefaultOutlineInputBorderInactive,
     disabledBorder: _kDefaultOutlineInputBorderInactive,
     focusedBorder: OutlineInputBorder(
-      borderSide: _kDefaultBorderSideActive,
+      borderSide: kDefaultBorderSideActive,
       borderRadius: _kDefaultBorderRadius,
     ),
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
@@ -333,5 +328,5 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
   );
 
-  return _kDefaultInputDecorationTheme;
+  return kDefaultInputDecorationTheme;
 }

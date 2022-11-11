@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/layout/responsive/navigation_element.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 Key layoutKey = UniqueKey();
 
@@ -9,7 +7,7 @@ class ResponsivePlatform extends StatefulWidget {
   final List<NavigationElement> navigationElements;
   final ValueChanged<int>? onTap;
   final int selectedIndex;
-  final PreferredSizeWidget? appBar;
+  final PreferredSizeWidget titlebar;
   final Widget? floatingActionButton;
   final Widget? body;
 
@@ -19,7 +17,7 @@ class ResponsivePlatform extends StatefulWidget {
     this.disableAnimation = false,
     this.onTap,
     required this.selectedIndex,
-    this.appBar,
+    required this.titlebar,
     this.floatingActionButton,
     this.body,
   }) : assert(
@@ -51,6 +49,7 @@ class _ResponsivePlatformState extends State<ResponsivePlatform> with SingleTick
 
   @override
   Widget build(BuildContext context) {
+    final theme = ZenitTheme.of(context);
     return LayoutBuilder(
       key: layoutKey,
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -73,8 +72,9 @@ class _ResponsivePlatformState extends State<ResponsivePlatform> with SingleTick
         final bool railIsExpanded = expansionState == ExpansionState.large;
 
         return Scaffold(
-          appBar: widget.appBar,
+          appBar: widget.titlebar,
           floatingActionButton: widget.floatingActionButton,
+          backgroundColor: theme.surfaceColor,
           body: Stack(
             clipBehavior: Clip.antiAlias,
             children: [
@@ -85,11 +85,21 @@ class _ResponsivePlatformState extends State<ResponsivePlatform> with SingleTick
                     left: Tween<double>(begin: navRailPadding, end: 0.0).animate(_controller).value,
                     bottom: Tween<double>(begin: 0.0, end: 56.0).animate(_controller).value,
                   ),
-                  child: child,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: theme.backgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(
+                          Tween<double>(begin: 8.0, end: 0.0).animate(_controller).value,
+                        ),
+                      ),
+                    ),
+                    child: child,
+                  ),
                 ),
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: widget.body,
+                  child: SizedBox.expand(child: widget.body),
                 ),
               ),
               Positioned(
@@ -130,13 +140,12 @@ class _ResponsivePlatformState extends State<ResponsivePlatform> with SingleTick
 
 class _NavigationRail extends StatelessWidget {
   const _NavigationRail({
-    Key? key,
     required this.selectedIndex,
     required this.onTap,
     required this.navigationElements,
     required this.isExpanded,
     required this.railWidth,
-  }) : super(key: key);
+  });
 
   final int selectedIndex;
   final ValueChanged<int>? onTap;
@@ -148,11 +157,10 @@ class _NavigationRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final ZenitTheme theme = ZenitTheme.of(context);
 
-
     return SizedBox(
       width: railWidth,
-      child: Theme(
-        data: Theme.of(context).copyWith(
+      child: MaterialTheme(
+        data: MaterialTheme.of(context).copyWith(
           useMaterial3: true,
         ),
         child: NavigationRail(
@@ -179,11 +187,10 @@ class _NavigationRail extends StatelessWidget {
 
 class _BottomNavigationBar extends StatelessWidget {
   const _BottomNavigationBar({
-    Key? key,
     required this.selectedIndex,
     required this.onTap,
     required this.navigationElements,
-  }) : super(key: key);
+  });
 
   final int selectedIndex;
   final ValueChanged<int>? onTap;
