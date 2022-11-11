@@ -1,10 +1,42 @@
-import { html } from 'lit-html';
+import { html, nothing } from 'lit-html';
+import { Components } from '../../components';
+import { ArgTypes } from '@storybook/web-components';
+
+import docs from './my-component.docs.mdx';
+import { MyComponent } from './my-component';
 
 export default {
   title: 'Components/Demo Component',
+  component: 'my-component',
+  parameters: {
+    docs: {
+      page: docs
+    }
+  },
+  argTypes: {
+    first: {
+      type: 'string',
+      name: 'First name',
+      description: 'The first name'
+    },
+    middle: {
+      type: 'string',
+      name: 'Middle name',
+      description: 'The middle name'
+    },
+    last: {
+      type: 'string',
+      name: 'Last name',
+      description: 'The last name'
+    }
+  } as ArgTypes<MyComponent>
 };
 
-const Template = ({first, middle, last}: {first: string, middle: string, last: string}) => html`<my-component first="${first}" middle="${middle}" last="${last}" />`;
+const Template = (args: Components.MyComponent) => html`<my-component
+  first=${args.first || nothing}
+  middle=${args.middle || nothing}
+  last=${args.last || nothing} 
+/>`;
 
 export const JohnGreen = Template.bind({});
 JohnGreen.args = {
