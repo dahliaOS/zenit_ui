@@ -7,9 +7,9 @@ button {
   border-radius: 4px;
   border: none;
 
-  background: var(--zenit-theme-secondary, #E6E6E6);
-  color: var(--zenit-theme-on-secondary, #000000);
-  font-family: var(--zenit-theme-font, (Manrope, sans-serif));
+  background: var(--zenit-theme-secondary, $default-secondary);
+  color: var(--zenit-theme-on-secondary, $default-on-secondary);
+  font-family: var(--zenit-theme-font, $default-font);
   
   display: flex;
   flex-direction: row;
@@ -45,8 +45,8 @@ button:enabled:hover {
 } */
 
 button.zenit-primary {
-  background: var(--zenit-theme-primary, #00B26E);
-  color: var(--zenit-theme-on-primary, #000000);
+  background: var(--zenit-theme-primary, $default-primary);
+  color: var(--zenit-theme-on-primary, $default-on-primary);
 }
 /* button.zenit-primary:enabled:hover {
   background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-primary, #00B26E);

@@ -2,12 +2,16 @@ import { html, nothing } from 'lit-html';
 import { Components } from '../../components';
 import { ArgTypes } from '@storybook/web-components';
 
+import results from '../../../.jest-test-results.json';
+import { withTests } from '@storybook/addon-jest';
+
 //import docs from './my-component.docs.mdx';
 import { Button } from './button';
 
 export default {
   title: 'Components/Button',
   component: 'zenit-button',
+  decorators: [withTests({ results })],
   parameters: {
     docs: {
       description: "A button is an interactive component which, when tapped or clicked, performs some action."

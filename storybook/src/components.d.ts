@@ -30,6 +30,16 @@ export namespace Components {
          */
         "primary": boolean;
     }
+    interface ZenitSwitch {
+        /**
+          * Whether the switch is on (true) or off (false).
+         */
+        "checked": boolean;
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled": boolean;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -44,9 +54,16 @@ declare global {
         prototype: HTMLZenitButtonElement;
         new (): HTMLZenitButtonElement;
     };
+    interface HTMLZenitSwitchElement extends Components.ZenitSwitch, HTMLStencilElement {
+    }
+    var HTMLZenitSwitchElement: {
+        prototype: HTMLZenitSwitchElement;
+        new (): HTMLZenitSwitchElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "zenit-button": HTMLZenitButtonElement;
+        "zenit-switch": HTMLZenitSwitchElement;
     }
 }
 declare namespace LocalJSX {
@@ -74,9 +91,20 @@ declare namespace LocalJSX {
          */
         "primary"?: boolean;
     }
+    interface ZenitSwitch {
+        /**
+          * Whether the switch is on (true) or off (false).
+         */
+        "checked"?: boolean;
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled"?: boolean;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "zenit-button": ZenitButton;
+        "zenit-switch": ZenitSwitch;
     }
 }
 export { LocalJSX as JSX };
@@ -85,6 +113,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "zenit-button": LocalJSX.ZenitButton & JSXBase.HTMLAttributes<HTMLZenitButtonElement>;
+            "zenit-switch": LocalJSX.ZenitSwitch & JSXBase.HTMLAttributes<HTMLZenitSwitchElement>;
         }
     }
 }

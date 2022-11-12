@@ -1,0 +1,42 @@
+svg {
+  border-radius: 16px;
+  &:not([data-disabled]) {
+    cursor: pointer;
+  }
+}
+svg[data-disabled] {
+  opacity: 70%;
+}
+
+svg:not([data-disabled]):hover>.--bg {
+  background-color: #ffffff;
+  fill-opacity: 100%-16%;
+  // linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%))
+}
+svg:not([data-disabled]):active>.--bg {
+  background-color: #ffffff;
+  fill-opacity: 100%-32%;
+}
+
+svg>.--bg {
+  fill: var(--zenit-theme-secondary, $default-secondary);
+}
+svg[data-checked]>.--bg {
+  fill: var(--zenit-theme-primary, $default-primary);
+}
+
+svg>.--thumb {
+  fill: var(--zenit-theme-secondary-on-widget, $default-secondary-on-widget);
+  margin-left: 4px;
+  transition: width 0.1s, fill 0.2s, transform 0.1s, height 0.1s
+}
+svg[data-checked]>.--thumb {
+  fill: var(--zenit-theme-on-primary, $default-on-primary);
+  transform: translate(24px, 0px);
+}
+
+svg:not([data-disabled]):active>.--thumb {
+  width: 40px;
+  //height: 12px;
+  transform: translate(0px, 0px);
+}

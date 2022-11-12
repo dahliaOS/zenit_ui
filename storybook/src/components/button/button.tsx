@@ -2,11 +2,11 @@ import { Component, Prop, h, Host } from '@stencil/core';
 
 @Component({
   tag: 'zenit-button',
-  styleUrl: 'button.css',
+  styleUrl: 'button.scss',
   shadow: true,
 })
 export class Button {
-  element: HTMLButtonElement;
+  //element: HTMLButtonElement;
 
   /**
    * Whether to use primary styling for this button.
@@ -25,7 +25,7 @@ export class Button {
           this.primary ? 'zenit-primary' : ''
         ].join(' ')}
         disabled={this.disabled}
-        ref={(el) => this.element = el}
+      //ref={(el) => this.element = el}
       ><slot /></button>
     </Host>;
   }
