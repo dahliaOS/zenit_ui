@@ -2,6 +2,7 @@ import { html, nothing } from 'lit-html';
 import { Components } from '../../components';
 import { ArgTypes } from '@storybook/web-components';
 
+//@ts-ignore
 import docs from './my-component.docs.mdx';
 import { MyComponent } from './my-component';
 

@@ -20,6 +20,16 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface ZenitButton {
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled": boolean;
+        /**
+          * Whether to use primary styling for this button.
+         */
+        "primary": boolean;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +38,15 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLZenitButtonElement extends Components.ZenitButton, HTMLStencilElement {
+    }
+    var HTMLZenitButtonElement: {
+        prototype: HTMLZenitButtonElement;
+        new (): HTMLZenitButtonElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "zenit-button": HTMLZenitButtonElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +64,19 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface ZenitButton {
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled"?: boolean;
+        /**
+          * Whether to use primary styling for this button.
+         */
+        "primary"?: boolean;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "zenit-button": ZenitButton;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +84,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "zenit-button": LocalJSX.ZenitButton & JSXBase.HTMLAttributes<HTMLZenitButtonElement>;
         }
     }
 }

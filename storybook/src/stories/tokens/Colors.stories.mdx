@@ -32,3 +32,17 @@ This is a copy-pasted placeholder and will be made proper later
     }}
   />
 </ColorPalette>
+
+## Theming in Zenit for Web (Web Components)
+Zenit's low-level Web Components package (`@zenit-ui/web-components` or `zenit-ui`) uses CSS variables to manage its colors.
+
+| Variable name | Default value | Description |
+| ------------- | ------------- | ----------- |
+| `--zenit-theme-primary` | `#00B26E` | The primary color, used for positive actions and branded accents around an app. |
+| `--zenit-theme-on-primary` | `#ffffff` | A color that contrasts with the primary color (preferably pure white or black). |
+| `--zenit-theme-secondary` | Light: `#E6E6E6`; Dark: `#262626` | A secondary color used for some interactive backgrounds (i.e. buttons and text fields). It is somewhat visible against the background. |
+| `--zenit-theme-on-secondary` | Light: `#000000`; Dark: `#ffffff` | A color that contrasts with the secondary color. |
+| `--zenit-theme-surface` | Light: `#F7F7F7`; Dark: `#212121` | A color used for a non-interactive surface placed on top of a background, typically used by an app-bar or card. It should be closer to gray than the background color. The sidebar on web apps should use this color, but where possible, acrylic can be used instead. |
+| `--zenit-theme-on-surface` | Light: `#000000`; Dark: `#ffffff` | A color that contrasts with the surface color. Usually the same as `--zenit-theme-on-background`. |
+| `--zenit-theme-background` | Light: `#ffffff`; Dark: `#121212` | The color of the solid background that covers the empty spaces behind everything in an app. This is used for non-acrylic areas in dahliaOS, but in most web applications it's going to be the primary background. |
+| `--zenit-theme-on-background` | Light: `#000000`; Dark: `#ffffff` | A color that contrasts with the background color. |

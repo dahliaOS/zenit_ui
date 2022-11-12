@@ -20,5 +20,6 @@ export const parameters = {
         "Components",
       ],
     },
-  }
+  },
+  backgrounds: { disable: true }
 }

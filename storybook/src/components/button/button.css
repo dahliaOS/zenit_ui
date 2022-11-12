@@ -1,0 +1,64 @@
+:host {
+  display: contents;
+}
+button {
+  appearance: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: none;
+
+  background: var(--zenit-theme-secondary, #E6E6E6);
+  color: var(--zenit-theme-on-secondary, #000000);
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+}
+button:enabled:hover {
+  background: linear-gradient(0deg, rgba(255 255 255 / 20%), rgba(255 255 255 / 20%)), var(--zenit-theme-secondary, #E6E6E6);
+  cursor: pointer;
+}
+button:enabled:active {
+  background: linear-gradient(0deg, rgba(0 0 0 / 20%), rgba(0 0 0 / 20%)), var(--zenit-theme-secondary, #E6E6E6);
+}
+
+ /* Notes:
+  * The `:host-context` selector is pretty well hated in the 
+  * browser developer community, probably for the same reason
+  * `:has` probably hasn't been implemented.
+  * It's not supported at all in Firefox or Safari, so
+  * it's ultimately not worth it.
+  */
+/* :host-context(.dark) button {
+  background: var(--zenit-theme-secondary-dark, #262626);
+  color: var(--zenit-theme-on-secondary-dark, #ffffff);
+}
+:host-context(.dark) button:hover {
+  background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-secondary-dark, #262626);
+}
+:host-context(.dark) button:active {
+  background: linear-gradient(0deg, rgba(0 0 0 / 16%), rgba(0 0 0 / 16%)), var(--zenit-theme-secondary-dark, #262626);
+} */
+
+button.zenit-primary {
+  background: var(--zenit-theme-primary, #00B26E);
+  color: var(--zenit-theme-on-primary, #000000);
+}
+button.zenit-primary:enabled:hover {
+  background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-primary, #00B26E);
+}
+button.zenit-primary:enabled:active {
+  background: linear-gradient(0deg, rgba(0 0 0 / 16%), rgba(0 0 0 / 16%)), var(--zenit-theme-primary, #00B26E);
+}
+
+button:disabled {
+  opacity: 70%;
+}
+
+button>* {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}

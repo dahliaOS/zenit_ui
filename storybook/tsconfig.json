@@ -18,10 +18,10 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.mdx",
+    "src/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/**/*.stories.ts"
   ]
 }
