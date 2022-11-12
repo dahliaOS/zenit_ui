@@ -14,7 +14,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "yarn install",
-	"postCreateCommand": "pnpm install",
+	// "postCreateCommand": "npm install",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -23,7 +23,8 @@
 				"esbenp.prettier-vscode"
 			],
 			"settings": {
-				"prettier.enable": true
+				"prettier.enable": true,
+				"editor.formatOnSave": true
 			}
 		}
 	}

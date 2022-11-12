@@ -9,6 +9,7 @@ button {
 
   background: var(--zenit-theme-secondary, #E6E6E6);
   color: var(--zenit-theme-on-secondary, #000000);
+  font-family: var(--zenit-theme-font, (Manrope, sans-serif));
   
   display: flex;
   flex-direction: row;
@@ -17,12 +18,13 @@ button {
   gap: 8px;
 }
 button:enabled:hover {
-  background: linear-gradient(0deg, rgba(255 255 255 / 20%), rgba(255 255 255 / 20%)), var(--zenit-theme-secondary, #E6E6E6);
+  background-image: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%));
+  /* , var(--zenit-theme-secondary, #E6E6E6); */
   cursor: pointer;
 }
-button:enabled:active {
+/* button:enabled:active {
   background: linear-gradient(0deg, rgba(0 0 0 / 20%), rgba(0 0 0 / 20%)), var(--zenit-theme-secondary, #E6E6E6);
-}
+} */
 
  /* Notes:
   * The `:host-context` selector is pretty well hated in the 
@@ -46,11 +48,11 @@ button.zenit-primary {
   background: var(--zenit-theme-primary, #00B26E);
   color: var(--zenit-theme-on-primary, #000000);
 }
-button.zenit-primary:enabled:hover {
+/* button.zenit-primary:enabled:hover {
   background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-primary, #00B26E);
-}
-button.zenit-primary:enabled:active {
-  background: linear-gradient(0deg, rgba(0 0 0 / 16%), rgba(0 0 0 / 16%)), var(--zenit-theme-primary, #00B26E);
+} */
+button:enabled:active {
+  background-image: linear-gradient(0deg, rgba(255 255 255 / 32%), rgba(255 255 255 / 32%))
 }
 
 button:disabled {

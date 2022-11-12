@@ -16,8 +16,7 @@ export class Button {
   /**
    * Whether the button should not be clickable.
    */
-   @Prop() disabled: boolean;
-
+  @Prop() disabled: boolean;
 
   render() {
     return <Host>

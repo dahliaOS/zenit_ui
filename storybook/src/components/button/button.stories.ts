@@ -10,6 +10,7 @@ export default {
   component: 'zenit-button',
   parameters: {
     docs: {
+      description: "A button is an interactive component which, when tapped or clicked, performs some action."
       //page: docs
     }
   },
@@ -31,6 +32,10 @@ export default {
 
 export const Primary = ({label, disabled}) => html`<zenit-button primary ?disabled=${disabled}>${label}</zenit-button>`
 Primary.parameters = {
+  docs: {
+    description: "Only one button in any given set should be primary, and it should correspond to the preferred or most used action, "+
+    "such as canceling a deletion, starting a virtual machine, or moving to the next step."
+  },
   backgrounds: {
     disable: false,
     items: [
@@ -45,6 +50,7 @@ Primary.parameters = {
     ],
   }
 }
+
 export const Secondary = ({label, disabled}) => html`<zenit-button ?disabled=${disabled}>${label}</zenit-button><style>
 .dark {
   --zenit-theme-secondary: #262626;
@@ -65,6 +71,7 @@ Secondary.parameters = {
     }
   ],
 }
+
 export const PrimaryDisabled = ({label, disabled}) => html`<zenit-button primary ?disabled=${disabled}>${label}</zenit-button>`
 PrimaryDisabled.args = {
   disabled: true
