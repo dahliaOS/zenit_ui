@@ -15,7 +15,7 @@ describe('zenit-switch', () => {
             <rect class="--thumb" fill="#FAFAFA" height="16" rx="8" width="16" x="4" y="4"></rect>
           </svg>
         </mock:shadow-root>
-      </zenit-button>
+      </zenit-switch>
     `);
   });
   it('toggles', async () => {
@@ -33,7 +33,7 @@ describe('zenit-switch', () => {
             <rect class="--thumb" fill="#FAFAFA" height="16" rx="8" width="16" x="4" y="4"></rect>
           </svg>
         </mock:shadow-root>
-      </zenit-button>
+      </zenit-switch>
     `);
   });
   it('renders when disabled', async () => {
@@ -49,7 +49,7 @@ describe('zenit-switch', () => {
             <rect class="--thumb" fill="#FAFAFA" height="16" rx="8" width="16" x="4" y="4"></rect>
           </svg>
         </mock:shadow-root>
-      </zenit-button>
+      </zenit-switch>
     `);
   });
   it('does not toggle when disabled', async () => {
@@ -68,7 +68,7 @@ describe('zenit-switch', () => {
             <rect class="--thumb" fill="#FAFAFA" height="16" rx="8" width="16" x="4" y="4"></rect>
           </svg>
         </mock:shadow-root>
-      </zenit-button>
+      </zenit-switch>
     `);
   });
 });

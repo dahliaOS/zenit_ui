@@ -8,7 +8,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "storybook-addon-themes",
-    "@storybook/addon-jest"
+    "@storybook/addon-jest",
+    "@storybook/addon-interactions"
   ],
   "staticDirs": [{ from: '../src/stories/assets', to: '/assets' }],
   "framework": "@storybook/web-components",

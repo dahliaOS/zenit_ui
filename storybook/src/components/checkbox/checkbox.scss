@@ -1,0 +1,115 @@
+svg {
+  border-radius: 6px;
+  &:not([data-disabled]) {
+    cursor: pointer;
+  }
+}
+svg[data-disabled] {
+  opacity: 70%;
+  animation: none;
+}
+
+svg[data-checked=off]>.--bg {
+  transition: fill 0.25s
+}
+svg[data-checked=off]>.--mark {
+  stroke-width: 0;
+}
+svg[data-checked=mixed]>.--mixed {
+  stroke-width: 2px;
+}
+svg[data-checked=off][data-from-state=on]>.--mark {
+  animation: checked-to-unchecked 0.5s forwards 1;
+}
+svg>.--bg {
+  fill: var(--zenit-theme-secondary, $default-secondary);
+  //fill: var(--zenit-theme-primary, $default-primary); // for now
+}
+svg:is([data-checked=on], [data-checked=mixed])>.--bg {
+  fill: var(--zenit-theme-primary, $default-primary);
+  transition: fill 0.1s
+}
+
+svg[data-checked=on]:is([data-from-state=off], [data-from-state=mixed])>.--mark {
+  animation: unchecked-to-checked 0.5s forwards 1;
+}
+
+svg:not([data-disabled]):hover>.--bg {
+  background-color: #ffffff;
+  fill-opacity: 100%-16%;
+  // linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%))
+}
+svg:not([data-disabled]):active>.--bg {
+  background-color: #ffffff;
+  fill-opacity: 100%-32%;
+}
+
+svg[data-checked=mixed]>.--mark {
+  stroke-width: 0;
+}
+svg[data-checked=mixed]:is([data-from-state=on], [data-from-state=off])>.--mixed {
+  animation: clear-to-mixed 0.5s forwards 1;
+}
+svg[data-from-state=mixed]:is([data-checked=on], [data-checked=off])>.--mixed {
+  animation: mixed-to-clear 0.5s forwards 1;
+}
+
+@keyframes unchecked-to-checked {
+  0% {
+    stroke-width: 0px;
+    stroke-dasharray: 32;
+    stroke-dashoffset: 32;
+  }
+  33% {
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-width: 2px;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes checked-to-unchecked {
+  0% {
+    stroke-width: 2px;
+    stroke-dasharray: 32;
+    stroke-dashoffset: 0;
+  }
+  67% {
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-width: 0px;
+    stroke-dasharray: 32;
+    stroke-dashoffset: -32;
+  }
+}
+
+@keyframes clear-to-mixed {
+  0% {
+    stroke-width: 0px;
+    stroke-dasharray: 24;
+    stroke-dashoffset: 24;
+  }
+  33% {
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-width: 2px;
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes mixed-to-clear {
+  0% {
+    stroke-width: 2px;
+    stroke-dasharray: 24;
+    stroke-dashoffset: 0;
+  }
+  67% {
+    stroke-width: 2px;
+  }
+  100% {
+    stroke-width: 0px;
+    stroke-dasharray: 24;
+    stroke-dashoffset: -24;
+  }
+}

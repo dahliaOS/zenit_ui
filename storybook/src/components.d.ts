@@ -30,6 +30,20 @@ export namespace Components {
          */
         "primary": boolean;
     }
+    interface ZenitCheckbox {
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled": boolean;
+        /**
+          * Whether to allow "click" actions to switch to the intermediate/mixed state.
+         */
+        "tristate": boolean;
+        /**
+          * Whether the box is checked. If it has an indeterminate value, then use "mixed".
+         */
+        "value": "on" | "off" | "mixed";
+    }
     interface ZenitSwitch {
         /**
           * Whether the switch is on (true) or off (false).
@@ -54,6 +68,12 @@ declare global {
         prototype: HTMLZenitButtonElement;
         new (): HTMLZenitButtonElement;
     };
+    interface HTMLZenitCheckboxElement extends Components.ZenitCheckbox, HTMLStencilElement {
+    }
+    var HTMLZenitCheckboxElement: {
+        prototype: HTMLZenitCheckboxElement;
+        new (): HTMLZenitCheckboxElement;
+    };
     interface HTMLZenitSwitchElement extends Components.ZenitSwitch, HTMLStencilElement {
     }
     var HTMLZenitSwitchElement: {
@@ -63,6 +83,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "zenit-button": HTMLZenitButtonElement;
+        "zenit-checkbox": HTMLZenitCheckboxElement;
         "zenit-switch": HTMLZenitSwitchElement;
     }
 }
@@ -91,6 +112,20 @@ declare namespace LocalJSX {
          */
         "primary"?: boolean;
     }
+    interface ZenitCheckbox {
+        /**
+          * Whether the button should not be clickable.
+         */
+        "disabled"?: boolean;
+        /**
+          * Whether to allow "click" actions to switch to the intermediate/mixed state.
+         */
+        "tristate"?: boolean;
+        /**
+          * Whether the box is checked. If it has an indeterminate value, then use "mixed".
+         */
+        "value"?: "on" | "off" | "mixed";
+    }
     interface ZenitSwitch {
         /**
           * Whether the switch is on (true) or off (false).
@@ -104,6 +139,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "my-component": MyComponent;
         "zenit-button": ZenitButton;
+        "zenit-checkbox": ZenitCheckbox;
         "zenit-switch": ZenitSwitch;
     }
 }
@@ -113,6 +149,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "zenit-button": LocalJSX.ZenitButton & JSXBase.HTMLAttributes<HTMLZenitButtonElement>;
+            "zenit-checkbox": LocalJSX.ZenitCheckbox & JSXBase.HTMLAttributes<HTMLZenitCheckboxElement>;
             "zenit-switch": LocalJSX.ZenitSwitch & JSXBase.HTMLAttributes<HTMLZenitSwitchElement>;
         }
     }
