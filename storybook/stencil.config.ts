@@ -22,5 +22,7 @@ export const config: Config = {
     {
       type: 'docs-readme',
     },
-  ]
+  ],
+  excludeUnusedDependencies: true,
+  validateTypes: false
 };

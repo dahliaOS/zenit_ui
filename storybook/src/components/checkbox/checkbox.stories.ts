@@ -8,7 +8,6 @@ import { userEvent, waitFor, within } from '@storybook/testing-library';
 
 //import docs from './my-component.docs.mdx';
 import { Checkbox } from './checkbox';
-import { setPlatformHelpers } from '@stencil/core';
 
 export default {
   title: 'Components/Checkbox',
