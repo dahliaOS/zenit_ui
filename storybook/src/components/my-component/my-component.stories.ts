@@ -39,12 +39,12 @@ const Template = (args: Components.MyComponent) => html`<my-component
   last=${args.last || nothing} 
 />`;
 
-export const JohnGreen = Template.bind({});
-JohnGreen.args = {
-  first: 'John',
-  last: 'Green'
+export const BobParr = Template.bind({});
+BobParr.args = {
+  first: 'Bob',
+  last: 'Parr'
 };
-JohnGreen.storyName = 'John Green';
+BobParr.storyName = 'Bob Parr';
 
 export const JJJS = Template.bind({});
 JJJS.args = {

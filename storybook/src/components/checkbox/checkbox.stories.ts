@@ -64,14 +64,15 @@ export const Tristate = Template.bind({});
 Tristate.args = {value: "off", tristate: true};
 Tristate.storyName = "Cycle all three states";
 Tristate.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+  //const canvas = within();
+  const element = (canvasElement as HTMLElement).querySelector("zenit-checkbox")!;
 
   await sleep(250);
-  await userEvent.click(canvas.getByRole("checkbox"));
+  await userEvent.click(element);
   await sleep(1000);
-  await userEvent.click(canvas.getByRole("checkbox"));
+  await userEvent.click(element);
   await sleep(1000);
-  await userEvent.click(canvas.getByRole("checkbox"));
+  await userEvent.click(element);
 }
 
 export const IndeterminateState = Template.bind({});

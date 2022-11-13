@@ -1,0 +1,92 @@
+import { Meta, Typeset, Canvas, Story } from '@storybook/addon-docs/blocks';
+
+<Meta title="Tokens/Typography" />
+
+export const typography = {
+  type: {
+    primary: '"Manrope", "Roboto", Helvetica, Arial, sans-serif',
+  },
+  weight: {
+    regular: '500',
+    bold: '700',
+  },
+  size: {
+    xs: 10,
+    s1: 12,
+    s2: 14,
+    s3: 16,
+    m1: 20,
+    m2: 24,
+    m3: 28,
+    l1: 32,
+    l2: 40,
+    l3: 48,
+  },
+};
+
+export const SampleText = 'Zwölf Boxkämpfer jagen Viktor quer über den großen Sylter Deich';
+
+# Typography
+
+**Body Font:** Manrope
+
+**Weights:** 500(regular), 700(bold)
+
+The sample text below uses a German pangram to showcase more characters.
+
+<Typeset
+  fontSizes={[
+    Number(typography.size.xs),
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.m1),
+    Number(typography.size.m2),
+    Number(typography.size.m3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3),
+  ]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
+<Typeset
+  fontSizes={[
+    Number(typography.size.xs),
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3),
+  ]}
+  fontWeight={typography.weight.bold}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
+
+Here are some other font-related demos and tests. Please make sure when changing the font that all of the following tests display correctly.
+
+<Typeset
+  fontSizes={[Number(typography.size.xs), Number(typography.size.s1)]}
+  fontWeight={typography.weight.normal}
+  sampleText="Eble ĉiu kvazaŭ-deca fuŝĥoraĵo ĝojigos homtipon."
+  fontFamily={typography.type.primary}
+/>
+<Typeset
+  fontSizes={[Number(typography.size.s2), Number(typography.size.s3)]}
+  fontWeight={typography.weight.normal}
+  sampleText="以呂波耳本部止
+  千利奴流乎和加
+  餘多連曽津祢那
+  良牟有為能於久
+  耶万計不己衣天
+  阿佐伎喩女美之
+  恵比毛勢須 "
+  fontFamily={typography.type.primary}
+/>
+
+<Canvas>
+  <Story id="components-button--primary" />
+</Canvas>
