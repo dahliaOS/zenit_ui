@@ -4,25 +4,164 @@ import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
 
 # Color Scheme
 
-This is a copy-pasted placeholder and will be made proper later
+Zenit UI has a few color roles:
+
+## Primary
+
+Primary colors are the most prominent colors displayed across an app, and are typically used for branding
+or a user's theme choices. Primary colors may be vibrant.
+
+## Secondary
+
+Zenit's secondary color is a middle shade of gray. It is used on buttons, switches, and other components.
+
+## Surface
+
+A surface color is used by various secondary surfaces throughout the app. It should be a shade somewhere
+between Secondary and Background. This may be used as a background color in place of acrylic when it isn't
+available, such as in a mobile app, or where it doesn't make sense.
+
+## Background
+
+The color used in the furthest solid background of your app. On dahliaOS, this is secondary to the acrylic
+background, which shows the desktop behind it.
+
+# Zenit Palette
+
+A pre-made color palette for use with Zenit and dahliaOS products, or to help inspire your branding.
 
 <ColorPalette>
-  <ColorItem title="theme.color.greyscale" subtitle="Some of the greys" colors={{ White: '#FFFFFF', Alabaster: '#F8F8F8', Concrete: '#F3F3F3' }} />
-  <ColorItem title="theme.color.primary" subtitle="Coral" colors={{ WildWatermelon: '#FF4785' }} />
-  <ColorItem title="theme.color.secondary" subtitle="Ocean" colors={{ DodgerBlue: '#1EA7FD' }} />
   <ColorItem
-    title="theme.color.positive"
-    subtitle="Green"
+    title="red"
+    subtitle="Rose Red"
     colors={{
-      Apple: 'rgba(102,191,60,1)',
-      Apple80: 'rgba(102,191,60,.8)',
-      Apple60: 'rgba(102,191,60,.6)',
-      Apple30: 'rgba(102,191,60,.3)',
+      50: '#ffe9ec',
+      100: '#ffc9cc',
+      200: '#f0938e',
+      300: '#e66963',
+      400: '#ed453a',
+      500: '#f03118',
+      600: '#e2241a',
+      700: '#d11615',
+      800: '#c4070c',
+      900: '#b60000',
+    }}
+  />
+  <ColorItem
+    title="orange"
+    subtitle="Magma Orange"
+    colors={{
+      50: '#fce8e5',
+      100: '#ffcab7',
+      200: '#ffa788',
+      300: '#ff8458',
+      400: '#ff6832',
+      500: '#ff4d00',
+      600: '#f44600',
+      700: '#e63f00',
+      800: '#d93700',
+      900: '#c12700',
+    }}
+  />
+  <ColorItem
+    title="yellow"
+    subtitle="Honey Yellow"
+    colors={{
+      50: '#fff8e0',
+      100: '#ffedb0',
+      200: '#ffe17c',
+      300: '#ffd743',
+      400: '#ffcc00',
+      500: '#ffc300',
+      600: '#ffb500',
+      700: '#ffa100',
+      800: '#ff8f00',
+      900: '#ff6d00',
+    }}
+  />
+  <ColorItem
+    title="green"
+    subtitle="Leaf Green"
+    colors={{
+      50: '#e5f6ed',
+      100: '#c0e7d2',
+      200: '#97d8b6',
+      300: '#6ac999',
+      400: '#44be83',
+      500: '#00b26e',
+      600: '#00a363',
+      700: '#009056',
+      800: '#007f4a',
+      900: '#006035',
+    }}
+  />
+  <ColorItem
+    title="teal"
+    subtitle="Pine Teal"
+    colors={{
+      50: '#e0f3f0',
+      100: '#b3e2d9',
+      200: '#82cfc1',
+      300: '#50bca9',
+      400: '#2aad97',
+      500: '#049e85',
+      600: '#029078',
+      700: '#008069',
+      800: '#00705a',
+      900: '#00543e',
+    }}
+  />
+  <ColorItem
+    title="blue"
+    subtitle="Aqua Blue"
+    colors={{
+      50: '#e3f2fd',
+      100: '#badffc',
+      200: '#8ecbfb',
+      300: '#60b7f9',
+      400: '#39a7f8',
+      500: '#0099F7',
+      600: '#008ae9',
+      700: '#0078d6',
+      800: '#0067c4',
+      900: '#0049a6',
+    }}
+  />
+  <ColorItem
+    title="purple"
+    subtitle="Grape Purple"
+    colors={{
+      50: '#f2e3f1',
+      100: '#e0b9de',
+      200: '#cc8bc8',
+      300: '#b65db3',
+      400: '#a739a3',
+      500: '#960d94',
+      600: '#8a0a8f',
+      700: '#780388',
+      800: '#690080',
+      900: '#4c0072',
+    }}
+  />
+  <ColorItem
+    title="pink"
+    subtitle="Lipstick Pink"
+    colors={{
+      50: '#fce5ef',
+      100: '#f9bdd8',
+      200: '#f692be',
+      300: '#f566a4',
+      400: '#f4438e',
+      500: '#f41b78',
+      600: '#e21a74',
+      700: '#cb196e',
+      800: '#b51669',
+      900: '#8f125f',
     }}
   />
 </ColorPalette>
 
-## Theming in Zenit for Web (Web Components)
+# Theming in Zenit for Web (Web Components)
 
 Zenit's low-level Web Components package (`@zenit-ui/web-components` or `zenit-ui`) uses CSS variables to manage its colors.
 
