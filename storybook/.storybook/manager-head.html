@@ -1,4 +1,20 @@
 <style>
+  /* --==// Resizing the bar //==-- */
+  .sidebar-item {
+    /* height: 36px; */
+    padding: 8px 8px !important;
+  }
+  .sidebar-item > svg:first-of-type {
+    height: 16px;
+    width: 16px;
+  }
+  .sidebar-item > span:first-of-type {
+    display: none;
+  }
+  .sidebar-item[data-nodetype='story'] {
+    padding-left: 24px !important;
+  }
+
   /* --==// Custom icons //==-- */
   #storybook-explorer-tree button#components-button svg {
     fill-opacity: 0;
@@ -18,4 +34,20 @@
     background-image: url(assets/icons/check-square.svg);
     background-size: contain;
   }
+  #storybook-explorer-tree button#components-textbox svg {
+    fill-opacity: 0;
+    stroke: none;
+    background-image: url(assets/icons/form-input.svg);
+    background-size: contain;
+  }
 </style>
+<!-- <script>
+  document.body.addEventListener("load", () {
+    const $ = (...args) => document.querySelectorAll(...args);
+    const $1 = (...args) => document.querySelector(...args);
+
+    $1(
+      'symbol[id=icon--bookmarkhollow]',
+    ).outerHTML = `<symbol id="icon--bookmarkhollow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3a2 2 0 0 0-2 2"></path><path d="M19 3a2 2 0 0 1 2 2"></path><path d="M21 19a2 2 0 0 1-2 2"></path><path d="M5 21a2 2 0 0 1-2-2"></path><path d="M9 3h1"></path><path d="M9 21h1"></path><path d="M14 3h1"></path><path d="M14 21h1"></path><path d="M3 9v1"></path><path d="M21 9v1"></path><path d="M3 14v1"></path><path d="M21 14v1"></path></symbol>`;
+  });
+</script> -->
