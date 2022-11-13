@@ -59,9 +59,9 @@ button:disabled {
   opacity: 70%;
 }
 
-button:focus {
-  outline: 2px ridge var(--zenit-theme-on-background, $default-on-background)
-}
+// button:focus {
+//   outline: 2px ridge var(--zenit-theme-on-background, $default-on-background)
+// }
 
 button>* {
   flex: none;

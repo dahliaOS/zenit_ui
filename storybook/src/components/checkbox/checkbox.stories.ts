@@ -66,7 +66,7 @@ Tristate.storyName = "Cycle all three states";
 Tristate.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  await sleep(1000);
+  await sleep(250);
   await userEvent.click(canvas.getByRole("checkbox"));
   await sleep(1000);
   await userEvent.click(canvas.getByRole("checkbox"));

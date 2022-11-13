@@ -8,9 +8,9 @@ svg[data-disabled] {
   opacity: 70%;
   animation: none;
 }
-svg:focus {
-  outline: 2px ridge var(--zenit-theme-on-background, $default-on-background)
-}
+// svg:focus {
+//   outline: 2px ridge var(--zenit-theme-on-background, $default-on-background)
+// }
 
 svg[data-checked=off]>.--bg {
   transition: fill 0.25s

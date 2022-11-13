@@ -40,7 +40,3 @@ svg:not([data-disabled]):active>.--thumb {
   //height: 12px;
   transform: translate(0px, 0px);
 }
-
-svg:focus {
-  outline: 2px ridge var(--zenit-theme-on-background, $default-on-background)
-}

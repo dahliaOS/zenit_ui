@@ -1,4 +1,4 @@
-import { Component, Prop, h, Host, Listen } from '@stencil/core';
+import { Component, Prop, h, Listen } from '@stencil/core';
 
 @Component({
   tag: 'zenit-switch',
@@ -41,11 +41,9 @@ export class Switch {
   }
 
   render() {
-    return <Host role="switch" aria-checked={this.checked ? "true" : "false"} aria-disabled={this.disabled}>
-      <svg onKeyDown={this.onKeydownHandler} data-checked={this.checked} data-disabled={this.disabled} width="48" height="24" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg" tabindex={0}>
-        <rect class="--bg" width="48" height="24" rx="12" fill="#00B26E" />
-        <rect class="--thumb" width="16" height="16" x="4" y="4" rx="8" fill="#FAFAFA" />
-      </svg>
-    </Host>;
+    return <svg onKeyDown={this.onKeydownHandler} data-checked={this.checked} data-disabled={this.disabled} width="48" height="24" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="switch" aria-checked={this.checked ? "true" : "false"} aria-disabled={this.disabled} tabindex={0}>
+      <rect class="--bg" width="48" height="24" rx="12" fill="#00B26E" />
+      <rect class="--thumb" width="16" height="16" x="4" y="4" rx="8" fill="#FAFAFA" />
+    </svg>;
   }
 }
