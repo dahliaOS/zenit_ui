@@ -34,7 +34,7 @@ export default {
   } as unknown as ArgTypes<Button>
 };
 
-export const Primary = ({label, disabled}) => html`<zenit-button primary ?disabled=${disabled}>${label}</zenit-button>`
+export const Primary = ({label, disabled}) => html`<zenit-button @click=${() => alert("You clicked the button!")} primary ?disabled=${disabled}>${label}</zenit-button>`
 Primary.parameters = {
   docs: {
     description: "Only one button in any given set should be primary, and it should correspond to the preferred or most used action, "+
@@ -55,7 +55,7 @@ Primary.parameters = {
   }
 }
 
-export const Secondary = ({label, disabled}) => html`<zenit-button ?disabled=${disabled}>${label}</zenit-button><style>
+export const Secondary = ({label, disabled}) => html`<zenit-button @click=${() => alert("You clicked the button!")} ?disabled=${disabled}>${label}</zenit-button><style>
 .dark {
   --zenit-theme-secondary: #262626;
   --zenit-theme-on-secondary: #ffffff;
@@ -76,7 +76,7 @@ Secondary.parameters = {
   ],
 }
 
-export const PrimaryDisabled = ({label, disabled}) => html`<zenit-button primary ?disabled=${disabled}>${label}</zenit-button>`
+export const PrimaryDisabled = ({label, disabled}) => html`<zenit-button @click=${() => alert("You clicked the button!")} primary ?disabled=${disabled}>${label}</zenit-button>`
 PrimaryDisabled.args = {
   disabled: true
 }
