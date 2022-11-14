@@ -24,7 +24,7 @@ export class Switch {
   /**
    * Whether the switch is on (true) or off (false).
    */
-  @Prop() checked: boolean;
+  @Prop({ mutable: true }) checked: boolean;
 
   /**
    * Whether the button should not be clickable.

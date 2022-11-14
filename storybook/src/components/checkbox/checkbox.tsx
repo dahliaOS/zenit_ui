@@ -25,7 +25,7 @@ export class Checkbox {
    * Whether the box is checked. If it has an indeterminate value,
    * then use "mixed".
    */
-  @Prop() value: "on" | "off" | "mixed";
+  @Prop({ mutable: true }) value: "on" | "off" | "mixed";
 
   /**
    * Whether to allow "click" actions to switch to the
@@ -55,14 +55,12 @@ export class Checkbox {
   @Listen('click')
   onClickHandler(event: MouseEvent) {
     if (!event.defaultPrevented && !this.disabled) {
-      console.log("click!");
       this._trigger();
     }
   }
   @Listen('keydown')
   onKeydownHandler(event: KeyboardEvent) {
     if ((event.key == "Enter" || event.key == " ") && event.repeat == false && !event.defaultPrevented && !this.disabled) {
-      console.log("press!");
       this._trigger();
     }
   }
