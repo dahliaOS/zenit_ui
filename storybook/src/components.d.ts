@@ -26,9 +26,21 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
+          * Whether the button should have a 1:1 aspect ratio. This is useful for icon buttons.
+         */
+        "icon": boolean;
+        /**
           * Whether to use primary styling for this button.
          */
         "primary": boolean;
+        /**
+          * Whether to display the button as a rounded rectangle instead of a pill.
+         */
+        "rounded": boolean;
+        /**
+          * Whether to use transparent/tertiary styling for this button.
+         */
+        "transparent": boolean;
     }
     interface ZenitCheckbox {
         /**
@@ -108,9 +120,21 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
+          * Whether the button should have a 1:1 aspect ratio. This is useful for icon buttons.
+         */
+        "icon"?: boolean;
+        /**
           * Whether to use primary styling for this button.
          */
         "primary"?: boolean;
+        /**
+          * Whether to display the button as a rounded rectangle instead of a pill.
+         */
+        "rounded"?: boolean;
+        /**
+          * Whether to use transparent/tertiary styling for this button.
+         */
+        "transparent"?: boolean;
     }
     interface ZenitCheckbox {
         /**

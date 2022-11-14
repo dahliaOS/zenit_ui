@@ -17,40 +17,37 @@ button {
   padding: 8px 20px;
   gap: 8px;
 }
+button.zenit-rounded {
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+button.zenit-square {
+  aspect-ratio: 1/1;
+  padding: 8px;
+}
+
 button:enabled:hover {
   background-image: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%));
   /* , var(--zenit-theme-secondary, #E6E6E6); */
   cursor: pointer;
 }
-/* button:enabled:active {
-  background: linear-gradient(0deg, rgba(0 0 0 / 20%), rgba(0 0 0 / 20%)), var(--zenit-theme-secondary, #E6E6E6);
-} */
-
- /* Notes:
-  * The `:host-context` selector is pretty well hated in the 
-  * browser developer community, probably for the same reason
-  * `:has` probably hasn't been implemented.
-  * It's not supported at all in Firefox or Safari, so
-  * it's ultimately not worth it.
-  */
-/* :host-context(.dark) button {
-  background: var(--zenit-theme-secondary-dark, #262626);
-  color: var(--zenit-theme-on-secondary-dark, #ffffff);
-}
-:host-context(.dark) button:hover {
-  background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-secondary-dark, #262626);
-}
-:host-context(.dark) button:active {
-  background: linear-gradient(0deg, rgba(0 0 0 / 16%), rgba(0 0 0 / 16%)), var(--zenit-theme-secondary-dark, #262626);
-} */
 
 button.zenit-primary {
   background: var(--zenit-theme-primary, $default-primary);
   color: var(--zenit-theme-on-primary, $default-on-primary);
 }
-/* button.zenit-primary:enabled:hover {
-  background: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%)), var(--zenit-theme-primary, #00B26E);
-} */
+
+button.zenit-tertiary {
+  background: #7f7f7f00;
+}
+button.zenit-tertiary:enabled:hover {
+  background: var(--zenit-theme-secondary, $default-secondary);
+  background-image: none;
+}
+button.zenit-tertiary:enabled:active {
+  background-image: linear-gradient(0deg, rgba(255 255 255 / 16%), rgba(255 255 255 / 16%))
+}
+
 button:enabled:active {
   background-image: linear-gradient(0deg, rgba(255 255 255 / 32%), rgba(255 255 255 / 32%))
 }
