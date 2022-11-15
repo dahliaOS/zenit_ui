@@ -1,0 +1,146 @@
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+
+<style>{`
+  .do {
+    border: 2px green solid;
+    
+  }
+  .dont {
+    border: 2px red solid;
+  }
+  .this {
+    border-bottom-width: 8px;
+    margin-bottom: 16px;
+    background: #F7F7F7;
+  }
+  .dodontrow {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+  .dodontrow>* {
+    margin: auto;
+    padding: 8px;
+    width: 256px;
+    margin-top: 0;
+  }
+  .this~p {
+    margin-top: 4px;
+  }
+  .danger {
+    --zenit-theme-primary: #f03118;
+    --zenit-theme-on-primary: #ffffff;
+  }
+`}</style>
+
+# Button
+
+A button is an interactive component which, when clicked, performs some action.
+
+<Canvas>
+  <Story id="components-button--primary" />
+  <Story id="components-button--secondary" />
+  <Story id="components-button--tertiary" />
+  <Story id="components-button--icon" />
+</Canvas>
+
+## Primary buttons
+
+Primary buttons are colorful and stand out. They indicate the most important call to action available at any given point.
+
+<Story id="components-button--primary" />
+
+Primary buttons are best used once per screen for the most prominent action, such as submitting a form or logging into a website.
+It should be for a positive action, even if this action is destructive: for example, use a primary button for confirming deletions.
+
+<div className="dodontrow">
+  <div>
+    <img src="assets/docs/button-primary-7a1a94d1.png" className="do this" />
+    <h4 style={{ color: 'green' }}>Do</h4>
+    <p>Use primary buttons, even if they aren't in your app's primary color, to signify the intended or preferred action.</p>
+  </div>
+  <div>
+    <img src="assets/docs/button-primary-f84d7fec.png" className="dont this" />
+    <h4 style={{ color: 'red' }}>Don't</h4>
+    <p>Use too many primary buttons.</p>
+  </div>
+</div>
+
+### Implementation details[^1]
+
+```css
+/* CSS */
+padding: 8px 20px;
+border-radius: 24px;
+background: var(--primary-color);
+color: var(--on-primary-color);
+
+:hover {
+  background: color.lighten(var(--primary-color) 16%);
+  /* darken in light mode, lighten in dark mode */
+}
+:active {
+  background: color.lighten(var(--primary-color) 32%);
+}
+```
+
+## Secondary buttons
+
+<div style={{ float: 'right', width: 256, margin: 8 }}>
+  <img src="assets/docs/button-primary-a7c58300.png" className="dont this" />
+  <h4 style={{ color: 'red' }}>Don't</h4>
+  <p>
+    Use secondary buttons when your user is probably looking for a particular, obvious action.
+    <br />
+    Instead, use a primary button.
+  </p>
+</div>
+
+These less obvious buttons don't stand out, so they're useful for secondary actions, such as canceling an action.
+
+<Story id="components-button--secondary" />
+
+Since primary buttons contain the main action in a group, secondary buttons are best used next to primary buttons for alternative actions.
+
+### Implementation details
+
+```css
+/* CSS */
+padding: 8px 20px;
+border-radius: 24px;
+background: var(--secondary-color);
+color: var(--on-secondary-color);
+
+:hover {
+  background: color.lighten(var(--secondary-color) 16%);
+  /* darken in light mode, lighten in dark mode */
+}
+:active {
+  background: color.lighten(var(--secondary-color) 32%);
+}
+```
+
+## Transparent buttons
+
+<Story id="components-button--tertiary" />
+
+Also called "tertiary" or "text" buttons, this type is best used in app bars and toolbars, rather than in dialogs. It does not have a background or outline, and is identified by expectation alone.
+If you use transparent buttons in a context where it isn't obvious, you will encounter accessibility issues, so be careful how you use these.
+
+When the mouse is resting over a transparent button, it brightens or dims the background area just as it would if there were a background color set for the button.
+
+## Icon buttons
+
+<div style={{ display: 'flex', flexDirection: 'wrap', gap: 8 }}>
+  <Story id="components-button--icon" />
+  <zenit-button icon>❤️</zenit-button>
+  <zenit-button transparent icon>
+    +
+  </zenit-button>
+</div>
+
+The name should explain it all. The main difference with these is that they **must** be square, and to that end the left and right padding is reduced. These are best used with icons but can also be used with emoji or a small amount of characters.
+
+[^1]: Implementation details are most helpful to implementers, such as the developers of Zenit for Web or zenit_ui for Flutter. The CSS given may not be legal or valid, as they are intended as a guideline.
