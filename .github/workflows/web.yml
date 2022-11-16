@@ -29,7 +29,7 @@ jobs:
         run: flutter build web --release
         working-directory: ./flutter/example
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: flutter
           path: './flutter/example/build/web/'
@@ -38,6 +38,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
         name: Checkout repository
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: 16.x
       - name: Build Storybook
         run: | # Install npm packages and build the Storybook files
           npm ci --dev
