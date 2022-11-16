@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   window_manager: ^0.2.7
   zenit_ui:
-    path: ../
+    path: ../flutter
 
 dev_dependencies:
   flutter_test:
