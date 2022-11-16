@@ -1,0 +1,90 @@
+label.--container {
+  border: 1.25px transparent solid;
+  transition: border-color 250ms;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  color: var(--zenit-theme-on-secondary, $default-on-secondary);
+  //gap: 0.5rem;
+}
+span.--label {
+  //color: var(--zenit-theme-primary, $default-primary);
+  font-size: 0.9em;
+  font-weight: 600;
+  margin: 4px;
+  margin-bottom: 0.25rem;
+  transition: color 250ms;
+}
+.--container[data-required] span.--label::after {
+  content: "*";
+  color: var(--zenit-theme-error, $default-error);
+  margin-left: 0.25rem;
+}
+.--container[data-disabled][data-required] span.--label::after {
+  color: var(--zenit-theme-on-secondary, $default-on-secondary);
+  opacity: 50%;
+}
+.--container:not([data-disabled]):is(:focus, :focus-within) span.--label {
+  color: var(--zenit-theme-primary, $default-primary);
+}
+label.--container[data-disabled] {
+  opacity: 60%;
+}
+input.--input {
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 6px;
+  padding: 8px;
+  background: none;
+  padding-right: 24px;
+  font-family: var(--zenit-theme-font, $default-font);
+  flex-grow: 1;
+  &~[slot=error] {
+    display: none;
+  }
+}
+input.--input::grammar-error {
+  border-color: var(--zenit-theme-error, $default-error);
+  border-bottom: 2px;
+}
+input.--input:disabled {
+  opacity: 100%;
+  color: inherit;
+}
+.--row {
+  background-color: var(--zenit-theme-secondary, $default-secondary);
+  border: 1.25px transparent solid;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  transition: border-color 250ms;
+}
+.--row:not([data-disabled]) {
+  &:focus, &:focus-within {
+    border: 1.25px var(--zenit-theme-primary, $default-primary) solid;
+  }
+}
+input.--input:focus {
+  //border-right: 0;
+  outline: none;
+}
+input.--input::placeholder {
+  color: var(--zenit-theme-on-secondary, $default-on-secondary);
+  opacity: 50%;
+}
+input.--input:invalid {
+  outline: 1.25px var(--zenit-theme-error, $default-error) solid;
+  &::placeholder {
+    color: var(--zenit-theme-error, $default-error);
+  }
+  &~[slot=error] {
+    display: unset;
+    color: var(--zenit-theme-error, $default-error);
+    font-size: 0.9em;
+    margin: 4px;
+    margin-top: 0.25rem;
+  }
+}

@@ -66,6 +66,32 @@ export namespace Components {
          */
         "disabled": boolean;
     }
+    interface ZenitTextbox {
+        /**
+          * Whether the input is disabled
+         */
+        "disabled": boolean;
+        /**
+          * Label for the input
+         */
+        "label"?: string;
+        /**
+          * Placeholder for the input
+         */
+        "placeholder": string;
+        /**
+          * Whether the input is required
+         */
+        "required": boolean;
+        /**
+          * Type for the input
+         */
+        "type": 'text' | 'password' | 'search' | 'url' | 'email' | 'tel';
+        /**
+          * Value for the input
+         */
+        "value": string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -92,11 +118,18 @@ declare global {
         prototype: HTMLZenitSwitchElement;
         new (): HTMLZenitSwitchElement;
     };
+    interface HTMLZenitTextboxElement extends Components.ZenitTextbox, HTMLStencilElement {
+    }
+    var HTMLZenitTextboxElement: {
+        prototype: HTMLZenitTextboxElement;
+        new (): HTMLZenitTextboxElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "zenit-button": HTMLZenitButtonElement;
         "zenit-checkbox": HTMLZenitCheckboxElement;
         "zenit-switch": HTMLZenitSwitchElement;
+        "zenit-textbox": HTMLZenitTextboxElement;
     }
 }
 declare namespace LocalJSX {
@@ -160,11 +193,38 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
     }
+    interface ZenitTextbox {
+        /**
+          * Whether the input is disabled
+         */
+        "disabled"?: boolean;
+        /**
+          * Label for the input
+         */
+        "label"?: string;
+        /**
+          * Placeholder for the input
+         */
+        "placeholder"?: string;
+        /**
+          * Whether the input is required
+         */
+        "required"?: boolean;
+        /**
+          * Type for the input
+         */
+        "type"?: 'text' | 'password' | 'search' | 'url' | 'email' | 'tel';
+        /**
+          * Value for the input
+         */
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "zenit-button": ZenitButton;
         "zenit-checkbox": ZenitCheckbox;
         "zenit-switch": ZenitSwitch;
+        "zenit-textbox": ZenitTextbox;
     }
 }
 export { LocalJSX as JSX };
@@ -175,6 +235,7 @@ declare module "@stencil/core" {
             "zenit-button": LocalJSX.ZenitButton & JSXBase.HTMLAttributes<HTMLZenitButtonElement>;
             "zenit-checkbox": LocalJSX.ZenitCheckbox & JSXBase.HTMLAttributes<HTMLZenitCheckboxElement>;
             "zenit-switch": LocalJSX.ZenitSwitch & JSXBase.HTMLAttributes<HTMLZenitSwitchElement>;
+            "zenit-textbox": LocalJSX.ZenitTextbox & JSXBase.HTMLAttributes<HTMLZenitTextboxElement>;
         }
     }
 }
