@@ -62,7 +62,7 @@ jobs:
         with:
           path: artifacts
       - name: Copy flutter build into storybook
-        run: rsync -av artifacts/flutter artifacts/storybook/flutter
+        run: rsync -av artifacts/flutter artifacts/storybook/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1.0.4
         with:
