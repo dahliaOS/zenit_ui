@@ -40,13 +40,13 @@ jobs:
         name: Checkout repository
       - name: Build Storybook
         run: | # Install npm packages and build the Storybook files
-          npm install --dev
+          npm ci --dev
           npm run build-storybook
         working-directory: ./storybook
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v3.1.1
         with:
-          path: './storybook/docs-build'
+          path: './storybook/storybook-static'
           name: storybook
   merge-artifacts:
     runs-on: ubuntu-latest
@@ -59,7 +59,7 @@ jobs:
       - name: Copy flutter build into storybook
         run: rsync -av artifacts/flutter artifacts/storybook/flutter
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1.0.4
         with:
           path: './artifacts/storybook'
   deploy:
