@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Test on Node ${{ matrix.node_version }}
+    name: Test on Node v${{ matrix.node-version }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,7 +25,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - run: npm ci
       name: Get dependencies
       working-directory: ./storybook
