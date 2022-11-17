@@ -2,8 +2,7 @@ name: Build and Deploy to Web
 
 on:
   push:
-    branches: [ main, storybook ]
-    # for now
+    branches: [ main ]
     
 permissions:
   contents: read
