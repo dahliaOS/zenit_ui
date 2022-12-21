@@ -1,4 +1,5 @@
-import 'package:zenit_ui/src/base/action_base.dart';
+import 'package:zenit_ui/src/base/tick_animator.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitRadioButton extends StatelessWidget {
@@ -20,10 +21,11 @@ class ZenitRadioButton extends StatelessWidget {
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final activeThumbColor = theme.activeThumbColor;
     final inactiveThumbColor = theme.inactiveThumbColor;
-    return ActionBase(
-      onTapUp: () => onChanged?.call(!value),
+    return TickAnimator(
+      onPressed: () => onChanged?.call(!value),
+      borderRadius: BorderRadius.circular(24),
       child: PhysicalModel(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: kDefaultBorderRadiusBig,
         clipBehavior: Clip.antiAlias,
         color: value ? activeBackgroundColor : inactiveBackgroundColor,
         child: SizedBox(
@@ -34,7 +36,7 @@ class ZenitRadioButton extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: value ? activeThumbColor : inactiveThumbColor,
-                borderRadius: BorderRadius.circular(24),
+                borderRadius: kDefaultBorderRadiusBig,
               ),
             ),
           ),

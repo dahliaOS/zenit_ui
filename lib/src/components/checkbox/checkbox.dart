@@ -1,4 +1,5 @@
-import 'package:zenit_ui/src/base/action_base.dart';
+import 'package:zenit_ui/src/base/tick_animator.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitCheckbox extends StatelessWidget {
@@ -19,10 +20,11 @@ class ZenitCheckbox extends StatelessWidget {
     final activeBackgroundColor = theme.activeBackgroundColor;
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final foregroundColor = theme.foregroundColor;
-    return ActionBase(
-      onTapUp: () => onChanged?.call(!value),
+    return TickAnimator(
+      onPressed: () => onChanged?.call(!value),
+      borderRadius: kDefaultBorderRadiusMedium,
       child: PhysicalModel(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: kDefaultBorderRadiusMedium,
         clipBehavior: Clip.antiAlias,
         color: value ? activeBackgroundColor : inactiveBackgroundColor,
         child: SizedBox(

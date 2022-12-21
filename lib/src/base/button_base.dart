@@ -1,5 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:zenit_ui/src/base/action_base.dart';
+import 'package:zenit_ui/src/base/tick_animator.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/types/button_type.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -43,7 +44,7 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   void loadColors() {
     _enabled = widget.onPressed != null;
-    textColor = widget.foregroundColor ?? Theme.of(context).foregroundColor;
+    textColor = widget.foregroundColor ?? ZenitTheme.of(context).foregroundColor;
     focusMixin = MaterialTheme.of(context).focusColor;
     hoverMixin = MaterialTheme.of(context).hoverColor;
 
@@ -51,9 +52,9 @@ class _ButtonBaseState extends State<ButtonBase> {
       backgroundColor = const Color(0xFFE5E5E5);
       textColor = const Color(0xFF212121).withOpacity(0.25);
     } else if (widget.type == ButtonType.primary) {
-      backgroundColor = widget.backgroundColor ?? Theme.of(context).primaryColor;
+      backgroundColor = widget.backgroundColor ?? ZenitTheme.of(context).primaryColor;
     } else {
-      backgroundColor = Theme.of(context).surfaceColor;
+      backgroundColor = ZenitTheme.of(context).backgroundColor;
     }
 
     buttonColor = backgroundColor;
@@ -73,7 +74,9 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   @override
   Widget build(BuildContext context) {
-    return ActionBase(
+    return TickAnimator(
+      multiplier: 0.9,
+      borderRadius: kDefaultBorderRadiusBig,
       onPressed: () async {
         if (_enabled) {
           setState(
@@ -89,43 +92,51 @@ class _ButtonBaseState extends State<ButtonBase> {
           );
         }
       },
-      cursor: _enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-      onEnter: (_) {
-        if (_enabled) {
-          setState(() {
-            buttonColor = Color.alphaBlend(hoverMixin, backgroundColor);
-          });
-        }
-      },
-      onExit: (_) {
-        if (_enabled) {
-          setState(() {
-            buttonColor = backgroundColor;
-          });
-        }
-      },
-      child: PhysicalModel(
-        borderRadius: BorderRadius.circular(24),
-        color: buttonColor,
-        clipBehavior: Clip.antiAlias,
-        child: Padding(
-          padding: widget.child != null
-              ? const EdgeInsets.symmetric(horizontal: 16, vertical: 12.0)
-              : EdgeInsets.zero,
-          child: IconTheme.merge(
-            data: IconThemeData(
-              color: widget.foregroundColor,
+      child: MouseRegion(
+        cursor: _enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        onEnter: (_) {
+          if (_enabled) {
+            setState(() {
+              buttonColor = Color.alphaBlend(hoverMixin, backgroundColor);
+            });
+          }
+        },
+        onExit: (_) {
+          if (_enabled) {
+            setState(() {
+              buttonColor = backgroundColor;
+            });
+          }
+        },
+        child: PhysicalModel(
+          borderRadius: kDefaultBorderRadiusBig,
+          color: buttonColor,
+          clipBehavior: Clip.antiAlias,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: kDefaultBorderRadiusBig,
+              border: Border.all(color: ZenitTheme.of(context).primaryColor, width: 2),
             ),
-            child: DefaultTextStyle(
-              style: TextStyle(
-                color: textColor,
-                fontFamily: GoogleFonts.manrope().fontFamily,
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-                letterSpacing: 0.8,
-                backgroundColor: Colors.transparent,
+            child: Padding(
+              padding: widget.child != null
+                  ? const EdgeInsets.symmetric(horizontal: 16, vertical: 12.0)
+                  : EdgeInsets.zero,
+              child: IconTheme.merge(
+                data: IconThemeData(
+                  color: widget.foregroundColor,
+                ),
+                child: DefaultTextStyle(
+                  style: TextStyle(
+                    color: textColor,
+                    fontFamily: GoogleFonts.manrope().fontFamily,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    letterSpacing: 0.8,
+                    backgroundColor: Colors.transparent,
+                  ),
+                  child: widget.child ?? const SizedBox.shrink(),
+                ),
               ),
-              child: widget.child ?? const SizedBox.shrink(),
             ),
           ),
         ),

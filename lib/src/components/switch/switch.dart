@@ -47,7 +47,7 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSwitchTheme switchTheme = widget.theme ?? Theme.of(context).switchTheme;
+    final ZenitSwitchTheme switchTheme = widget.theme ?? ZenitTheme.of(context).switchTheme;
     final Color activeTrackColor = switchTheme.activeTrackColor;
     final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
     final Color activeThumbColor = switchTheme.activeThumbColor;

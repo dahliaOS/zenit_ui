@@ -7,16 +7,16 @@ import 'package:window_manager/window_manager.dart';
 final _kIsLinux = !kIsWeb && Platform.isLinux;
 final _kIsWindows = !kIsWeb && Platform.isWindows;
 
-double get kZenitWindowFrameMargin => _kIsLinux ? 20.0 : 0;
+double get kZenitWindowFrameMargin => _kIsLinux ? 12.0 : 0;
 
 class ZenitWindowFrame extends StatefulWidget {
   /// The [child] contained by the ZenitWindowFrame.
   final Widget child;
 
   const ZenitWindowFrame({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   State<StatefulWidget> createState() => _ZenitWindowFrameState();
@@ -56,7 +56,7 @@ class _ZenitWindowFrameState extends State<ZenitWindowFrame> with WindowListener
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
               offset: Offset(0.0, _isFocused ? 4 : 2),
-              blurRadius: 12,
+              blurRadius: 6,
             ),
         ],
       ),

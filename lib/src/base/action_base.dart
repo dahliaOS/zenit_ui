@@ -34,6 +34,8 @@ class ActionBase extends StatefulWidget {
     this.semanticLabel,
     // Child
     this.child,
+    // Enabled
+    this.enabled = true,
     // Key
     super.key,
   });
@@ -68,6 +70,8 @@ class ActionBase extends StatefulWidget {
   final Widget? child;
 
   final GestureTapDownCallback? onTertiaryTapDown;
+
+  final bool enabled;
 
   @override
   _ActionBaseState createState() => _ActionBaseState();
@@ -108,11 +112,9 @@ class _ActionBaseState extends State<ActionBase> {
         child: Semantics(
           label: widget.semanticLabel,
           button: true,
-          //TODO enabled property
-          enabled: true,
+          enabled: widget.enabled,
           focusable: true,
           focused: node.hasFocus,
-
           child: FocusableActionDetector(
             mouseCursor: SystemMouseCursors.click,
             focusNode: node,

@@ -3,6 +3,7 @@ import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide Theme;
 import 'package:flutter/services.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 export 'package:flutter/services.dart'
@@ -23,7 +24,6 @@ class ZenitTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
@@ -94,26 +94,7 @@ class ZenitTextField extends StatelessWidget {
           'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
         ),
         keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText),
-        toolbarOptions = toolbarOptions ??
-            (obscureText
-                ? (readOnly
-                    ? const ToolbarOptions()
-                    : const ToolbarOptions(
-                        selectAll: true,
-                        paste: true,
-                      ))
-                : (readOnly
-                    ? const ToolbarOptions(
-                        selectAll: true,
-                        copy: true,
-                      )
-                    : const ToolbarOptions(
-                        copy: true,
-                        cut: true,
-                        selectAll: true,
-                        paste: true,
-                      )));
+        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText);
 
   final TextEditingController? controller;
 
@@ -158,8 +139,6 @@ class ZenitTextField extends StatelessWidget {
   final bool expands;
 
   final bool readOnly;
-
-  final ToolbarOptions toolbarOptions;
 
   final bool? showCursor;
 
@@ -288,12 +267,10 @@ class ZenitTextField extends StatelessWidget {
       textDirection: textDirection,
       textInputAction: textInputAction,
       contextMenuBuilder: contextMenuBuilder,
-      toolbarOptions: toolbarOptions,
     );
   }
 }
 
-const BorderRadius _kDefaultBorderRadius = BorderRadius.all(Radius.circular(8));
 const double _kDefaultBorderWidth = 2.0;
 
 const BorderSide _kDefaultBorderSideInactive = BorderSide(
@@ -303,7 +280,7 @@ const BorderSide _kDefaultBorderSideInactive = BorderSide(
 
 const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorder(
   borderSide: _kDefaultBorderSideInactive,
-  borderRadius: _kDefaultBorderRadius,
+  borderRadius: kDefaultBorderRadiusMedium,
 );
 
 InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
@@ -321,7 +298,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
     disabledBorder: _kDefaultOutlineInputBorderInactive,
     focusedBorder: OutlineInputBorder(
       borderSide: kDefaultBorderSideActive,
-      borderRadius: _kDefaultBorderRadius,
+      borderRadius: kDefaultBorderRadiusMedium,
     ),
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
     floatingLabelStyle: TextStyle(color: theme.primaryColor),

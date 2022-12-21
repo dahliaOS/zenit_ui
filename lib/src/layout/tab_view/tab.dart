@@ -1,4 +1,5 @@
 import 'package:zenit_ui/src/base/action_base.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class Tab extends StatelessWidget {
@@ -37,8 +38,8 @@ class Tab extends StatelessWidget {
         width: 184,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            color: enabled ? Theme.of(context).surfaceColor : Colors.transparent,
+            borderRadius: kDefaultBorderRadiusMedium,
+            color: enabled ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -51,7 +52,7 @@ class Tab extends StatelessWidget {
                   ),
                 Text(
                   title ?? "Tab",
-                  style: TextStyle(color: Theme.of(context).foregroundColor),
+                  style: TextStyle(color: ZenitTheme.of(context).foregroundColor),
                 ),
                 const Spacer(),
                 IconButton(
@@ -60,7 +61,7 @@ class Tab extends StatelessWidget {
                   icon: Icon(
                     closeIcon ?? Icons.close,
                     size: 14,
-                    color: Theme.of(context).foregroundColor,
+                    color: ZenitTheme.of(context).foregroundColor,
                   ),
                 ),
               ],

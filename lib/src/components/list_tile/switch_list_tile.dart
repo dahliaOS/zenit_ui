@@ -1,4 +1,3 @@
-import 'package:zenit_ui/src/components/switch/switch.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitSwitchListTile extends StatelessWidget {

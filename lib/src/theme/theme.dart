@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitTheme {
@@ -78,7 +79,7 @@ class ThemeEngine {
         color: backgroundColor,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: kDefaultBorderRadiusMedium,
           side: BorderSide(color: surfaceColor, width: 2),
         ),
       ),
@@ -90,6 +91,15 @@ class ThemeEngine {
         hoverElevation: 0,
         disabledElevation: 0,
         highlightElevation: 0,
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+          TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+        },
       ),
     );
   }
@@ -104,8 +114,8 @@ class ThemeEngine {
   static ThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
         variant: ThemeVariant.dark,
         primaryColor: ZenitColors.blue,
-        backgroundColor: const Color(0xFF121212),
-        surfaceColor: const Color(0xFF3D3D3D),
+        backgroundColor: const Color(0xFF212121),
+        surfaceColor: const Color(0xFF353535),
         textColor: Colors.white,
       );
 }
