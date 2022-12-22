@@ -89,7 +89,7 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
     return WillPopScope(
       onWillPop: () async => !await navigator.maybePop().then(setPage),
       child: Padding(
-        padding: (_selectedIndex != -1) ? widget.margin : EdgeInsets.zero,
+        padding: widget.margin,
         child: Navigator(
           key: _navigatorKey,
           onGenerateInitialRoutes: (navigator, initialRoute) {

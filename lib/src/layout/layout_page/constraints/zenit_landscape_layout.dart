@@ -79,12 +79,15 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
           children: [
             SizedBox(
               width: 256,
-              child: Scaffold(
-                body: ZenitLayoutDestinationListView(
-                  length: widget.length,
-                  selectedIndex: selectedIndex,
-                  onTap: onTap,
-                  builder: widget.destinationBuilder,
+              child: Padding(
+                padding: widget.margin,
+                child: Scaffold(
+                  body: ZenitLayoutDestinationListView(
+                    length: widget.length,
+                    selectedIndex: selectedIndex,
+                    onTap: onTap,
+                    builder: widget.destinationBuilder,
+                  ),
                 ),
               ),
             ),

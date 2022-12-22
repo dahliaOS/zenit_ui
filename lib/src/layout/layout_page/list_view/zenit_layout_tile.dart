@@ -29,28 +29,25 @@ class ZenitLayoutTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final ZenitLayoutTileScope? scope = ZenitLayoutTileScope.maybeOf(context);
     final bool isSelected = selected ?? scope?.selected ?? false;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Material(
-        clipBehavior: Clip.antiAlias,
-        color: isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
-        borderRadius: kDefaultBorderRadiusBig,
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-          dense: true,
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      color: isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
+      borderRadius: kDefaultBorderRadiusBig,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+        dense: true,
+        selected: isSelected,
+        title: title,
+        subtitle: subtitle,
+        leading: ZenitPillIcon(
           selected: isSelected,
-          title: title,
-          subtitle: subtitle,
-          leading: ZenitPillIcon(
-            selected: isSelected,
-            child: leading,
-          ),
-          trailing: trailing,
-          onTap: () {
-            scope?.onTap();
-            onTap?.call();
-          },
+          child: leading,
         ),
+        trailing: trailing,
+        onTap: () {
+          scope?.onTap();
+          onTap?.call();
+        },
       ),
     );
   }
