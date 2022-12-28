@@ -48,11 +48,6 @@ class ZenitWindowControlsExample extends StatelessWidget {
                 icon: Icons.chevron_left,
                 onPressed: () => Navigator.maybePop(context),
               ),
-              const Gap(8),
-              ZenitWindowControl(
-                icon: Icons.fullscreen,
-                onPressed: () async => ZenitWindow.toggleFullscreen(),
-              ),
             ],
           ),
         ),
