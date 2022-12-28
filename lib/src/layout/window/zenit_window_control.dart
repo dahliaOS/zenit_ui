@@ -1,7 +1,7 @@
 import 'package:zenit_ui/zenit_ui.dart';
 
 const _kWindowControlHoverOpacity = 0.2;
-const _kWindowControlSize = 32.0;
+const _kWindowControlSize = 28.0;
 const _kWindowControlIconSize = 16.0;
 
 class ZenitWindowControl extends StatefulWidget {

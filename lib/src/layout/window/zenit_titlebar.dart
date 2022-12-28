@@ -9,7 +9,7 @@ class ZenitWindowTitlebar extends StatefulWidget with PreferredSizeWidget {
   State<ZenitWindowTitlebar> createState() => _ZenitWindowTitlebarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(46);
+  Size get preferredSize => const Size.fromHeight(42);
 }
 
 class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowListener {
@@ -27,7 +27,7 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowLi
 
   @override
   Widget build(BuildContext context) {
-    final navigator = Navigator.of(context);
+    final navigator = Navigator.maybeOf(context);
     return SizedBox.fromSize(
       size: widget.preferredSize,
       child: Stack(
@@ -40,7 +40,7 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowLi
     );
   }
 
-  Padding _buildForeground(NavigatorState navigator, BuildContext context) {
+  Padding _buildForeground(NavigatorState? navigator, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
@@ -48,12 +48,7 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowLi
           const Gap(4),
           ZenitWindowControl(
             icon: Icons.chevron_left,
-            onPressed: () => navigator.maybePop(context),
-          ),
-          const Gap(8),
-          ZenitWindowControl(
-            icon: Icons.fullscreen,
-            onPressed: () async => ZenitWindow.toggleFullscreen(),
+            onPressed: () => navigator?.maybePop(context),
           ),
           const Gap(24),
           IgnorePointer(
@@ -82,12 +77,6 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowLi
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: ZenitTheme.of(context).backgroundColor,
-            border: Border(
-              bottom: Divider.createBorderSide(
-                context,
-                width: 1,
-              ),
-            ),
           ),
         ),
       ),

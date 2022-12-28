@@ -14,7 +14,7 @@ class TickAnimator extends StatefulWidget {
     required this.child,
     this.borderRadius,
     this.duration = kDefaultAnimationDuration,
-    this.multiplier = 0.8,
+    this.multiplier = 0.95,
   }) : assert(multiplier > 0 && multiplier < 1);
 
   @override

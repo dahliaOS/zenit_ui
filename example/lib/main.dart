@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages.dart';
@@ -8,18 +6,8 @@ import 'package:zenit_ui_example/theme/theme.dart';
 void main() async {
   // Check for repainting
   //debugRepaintRainbowEnabled = true;
-  if (!kIsWeb && !Platform.isAndroid) {
-    await ZenitWindow.initialize(
-      options: const WindowOptions(
-        size: Size(800, 600),
-        backgroundColor: Colors.transparent,
-        skipTaskbar: false,
-        titleBarStyle: TitleBarStyle.hidden,
-        minimumSize: Size(240, 120),
-        title: "Zenit UI Example",
-      ),
-    );
-  }
+  await ZenitWindow.initialize();
+
   runApp(const MyApp());
 }
 
@@ -35,15 +23,14 @@ class _MyAppState extends State<MyApp> {
   Set<ThemeMode> themeModes = {ThemeMode.system, ThemeMode.light, ThemeMode.dark};
   @override
   Widget build(BuildContext context) {
-    final virtualWindowFrameBuilder = ZenitWindowFrameInit();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: themeModes.elementAt(themeMode),
       theme: lightTheme,
       darkTheme: darkTheme,
-      builder: (context, child) {
-        return SafeArea(child: virtualWindowFrameBuilder(context, child));
-      },
+      /* builder: (context, child) {
+        return SafeArea(child: zenitWindowFrameBuilder(context, child));
+      }, */
       home: ZenitNavigationLayout(
         appBar: kIsWeb ? null : const ZenitWindowTitlebar(),
         length: examplePages.length,

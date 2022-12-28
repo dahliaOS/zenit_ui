@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -5,20 +6,16 @@ export 'package:window_manager/src/widgets/virtual_window_frame.dart';
 export 'package:window_manager/src/window_listener.dart';
 export 'package:window_manager/window_manager.dart' show WindowOptions, TitleBarStyle;
 export 'package:zenit_ui/src/layout/window/zenit_titlebar.dart';
-export 'package:zenit_ui/src/layout/window/zenit_window_frame.dart';
 
 class ZenitWindow {
   WindowOptions? options;
 
-  static Future<void> initialize({WindowOptions? options}) async {
+  static Future<void> initialize() async {
     WidgetsFlutterBinding.ensureInitialized();
-    await windowManager.ensureInitialized();
-
-    windowManager.waitUntilReadyToShow(options, () async {
-      await windowManager.show();
-      await windowManager.focus();
-      if (options?.titleBarStyle == TitleBarStyle.hidden) await windowManager.setAsFrameless();
-    });
+    if (!kIsWeb) {
+      await windowManager.ensureInitialized();
+      await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
+    }
   }
 
   /// Closes the window.
@@ -50,12 +47,6 @@ class ZenitWindow {
 
   /// Sets the window to be fullscreen.
   static Future<void> setFullscreen(bool isFullScreen) async => windowManager.setFullScreen(isFullScreen);
-
-  /// Returns true of the window is in fullscreen mode.
-  static Future<bool> isFullscreen() async => windowManager.isFullScreen();
-
-  /// Sets the window to be fullscreen.
-  static Future<void> toggleFullscreen() async => windowManager.setFullScreen(!await isFullscreen());
 
   /// Resizes and moves the window to the supplied bounds.
   static Future<void> setBounds(Rect bounds) async => windowManager.setBounds(bounds);

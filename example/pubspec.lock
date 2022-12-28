@@ -86,6 +86,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  handy_window:
+    dependency: transitive
+    description:
+      name: handy_window
+      sha256: "57fb3c5623cf6e750135235fd44116bf9517f2d6a3043bbb8d9581917bcb08ab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.9"
   http:
     dependency: transitive
     description:
@@ -106,10 +114,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: "5528c2f391ededb7775ec1daa69e65a2d61276f7552de2b5f7b8d34ee9fd4ab7"
+      sha256: "323b7c70073cccf6b9b8d8b334be418a3293cfb612a560dc2737160a37bf61bd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.5"
+    version: "0.6.6"
   lints:
     dependency: transitive
     description:
@@ -286,10 +294,11 @@ packages:
   window_manager:
     dependency: transitive
     description:
-      name: window_manager
-      sha256: "5a7bda81b8b8e5feb733d07f4bd174e64dfb412031aff5314a375118e42b498e"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: b8188c800928afdbcec1dc0ff3e680c466e9a053
+      url: "https://github.com/leanflutter/window_manager.git"
+    source: git
     version: "0.2.8"
   xdg_directories:
     dependency: transitive
@@ -307,5 +316,5 @@ packages:
     source: path
     version: "0.0.8"
 sdks:
-  dart: ">=2.18.0 <4.0.0"
+  dart: ">=2.19.0-345.0.dev <4.0.0"
   flutter: ">=3.0.0"

@@ -1,5 +1,6 @@
 //Credits: @HrX03 - for the base (which was slightly altered)
 
+import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitSwitch extends StatefulWidget {
@@ -55,40 +56,43 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
+      child: TickAnimator(
+        borderRadius: BorderRadius.circular(24),
+        onPressed: () {
           widget.onChanged?.call(!widget.value);
         },
-        onHorizontalDragUpdate: (details) {
-          _positionController.value += details.primaryDelta! / 48;
-        },
-        onHorizontalDragEnd: (details) {
-          widget.onChanged?.call(_positionController.value > 0.5);
-        },
-        child: SizedBox(
-          width: 48,
-          height: 24,
-          child: DecoratedBox(
-            decoration: ShapeDecoration(
-              shape: const StadiumBorder(),
-              color: widget.value ? activeTrackColor : inactiveTrackColor,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(4),
-              child: AnimatedBuilder(
-                animation: _positionController,
-                builder: (context, child) {
-                  return Align(
-                    alignment: _thumbPositionTween.evaluate(_positionController)!,
-                    child: child,
-                  );
-                },
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  decoration: ShapeDecoration(
-                    shape: const CircleBorder(),
-                    color: widget.value ? activeThumbColor : inactiveThumbColor,
+        child: GestureDetector(
+          onHorizontalDragUpdate: (details) {
+            _positionController.value += details.primaryDelta! / 48;
+          },
+          onHorizontalDragEnd: (details) {
+            widget.onChanged?.call(_positionController.value > 0.5);
+          },
+          child: SizedBox(
+            width: 48,
+            height: 24,
+            child: DecoratedBox(
+              decoration: ShapeDecoration(
+                shape: const StadiumBorder(),
+                color: widget.value ? activeTrackColor : inactiveTrackColor,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: AnimatedBuilder(
+                  animation: _positionController,
+                  builder: (context, child) {
+                    return Align(
+                      alignment: _thumbPositionTween.evaluate(_positionController)!,
+                      child: child,
+                    );
+                  },
+                  child: Container(
+                    width: 16,
+                    height: 16,
+                    decoration: ShapeDecoration(
+                      shape: const CircleBorder(),
+                      color: widget.value ? activeThumbColor : inactiveThumbColor,
+                    ),
                   ),
                 ),
               ),

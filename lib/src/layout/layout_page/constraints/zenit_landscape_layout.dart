@@ -91,7 +91,6 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                 ),
               ),
             ),
-            //_buildVerticalSeparator(),
             Expanded(
               child: SizedBox.expand(
                 child: ClipRRect(
@@ -116,18 +115,6 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
           ],
         );
       },
-    );
-  }
-
-  Widget _buildVerticalSeparator() {
-    // Fix for the ultra white divider on flutter web
-    final theme = ZenitTheme.of(context);
-    return VerticalDivider(
-      thickness: 1,
-      width: 1,
-      //indent: 8,
-      //endIndent: 8,
-      color: theme.surfaceColor,
     );
   }
 }
