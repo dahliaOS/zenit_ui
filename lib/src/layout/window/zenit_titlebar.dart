@@ -1,3 +1,4 @@
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_interceptor.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitWindowTitlebar extends StatefulWidget with PreferredSizeWidget {
@@ -12,7 +13,8 @@ class ZenitWindowTitlebar extends StatefulWidget with PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(42);
 }
 
-class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowListener {
+class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar>
+    with WindowListener {
   @override
   void initState() {
     ZenitWindow.instance.addListener(this);
@@ -27,41 +29,63 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> with WindowLi
 
   @override
   Widget build(BuildContext context) {
-    final navigator = Navigator.maybeOf(context);
+    final navigatorInterceptor = ZenitNavigatorMessenger.maybeOf(context);
+
     return SizedBox.fromSize(
       size: widget.preferredSize,
       child: Stack(
         fit: StackFit.expand,
         children: [
           _buildBackground(context),
-          _buildForeground(navigator, context),
+          _buildForeground(
+            navigatorInterceptor?.canPop ?? false,
+            context,
+          ),
         ],
       ),
     );
   }
 
-  Padding _buildForeground(NavigatorState? navigator, BuildContext context) {
+  Padding _buildForeground(
+    bool canPop,
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
+      child: Stack(
         children: [
-          const Gap(4),
-          ZenitWindowControl(
-            icon: Icons.chevron_left,
-            onPressed: () => navigator?.maybePop(context),
-          ),
-          const Gap(24),
-          IgnorePointer(
-            child: FutureBuilder(
-              future: ZenitWindow.getTitle(),
-              builder: (context, AsyncSnapshot<String> snapshot) {
-                return Text(widget.customTitle ?? (snapshot.data ?? "Loading..."));
-              },
+          Positioned.fill(
+            child: Row(
+              children: [
+                const Gap(4),
+                if (canPop)
+                  ZenitWindowControl(
+                    icon: Icons.chevron_left,
+                    onPressed: () {
+                      final navigatorInterceptor =
+                          ZenitNavigatorMessenger.maybeOf(context);
+                      navigatorInterceptor?.requestPopTransaction();
+                    },
+                  ),
+                /* const Gap(24), */
+                const Spacer(),
+                const ZenitWindowControlRow(),
+                const Gap(4),
+              ],
             ),
           ),
-          const Spacer(),
-          const ZenitWindowControlRow(),
-          const Gap(4),
+          Center(
+            child: IgnorePointer(
+              child: FutureBuilder(
+                future: ZenitWindow.getTitle(),
+                builder: (context, AsyncSnapshot<String> snapshot) {
+                  return Text(
+                    widget.customTitle ?? (snapshot.data ?? "Loading..."),
+                  );
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
 import 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
 
 class ZenitPortraitLayout extends StatefulWidget {
   const ZenitPortraitLayout({
@@ -90,25 +91,29 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
       onWillPop: () async => !await navigator.maybePop().then(setPage),
       child: Padding(
         padding: widget.margin,
-        child: Navigator(
-          key: _navigatorKey,
-          onGenerateInitialRoutes: (navigator, initialRoute) {
-            return [
-              MaterialPageRoute(
-                builder: (context) {
-                  return Scaffold(
-                    body: ZenitLayoutDestinationListView(
-                      length: widget.length,
-                      selectedIndex: selectedIndex,
-                      onTap: onTap,
-                      builder: widget.destinationBuilder,
-                    ),
-                  );
-                },
-              ),
-              if (_selectedIndex != -1) pageRoute(selectedIndex),
-            ];
-          },
+        child: ZenitNavigatorPopTransactionObserver(
+          navigatorKey: _navigatorKey,
+          child: Navigator(
+            key: _navigatorKey,
+            observers: [ZenitNavigatorCanPopObserver.withContext(context)],
+            onGenerateInitialRoutes: (navigator, initialRoute) {
+              return [
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Scaffold(
+                      body: ZenitLayoutDestinationListView(
+                        length: widget.length,
+                        selectedIndex: selectedIndex,
+                        onTap: onTap,
+                        builder: widget.destinationBuilder,
+                      ),
+                    );
+                  },
+                ),
+                if (_selectedIndex != -1) pageRoute(selectedIndex),
+              ];
+            },
+          ),
         ),
       ),
     );

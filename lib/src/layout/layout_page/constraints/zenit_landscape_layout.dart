@@ -1,5 +1,6 @@
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitLandscapeLayout extends StatefulWidget {
@@ -48,6 +49,7 @@ class ZenitLandscapeLayout extends StatefulWidget {
 
 class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
   late int _selectedIndex;
+  final _navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   void initState() {
@@ -96,17 +98,24 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                 child: ClipRRect(
                   child: Padding(
                     padding: widget.margin,
-                    child: Navigator(
-                      pages: [
-                        MaterialPage(
-                          key: ValueKey(_selectedIndex),
-                          child: widget.length > _selectedIndex
-                              ? widget.pageBuilder(context, _selectedIndex)
-                              : widget.pageBuilder(context, 0),
-                        ),
-                      ],
-                      onPopPage: (route, result) => route.didPop(result),
-                      observers: [HeroController()],
+                    child: ZenitNavigatorPopTransactionObserver(
+                      navigatorKey: _navigatorKey,
+                      child: Navigator(
+                        key: _navigatorKey,
+                        pages: [
+                          MaterialPage(
+                            key: ValueKey(_selectedIndex),
+                            child: widget.length > _selectedIndex
+                                ? widget.pageBuilder(context, _selectedIndex)
+                                : widget.pageBuilder(context, 0),
+                          ),
+                        ],
+                        onPopPage: (route, result) => route.didPop(result),
+                        observers: [
+                          ZenitNavigatorCanPopObserver.withContext(context),
+                          HeroController(),
+                        ],
+                      ),
                     ),
                   ),
                 ),

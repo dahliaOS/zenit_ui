@@ -22,7 +22,8 @@ class TickAnimator extends StatefulWidget {
 }
 
 //TODO possibly integrate PhysicalModel into this or make sure it's not needed
-class _TickAnimatorState extends State<TickAnimator> with SingleTickerProviderStateMixin {
+class _TickAnimatorState extends State<TickAnimator>
+    with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> animation;
 
@@ -41,6 +42,12 @@ class _TickAnimatorState extends State<TickAnimator> with SingleTickerProviderSt
         () => setState(() {}),
       );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override

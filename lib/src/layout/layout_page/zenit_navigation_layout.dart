@@ -1,6 +1,7 @@
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_landscape_layout.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_portrait_layout.dart';
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_interceptor.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 typedef ZenitNavigationLayoutBuilder = Widget Function(
@@ -80,36 +81,38 @@ class _ZenitNavigationLayoutState extends State<ZenitNavigationLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: widget.globalFloatingActionButton,
-      appBar: widget.appBar,
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth < 620) {
-            return ZenitPortraitLayout(
-              destinationBuilder: widget.destinationBuilder,
-              pageBuilder: widget.pageBuilder,
-              length: widget.length,
-              selectedIndex: _index,
-              onPageSelected: setIndex,
-              controller: widget.controller,
-              appBar: widget.appBar,
-              globalFloatingActionButton: widget.globalFloatingActionButton,
-              margin: widget.margin,
-            );
-          } else {
-            return ZenitLandscapeLayout(
-              destinationBuilder: widget.destinationBuilder,
-              pageBuilder: widget.pageBuilder,
-              length: widget.length,
-              selectedIndex: _index == -1 ? _previousIndex : _index,
-              onPageSelected: setIndex,
-              controller: widget.controller,
-              appBar: widget.appBar,
-              margin: widget.margin,
-            );
-          }
-        },
+    return ZenitNavigatorMessengerHost(
+      child: Scaffold(
+        floatingActionButton: widget.globalFloatingActionButton,
+        appBar: widget.appBar,
+        body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (constraints.maxWidth < 620) {
+              return ZenitPortraitLayout(
+                destinationBuilder: widget.destinationBuilder,
+                pageBuilder: widget.pageBuilder,
+                length: widget.length,
+                selectedIndex: _index,
+                onPageSelected: setIndex,
+                controller: widget.controller,
+                appBar: widget.appBar,
+                globalFloatingActionButton: widget.globalFloatingActionButton,
+                margin: widget.margin,
+              );
+            } else {
+              return ZenitLandscapeLayout(
+                destinationBuilder: widget.destinationBuilder,
+                pageBuilder: widget.pageBuilder,
+                length: widget.length,
+                selectedIndex: _index == -1 ? _previousIndex : _index,
+                onPageSelected: setIndex,
+                controller: widget.controller,
+                appBar: widget.appBar,
+                margin: widget.margin,
+              );
+            }
+          },
+        ),
       ),
     );
   }

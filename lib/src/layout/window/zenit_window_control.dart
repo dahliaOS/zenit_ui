@@ -86,14 +86,20 @@ class ZenitWindowControlRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        ZenitWindowControl(icon: Icons.minimize, onPressed: () async => ZenitWindow.minimize()),
+        ZenitWindowControl(
+          icon: Icons.minimize,
+          onPressed: () async => ZenitWindow.minimize(),
+        ),
         const Gap(8),
         ZenitWindowControl(
           icon: Icons.crop_square_rounded,
           onPressed: () async => ZenitWindow.toggleMaximize(),
         ),
         const Gap(8),
-        ZenitWindowControl(icon: Icons.close, onPressed: () async => ZenitWindow.close()),
+        ZenitWindowControl(
+          icon: Icons.close,
+          onPressed: () async => ZenitWindow.close(),
+        ),
       ],
     );
   }
