@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/components/pill_icon/zenit_pill_icon.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitLayoutTile extends StatelessWidget {
   const ZenitLayoutTile({

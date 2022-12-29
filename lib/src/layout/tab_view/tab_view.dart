@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/layout/tab_view/tab.dart';
+import 'package:zenit_ui/src/layout/tab_view/tab_page.dart';
 
 //TODO: REMAKE THIS
 class TabView extends StatefulWidget {
@@ -41,7 +42,7 @@ class _TabViewState extends State<TabView> {
             height: 44,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: MaterialTheme.of(context).backgroundColor,
+                color: Theme.of(context).backgroundColor,
               ),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

@@ -1,7 +1,5 @@
 library zenit_ui;
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart' as material;
 
 // Zenit exports
@@ -24,16 +22,18 @@ export 'package:zenit_ui/src/components/slider/slider.dart';
 export 'package:zenit_ui/src/components/switch/switch.dart';
 // Zenit text field
 export 'package:zenit_ui/src/components/textfield/text_flield.dart';
+// Zenit extensions
+export 'package:zenit_ui/src/extensions/extensions.dart';
 // Zenit layout item
 export 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_item.dart';
 // Zenit layout tile
 export 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_tile.dart';
+// Zenit layout page
+export 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
 // Zenit navigator messenger
 export 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
 // Zenit navigator observer
 export 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
-// Zenit layout page
-export 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
 // Zenit tab view tab
 export 'package:zenit_ui/src/layout/tab_view/tab.dart';
 // Zenit tab view page
@@ -71,13 +71,3 @@ typedef MaterialSwitchListTile = material.SwitchListTile;
 
 //Checkbox
 typedef MaterialCheckbox = material.Checkbox;
-
-//Zenit object extensions
-extension ObX on Object? {
-  bool get isNull => this == null;
-  bool get isNotNull => this != null;
-}
-
-extension ColorX on Color {
-  Color mix(Color foregrounnd) => Color.lerp(this, foregrounnd, 0.5) ?? this;
-}

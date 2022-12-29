@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/components/switch/switch.dart';
 
 class ZenitSwitchListTile extends StatelessWidget {
   const ZenitSwitchListTile({
@@ -81,10 +81,7 @@ class ZenitSwitchListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: ZenitSwitch(
-        value: value,
-        onChanged: onChanged,
-      ),
+      trailing: ZenitSwitch(value: value, onChanged: onChanged),
       title: title,
       subtitle: subtitle,
       leading: secondary,

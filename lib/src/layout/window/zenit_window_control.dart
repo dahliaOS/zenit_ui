@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/layout/window/zenit_window.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
 const _kWindowControlHoverOpacity = 0.2;
 const _kWindowControlSize = 28.0;

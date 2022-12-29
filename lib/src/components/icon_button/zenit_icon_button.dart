@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/events.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitIconButton extends StatefulWidget {
   const ZenitIconButton({

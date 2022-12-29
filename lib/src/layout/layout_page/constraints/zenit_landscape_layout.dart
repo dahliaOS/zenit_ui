@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
+import 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
 import 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
-import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitLandscapeLayout extends StatefulWidget {
   const ZenitLandscapeLayout({

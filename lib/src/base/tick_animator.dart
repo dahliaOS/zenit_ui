@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/extensions/extensions.dart';
 
 class TickAnimator extends StatefulWidget {
   final VoidCallback? onPressed;

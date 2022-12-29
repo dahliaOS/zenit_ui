@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/theme/colors.dart';
 
 class ZenitTheme {
   late BuildContext context;
   ZenitTheme.of(this.context);
 
-  ThemeData get materialTheme => MaterialTheme.of(context);
+  ThemeData get materialTheme => Theme.of(context);
 
   Color get primaryColor => materialTheme.primaryColor;
 

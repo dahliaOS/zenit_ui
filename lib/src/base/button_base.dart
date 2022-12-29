@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 import 'package:zenit_ui/src/types/button_type.dart';
-import 'package:zenit_ui/zenit_ui.dart';
 
 class ButtonBase extends StatefulWidget {
   const ButtonBase({
@@ -47,8 +47,8 @@ class _ButtonBaseState extends State<ButtonBase> {
     _enabled = widget.onPressed != null;
     textColor =
         widget.foregroundColor ?? ZenitTheme.of(context).foregroundColor;
-    focusMixin = MaterialTheme.of(context).focusColor;
-    hoverMixin = MaterialTheme.of(context).hoverColor;
+    focusMixin = Theme.of(context).focusColor;
+    hoverMixin = Theme.of(context).hoverColor;
 
     if (!_enabled) {
       backgroundColor = const Color(0xFFE5E5E5);

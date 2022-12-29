@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui/src/layout/window/zenit_window.dart';
+import 'package:zenit_ui/src/layout/window/zenit_window_control.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitWindowTitlebar extends StatefulWidget with PreferredSizeWidget {
   /// By default the titlebar uses the window title
