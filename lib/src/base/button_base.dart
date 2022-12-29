@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
@@ -44,7 +45,8 @@ class _ButtonBaseState extends State<ButtonBase> {
 
   void loadColors() {
     _enabled = widget.onPressed != null;
-    textColor = widget.foregroundColor ?? ZenitTheme.of(context).foregroundColor;
+    textColor =
+        widget.foregroundColor ?? ZenitTheme.of(context).foregroundColor;
     focusMixin = MaterialTheme.of(context).focusColor;
     hoverMixin = MaterialTheme.of(context).hoverColor;
 
@@ -52,7 +54,8 @@ class _ButtonBaseState extends State<ButtonBase> {
       backgroundColor = const Color(0xFFE5E5E5);
       textColor = const Color(0xFF212121).withOpacity(0.25);
     } else if (widget.type == ButtonType.primary) {
-      backgroundColor = widget.backgroundColor ?? ZenitTheme.of(context).primaryColor;
+      backgroundColor =
+          widget.backgroundColor ?? ZenitTheme.of(context).primaryColor;
     } else {
       backgroundColor = ZenitTheme.of(context).backgroundColor;
     }
@@ -115,7 +118,10 @@ class _ButtonBaseState extends State<ButtonBase> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               borderRadius: kDefaultBorderRadiusBig,
-              border: Border.all(color: ZenitTheme.of(context).primaryColor, width: 2),
+              border: Border.all(
+                color: ZenitTheme.of(context).primaryColor,
+                width: 2,
+              ),
             ),
             child: Padding(
               padding: widget.child != null

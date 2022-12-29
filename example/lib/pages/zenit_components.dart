@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitComponentsExample extends StatefulWidget {
@@ -90,12 +92,14 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
           ZenitIconButton(
             icon: Icons.add,
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
+              ScaffoldMessenger.of(context).showMaterialBanner(
+                  MaterialBanner(content: const Text("Test"), actions: [
                 ZenitIconButton(
                   icon: Icons.close,
-                  hoverColor: ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
-                  onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
+                  hoverColor:
+                      ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
+                  onPressed: () =>
+                      ScaffoldMessenger.of(context).clearMaterialBanners(),
                 )
               ]));
             },

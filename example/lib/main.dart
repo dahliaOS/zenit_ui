@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages.dart';
 import 'package:zenit_ui_example/theme/theme.dart';
@@ -20,7 +21,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int themeMode = 0;
-  Set<ThemeMode> themeModes = {ThemeMode.system, ThemeMode.light, ThemeMode.dark};
+  Set<ThemeMode> themeModes = {
+    ThemeMode.system,
+    ThemeMode.light,
+    ThemeMode.dark
+  };
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,9 +44,12 @@ class _MyAppState extends State<MyApp> {
           leading: examplePages[index].iconBuilder(context, selected),
           selected: selected,
         ),
-        pageBuilder: (context, index) => examplePages[index].pageBuilder(context),
+        pageBuilder: (context, index) =>
+            examplePages[index].pageBuilder(context),
         globalFloatingActionButton: FloatingActionButton.extended(
-          onPressed: () => setState(() => (themeMode < themeModes.length - 1) ? themeMode++ : themeMode = 0),
+          onPressed: () => setState(() => (themeMode < themeModes.length - 1)
+              ? themeMode++
+              : themeMode = 0),
           label: Text(resolveThemeName()),
           icon: Icon(resolveThemeIcon()),
         ),

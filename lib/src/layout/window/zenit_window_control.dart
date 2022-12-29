@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 const _kWindowControlHoverOpacity = 0.2;

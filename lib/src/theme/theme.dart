@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -17,7 +18,8 @@ class ZenitTheme {
 
   Color get backgroundColor => materialTheme.backgroundColor;
 
-  Color get foregroundColor => materialTheme.textTheme.button?.color ?? Colors.white;
+  Color get foregroundColor =>
+      materialTheme.textTheme.button?.color ?? Colors.white;
 
   Color get disabledColor => materialTheme.disabledColor;
 
@@ -25,7 +27,9 @@ class ZenitTheme {
         activeTrackColor: primaryColor,
         inactiveTrackColor: surfaceColor,
         activeThumbColor: backgroundColor,
-        inactiveThumbColor: darkMode ? foregroundColor.withOpacity(0.35) : foregroundColor.withOpacity(0.35),
+        inactiveThumbColor: darkMode
+            ? foregroundColor.withOpacity(0.35)
+            : foregroundColor.withOpacity(0.35),
         disabledTrackColor: disabledColor,
         disabledThumbColor: backgroundColor,
       );
@@ -71,7 +75,11 @@ class ThemeEngine {
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: surfaceColor,
-        titleTextStyle: TextStyle(color: textColor, fontSize: 17, fontWeight: FontWeight.w600),
+        titleTextStyle: TextStyle(
+          color: textColor,
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
+        ),
       ),
       iconTheme: IconThemeData(color: textColor),
       cardTheme: CardTheme(

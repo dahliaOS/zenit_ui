@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 //TODO: REMAKE THIS
@@ -57,7 +58,7 @@ class _TabViewState extends State<TabView> {
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         itemBuilder: (context, index) {
                           final e = widget.pages[index];
-                          return Tab(
+                          return ZenitTab(
                             title: e.title,
                             enabled: currentTabIndex == index,
                             onClose: () {
@@ -109,7 +110,9 @@ class _TabViewState extends State<TabView> {
           left: 0,
           right: 0,
           bottom: 0,
-          child: widget.pages.map((TabViewPage e) => e.view).toList()[currentTabIndex],
+          child: widget.pages
+              .map((TabViewPage e) => e.view)
+              .toList()[currentTabIndex],
         )
       ],
     );

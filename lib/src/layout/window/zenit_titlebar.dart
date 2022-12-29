@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:zenit_ui/src/layout/navigator/zenit_navigator_interceptor.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -67,7 +69,6 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar>
                       navigatorInterceptor?.requestPopTransaction();
                     },
                   ),
-                /* const Gap(24), */
                 const Spacer(),
                 const ZenitWindowControlRow(),
                 const Gap(4),

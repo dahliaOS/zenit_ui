@@ -4,10 +4,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart' as material;
 
-// Default exports
-export 'package:flutter/material.dart' hide Chip, Switch, Tab, Theme, Radio, SwitchListTile, Checkbox;
-export 'package:flutter/widgets.dart';
-export 'package:gap/gap.dart';
 // Zenit exports
 //
 // Zenit buttons

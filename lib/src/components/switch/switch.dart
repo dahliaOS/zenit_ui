@@ -1,5 +1,6 @@
 //Credits: @HrX03 - for the base (which was slightly altered)
 
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -19,7 +20,8 @@ class ZenitSwitch extends StatefulWidget {
   _ZenitSwitchState createState() => _ZenitSwitchState();
 }
 
-class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
+class _ZenitSwitchState extends State<ZenitSwitch>
+    with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 150),
@@ -48,7 +50,8 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSwitchTheme switchTheme = widget.theme ?? ZenitTheme.of(context).switchTheme;
+    final ZenitSwitchTheme switchTheme =
+        widget.theme ?? ZenitTheme.of(context).switchTheme;
     final Color activeTrackColor = switchTheme.activeTrackColor;
     final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
     final Color activeThumbColor = switchTheme.activeThumbColor;
@@ -82,7 +85,8 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
                   animation: _positionController,
                   builder: (context, child) {
                     return Align(
-                      alignment: _thumbPositionTween.evaluate(_positionController)!,
+                      alignment:
+                          _thumbPositionTween.evaluate(_positionController)!,
                       child: child,
                     );
                   },
@@ -91,7 +95,8 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
                     height: 16,
                     decoration: ShapeDecoration(
                       shape: const CircleBorder(),
-                      color: widget.value ? activeThumbColor : inactiveThumbColor,
+                      color:
+                          widget.value ? activeThumbColor : inactiveThumbColor,
                     ),
                   ),
                 ),

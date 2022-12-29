@@ -1,4 +1,4 @@
-import 'package:zenit_ui/zenit_ui.dart';
+import 'package:flutter/material.dart';
 
 class ZenitLayoutItem {
   const ZenitLayoutItem({

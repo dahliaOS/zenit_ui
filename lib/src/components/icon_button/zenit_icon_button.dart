@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/src/gestures/events.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
@@ -24,7 +25,8 @@ class ZenitIconButton extends StatefulWidget {
   State<ZenitIconButton> createState() => ZenitIconButtonState();
 }
 
-class ZenitIconButtonState extends State<ZenitIconButton> with SingleTickerProviderStateMixin {
+class ZenitIconButtonState extends State<ZenitIconButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> animation;
 
@@ -66,7 +68,8 @@ class ZenitIconButtonState extends State<ZenitIconButton> with SingleTickerProvi
   void handleHover(dynamic event) {
     if (event is PointerEnterEvent) {
       setState(() {
-        backgroundColor = widget.hoverColor ?? ZenitTheme.of(context).surfaceColor;
+        backgroundColor =
+            widget.hoverColor ?? ZenitTheme.of(context).surfaceColor;
       });
     } else {
       setState(() {

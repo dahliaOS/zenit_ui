@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/components/pill_icon/zenit_pill_icon.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/zenit_ui.dart';
@@ -31,7 +32,8 @@ class ZenitLayoutTile extends StatelessWidget {
     final bool isSelected = selected ?? scope?.selected ?? false;
     return Material(
       clipBehavior: Clip.antiAlias,
-      color: isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
+      color:
+          isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
       borderRadius: kDefaultBorderRadiusBig,
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),

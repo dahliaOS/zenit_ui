@@ -71,7 +71,7 @@ packages:
     source: hosted
     version: "2.0.1"
   gap:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: gap
       sha256: "6e35ee60d5bbc61b0bec97cc5ba7ed32f62f1f62449e281ea77677479418a15d"

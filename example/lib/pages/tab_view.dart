@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitTabViewExample extends StatefulWidget {
@@ -21,7 +22,8 @@ class _ZenitTabViewExampleState extends State<ZenitTabViewExample> {
               TabViewPage(
                 title: "Tab ${_tabs.length}",
                 view: Container(
-                  color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+                  color: Colors
+                      .primaries[Random().nextInt(Colors.primaries.length)],
                 ),
               ),
             );
