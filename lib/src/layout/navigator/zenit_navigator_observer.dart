@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/layout/navigator/zenit_navigator_interceptor.dart';
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
 
 /// A [NavigatorObserver] that updates the [ZenitNavigatorMessenger.canPop] property
 /// of the nearest [ZenitNavigatorMessenger]. Both [ZenitLandscapeLayout] and [ZenitPortraitLayout]

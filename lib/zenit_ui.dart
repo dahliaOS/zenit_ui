@@ -28,6 +28,10 @@ export 'package:zenit_ui/src/components/textfield/text_flield.dart';
 export 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_item.dart';
 // Zenit layout tile
 export 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_tile.dart';
+// Zenit navigator messenger
+export 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
+// Zenit navigator observer
+export 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
 // Zenit layout page
 export 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
 // Zenit tab view tab

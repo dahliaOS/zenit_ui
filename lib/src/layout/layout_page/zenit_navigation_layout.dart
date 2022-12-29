@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_landscape_layout.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_portrait_layout.dart';
-import 'package:zenit_ui/src/layout/navigator/zenit_navigator_interceptor.dart';
+import 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
 
 typedef ZenitNavigationLayoutBuilder = Widget Function(
   BuildContext context,
