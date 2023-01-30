@@ -15,7 +15,7 @@ dependencies:
   google_fonts: ">=2.3.2 <4.0.0"
   window_manager: 
     git: https://github.com/leanflutter/window_manager.git
-  handy_window: ^0.1.9
+  handy_window: ^0.2.1
 
 dev_dependencies:
   dahlia_lint:
