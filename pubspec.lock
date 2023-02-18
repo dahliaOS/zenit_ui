@@ -249,10 +249,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b8188c800928afdbcec1dc0ff3e680c466e9a053
+      resolved-ref: b4f2e56606cc9a0f76fdf5e9964bfde75bab2903
       url: "https://github.com/leanflutter/window_manager.git"
     source: git
-    version: "0.2.8"
+    version: "0.3.0"
   xdg_directories:
     dependency: transitive
     description:
