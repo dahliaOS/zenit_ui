@@ -15,7 +15,7 @@ dependencies:
   google_fonts: ^4.0.3
   window_manager: 
     git: https://github.com/leanflutter/window_manager.git
-    version: ^0.3.0
+    version: ^0.3.1
   handy_window: ^0.3.1
 
 dev_dependencies:
