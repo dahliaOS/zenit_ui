@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/components/pill_icon/zenit_pill_icon.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
@@ -32,19 +31,23 @@ class ZenitLayoutTile extends StatelessWidget {
     final bool isSelected = selected ?? scope?.selected ?? false;
     return Material(
       clipBehavior: Clip.antiAlias,
-      color:
-          isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
-      borderRadius: kDefaultBorderRadiusBig,
+      color: isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
+      borderRadius: kDefaultBorderRadiusSmall,
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
         dense: true,
         selected: isSelected,
-        title: title,
-        subtitle: subtitle,
-        leading: ZenitPillIcon(
-          selected: isSelected,
-          child: leading,
+        title: DefaultTextStyle(
+          style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                color: ZenitTheme.of(context).foregroundColor,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+          child: title!,
         ),
+        iconColor: ZenitTheme.of(context).foregroundColor,
+        selectedColor: ZenitTheme.of(context).primaryColor,
+        subtitle: subtitle,
+        leading: SizedBox(width: 56, child: leading),
         trailing: trailing,
         onTap: () {
           scope?.onTap();

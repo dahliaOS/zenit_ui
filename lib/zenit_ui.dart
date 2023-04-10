@@ -12,8 +12,6 @@ export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
 export 'package:zenit_ui/src/components/icon_button/zenit_icon_button.dart';
 // Zenit switch list tile
 export 'package:zenit_ui/src/components/list_tile/switch_list_tile.dart';
-// Zenit Option Button
-export 'package:zenit_ui/src/components/option_button/zenit_option_button.dart';
 // Zenit radio button
 export 'package:zenit_ui/src/components/radio_button/radio_button.dart';
 // Zenit slider
@@ -40,10 +38,7 @@ export 'package:zenit_ui/src/layout/tab_view/tab.dart';
 export 'package:zenit_ui/src/layout/tab_view/tab_page.dart';
 // Zenit tab view
 export 'package:zenit_ui/src/layout/tab_view/tab_view.dart';
-// Zenit window
-export 'package:zenit_ui/src/layout/window/zenit_window.dart';
-// Zenit window control
-export 'package:zenit_ui/src/layout/window/zenit_window_control.dart';
+export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
 // Zenit colors
 export 'package:zenit_ui/src/theme/colors.dart';
 // Zenit theme

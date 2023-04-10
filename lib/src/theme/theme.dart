@@ -14,22 +14,23 @@ class ZenitTheme {
 
   bool get darkMode => materialTheme.brightness == Brightness.dark;
 
-  Color get surfaceColor => materialTheme.cardColor;
+  Color get cardColor => materialTheme.cardColor;
+
+  Color get surfaceColor => materialTheme.extension<ZenitColorExtension>()!.surfaceColor!;
 
   Color get backgroundColor => materialTheme.backgroundColor;
 
-  Color get foregroundColor =>
-      materialTheme.textTheme.button?.color ?? Colors.white;
+  Color get foregroundColor => materialTheme.textTheme.button?.color ?? Colors.white;
 
   Color get disabledColor => materialTheme.disabledColor;
+
+  Color get iconColor => materialTheme.iconTheme.color!;
 
   ZenitSwitchTheme get switchTheme => ZenitSwitchTheme(
         activeTrackColor: primaryColor,
         inactiveTrackColor: surfaceColor,
         activeThumbColor: backgroundColor,
-        inactiveThumbColor: darkMode
-            ? foregroundColor.withOpacity(0.35)
-            : foregroundColor.withOpacity(0.35),
+        inactiveThumbColor: darkMode ? foregroundColor.withOpacity(0.35) : foregroundColor.withOpacity(0.35),
         disabledTrackColor: disabledColor,
         disabledThumbColor: backgroundColor,
       );
@@ -55,20 +56,23 @@ class ZenitTheme {
       );
 }
 
-// ignore: avoid_classes_with_only_static_members
 class ThemeEngine {
+  const ThemeEngine._();
+
   static ThemeData create({
     required Color primaryColor,
     required Color backgroundColor,
     required Color surfaceColor,
+    required Color cardColor,
     required Color textColor,
     required ThemeVariant variant,
   }) {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: primaryColor,
       backgroundColor: backgroundColor,
       scaffoldBackgroundColor: backgroundColor,
-      cardColor: surfaceColor,
+      cardColor: cardColor,
       brightness: _resolveThemeBrightness(variant),
       textTheme: TextTheme(
         button: TextStyle(color: textColor),
@@ -84,11 +88,11 @@ class ThemeEngine {
       iconTheme: IconThemeData(color: textColor),
       cardTheme: CardTheme(
         clipBehavior: Clip.antiAlias,
-        color: backgroundColor,
+        color: cardColor,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: kDefaultBorderRadiusMedium,
-          side: BorderSide(color: surfaceColor, width: 2),
+          borderRadius: kCardBorderRadius,
+          side: BorderSide(color: textColor.withOpacity(0.15)),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -109,6 +113,11 @@ class ThemeEngine {
           TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
         },
       ),
+      extensions: [
+        ZenitColorExtension(
+          surfaceColor: surfaceColor,
+        ),
+      ],
     );
   }
 
@@ -116,14 +125,16 @@ class ThemeEngine {
         variant: ThemeVariant.light,
         primaryColor: ZenitColors.blue,
         backgroundColor: const Color(0xFFFAFAFA),
-        surfaceColor: const Color(0xFFD9D9D9),
+        surfaceColor: const Color(0xFFE5E5E7),
+        cardColor: const Color(0xFFFFFFFF),
         textColor: Colors.black,
       );
   static ThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
         variant: ThemeVariant.dark,
         primaryColor: ZenitColors.blue,
-        backgroundColor: const Color(0xFF212121),
+        backgroundColor: const Color(0xFF1C1C1E),
         surfaceColor: const Color(0xFF353535),
+        cardColor: const Color(0xFF252528),
         textColor: Colors.white,
       );
 }

@@ -25,29 +25,41 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
             height: 192,
           ),
           const Gap(48),
-          PrimaryButton(
-            onPressed: () => ZenitWindow.instance.setAsFrameless(),
-            backgroundColor: ZenitColors.blue,
-            foregroundColor: const Color(0xffffffff),
-            child: const Text(
-              "Primary Button",
-            ),
-          ),
-          const Gap(16),
-          SecondaryButton(
-            onPressed: () => print("SecondaryButton was clicked"),
-            child: const Text(
-              "Secondary Button",
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 130,
+                child: ZenitTextButton(
+                  onPressed: () => print("TextButton was clicked"),
+                  child: const Text("TextButton"),
+                ),
+              ),
+              const Gap(16),
+              SizedBox(
+                width: 130,
+                child: ZenitFilledButton(
+                  onPressed: () => print("FilledButton was clicked"),
+                  child: const Text("FilledButton"),
+                ),
+              ),
+              const Gap(16),
+              SizedBox(
+                width: 130,
+                child: ZenitElevatedButton(
+                  onPressed: () => print("FilledButton was clicked"),
+                  foregroundColor: Colors.white,
+                  child: const Text("ElevatedButton"),
+                ),
+              ),
+            ],
           ),
           const Gap(16),
           SizedBox(
             width: 300,
             child: ZenitTextField(
               controller: TextEditingController(),
-              decoration: const InputDecoration(
-                label: Text("Text Box"),
-              ),
+              hint: "ZenitTextField",
             ),
           ),
           const Gap(16),
@@ -92,14 +104,12 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
           ZenitIconButton(
             icon: Icons.add,
             onPressed: () {
-              ScaffoldMessenger.of(context).showMaterialBanner(
-                  MaterialBanner(content: const Text("Test"), actions: [
+              ScaffoldMessenger.of(context)
+                  .showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
                 ZenitIconButton(
                   icon: Icons.close,
-                  hoverColor:
-                      ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
-                  onPressed: () =>
-                      ScaffoldMessenger.of(context).clearMaterialBanners(),
+                  hoverColor: ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
+                  onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
                 )
               ]));
             },

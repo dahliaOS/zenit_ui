@@ -14,7 +14,6 @@ class ZenitPortraitLayout extends StatefulWidget {
     required this.destinationBuilder,
     this.controller,
     this.appBar,
-    this.globalFloatingActionButton,
     this.margin = kDefaultPageMargin,
   });
 
@@ -37,9 +36,6 @@ class ZenitPortraitLayout extends StatefulWidget {
 
   /// AppBar for the [ZenitPortraitLayout]
   final PreferredSizeWidget? appBar;
-
-  /// Creates a global floating action button throughout all Pages
-  final FloatingActionButton? globalFloatingActionButton;
 
   /// Page Margin
   final EdgeInsets margin;

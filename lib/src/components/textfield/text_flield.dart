@@ -65,6 +65,7 @@ class ZenitTextField extends StatelessWidget {
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contextMenuBuilder,
+    this.hint,
   })  : assert(obscuringCharacter.length == 1),
         smartDashesType =
             smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
@@ -206,6 +207,8 @@ class ZenitTextField extends StatelessWidget {
 
   final EditableTextContextMenuBuilder? contextMenuBuilder;
 
+  final String? hint;
+
   @override
   Widget build(BuildContext context) {
     final ZenitTheme theme = ZenitTheme.of(context);
@@ -222,8 +225,8 @@ class ZenitTextField extends StatelessWidget {
       cursorHeight: cursorHeight,
       cursorRadius: cursorRadius,
       cursorWidth: cursorWidth,
-      decoration: decoration?.applyDefaults(kDefaultInputDecoration) ??
-          const InputDecoration().applyDefaults(kDefaultInputDecoration),
+      decoration: decoration?.applyDefaults(kDefaultInputDecoration).copyWith(hintText: hint) ??
+          const InputDecoration().applyDefaults(kDefaultInputDecoration).copyWith(hintText: hint),
       dragStartBehavior: dragStartBehavior,
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
@@ -260,7 +263,7 @@ class ZenitTextField extends StatelessWidget {
       smartDashesType: smartDashesType,
       smartQuotesType: smartQuotesType,
       strutStyle: strutStyle,
-      style: const TextStyle(fontSize: 14).merge(style),
+      style: const TextStyle(fontSize: 15).merge(style),
       textAlign: textAlign,
       textAlignVertical: textAlignVertical,
       textCapitalization: textCapitalization,
@@ -291,7 +294,6 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    constraints: const BoxConstraints(maxHeight: 40),
     fillColor: theme.surfaceColor,
     border: _kDefaultOutlineInputBorderInactive,
     enabledBorder: _kDefaultOutlineInputBorderInactive,
@@ -301,7 +303,8 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
       borderRadius: kDefaultBorderRadiusMedium,
     ),
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
-    floatingLabelStyle: TextStyle(color: theme.primaryColor),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    alignLabelWithHint: true,
     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
   );
 

@@ -8,7 +8,6 @@ class ZenitTab extends StatelessWidget {
     super.key,
     this.title,
     this.enabled = true,
-    //this.subtitle,
     this.icon = const FlutterLogo(
       size: 16,
     ),
@@ -18,7 +17,6 @@ class ZenitTab extends StatelessWidget {
   });
 
   final String? title;
-  //final Widget? subtitle;
   final Widget? icon;
 
   final IconData? closeIcon;
@@ -40,9 +38,7 @@ class ZenitTab extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: kDefaultBorderRadiusMedium,
-            color: enabled
-                ? ZenitTheme.of(context).surfaceColor
-                : Colors.transparent,
+            color: enabled ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -55,17 +51,23 @@ class ZenitTab extends StatelessWidget {
                   ),
                 Text(
                   title ?? "Tab",
-                  style:
-                      TextStyle(color: ZenitTheme.of(context).foregroundColor),
+                  style: TextStyle(color: ZenitTheme.of(context).foregroundColor),
                 ),
                 const Spacer(),
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: onClose,
-                  icon: Icon(
-                    closeIcon ?? Icons.close,
-                    size: 14,
-                    color: ZenitTheme.of(context).foregroundColor,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: InkWell(
+                    borderRadius: kDefaultBorderRadiusSmall,
+                    onTap: onClose,
+                    hoverColor: Colors.red,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Icon(
+                        closeIcon ?? Icons.close,
+                        size: 14,
+                        color: ZenitTheme.of(context).foregroundColor,
+                      ),
+                    ),
                   ),
                 ),
               ],

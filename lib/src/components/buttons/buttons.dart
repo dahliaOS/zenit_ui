@@ -1,46 +1,116 @@
+import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/base/button_base.dart';
-import 'package:zenit_ui/src/types/button_type.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
-class PrimaryButton extends ButtonBase {
-  const PrimaryButton({
-    super.key,
-    super.onPressed,
-    super.backgroundColor,
-    super.foregroundColor,
-    super.child,
-  }) : super(
-          type: ButtonType.primary,
-        );
+class ZenitTextButton extends StatelessWidget {
+  final Widget? child;
+
+  final VoidCallback? onPressed;
+
+  final Color? foregroundColor;
+
+  const ZenitTextButton({super.key, this.child, this.onPressed, this.foregroundColor});
+
+  @override
+  Widget build(BuildContext context) {
+    final zenitTheme = ZenitTheme.of(context);
+    return ButtonBase(
+      onPressed: onPressed,
+      foregroundColor: foregroundColor ?? zenitTheme.primaryColor,
+      hoverColor: (foregroundColor ?? zenitTheme.primaryColor).withOpacity(0.25),
+      backgroundColor: Colors.transparent,
+      child: child,
+    );
+  }
 }
 
-class SecondaryButton extends ButtonBase {
-  const SecondaryButton({
+class ZenitFilledButton extends StatelessWidget {
+  final Widget? child;
+
+  final VoidCallback? onPressed;
+
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+
+  const ZenitFilledButton({
     super.key,
-    super.onPressed,
-    super.foregroundColor,
-    super.child,
-  }) : super(
-          type: ButtonType.secondary,
-        );
+    this.child,
+    this.onPressed,
+    this.foregroundColor,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final zenitTheme = ZenitTheme.of(context);
+    return ButtonBase(
+      onPressed: onPressed,
+      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
+      backgroundColor: backgroundColor ?? zenitTheme.surfaceColor,
+      hoverColor: Color.alphaBlend(
+        zenitTheme.foregroundColor.withOpacity(0.1),
+        backgroundColor ?? zenitTheme.surfaceColor,
+      ),
+      child: child,
+    );
+  }
 }
 
-class Button extends ButtonBase {
-  const Button.primary({
-    super.key,
-    super.onPressed,
-    super.backgroundColor,
-    super.foregroundColor,
-    super.child,
-  }) : super(
-          type: ButtonType.primary,
-        );
+class ZenitElevatedButton extends StatelessWidget {
+  final Widget? child;
 
-  const Button.secondary({
+  final VoidCallback? onPressed;
+
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+
+  const ZenitElevatedButton({
     super.key,
-    super.onPressed,
-    super.foregroundColor,
-    super.child,
-  }) : super(
-          type: ButtonType.secondary,
-        );
+    this.child,
+    this.onPressed,
+    this.foregroundColor,
+    this.backgroundColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final zenitTheme = ZenitTheme.of(context);
+    return ButtonBase(
+      onPressed: onPressed,
+      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
+      backgroundColor: backgroundColor ?? zenitTheme.primaryColor,
+      child: child,
+    );
+  }
+}
+
+class ZenitButton extends StatelessWidget {
+  final Widget? child;
+
+  final VoidCallback? onPressed;
+
+  final Color? foregroundColor;
+  final Color? backgroundColor;
+  final Color? hoverColor;
+
+  const ZenitButton({
+    super.key,
+    this.child,
+    this.onPressed,
+    this.foregroundColor,
+    this.backgroundColor,
+    this.hoverColor,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final zenitTheme = ZenitTheme.of(context);
+    return ButtonBase(
+      onPressed: onPressed,
+      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
+      backgroundColor: backgroundColor ?? zenitTheme.surfaceColor,
+      hoverColor: hoverColor,
+      child: child,
+    );
+  }
 }

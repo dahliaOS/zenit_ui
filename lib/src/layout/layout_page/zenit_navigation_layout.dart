@@ -46,7 +46,7 @@ class ZenitNavigationLayout extends StatefulWidget {
   final PreferredSizeWidget? appBar;
 
   /// Creates a global floating action button throughout all Pages
-  final FloatingActionButton? globalFloatingActionButton;
+  final Widget? globalFloatingActionButton;
 
   /// Page Margin
   final EdgeInsets margin;
@@ -96,7 +96,6 @@ class _ZenitNavigationLayoutState extends State<ZenitNavigationLayout> {
                 onPageSelected: setIndex,
                 controller: widget.controller,
                 appBar: widget.appBar,
-                globalFloatingActionButton: widget.globalFloatingActionButton,
                 margin: widget.margin,
               );
             } else {

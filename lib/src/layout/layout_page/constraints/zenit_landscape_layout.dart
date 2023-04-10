@@ -94,6 +94,9 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                 ),
               ),
             ),
+            const VerticalDivider(
+              width: 1,
+            ),
             Expanded(
               child: SizedBox.expand(
                 child: ClipRRect(

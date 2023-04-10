@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
-import 'package:zenit_ui/src/types/button_type.dart';
 
 class ButtonBase extends StatefulWidget {
   const ButtonBase({
@@ -12,8 +9,8 @@ class ButtonBase extends StatefulWidget {
     this.onPressed,
     this.foregroundColor,
     this.backgroundColor,
-    this.debugDarkMode,
-    required this.type,
+    this.hoverColor,
+    this.splashColor,
   });
 
   final Widget? child;
@@ -23,124 +20,48 @@ class ButtonBase extends StatefulWidget {
   // Use the debug color until a theme system is established
   final Color? backgroundColor;
   final Color? foregroundColor;
-
-  final ButtonType type;
-
-  final bool? debugDarkMode;
+  final Color? hoverColor;
+  final Color? splashColor;
 
   @override
   _ButtonBaseState createState() => _ButtonBaseState();
 }
 
 class _ButtonBaseState extends State<ButtonBase> {
-  late bool _enabled;
-
-  late Color backgroundColor;
-  late Color textColor;
-
-  late Color buttonColor;
-
-  late Color focusMixin;
-  late Color hoverMixin;
-
-  void loadColors() {
-    _enabled = widget.onPressed != null;
-    textColor =
-        widget.foregroundColor ?? ZenitTheme.of(context).foregroundColor;
-    focusMixin = Theme.of(context).focusColor;
-    hoverMixin = Theme.of(context).hoverColor;
-
-    if (!_enabled) {
-      backgroundColor = const Color(0xFFE5E5E5);
-      textColor = const Color(0xFF212121).withOpacity(0.25);
-    } else if (widget.type == ButtonType.primary) {
-      backgroundColor =
-          widget.backgroundColor ?? ZenitTheme.of(context).primaryColor;
-    } else {
-      backgroundColor = ZenitTheme.of(context).backgroundColor;
-    }
-
-    buttonColor = backgroundColor;
-  }
-
-  @override
-  void didChangeDependencies() {
-    loadColors();
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(ButtonBase oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    loadColors();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return TickAnimator(
-      multiplier: 0.9,
-      borderRadius: kDefaultBorderRadiusBig,
-      onPressed: () async {
-        if (_enabled) {
-          setState(
-            () => buttonColor = Color.alphaBlend(focusMixin, backgroundColor),
-          );
-          widget.onPressed?.call();
-          await Future.delayed(const Duration(milliseconds: 100));
-          setState(
-            () => buttonColor = Color.alphaBlend(
-              hoverMixin,
-              backgroundColor,
-            ),
-          );
-        }
-      },
-      child: MouseRegion(
-        cursor: _enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-        onEnter: (_) {
-          if (_enabled) {
-            setState(() {
-              buttonColor = Color.alphaBlend(hoverMixin, backgroundColor);
-            });
-          }
-        },
-        onExit: (_) {
-          if (_enabled) {
-            setState(() {
-              buttonColor = backgroundColor;
-            });
-          }
-        },
-        child: PhysicalModel(
-          borderRadius: kDefaultBorderRadiusBig,
-          color: buttonColor,
+    final zenitTheme = ZenitTheme.of(context);
+    return MergeSemantics(
+      child: Semantics(
+        button: true,
+        container: true,
+        enabled: widget.onPressed != null,
+        child: Material(
           clipBehavior: Clip.antiAlias,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: kDefaultBorderRadiusBig,
-              border: Border.all(
-                color: ZenitTheme.of(context).primaryColor,
-                width: 2,
-              ),
-            ),
+          borderRadius: kDefaultBorderRadiusMedium,
+          color: widget.backgroundColor ?? zenitTheme.surfaceColor,
+          elevation: kDefaultElevation,
+          child: InkWell(
+            hoverColor: widget.hoverColor,
+            onTap: widget.onPressed,
             child: Padding(
-              padding: widget.child != null
-                  ? const EdgeInsets.symmetric(horizontal: 16, vertical: 12.0)
-                  : EdgeInsets.zero,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               child: IconTheme.merge(
                 data: IconThemeData(
-                  color: widget.foregroundColor,
+                  color: widget.foregroundColor ?? zenitTheme.foregroundColor,
                 ),
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    color: textColor,
-                    fontFamily: GoogleFonts.manrope().fontFamily,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 12,
-                    letterSpacing: 0.8,
-                    backgroundColor: Colors.transparent,
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    color: widget.foregroundColor ?? zenitTheme.foregroundColor,
                   ),
-                  child: widget.child ?? const SizedBox.shrink(),
+                  child: Align(
+                    alignment: Alignment.center,
+                    widthFactor: 1,
+                    heightFactor: 1,
+                    child: widget.child ?? const Text("Button"),
+                  ),
                 ),
               ),
             ),
