@@ -1,3 +1,35 @@
+v0.0.10 / 2023-04-10
+===================
+
+ * Add Dart 3 support
+ * Change Theme colours
+ * Add ThemeExtension for Zenit
+ * Switch to the default strict linter
+ * Remove window_manager dependency and related widgets
+ * Remove ZenitOptionButton Widget
+ * Change Buttons to more meaningful names
+
+
+v0.0.9 / 2022-12-21
+===================
+
+ * Add ZenitNavigationLayout -> replaces ZenitResponsivePlatform
+ * Add ZenitIconButton
+ * Add ZenitOptionButton
+ * Delete Chip widget
+ * Create ZenitPillIcon
+ * ZenitWindowControls
+ * ZenitWindowTitlebar
+ * ZenitWindowFrame
+ * Updated ZenitTextField
+ * Animate Buttons
+ * Switch to Constants as default values
+ * Slight changes to the default theme
+ * Revamped the example with the new ZenitNavigationLayout
+ * Create pages for each example
+ * Update Gap to version 2.0.1
+ * Added window_manager dependency
+
 v0.0.8 / 2022-11-11
 ===================
 
