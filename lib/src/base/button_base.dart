@@ -56,7 +56,7 @@ class _ButtonBaseState extends State<ButtonBase> {
                     fontWeight: FontWeight.normal,
                     color: widget.foregroundColor ?? zenitTheme.foregroundColor,
                   ),
-                  child: Align(
+                  child: Center(
                     widthFactor: 1,
                     heightFactor: 1,
                     child: widget.child ?? const Text("Button"),
