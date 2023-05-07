@@ -40,9 +40,9 @@ class _ButtonBaseState extends State<ButtonBase> {
           clipBehavior: Clip.antiAlias,
           borderRadius: kDefaultBorderRadiusMedium,
           color: widget.backgroundColor ?? zenitTheme.surfaceColor,
-          elevation: kDefaultElevation,
           child: InkWell(
             hoverColor: widget.hoverColor,
+            splashColor: widget.splashColor,
             onTap: widget.onPressed,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -57,7 +57,6 @@ class _ButtonBaseState extends State<ButtonBase> {
                     color: widget.foregroundColor ?? zenitTheme.foregroundColor,
                   ),
                   child: Align(
-                    alignment: Alignment.center,
                     widthFactor: 1,
                     heightFactor: 1,
                     child: widget.child ?? const Text("Button"),

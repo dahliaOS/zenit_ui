@@ -18,6 +18,7 @@ class ZenitTextButton extends StatelessWidget {
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? zenitTheme.primaryColor,
       hoverColor: (foregroundColor ?? zenitTheme.primaryColor).withOpacity(0.25),
+      splashColor: (foregroundColor ?? zenitTheme.primaryColor).withOpacity(0.25),
       backgroundColor: Colors.transparent,
       child: child,
     );

@@ -113,6 +113,18 @@ class ThemeEngine {
           TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
         },
       ),
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: surfaceColor,
+          borderRadius: kDefaultBorderRadiusMedium,
+          border: Border.all(
+            color: textColor.withOpacity(0.15),
+          ),
+        ),
+        textStyle: TextStyle(color: textColor),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        waitDuration: const Duration(seconds: 1),
+      ),
       extensions: [
         ZenitColorExtension(
           surfaceColor: surfaceColor,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
+const kButtonWidth = 132.0;
+
 class ZenitComponentsExample extends StatefulWidget {
   const ZenitComponentsExample({super.key});
 
@@ -29,7 +31,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitTextButton(
                   onPressed: () => print("TextButton was clicked"),
                   child: const Text("TextButton"),
@@ -37,7 +39,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
               ),
               const Gap(16),
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitFilledButton(
                   onPressed: () => print("FilledButton was clicked"),
                   child: const Text("FilledButton"),
@@ -45,7 +47,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
               ),
               const Gap(16),
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitElevatedButton(
                   onPressed: () => print("FilledButton was clicked"),
                   foregroundColor: Colors.white,
