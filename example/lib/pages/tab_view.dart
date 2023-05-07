@@ -11,13 +11,7 @@ class ZenitTabViewExample extends StatefulWidget {
 }
 
 class _ZenitTabViewExampleState extends State<ZenitTabViewExample> {
-  late int _selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = 0;
-  }
+  int _selectedIndex = 0;
 
   List<TabData> tabs = [
     const TabData(title: "New Tab Red", leading: FlutterLogo()),
