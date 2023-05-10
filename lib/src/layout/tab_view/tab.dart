@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
@@ -54,7 +53,7 @@ class ZenitTab extends StatelessWidget {
                 child: Row(
                   children: [
                     if (icon != null) SizedBox.square(dimension: 20, child: icon),
-                    const Gap(8),
+                    const SizedBox.square(dimension: 8),
                     SizedBox(
                       width: 132,
                       child: Text(
