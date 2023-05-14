@@ -305,7 +305,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
     floatingLabelBehavior: FloatingLabelBehavior.never,
     alignLabelWithHint: true,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
   );
 
   return kDefaultInputDecorationTheme;

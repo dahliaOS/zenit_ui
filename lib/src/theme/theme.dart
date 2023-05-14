@@ -22,6 +22,8 @@ class ZenitTheme {
 
   Color get foregroundColor => materialTheme.textTheme.button?.color ?? Colors.white;
 
+  Color get accentForegroundColor => primaryColor.computeLuminance() < 0.3 ? Colors.white : Colors.black;
+
   Color get disabledColor => materialTheme.disabledColor;
 
   Color get iconColor => materialTheme.iconTheme.color!;
@@ -68,12 +70,18 @@ class ThemeEngine {
     required ThemeVariant variant,
   }) {
     return ThemeData(
-      useMaterial3: true,
+      useMaterial3: false,
       primaryColor: primaryColor,
       backgroundColor: backgroundColor,
       scaffoldBackgroundColor: backgroundColor,
       cardColor: cardColor,
       brightness: _resolveThemeBrightness(variant),
+      colorScheme: ColorScheme.fromSeed(
+        brightness: _resolveThemeBrightness(variant),
+        seedColor: primaryColor,
+        secondary: primaryColor,
+        background: backgroundColor,
+      ),
       textTheme: TextTheme(
         button: TextStyle(color: textColor),
       ),
