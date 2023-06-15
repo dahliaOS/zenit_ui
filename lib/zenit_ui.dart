@@ -1,5 +1,3 @@
-library zenit_ui;
-
 import 'package:flutter/material.dart' as material;
 
 // Zenit exports

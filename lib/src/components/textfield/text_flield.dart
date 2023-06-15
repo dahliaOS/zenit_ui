@@ -7,7 +7,7 @@ import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 export 'package:flutter/services.dart'
-    show TextInputType, TextInputAction, TextCapitalization, SmartQuotesType, SmartDashesType;
+    show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
 class ZenitTextField extends StatelessWidget {
   const ZenitTextField({
@@ -67,10 +67,8 @@ class ZenitTextField extends StatelessWidget {
     this.contextMenuBuilder,
     this.hint,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType =
-            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType =
-            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
