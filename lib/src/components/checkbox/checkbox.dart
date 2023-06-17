@@ -17,7 +17,7 @@ class ZenitCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = this.theme ?? ZenitTheme.of(context).checkboxTheme;
+    final theme = this.theme ?? ZenitTheme.checkboxTheme(context);
     final activeBackgroundColor = theme.activeBackgroundColor;
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final foregroundColor = theme.foregroundColor;

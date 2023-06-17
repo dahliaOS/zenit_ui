@@ -106,11 +106,10 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
           ZenitIconButton(
             icon: Icons.add,
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
+              ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
                 ZenitIconButton(
                   icon: Icons.close,
-                  hoverColor: ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
+                  hoverColor: Theme.of(context).foregroundColor.withOpacity(0.1),
                   onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
                 )
               ]));

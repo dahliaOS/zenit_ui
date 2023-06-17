@@ -30,7 +30,7 @@ class ButtonBase extends StatefulWidget {
 class _ButtonBaseState extends State<ButtonBase> {
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return MergeSemantics(
       child: Semantics(
         button: true,
@@ -39,7 +39,7 @@ class _ButtonBaseState extends State<ButtonBase> {
         child: Material(
           clipBehavior: Clip.antiAlias,
           borderRadius: kDefaultBorderRadiusMedium,
-          color: widget.backgroundColor ?? zenitTheme.surfaceColor,
+          color: widget.backgroundColor ?? theme.elementColor,
           child: InkWell(
             hoverColor: widget.hoverColor,
             splashColor: widget.splashColor,
@@ -48,13 +48,13 @@ class _ButtonBaseState extends State<ButtonBase> {
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               child: IconTheme.merge(
                 data: IconThemeData(
-                  color: widget.foregroundColor ?? zenitTheme.foregroundColor,
+                  color: widget.foregroundColor ?? theme.foregroundColor,
                 ),
                 child: DefaultTextStyle(
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.normal,
-                    color: widget.foregroundColor ?? zenitTheme.foregroundColor,
+                    color: widget.foregroundColor ?? theme.foregroundColor,
                   ),
                   child: Center(
                     widthFactor: 1,

@@ -2,161 +2,173 @@
 
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/colors.dart';
 
-class ZenitTheme {
-  late BuildContext context;
-  ZenitTheme.of(this.context);
-
-  ThemeData get materialTheme => Theme.of(context);
-
-  Color get primaryColor => materialTheme.primaryColor;
-
-  bool get darkMode => materialTheme.brightness == Brightness.dark;
-
-  Color get cardColor => materialTheme.cardColor;
-
-  Color get surfaceColor => materialTheme.extension<ZenitColorExtension>()!.surfaceColor!;
-
-  Color get backgroundColor => materialTheme.backgroundColor;
-
-  Color get foregroundColor => materialTheme.textTheme.button?.color ?? Colors.white;
-
-  Color get accentForegroundColor => primaryColor.computeLuminance() < 0.3 ? Colors.white : Colors.black;
-
-  Color get disabledColor => materialTheme.disabledColor;
-
-  Color get iconColor => materialTheme.iconTheme.color!;
-
-  ZenitSwitchTheme get switchTheme => ZenitSwitchTheme(
-        activeTrackColor: primaryColor,
-        inactiveTrackColor: surfaceColor,
-        activeThumbColor: backgroundColor,
-        inactiveThumbColor: darkMode ? foregroundColor.withOpacity(0.35) : foregroundColor.withOpacity(0.35),
-        disabledTrackColor: disabledColor,
-        disabledThumbColor: backgroundColor,
-      );
-
-  ZenitSliderTheme get sliderTheme => ZenitSliderTheme(
-        activeTrackColor: primaryColor,
-        trackColor: primaryColor.withOpacity(0.25),
-      );
-
-  ZenitRadioButtonTheme get radioButtonTheme => ZenitRadioButtonTheme(
-        activeBackgroundColor: primaryColor,
-        inactiveBackgroundColor: surfaceColor,
-        activeThumbColor: backgroundColor,
-        inactiveThumbColor: surfaceColor,
-        disabledBackgroundColor: disabledColor,
-      );
-
-  ZenitCheckboxTheme get checkboxTheme => ZenitCheckboxTheme(
-        activeBackgroundColor: primaryColor,
-        inactiveBackgroundColor: surfaceColor,
-        foregroundColor: backgroundColor,
-        disabledBackgroundColor: disabledColor,
-      );
-}
-
-class ThemeEngine {
-  const ThemeEngine._();
-
-  static ThemeData create({
-    required Color primaryColor,
-    required Color backgroundColor,
-    required Color surfaceColor,
-    required Color cardColor,
-    required Color textColor,
-    required ThemeVariant variant,
-  }) {
-    return ThemeData(
-      useMaterial3: false,
-      primaryColor: primaryColor,
-      backgroundColor: backgroundColor,
-      scaffoldBackgroundColor: backgroundColor,
-      cardColor: cardColor,
-      brightness: _resolveThemeBrightness(variant),
-      colorScheme: ColorScheme.fromSeed(
-        brightness: _resolveThemeBrightness(variant),
-        seedColor: primaryColor,
-        secondary: primaryColor,
-        background: backgroundColor,
-      ),
-      textTheme: TextTheme(
-        button: TextStyle(color: textColor),
-      ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: surfaceColor,
-        titleTextStyle: TextStyle(
-          color: textColor,
-          fontSize: 17,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      iconTheme: IconThemeData(color: textColor),
-      cardTheme: CardTheme(
-        clipBehavior: Clip.antiAlias,
-        color: cardColor,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: kCardBorderRadius,
-          side: BorderSide(color: textColor.withOpacity(0.15)),
-        ),
-      ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: primaryColor,
-        foregroundColor: backgroundColor,
-        elevation: 0,
-        focusElevation: 0,
-        hoverElevation: 0,
-        disabledElevation: 0,
-        highlightElevation: 0,
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
-          TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-        },
-      ),
-      tooltipTheme: TooltipThemeData(
-        decoration: BoxDecoration(
-          color: surfaceColor,
-          borderRadius: kDefaultBorderRadiusMedium,
-          border: Border.all(
-            color: textColor.withOpacity(0.15),
-          ),
-        ),
-        textStyle: TextStyle(color: textColor),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        waitDuration: const Duration(seconds: 1),
-      ),
-      extensions: [
-        ZenitColorExtension(
-          surfaceColor: surfaceColor,
-        ),
-      ],
+mixin ZenitTheme {
+  static ZenitSwitchTheme switchTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return ZenitSwitchTheme(
+      activeTrackColor: theme.primaryColor,
+      inactiveTrackColor: theme.elementColor,
+      activeThumbColor: theme.colorScheme.background,
+      inactiveThumbColor:
+          theme.darkMode ? theme.foregroundColor.withOpacity(0.35) : theme.foregroundColor.withOpacity(0.35),
+      disabledTrackColor: theme.disabledColor,
+      disabledThumbColor: theme.colorScheme.background,
     );
   }
 
-  static ThemeData get zenitDefaultLightTheme => ThemeEngine.create(
-        variant: ThemeVariant.light,
-        primaryColor: ZenitColors.blue,
-        backgroundColor: const Color(0xFFFAFAFA),
-        surfaceColor: const Color(0xFFE5E5E7),
-        cardColor: const Color(0xFFFFFFFF),
-        textColor: Colors.black,
-      );
-  static ThemeData get zenitDefaultDarkTheme => ThemeEngine.create(
-        variant: ThemeVariant.dark,
-        primaryColor: ZenitColors.blue,
-        backgroundColor: const Color(0xFF1C1C1E),
-        surfaceColor: const Color(0xFF353535),
-        cardColor: const Color(0xFF252528),
-        textColor: Colors.white,
-      );
+  static ZenitSliderTheme sliderTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return ZenitSliderTheme(
+      activeTrackColor: theme.primaryColor,
+      trackColor: theme.primaryColor.withOpacity(0.25),
+    );
+  }
+
+  static ZenitRadioButtonTheme radioButtonTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return ZenitRadioButtonTheme(
+      activeBackgroundColor: theme.primaryColor,
+      inactiveBackgroundColor: theme.elementColor,
+      activeThumbColor: theme.colorScheme.background,
+      inactiveThumbColor: theme.elementColor,
+      disabledBackgroundColor: theme.disabledColor,
+    );
+  }
+
+  static ZenitCheckboxTheme checkboxTheme(BuildContext context) {
+    final theme = Theme.of(context);
+    return ZenitCheckboxTheme(
+      activeBackgroundColor: theme.primaryColor,
+      inactiveBackgroundColor: theme.elementColor,
+      foregroundColor: theme.colorScheme.background,
+      disabledBackgroundColor: theme.disabledColor,
+    );
+  }
+}
+
+ThemeData createZenitTheme({
+  Brightness? brightness = Brightness.light,
+  Color? primaryColor,
+  Color? backgroundColor,
+  Color? surfaceColor,
+  Color? elementColor,
+  Color? foregroundColor,
+}) {
+  // Default Values
+  final darkMode = brightness == Brightness.dark;
+  final primary = primaryColor ?? const Color(0xFF0073cf);
+  final foreground = foregroundColor ?? (darkMode ? const Color(0xffffffff) : const Color(0xFF000000));
+
+  // AppBar Theme
+  final appBarTheme = AppBarTheme(
+    backgroundColor: surfaceColor,
+    titleTextStyle: TextStyle(
+      color: foreground,
+      fontSize: 17,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+
+  // Icon Theme
+  final iconTheme = IconThemeData(color: foreground);
+
+  // Card Theme
+  const cardTheme = CardTheme(
+    clipBehavior: Clip.antiAlias,
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      borderRadius: kCardBorderRadius,
+    ),
+  );
+
+  // FloatingActionButton Theme
+  final floatingActionButtonTheme = FloatingActionButtonThemeData(
+    backgroundColor: primaryColor,
+    foregroundColor: backgroundColor,
+    elevation: 0,
+    focusElevation: 0,
+    hoverElevation: 0,
+    disabledElevation: 0,
+    highlightElevation: 0,
+  );
+
+  // PageTransitionsTheme
+  const pageTransitionsTheme = PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.iOS: FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.macOS: FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
+    },
+  );
+
+  // Tooltip Theme
+  final tooltipTheme = TooltipThemeData(
+    decoration: BoxDecoration(
+      color: surfaceColor,
+      borderRadius: kDefaultBorderRadiusMedium,
+      border: Border.all(
+        color: foreground.withOpacity(0.15),
+      ),
+    ),
+    textStyle: TextStyle(color: foregroundColor),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    waitDuration: const Duration(seconds: 1),
+  );
+
+  if (brightness == Brightness.light) {
+    return ThemeData.from(
+      colorScheme: ColorScheme.light(
+        primary: primary,
+        secondary: primary,
+        background: backgroundColor ?? const Color(0xFFEDEDED),
+        onBackground: elementColor ?? const Color(0xFF1C1C1E),
+        surface: surfaceColor ?? const Color(0xFFFFFFFF),
+        onSurface: elementColor ?? const Color(0xFFD6D6D6),
+      ),
+    ).copyWith(
+      useMaterial3: false,
+      appBarTheme: appBarTheme,
+      primaryColor: primary,
+      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFFEDEDED),
+      iconTheme: iconTheme,
+      cardTheme: cardTheme,
+      floatingActionButtonTheme: floatingActionButtonTheme,
+      pageTransitionsTheme: pageTransitionsTheme,
+      tooltipTheme: tooltipTheme,
+    );
+  } else {
+    return ThemeData.from(
+      colorScheme: ColorScheme.dark(
+        primary: primary,
+        secondary: primary,
+        background: backgroundColor ?? const Color(0xFF1C1C1E),
+        onBackground: elementColor ?? const Color(0xFF353535),
+        surface: surfaceColor ?? const Color(0xFF252528),
+        onSurface: elementColor ?? const Color(0xFF353535),
+      ),
+    ).copyWith(
+      useMaterial3: false,
+      primaryColor: primary,
+      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFF1C1C1E),
+      appBarTheme: appBarTheme,
+      iconTheme: iconTheme,
+      cardTheme: cardTheme,
+      floatingActionButtonTheme: floatingActionButtonTheme,
+      pageTransitionsTheme: pageTransitionsTheme,
+      tooltipTheme: tooltipTheme,
+    );
+  }
+}
+
+extension ZenitThemeData on ThemeData {
+  Color get surfaceColor => colorScheme.surface;
+  Color get elementColor => colorScheme.onSurface;
+  Color get foregroundColor => textTheme.button?.color ?? Colors.white;
+  Color get primaryColor => colorScheme.primary;
+  bool get darkMode => brightness == Brightness.dark;
 }
 
 class ZenitSwitchTheme {
@@ -216,16 +228,3 @@ class ZenitCheckboxTheme {
     required this.disabledBackgroundColor,
   });
 }
-
-Brightness _resolveThemeBrightness(ThemeVariant? variant) {
-  switch (variant) {
-    case ThemeVariant.light:
-      return Brightness.light;
-    case ThemeVariant.dark:
-      return Brightness.dark;
-    default:
-      return Brightness.light;
-  }
-}
-
-enum ThemeVariant { light, dark }

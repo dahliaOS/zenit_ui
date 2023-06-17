@@ -1,7 +1,7 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
@@ -209,7 +209,7 @@ class ZenitTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ZenitTheme theme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     final kDefaultInputDecoration = zenitInputDecorationTheme(theme);
 
     return TextField(
@@ -284,7 +284,7 @@ const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorde
   borderRadius: kDefaultBorderRadiusMedium,
 );
 
-InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
+InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
   final BorderSide kDefaultBorderSideActive = BorderSide(
     color: theme.primaryColor,
     width: _kDefaultBorderWidth,
@@ -292,7 +292,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: theme.surfaceColor,
+    fillColor: theme.elementColor,
     border: _kDefaultOutlineInputBorderInactive,
     enabledBorder: _kDefaultOutlineInputBorderInactive,
     disabledBorder: _kDefaultOutlineInputBorderInactive,

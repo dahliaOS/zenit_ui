@@ -28,10 +28,9 @@ class ZenitTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Colors
-    final backgroundColor = selected ? ZenitTheme.of(context).surfaceColor : Colors.transparent;
-    final borderColor = selected
-        ? ZenitTheme.of(context).foregroundColor.withOpacity(0.15)
-        : ZenitTheme.of(context).surfaceColor;
+    final backgroundColor = selected ? Theme.of(context).colorScheme.surface : Colors.transparent;
+    final borderColor =
+        selected ? Theme.of(context).foregroundColor.withOpacity(0.15) : Theme.of(context).colorScheme.surface;
 
     return SizedBox(
       width: 200,
@@ -66,7 +65,7 @@ class ZenitTab extends StatelessWidget {
                       IconButton(
                         iconSize: 16,
                         constraints: const BoxConstraints.tightFor(width: 24, height: 24),
-                        color: ZenitTheme.of(context).foregroundColor,
+                        color: Theme.of(context).foregroundColor,
                         padding: EdgeInsets.zero,
                         onPressed: onClose,
                         icon: const Icon(

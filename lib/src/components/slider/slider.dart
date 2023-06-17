@@ -42,7 +42,7 @@ class ZenitSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSliderTheme sliderTheme = ZenitTheme.of(context).sliderTheme;
+    final ZenitSliderTheme sliderTheme = ZenitTheme.sliderTheme(context);
     return SliderTheme(
       data: SliderThemeData(
         trackHeight: height,

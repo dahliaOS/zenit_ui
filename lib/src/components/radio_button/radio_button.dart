@@ -17,7 +17,7 @@ class ZenitRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = this.theme ?? ZenitTheme.of(context).radioButtonTheme;
+    final theme = this.theme ?? ZenitTheme.radioButtonTheme(context);
     final activeBackgroundColor = theme.activeBackgroundColor;
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final activeThumbColor = theme.activeThumbColor;

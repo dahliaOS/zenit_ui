@@ -31,7 +31,7 @@ class ZenitLayoutTile extends StatelessWidget {
     final bool isSelected = selected ?? scope?.selected ?? false;
     return Material(
       clipBehavior: Clip.antiAlias,
-      color: isSelected ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
+      color: isSelected ? Theme.of(context).colorScheme.surface : Colors.transparent,
       borderRadius: kDefaultBorderRadiusSmall,
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
@@ -39,13 +39,13 @@ class ZenitLayoutTile extends StatelessWidget {
         selected: isSelected,
         title: DefaultTextStyle(
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: ZenitTheme.of(context).foregroundColor,
+                color: Theme.of(context).foregroundColor,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
           child: title!,
         ),
-        iconColor: ZenitTheme.of(context).foregroundColor,
-        selectedColor: ZenitTheme.of(context).primaryColor,
+        iconColor: Theme.of(context).foregroundColor,
+        selectedColor: Theme.of(context).primaryColor,
         subtitle: subtitle,
         leading: SizedBox(width: 56, child: leading),
         trailing: trailing,

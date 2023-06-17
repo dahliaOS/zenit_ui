@@ -35,8 +35,6 @@ export 'package:zenit_ui/src/layout/tab_view/tab.dart';
 export 'package:zenit_ui/src/layout/tab_view/tab_data.dart';
 // Zenit tab view
 export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
-// Zenit colors
-export 'package:zenit_ui/src/theme/colors.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';
 
