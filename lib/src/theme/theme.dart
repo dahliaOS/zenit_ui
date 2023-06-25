@@ -171,6 +171,7 @@ extension ZenitThemeData on ThemeData {
   bool get darkMode => brightness == Brightness.dark;
   Color computedForegroundColor(Color backgroundColor) =>
       backgroundColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  Color get accentForegroundColor => colorScheme.primary.computeLuminance() < 0.3 ? Colors.white : Colors.black;
 }
 
 class ZenitSwitchTheme {
