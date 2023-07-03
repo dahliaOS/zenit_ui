@@ -47,6 +47,31 @@ mixin ZenitTheme {
   }
 }
 
+class ZenitElementColor extends ThemeExtension<ZenitElementColor> {
+  const ZenitElementColor({
+    required this.elementColor,
+  });
+
+  final Color? elementColor;
+
+  @override
+  ZenitElementColor copyWith({Color? elementColor, Color? newElementColor}) {
+    return ZenitElementColor(
+      elementColor: elementColor ?? this.elementColor,
+    );
+  }
+
+  @override
+  ZenitElementColor lerp(ZenitElementColor? other, double t) {
+    if (other is! ZenitElementColor) {
+      return this;
+    }
+    return ZenitElementColor(
+      elementColor: Color.lerp(elementColor, other.elementColor, t),
+    );
+  }
+}
+
 ThemeData createZenitTheme({
   Brightness? brightness = Brightness.light,
   Color? primaryColor,
@@ -59,6 +84,7 @@ ThemeData createZenitTheme({
   final darkMode = brightness == Brightness.dark;
   final primary = primaryColor ?? const Color(0xFF0073cf);
   final foreground = foregroundColor ?? (darkMode ? const Color(0xffffffff) : const Color(0xFF000000));
+  final element = elementColor ?? (darkMode ? const Color(0xFF353535) : const Color(0xFFD9D9D9));
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -123,21 +149,24 @@ ThemeData createZenitTheme({
       colorScheme: ColorScheme.light(
         primary: primary,
         secondary: primary,
-        background: backgroundColor ?? const Color(0xFFEDEDED),
-        onBackground: elementColor ?? const Color(0xFF1C1C1E),
-        surface: surfaceColor ?? const Color(0xFFFFFFFF),
-        onSurface: elementColor ?? const Color(0xFFD6D6D6),
+        background: backgroundColor ?? const Color(0xFFFAFAFA),
+        onBackground: foreground,
+        surface: surfaceColor ?? const Color(0xFFEBEBEB),
+        onSurface: foreground,
       ),
     ).copyWith(
       useMaterial3: false,
       appBarTheme: appBarTheme,
       primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFFEDEDED),
+      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFFFAFAFA),
       iconTheme: iconTheme,
       cardTheme: cardTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
+      extensions: [
+        ZenitElementColor(elementColor: element),
+      ],
     );
   } else {
     return ThemeData.from(
@@ -145,9 +174,9 @@ ThemeData createZenitTheme({
         primary: primary,
         secondary: primary,
         background: backgroundColor ?? const Color(0xFF1C1C1E),
-        onBackground: elementColor ?? const Color(0xFF353535),
+        onBackground: foreground,
         surface: surfaceColor ?? const Color(0xFF252528),
-        onSurface: elementColor ?? const Color(0xFF353535),
+        onSurface: foreground,
       ),
     ).copyWith(
       useMaterial3: false,
@@ -159,13 +188,30 @@ ThemeData createZenitTheme({
       floatingActionButtonTheme: floatingActionButtonTheme,
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
+      extensions: [
+        ZenitElementColor(elementColor: element),
+      ],
     );
+  }
+}
+
+extension on Map<Object, ThemeExtension<dynamic>> {
+  T? maybeGet<T>() {
+    return this[T] as T?;
+  }
+
+  T get<T>() {
+    final element = maybeGet<T>();
+
+    if (element != null) return element;
+
+    throw Exception("No theme extension $T found in current ThemeData");
   }
 }
 
 extension ZenitThemeData on ThemeData {
   Color get surfaceColor => colorScheme.surface;
-  Color get elementColor => colorScheme.onSurface;
+  Color get elementColor => extensions.get<ZenitElementColor>().elementColor ?? colorScheme.background;
   Color get foregroundColor => textTheme.button?.color ?? Colors.white;
   Color get primaryColor => colorScheme.primary;
   bool get darkMode => brightness == Brightness.dark;
