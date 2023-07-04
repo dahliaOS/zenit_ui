@@ -90,7 +90,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
                     const Gap(8),
                     ZenitCheckbox(
                       value: value,
-                      onChanged: (val) => setState(() => value = val),
+                      onChanged: (val) => setState(() => value = val!),
                     ),
                     const Gap(8),
                     ZenitSwitch(

@@ -215,9 +215,8 @@ extension ZenitThemeData on ThemeData {
   Color get foregroundColor => textTheme.button?.color ?? Colors.white;
   Color get primaryColor => colorScheme.primary;
   bool get darkMode => brightness == Brightness.dark;
-  Color computedForegroundColor(Color backgroundColor) =>
-      backgroundColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
-  Color get accentForegroundColor => colorScheme.primary.computeLuminance() < 0.3 ? Colors.white : Colors.black;
+  Color get accentForegroundColor => primaryColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 }
 
 class ZenitSwitchTheme {
