@@ -62,7 +62,9 @@ class _ZenitTabViewExampleState extends State<ZenitTabViewExample> {
             });
           },
         ),
-        Expanded(child: pages.elementAt(_selectedIndex)),
+        Expanded(
+          child: pages.isEmpty ? const Center(child: Text("No tabs")) : pages.elementAt(_selectedIndex),
+        ),
       ],
     );
   }

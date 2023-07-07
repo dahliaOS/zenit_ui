@@ -53,7 +53,10 @@ class ZenitCheckbox extends StatelessWidget {
         child: PhysicalModel(
           borderRadius: kDefaultBorderRadiusMedium,
           clipBehavior: Clip.antiAlias,
-          color: colored ? activeBackgroundColor : inactiveBackgroundColor,
+          color: switch (colored) {
+            true => activeBackgroundColor,
+            false => inactiveBackgroundColor,
+          },
           child: SizedBox(
             width: 24,
             height: 24,

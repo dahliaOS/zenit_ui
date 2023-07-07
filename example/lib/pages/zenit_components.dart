@@ -83,9 +83,10 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ZenitRadioButton(
-                      value: value,
-                      onChanged: (val) => setState(() => value = val),
+                    ZenitRadioButton<bool>(
+                      value: true,
+                      groupValue: value,
+                      onChanged: (val) => setState(() => value = !val!),
                     ),
                     const Gap(8),
                     ZenitCheckbox(

@@ -3,15 +3,16 @@ import 'package:zenit_ui/src/base/tick_animator.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
-class ZenitRadioButton extends StatelessWidget {
-  final bool value;
-  final ValueChanged<bool>? onChanged;
+class ZenitRadioButton<T> extends StatelessWidget {
+  final T? value;
+  final T? groupValue;
+  final ValueChanged<T?>? onChanged;
   final ZenitRadioButtonTheme? theme;
-  //TODO implement groupValue
   const ZenitRadioButton({
     super.key,
     required this.value,
-    this.onChanged,
+    required this.groupValue,
+    required this.onChanged,
     this.theme,
   });
 
@@ -22,13 +23,17 @@ class ZenitRadioButton extends StatelessWidget {
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final activeThumbColor = theme.activeThumbColor;
     final inactiveThumbColor = theme.inactiveThumbColor;
+    final selected = value == groupValue;
     return TickAnimator(
-      onPressed: () => onChanged?.call(!value),
+      onPressed: () => onChanged?.call(value),
       borderRadius: BorderRadius.circular(24),
       child: PhysicalModel(
         borderRadius: kDefaultBorderRadiusBig,
         clipBehavior: Clip.antiAlias,
-        color: value ? activeBackgroundColor : inactiveBackgroundColor,
+        color: switch (selected) {
+          true => activeBackgroundColor,
+          false => inactiveBackgroundColor,
+        },
         child: SizedBox(
           width: 24,
           height: 24,
@@ -36,7 +41,10 @@ class ZenitRadioButton extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                color: value ? activeThumbColor : inactiveThumbColor,
+                color: switch (selected) {
+                  true => activeThumbColor,
+                  false => inactiveThumbColor,
+                },
                 borderRadius: kDefaultBorderRadiusBig,
               ),
             ),
