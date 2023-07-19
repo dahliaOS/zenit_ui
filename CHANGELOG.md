@@ -1,3 +1,21 @@
+v0.0.11 / 2023-07-19
+===================
+
+ * Remove ActionBase
+ * Drop HandyWindow -> should be decentralised
+ * Update the Tab design
+ * Fix Button splash colour
+ * Add default Tooltip theme
+ * Remove old TabView
+ * Update gap
+ * Revise Checkbox
+ * Add gitignore
+ * Fix lints
+ * Switch to ThemeData instead of ZenitTheme.of
+ * Add new extensions for ThemeData
+ * Fix colours
+ * Add groupValue to ZenitRadioButton
+
 v0.0.10 / 2023-04-10
 ===================
 
