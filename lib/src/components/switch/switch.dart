@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/base/tick_animator.dart';
+import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitSwitch extends StatefulWidget {
@@ -23,7 +24,7 @@ class ZenitSwitch extends StatefulWidget {
 class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 150),
+    duration: kDefaultAnimationDuration,
     value: widget.value ? 1 : 0,
   );
   final AlignmentGeometryTween _thumbPositionTween = AlignmentGeometryTween(

@@ -30,9 +30,8 @@ mixin ZenitTheme {
     return ZenitRadioButtonTheme(
       activeBackgroundColor: theme.primaryColor,
       inactiveBackgroundColor: theme.elementColor,
-      activeThumbColor: theme.colorScheme.background,
-      inactiveThumbColor: theme.elementColor,
       disabledBackgroundColor: theme.disabledColor,
+      thumbColor: theme.colorScheme.background,
     );
   }
 
@@ -84,7 +83,7 @@ ThemeData createZenitTheme({
   final darkMode = brightness == Brightness.dark;
   final primary = primaryColor ?? const Color(0xFF0073cf);
   final foreground = foregroundColor ?? (darkMode ? const Color(0xffffffff) : const Color(0xFF000000));
-  final element = elementColor ?? (darkMode ? const Color(0xFF353535) : const Color(0xFFD9D9D9));
+  final element = elementColor ?? (darkMode ? const Color(0xFF454545) : const Color(0xFFD9D9D9));
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -173,15 +172,15 @@ ThemeData createZenitTheme({
       colorScheme: ColorScheme.dark(
         primary: primary,
         secondary: primary,
-        background: backgroundColor ?? const Color(0xFF1C1C1E),
+        background: backgroundColor ?? const Color(0xFF242424),
         onBackground: foreground,
-        surface: surfaceColor ?? const Color(0xFF252528),
+        surface: surfaceColor ?? const Color(0xFF303030),
         onSurface: foreground,
       ),
     ).copyWith(
       useMaterial3: false,
       primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFF1C1C1E),
+      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFF242424),
       appBarTheme: appBarTheme,
       iconTheme: iconTheme,
       cardTheme: cardTheme,
@@ -235,6 +234,24 @@ class ZenitSwitchTheme {
     required this.disabledTrackColor,
     required this.disabledThumbColor,
   });
+
+  ZenitSwitchTheme copyWith({
+    Color? activeTrackColor,
+    Color? inactiveTrackColor,
+    Color? activeThumbColor,
+    Color? inactiveThumbColor,
+    Color? disabledTrackColor,
+    Color? disabledThumbColor,
+  }) {
+    return ZenitSwitchTheme(
+      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
+      inactiveTrackColor: inactiveTrackColor ?? this.inactiveTrackColor,
+      activeThumbColor: activeThumbColor ?? this.activeThumbColor,
+      inactiveThumbColor: inactiveThumbColor ?? this.inactiveThumbColor,
+      disabledTrackColor: disabledTrackColor ?? this.disabledTrackColor,
+      disabledThumbColor: disabledThumbColor ?? this.disabledThumbColor,
+    );
+  }
 }
 
 class ZenitSliderTheme {
@@ -245,22 +262,44 @@ class ZenitSliderTheme {
     required this.activeTrackColor,
     required this.trackColor,
   });
+
+  ZenitSliderTheme copyWith({
+    Color? activeTrackColor,
+    Color? trackColor,
+  }) {
+    return ZenitSliderTheme(
+      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
+      trackColor: trackColor ?? this.trackColor,
+    );
+  }
 }
 
 class ZenitRadioButtonTheme {
   final Color activeBackgroundColor;
   final Color inactiveBackgroundColor;
-  final Color activeThumbColor;
-  final Color inactiveThumbColor;
   final Color disabledBackgroundColor;
+  final Color thumbColor;
 
   const ZenitRadioButtonTheme({
     required this.activeBackgroundColor,
     required this.inactiveBackgroundColor,
-    required this.activeThumbColor,
-    required this.inactiveThumbColor,
     required this.disabledBackgroundColor,
+    required this.thumbColor,
   });
+
+  ZenitRadioButtonTheme copyWith({
+    Color? activeBackgroundColor,
+    Color? inactiveBackgroundColor,
+    Color? disabledBackgroundColor,
+    Color? thumbColor,
+  }) {
+    return ZenitRadioButtonTheme(
+      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
+      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
+      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+    );
+  }
 }
 
 class ZenitCheckboxTheme {
@@ -275,4 +314,18 @@ class ZenitCheckboxTheme {
     required this.foregroundColor,
     required this.disabledBackgroundColor,
   });
+
+  ZenitCheckboxTheme copyWith({
+    Color? activeBackgroundColor,
+    Color? inactiveBackgroundColor,
+    Color? foregroundColor,
+    Color? disabledBackgroundColor,
+  }) {
+    return ZenitCheckboxTheme(
+      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
+      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
+      foregroundColor: foregroundColor ?? this.foregroundColor,
+      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+    );
+  }
 }

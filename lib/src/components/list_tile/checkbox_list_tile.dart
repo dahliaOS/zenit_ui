@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/components/switch/switch.dart';
+import 'package:zenit_ui/src/components/checkbox/checkbox.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
-class ZenitSwitchListTile extends StatelessWidget {
-  const ZenitSwitchListTile({
+class ZenitCheckboxListTile extends StatelessWidget {
+  const ZenitCheckboxListTile({
     super.key,
     required this.value,
-    this.onChanged,
-    this.switchTheme,
+    required this.onChanged,
+    this.tristate = false,
+    this.checkboxTheme,
     this.tileColor,
     this.activeThumbImage,
     this.inactiveThumbImage,
@@ -28,11 +29,13 @@ class ZenitSwitchListTile extends StatelessWidget {
     this.hoverColor,
   }) : assert(!isThreeLine || subtitle != null);
 
-  final bool value;
+  final bool? value;
 
-  final ValueChanged<bool>? onChanged;
+  final ValueChanged<bool?>? onChanged;
 
-  final ZenitSwitchTheme? switchTheme;
+  final bool tristate;
+
+  final ZenitCheckboxTheme? checkboxTheme;
 
   final Color? tileColor;
 
@@ -70,13 +73,26 @@ class ZenitSwitchListTile extends StatelessWidget {
 
   final Color? hoverColor;
 
+  void handleTap() {
+    if (onChanged == null) return;
+    switch (value) {
+      case false:
+        onChanged!(true);
+      case true:
+        onChanged!(tristate ? null : false);
+      case null:
+        onChanged!(false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: ZenitSwitch(
+      trailing: ZenitCheckbox(
         value: value,
         onChanged: onChanged,
-        theme: switchTheme,
+        tristate: tristate,
+        theme: checkboxTheme,
       ),
       title: title,
       subtitle: subtitle,
@@ -92,7 +108,7 @@ class ZenitSwitchListTile extends StatelessWidget {
       focusNode: focusNode,
       enableFeedback: enableFeedback,
       hoverColor: hoverColor,
-      onTap: onChanged != null ? () => onChanged!(!value) : null,
+      onTap: handleTap,
     );
   }
 }

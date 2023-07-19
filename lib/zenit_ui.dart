@@ -8,6 +8,10 @@ export 'package:zenit_ui/src/components/buttons/buttons.dart';
 export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
 // Zenit Flat Button
 export 'package:zenit_ui/src/components/icon_button/zenit_icon_button.dart';
+// Zenit checkbox list tile
+export 'package:zenit_ui/src/components/list_tile/checkbox_list_tile.dart';
+// Zenit radio button list tile
+export 'package:zenit_ui/src/components/list_tile/radio_list_tile.dart';
 // Zenit switch list tile
 export 'package:zenit_ui/src/components/list_tile/switch_list_tile.dart';
 // Zenit radio button

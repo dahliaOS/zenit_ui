@@ -109,9 +109,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                         pages: [
                           MaterialPage(
                             key: ValueKey(_selectedIndex),
-                            child: widget.length > _selectedIndex
-                                ? widget.pageBuilder(context, _selectedIndex)
-                                : widget.pageBuilder(context, 0),
+                            child: widget.pageBuilder(context, _selectedIndex),
                           ),
                         ],
                         onPopPage: (route, result) => route.didPop(result),

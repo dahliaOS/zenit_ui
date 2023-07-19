@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/components/switch/switch.dart';
+import 'package:zenit_ui/src/components/radio_button/radio_button.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
-class ZenitSwitchListTile extends StatelessWidget {
-  const ZenitSwitchListTile({
+class ZenitRadioButtonListTile<T> extends StatelessWidget {
+  const ZenitRadioButtonListTile({
     super.key,
     required this.value,
-    this.onChanged,
-    this.switchTheme,
+    required this.groupValue,
+    required this.onChanged,
+    this.radioButtonTheme,
     this.tileColor,
     this.activeThumbImage,
     this.inactiveThumbImage,
@@ -28,11 +29,13 @@ class ZenitSwitchListTile extends StatelessWidget {
     this.hoverColor,
   }) : assert(!isThreeLine || subtitle != null);
 
-  final bool value;
+  final T? value;
 
-  final ValueChanged<bool>? onChanged;
+  final T? groupValue;
 
-  final ZenitSwitchTheme? switchTheme;
+  final ValueChanged<T?>? onChanged;
+
+  final ZenitRadioButtonTheme? radioButtonTheme;
 
   final Color? tileColor;
 
@@ -73,10 +76,11 @@ class ZenitSwitchListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: ZenitSwitch(
+      trailing: ZenitRadioButton(
         value: value,
+        groupValue: groupValue,
         onChanged: onChanged,
-        theme: switchTheme,
+        theme: radioButtonTheme,
       ),
       title: title,
       subtitle: subtitle,
@@ -92,7 +96,7 @@ class ZenitSwitchListTile extends StatelessWidget {
       focusNode: focusNode,
       enableFeedback: enableFeedback,
       hoverColor: hoverColor,
-      onTap: onChanged != null ? () => onChanged!(!value) : null,
+      onTap: onChanged != null ? () => onChanged?.call(value) : null,
     );
   }
 }
