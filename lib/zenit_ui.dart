@@ -1,5 +1,3 @@
-library zenit_ui;
-
 import 'package:flutter/material.dart' as material;
 
 // Zenit exports
@@ -34,13 +32,9 @@ export 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
 export 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
 // Zenit tab view tab
 export 'package:zenit_ui/src/layout/tab_view/tab.dart';
-// Zenit tab view page
-export 'package:zenit_ui/src/layout/tab_view/tab_page.dart';
+export 'package:zenit_ui/src/layout/tab_view/tab_data.dart';
 // Zenit tab view
-export 'package:zenit_ui/src/layout/tab_view/tab_view.dart';
 export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
-// Zenit colors
-export 'package:zenit_ui/src/theme/colors.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';
 

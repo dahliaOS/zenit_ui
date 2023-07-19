@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitPillIcon extends StatelessWidget {
   const ZenitPillIcon({
@@ -14,18 +13,18 @@ class ZenitPillIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return SizedBox(
       width: 52,
       height: 28,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: selected ? zenitTheme.primaryColor : Colors.transparent,
+          color: selected ? theme.primaryColor : Colors.transparent,
           borderRadius: kDefaultBorderRadiusBig,
         ),
         child: IconTheme(
           data: IconTheme.of(context).copyWith(
-            color: selected ? zenitTheme.backgroundColor : null,
+            color: selected ? theme.colorScheme.background : null,
           ),
           child: child ?? const SizedBox(),
         ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
+const kButtonWidth = 132.0;
+
 class ZenitComponentsExample extends StatefulWidget {
   const ZenitComponentsExample({super.key});
 
@@ -29,7 +31,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitTextButton(
                   onPressed: () => print("TextButton was clicked"),
                   child: const Text("TextButton"),
@@ -37,7 +39,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
               ),
               const Gap(16),
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitFilledButton(
                   onPressed: () => print("FilledButton was clicked"),
                   child: const Text("FilledButton"),
@@ -45,7 +47,7 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
               ),
               const Gap(16),
               SizedBox(
-                width: 130,
+                width: kButtonWidth,
                 child: ZenitElevatedButton(
                   onPressed: () => print("FilledButton was clicked"),
                   foregroundColor: Colors.white,
@@ -81,14 +83,15 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ZenitRadioButton(
-                      value: value,
-                      onChanged: (val) => setState(() => value = val),
+                    ZenitRadioButton<bool>(
+                      value: true,
+                      groupValue: value,
+                      onChanged: (val) => setState(() => value = !val!),
                     ),
                     const Gap(8),
                     ZenitCheckbox(
                       value: value,
-                      onChanged: (val) => setState(() => value = val),
+                      onChanged: (val) => setState(() => value = val!),
                     ),
                     const Gap(8),
                     ZenitSwitch(
@@ -104,11 +107,10 @@ class _ZenitComponentsExampleState extends State<ZenitComponentsExample> {
           ZenitIconButton(
             icon: Icons.add,
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
+              ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(content: const Text("Test"), actions: [
                 ZenitIconButton(
                   icon: Icons.close,
-                  hoverColor: ZenitTheme.of(context).foregroundColor.withOpacity(0.1),
+                  hoverColor: Theme.of(context).foregroundColor.withOpacity(0.1),
                   onPressed: () => ScaffoldMessenger.of(context).clearMaterialBanners(),
                 )
               ]));

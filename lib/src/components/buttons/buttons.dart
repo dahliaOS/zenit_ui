@@ -13,11 +13,12 @@ class ZenitTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return ButtonBase(
       onPressed: onPressed,
-      foregroundColor: foregroundColor ?? zenitTheme.primaryColor,
-      hoverColor: (foregroundColor ?? zenitTheme.primaryColor).withOpacity(0.25),
+      foregroundColor: foregroundColor ?? theme.primaryColor,
+      hoverColor: (foregroundColor ?? theme.primaryColor).withOpacity(0.25),
+      splashColor: (foregroundColor ?? theme.primaryColor).withOpacity(0.25),
       backgroundColor: Colors.transparent,
       child: child,
     );
@@ -42,14 +43,14 @@ class ZenitFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return ButtonBase(
       onPressed: onPressed,
-      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
-      backgroundColor: backgroundColor ?? zenitTheme.surfaceColor,
+      foregroundColor: foregroundColor ?? theme.foregroundColor,
+      backgroundColor: backgroundColor ?? theme.elementColor,
       hoverColor: Color.alphaBlend(
-        zenitTheme.foregroundColor.withOpacity(0.1),
-        backgroundColor ?? zenitTheme.surfaceColor,
+        theme.foregroundColor.withOpacity(0.1),
+        backgroundColor ?? theme.elementColor,
       ),
       child: child,
     );
@@ -74,11 +75,11 @@ class ZenitElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return ButtonBase(
       onPressed: onPressed,
-      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
-      backgroundColor: backgroundColor ?? zenitTheme.primaryColor,
+      foregroundColor: foregroundColor ?? theme.foregroundColor,
+      backgroundColor: backgroundColor ?? theme.primaryColor,
       child: child,
     );
   }
@@ -104,11 +105,11 @@ class ZenitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final zenitTheme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     return ButtonBase(
       onPressed: onPressed,
-      foregroundColor: foregroundColor ?? zenitTheme.foregroundColor,
-      backgroundColor: backgroundColor ?? zenitTheme.surfaceColor,
+      foregroundColor: foregroundColor ?? theme.foregroundColor,
+      backgroundColor: backgroundColor ?? theme.elementColor,
       hoverColor: hoverColor,
       child: child,
     );

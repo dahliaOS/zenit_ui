@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages.dart';
-import 'package:zenit_ui_example/theme/theme.dart';
 
 void main() async {
   // Check for repainting
@@ -25,8 +24,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       themeMode: themeModes.elementAt(themeMode),
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: createZenitTheme(brightness: Brightness.light),
+      darkTheme: createZenitTheme(brightness: Brightness.dark),
       home: ZenitNavigationLayout(
         length: examplePages.length,
         destinationBuilder: (context, index, selected) => ZenitLayoutTile(

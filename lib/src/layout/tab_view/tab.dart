@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/base/action_base.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitTab extends StatelessWidget {
   const ZenitTab({
     super.key,
-    this.title,
-    this.enabled = true,
+    this.title = "Tab",
+    this.selected = true,
     this.icon = const FlutterLogo(
       size: 16,
     ),
@@ -16,7 +15,7 @@ class ZenitTab extends StatelessWidget {
     this.onPressed,
   });
 
-  final String? title;
+  final String title;
   final Widget? icon;
 
   final IconData? closeIcon;
@@ -24,53 +23,58 @@ class ZenitTab extends StatelessWidget {
   final VoidCallback? onClose;
   final VoidCallback? onPressed;
 
-  final bool enabled;
+  final bool selected;
 
   @override
   Widget build(BuildContext context) {
-    return ActionBase(
-      onTapDown: onPressed,
-      onTertiaryTapDown: (details) => onClose?.call(),
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      child: SizedBox(
-        height: 36,
-        width: 184,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: kDefaultBorderRadiusMedium,
-            color: enabled ? ZenitTheme.of(context).surfaceColor : Colors.transparent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Row(
-              children: [
-                if (icon != null)
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 4, 8, 4),
-                    child: icon,
-                  ),
-                Text(
-                  title ?? "Tab",
-                  style: TextStyle(color: ZenitTheme.of(context).foregroundColor),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                  child: InkWell(
-                    borderRadius: kDefaultBorderRadiusSmall,
-                    onTap: onClose,
-                    hoverColor: Colors.red,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Icon(
-                        closeIcon ?? Icons.close,
-                        size: 14,
-                        color: ZenitTheme.of(context).foregroundColor,
+    // Colors
+    final backgroundColor = selected ? Theme.of(context).colorScheme.surface : Colors.transparent;
+    final borderColor =
+        selected ? Theme.of(context).foregroundColor.withOpacity(0.15) : Theme.of(context).colorScheme.surface;
+
+    return SizedBox(
+      width: 200,
+      child: GestureDetector(
+        onTap: onPressed,
+        onTertiaryTapUp: (_) => onClose?.call(),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Tooltip(
+            message: title,
+            child: Material(
+              color: backgroundColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: kDefaultBorderRadiusMedium,
+                side: BorderSide(color: borderColor),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    if (icon != null) SizedBox.square(dimension: 20, child: icon),
+                    const SizedBox.square(dimension: 8),
+                    SizedBox(
+                      width: 132,
+                      child: Text(
+                        title,
+                        style: const TextStyle(overflow: TextOverflow.ellipsis),
                       ),
                     ),
-                  ),
+                    const Spacer(),
+                    if (onClose != null)
+                      IconButton(
+                        iconSize: 16,
+                        constraints: const BoxConstraints.tightFor(width: 24, height: 24),
+                        color: Theme.of(context).foregroundColor,
+                        padding: EdgeInsets.zero,
+                        onPressed: onClose,
+                        icon: const Icon(
+                          Icons.close,
+                        ),
+                      )
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

@@ -1,13 +1,13 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' hide Theme;
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/theme/theme.dart';
 
 export 'package:flutter/services.dart'
-    show TextInputType, TextInputAction, TextCapitalization, SmartQuotesType, SmartDashesType;
+    show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
 class ZenitTextField extends StatelessWidget {
   const ZenitTextField({
@@ -67,10 +67,8 @@ class ZenitTextField extends StatelessWidget {
     this.contextMenuBuilder,
     this.hint,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType =
-            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType =
-            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -211,7 +209,7 @@ class ZenitTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ZenitTheme theme = ZenitTheme.of(context);
+    final theme = Theme.of(context);
     final kDefaultInputDecoration = zenitInputDecorationTheme(theme);
 
     return TextField(
@@ -286,7 +284,7 @@ const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorde
   borderRadius: kDefaultBorderRadiusMedium,
 );
 
-InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
+InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
   final BorderSide kDefaultBorderSideActive = BorderSide(
     color: theme.primaryColor,
     width: _kDefaultBorderWidth,
@@ -294,7 +292,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: theme.surfaceColor,
+    fillColor: theme.elementColor,
     border: _kDefaultOutlineInputBorderInactive,
     enabledBorder: _kDefaultOutlineInputBorderInactive,
     disabledBorder: _kDefaultOutlineInputBorderInactive,
@@ -305,7 +303,7 @@ InputDecorationTheme zenitInputDecorationTheme(ZenitTheme theme) {
     labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
     floatingLabelBehavior: FloatingLabelBehavior.never,
     alignLabelWithHint: true,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
   );
 
   return kDefaultInputDecorationTheme;

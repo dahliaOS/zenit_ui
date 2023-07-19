@@ -12,21 +12,14 @@ class ZenitTabBar extends StatefulWidget {
   const ZenitTabBar({
     super.key,
     required this.selectedIndex,
-    required this.tabCount,
-    required this.pageBuilder,
     required this.onTabSelected,
     required this.onTabClosed,
-    this.tabData,
+    required this.tabs,
+    this.onAddTab,
   });
 
   /// Selected index
   final int selectedIndex;
-
-  /// Amount of tabs
-  final int tabCount;
-
-  /// Builder for the specific pages
-  final IndexedWidgetBuilder pageBuilder;
 
   /// Called when the user selects a tab.
   final ValueChanged<int> onTabSelected;
@@ -34,21 +27,15 @@ class ZenitTabBar extends StatefulWidget {
   /// Called when the user closes a tab
   final ValueSetter<int> onTabClosed;
 
-  final TabData? tabData;
+  final VoidCallback? onAddTab;
+
+  final List<TabData> tabs;
 
   @override
   State<ZenitTabBar> createState() => _ZenitTabBarState();
 }
 
 class _ZenitTabBarState extends State<ZenitTabBar> {
-  late int _selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = widget.selectedIndex;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,30 +43,34 @@ class _ZenitTabBarState extends State<ZenitTabBar> {
         SizedBox(
           height: 48,
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: ListView.builder(
-              itemCount: widget.tabCount,
+              itemCount: widget.onAddTab != null ? widget.tabs.length + 1 : widget.tabs.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return ZenitTab(
-                  icon: widget.tabData?.leading ??
-                      const FlutterLogo(
-                        size: 16,
-                      ),
-                  title: widget.tabData?.title ?? "Tab",
-                  onPressed: () => setState(() {
-                    _selectedIndex = index;
-                  }),
-                  onClose: () => widget.onTabClosed(index),
-                  enabled: _selectedIndex == index,
-                );
+                if (index < widget.tabs.length) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: ZenitTab(
+                      icon: widget.tabs.elementAt(index).leading,
+                      title: widget.tabs.elementAt(index).title,
+                      onPressed: () => widget.onTabSelected(index),
+                      onClose: () => widget.onTabClosed(index),
+                      selected: widget.selectedIndex == index,
+                    ),
+                  );
+                } else {
+                  return IconButton(
+                    constraints: const BoxConstraints.tightFor(height: 40, width: 40),
+                    padding: EdgeInsets.zero,
+                    onPressed: widget.onAddTab,
+                    icon: const Icon(Icons.add),
+                  );
+                }
               },
             ),
           ),
         ),
-        Expanded(
-          child: widget.pageBuilder(context, _selectedIndex),
-        )
       ],
     );
   }
