@@ -47,6 +47,8 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTi
     super.dispose();
   }
 
+  bool hover = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZenitTheme.radioButtonTheme(context);
@@ -55,22 +57,29 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTi
     final thumbColor = theme.thumbColor;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => hover = true),
+      onExit: (_) => setState(() => hover = false),
       child: GestureDetector(
         onTap: () => widget.onChanged?.call(widget.value),
-        child: AnimatedBuilder(
-          animation: animation,
-          builder: (context, child) {
-            return CustomPaint(
-              painter: _RadioPainter(
-                selected: widget.value == widget.groupValue,
-                activeBackgroundColor: activeBackgroundColor,
-                inactiveBackgroundColor: inactiveBackgroundColor,
-                thumbColor: thumbColor,
-                animationValue: animation.value,
-              ),
-              size: const Size.square(24),
-            );
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: AnimatedBuilder(
+            animation: animation,
+            builder: (context, child) {
+              return CustomPaint(
+                painter: _RadioPainter(
+                  selected: widget.value == widget.groupValue,
+                  activeBackgroundColor: activeBackgroundColor,
+                  inactiveBackgroundColor: inactiveBackgroundColor,
+                  thumbColor: thumbColor,
+                  animationValue: animation.value,
+                  hover: hover,
+                  hoverColor: Theme.of(context).foregroundColor.withOpacity(0.05),
+                ),
+                size: const Size.square(24),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -82,6 +91,8 @@ class _RadioPainter extends CustomPainter {
   final Color activeBackgroundColor;
   final Color inactiveBackgroundColor;
   final Color thumbColor;
+  final bool hover;
+  final Color hoverColor;
 
   final double animationValue;
 
@@ -91,6 +102,8 @@ class _RadioPainter extends CustomPainter {
     required this.inactiveBackgroundColor,
     required this.thumbColor,
     required this.animationValue,
+    required this.hover,
+    required this.hoverColor,
   });
 
   @override
@@ -106,6 +119,14 @@ class _RadioPainter extends CustomPainter {
     final Offset center = Offset(size.height / 2, size.width / 2);
 
     canvas.drawCircle(center, 12, backgroundPaint);
+
+    if (hover) {
+      final hoverPaint = Paint()
+        ..color = hoverColor
+        ..style = PaintingStyle.fill;
+      canvas.drawCircle(Offset(size.width / 2, size.height / 2), 20, hoverPaint);
+    }
+
     if (animationValue != 0) {
       canvas.drawCircle(center, animationValue * 7, thumbPaint);
     }
@@ -113,6 +134,6 @@ class _RadioPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _RadioPainter old) {
-    return selected != old.selected || animationValue != old.animationValue;
+    return selected != old.selected || animationValue != old.animationValue || hover != old.hover;
   }
 }

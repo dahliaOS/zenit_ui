@@ -78,6 +78,8 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
     }
   }
 
+  bool hover = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme ?? ZenitTheme.checkboxTheme(context);
@@ -89,20 +91,27 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => hover = true),
+      onExit: (_) => setState(() => hover = false),
       child: GestureDetector(
         onTap: handleTap,
-        child: AnimatedBuilder(
-          animation: Listenable.merge([checkmarkController, dashController]),
-          builder: (context, child) => CustomPaint(
-            painter: _CheckboxPainter(
-              value: widget.value,
-              activeBackgroundColor: activeBackgroundColor,
-              inactiveBackgroundColor: inactiveBackgroundColor,
-              foregroundColor: foregroundColor,
-              checkmarkAnimationValue: curvedCheckmark.value,
-              dashAnimationValue: curvedDash.value,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: AnimatedBuilder(
+            animation: Listenable.merge([checkmarkController, dashController]),
+            builder: (context, child) => CustomPaint(
+              painter: _CheckboxPainter(
+                value: widget.value,
+                activeBackgroundColor: activeBackgroundColor,
+                inactiveBackgroundColor: inactiveBackgroundColor,
+                foregroundColor: foregroundColor,
+                checkmarkAnimationValue: curvedCheckmark.value,
+                dashAnimationValue: curvedDash.value,
+                hover: hover,
+                hoverColor: Theme.of(context).foregroundColor.withOpacity(0.05),
+              ),
+              size: const Size.square(24),
             ),
-            size: const Size.square(24),
           ),
         ),
       ),
@@ -117,6 +126,8 @@ class _CheckboxPainter extends CustomPainter {
   final Color foregroundColor;
   final double checkmarkAnimationValue;
   final double dashAnimationValue;
+  final bool hover;
+  final Color hoverColor;
 
   const _CheckboxPainter({
     required this.value,
@@ -125,6 +136,8 @@ class _CheckboxPainter extends CustomPainter {
     required this.foregroundColor,
     required this.checkmarkAnimationValue,
     required this.dashAnimationValue,
+    required this.hover,
+    required this.hoverColor,
   });
 
   @override
@@ -144,6 +157,14 @@ class _CheckboxPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     canvas.drawPath(bgPath, backgroundPaint);
+
+    if (hover) {
+      final hoverPaint = Paint()
+        ..color = hoverColor
+        ..style = PaintingStyle.fill;
+      canvas.drawCircle(Offset(size.width / 2, size.height / 2), 20, hoverPaint);
+    }
+
     switch (value) {
       case true:
         final checkmarkPath = Path()
@@ -169,6 +190,6 @@ class _CheckboxPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _CheckboxPainter old) {
-    return value != old.value || checkmarkAnimationValue != old.checkmarkAnimationValue;
+    return value != old.value || checkmarkAnimationValue != old.checkmarkAnimationValue || hover != old.hover;
   }
 }
