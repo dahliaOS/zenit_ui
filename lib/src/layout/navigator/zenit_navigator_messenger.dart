@@ -13,12 +13,10 @@ class ZenitNavigatorMessengerHost extends StatefulWidget {
   });
 
   @override
-  State<ZenitNavigatorMessengerHost> createState() =>
-      _ZenitNavigatorMessengerHostState();
+  State<ZenitNavigatorMessengerHost> createState() => _ZenitNavigatorMessengerHostState();
 }
 
-class _ZenitNavigatorMessengerHostState
-    extends State<ZenitNavigatorMessengerHost> {
+class _ZenitNavigatorMessengerHostState extends State<ZenitNavigatorMessengerHost> {
   bool _canPop = false;
   bool _requestedPopTransaction = false;
   bool _lastCanPop = false;
@@ -95,8 +93,7 @@ class ZenitNavigatorMessenger extends InheritedWidget {
   /// Get the closest [ZenitNavigatorMessenger] ancestor if any is available.
   /// If it's not, return `null`.
   static ZenitNavigatorMessenger? maybeOf(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<ZenitNavigatorMessenger>();
+    return context.dependOnInheritedWidgetOfExactType<ZenitNavigatorMessenger>();
   }
 
   /// Get the closest [ZenitNavigatorMessenger] ancestor if any is available.

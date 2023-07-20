@@ -70,21 +70,17 @@ class ZenitNavigatorPopTransactionObserver extends StatefulWidget {
   });
 
   @override
-  State<ZenitNavigatorPopTransactionObserver> createState() =>
-      _ZenitNavigatorPopTransactionObserverState();
+  State<ZenitNavigatorPopTransactionObserver> createState() => _ZenitNavigatorPopTransactionObserverState();
 }
 
-class _ZenitNavigatorPopTransactionObserverState
-    extends State<ZenitNavigatorPopTransactionObserver> {
+class _ZenitNavigatorPopTransactionObserverState extends State<ZenitNavigatorPopTransactionObserver> {
   @override
   void didChangeDependencies() {
     final navigatorInterceptor = ZenitNavigatorMessenger.maybeOf(context);
-    final bool requestedPop =
-        navigatorInterceptor?.requestedPopTransaction ?? false;
+    final bool requestedPop = navigatorInterceptor?.requestedPopTransaction ?? false;
 
     if (requestedPop) {
-      final NavigatorState? navigator =
-          widget.navigatorKey?.currentState ?? Navigator.maybeOf(context);
+      final NavigatorState? navigator = widget.navigatorKey?.currentState ?? Navigator.maybeOf(context);
 
       navigator?.pop();
       navigatorInterceptor?.completeCurrentTransaction();
