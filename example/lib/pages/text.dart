@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class TextExamplePage extends StatelessWidget {
   const TextExamplePage({super.key});
@@ -21,8 +22,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  Card textStyleTitle(TextTheme textTheme) {
-    return Card(
+  ZenitSection textStyleTitle(TextTheme textTheme) {
+    return ZenitSection(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,8 +50,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  Card textStyleLabel(TextTheme textTheme) {
-    return Card(
+  ZenitSection textStyleLabel(TextTheme textTheme) {
+    return ZenitSection(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -77,8 +78,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  Card textStyleHeadline(TextTheme textTheme) {
-    return Card(
+  ZenitSection textStyleHeadline(TextTheme textTheme) {
+    return ZenitSection(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -105,8 +106,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  Card textStyleBody(TextTheme textTheme) {
-    return Card(
+  ZenitSection textStyleBody(TextTheme textTheme) {
+    return ZenitSection(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -133,8 +134,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  Card textStyleDisplay(TextTheme textTheme) {
-    return Card(
+  ZenitSection textStyleDisplay(TextTheme textTheme) {
+    return ZenitSection(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

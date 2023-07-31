@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitTab extends StatelessWidget {
   const ZenitTab({
@@ -27,10 +27,7 @@ class ZenitTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Colors
-    final backgroundColor = selected ? Theme.of(context).colorScheme.surface : Colors.transparent;
-    final borderColor =
-        selected ? Theme.of(context).foregroundColor.withOpacity(0.15) : Theme.of(context).colorScheme.surface;
+    final backgroundColor = selected ? Theme.of(context).elementColor : Colors.transparent;
 
     return SizedBox(
       width: 200,
@@ -43,9 +40,8 @@ class ZenitTab extends StatelessWidget {
             message: title,
             child: Material(
               color: backgroundColor,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius: kDefaultBorderRadiusMedium,
-                side: BorderSide(color: borderColor),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -62,16 +58,12 @@ class ZenitTab extends StatelessWidget {
                     ),
                     const Spacer(),
                     if (onClose != null)
-                      IconButton(
+                      ZenitIconButton(
                         iconSize: 16,
-                        constraints: const BoxConstraints.tightFor(width: 24, height: 24),
-                        color: Theme.of(context).foregroundColor,
-                        padding: EdgeInsets.zero,
+                        buttonSize: 24,
                         onPressed: onClose,
-                        icon: const Icon(
-                          Icons.close,
-                        ),
-                      )
+                        icon: Icons.close,
+                      ),
                   ],
                 ),
               ),

@@ -7,7 +7,7 @@ export 'package:zenit_ui/src/components/buttons/buttons.dart';
 // Zenit checkbox
 export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
 // Zenit Flat Button
-export 'package:zenit_ui/src/components/icon_button/zenit_icon_button.dart';
+export 'package:zenit_ui/src/components/icon_button/icon_button.dart';
 // Zenit checkbox list tile
 export 'package:zenit_ui/src/components/list_tile/checkbox_list_tile.dart';
 // Zenit radio button list tile
@@ -16,6 +16,8 @@ export 'package:zenit_ui/src/components/list_tile/radio_list_tile.dart';
 export 'package:zenit_ui/src/components/list_tile/switch_list_tile.dart';
 // Zenit radio button
 export 'package:zenit_ui/src/components/radio_button/radio_button.dart';
+// Zenit section
+export 'package:zenit_ui/src/components/section/section.dart';
 // Zenit slider
 export 'package:zenit_ui/src/components/slider/slider.dart';
 // Zenit switch

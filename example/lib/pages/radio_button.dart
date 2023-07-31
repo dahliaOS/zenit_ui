@@ -36,9 +36,11 @@ class _ZenitRadioButtonExampleState extends State<ZenitRadioButtonExample> {
           ],
         ),
         const Gap(24),
+        const ExampleSubtitle("ZenitRadioButtonListTile"),
+        const Gap(8),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4 + 256,
-          child: Card(
+          child: ZenitSection(
             child: Column(
               children: [
                 for (double d = 0; d < 3; d++) ...[

@@ -27,9 +27,9 @@ class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
         const Divider(),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("ListTiles in cards", style: textStyle),
+          child: Text("ListTiles in ZenitSections", style: textStyle),
         ),
-        Card(
+        ZenitSection(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

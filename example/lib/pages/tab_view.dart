@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui_example/title.dart';
 
 class ZenitTabViewExample extends StatefulWidget {
   const ZenitTabViewExample({super.key});
@@ -35,6 +37,9 @@ class _ZenitTabViewExampleState extends State<ZenitTabViewExample> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const Gap(8),
+        const ExampleTitle("ZenitTabBar"),
+        const Gap(24),
         ZenitTabBar(
           selectedIndex: _selectedIndex,
           tabs: tabs,

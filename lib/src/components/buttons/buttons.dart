@@ -78,8 +78,12 @@ class ZenitElevatedButton extends StatelessWidget {
     final theme = Theme.of(context);
     return ButtonBase(
       onPressed: onPressed,
-      foregroundColor: foregroundColor ?? theme.foregroundColor,
+      foregroundColor: foregroundColor ?? theme.accentForegroundColor,
       backgroundColor: backgroundColor ?? theme.primaryColor,
+      hoverColor: Color.alphaBlend(
+        theme.foregroundColor.withOpacity(0.1),
+        backgroundColor ?? theme.elementColor,
+      ),
       child: child,
     );
   }

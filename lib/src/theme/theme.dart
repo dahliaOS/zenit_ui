@@ -82,8 +82,9 @@ ThemeData createZenitTheme({
   // Default Values
   final darkMode = brightness == Brightness.dark;
   final primary = primaryColor ?? const Color(0xFF0073cf);
-  final foreground = foregroundColor ?? (darkMode ? const Color(0xffffffff) : const Color(0xFF000000));
-  final element = elementColor ?? (darkMode ? const Color(0xFF454545) : const Color(0xFFD9D9D9));
+  final foreground = foregroundColor ?? (darkMode ? const Color(0xFFFFFFFF) : const Color(0xFF000000));
+  final background = backgroundColor ?? (darkMode ? const Color(0xFF242424) : const Color(0xFFFFFFFF));
+  final element = elementColor ?? foreground.withOpacity(0.075);
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -99,10 +100,11 @@ ThemeData createZenitTheme({
   final iconTheme = IconThemeData(color: foreground);
 
   // Card Theme
-  const cardTheme = CardTheme(
+  final cardTheme = CardTheme(
     clipBehavior: Clip.antiAlias,
     elevation: 0,
-    shape: RoundedRectangleBorder(
+    color: element.withOpacity(0.05),
+    shape: const RoundedRectangleBorder(
       borderRadius: kCardBorderRadius,
     ),
   );
@@ -148,16 +150,15 @@ ThemeData createZenitTheme({
       colorScheme: ColorScheme.light(
         primary: primary,
         secondary: primary,
-        background: backgroundColor ?? const Color(0xFFFAFAFA),
+        background: background,
         onBackground: foreground,
-        surface: surfaceColor ?? const Color(0xFFEBEBEB),
+        surface: surfaceColor ?? const Color(0xFFE8E8E8),
         onSurface: foreground,
       ),
     ).copyWith(
       useMaterial3: false,
-      appBarTheme: appBarTheme,
       primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFFFAFAFA),
+      scaffoldBackgroundColor: background,
       iconTheme: iconTheme,
       cardTheme: cardTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
@@ -172,7 +173,7 @@ ThemeData createZenitTheme({
       colorScheme: ColorScheme.dark(
         primary: primary,
         secondary: primary,
-        background: backgroundColor ?? const Color(0xFF242424),
+        background: background,
         onBackground: foreground,
         surface: surfaceColor ?? const Color(0xFF303030),
         onSurface: foreground,
@@ -180,7 +181,7 @@ ThemeData createZenitTheme({
     ).copyWith(
       useMaterial3: false,
       primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFF242424),
+      scaffoldBackgroundColor: background,
       appBarTheme: appBarTheme,
       iconTheme: iconTheme,
       cardTheme: cardTheme,

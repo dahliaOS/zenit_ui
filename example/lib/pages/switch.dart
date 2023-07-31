@@ -36,9 +36,11 @@ class _ZenitSwitchExampleState extends State<ZenitSwitchExample> {
           ],
         ),
         const Gap(24),
+        const ExampleSubtitle("ZenitSwitchListTile"),
+        const Gap(8),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4 + 256,
-          child: Card(
+          child: ZenitSection(
             child: Column(
               children: [
                 for (int i = 0; i < 2; i++) ...[

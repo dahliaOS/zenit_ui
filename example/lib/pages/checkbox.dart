@@ -36,9 +36,11 @@ class _ZenitCheckboxExampleState extends State<ZenitCheckboxExample> {
           ],
         ),
         const Gap(24),
+        const ExampleSubtitle("ZenitCheckboxListTile"),
+        const Gap(8),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4 + 256,
-          child: Card(
+          child: ZenitSection(
             child: Column(
               children: [
                 for (int i = 0; i < _checkboxValues.length; i++) ...[

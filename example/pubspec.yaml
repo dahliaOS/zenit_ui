@@ -24,3 +24,5 @@ flutter:
   assets:
     - assets/icon_light.png
     - assets/banner.png
+    - assets/dahliaos_banner_dark.png
+    - assets/dahliaos_banner_light.png
