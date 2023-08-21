@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
-import 'package:zenit_ui_example/pages/welcome.dart';
 import 'package:zenit_ui_example/title.dart';
 
 class ZenitButtonExample extends StatefulWidget {
@@ -25,29 +23,15 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: kButtonWidth,
-              child: ZenitTextButton(
-                onPressed: () => print("TextButton was clicked"),
-                child: const Text("TextButton"),
-              ),
+            ZenitPrimaryButton(
+              onPressed: () => print("PrimaryButton was clicked"),
+              foregroundColor: Colors.white,
+              child: const Text("PrimaryButton"),
             ),
             const Gap(16),
-            SizedBox(
-              width: kButtonWidth,
-              child: ZenitFilledButton(
-                onPressed: () => print("FilledButton was clicked"),
-                child: const Text("FilledButton"),
-              ),
-            ),
-            const Gap(16),
-            SizedBox(
-              width: kButtonWidth,
-              child: ZenitElevatedButton(
-                onPressed: () => print("FilledButton was clicked"),
-                foregroundColor: Colors.white,
-                child: const Text("ElevatedButton"),
-              ),
+            ZenitSecondaryButton(
+              onPressed: () => print("FilledButton was clicked"),
+              child: const Text("SecondaryButton"),
             ),
           ],
         ),
@@ -61,38 +45,26 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
               children: [
                 ListTile(
                   title: const Text(
-                    "A ListTile with a ZenitTextButton",
+                    "A ListTile with a ZenitPrimaryButton",
                   ),
                   subtitle: const Text(
                     "This is the subtitle",
                   ),
-                  trailing: ZenitTextButton(
+                  trailing: ZenitPrimaryButton(
                     onPressed: () => print("Button pressed"),
-                    child: const Text("Text Button"),
+                    child: const Text("Primary Button"),
                   ),
                 ),
                 ListTile(
                   title: const Text(
-                    "A ListTile with a ZenitFilledButton",
+                    "A ListTile with a ZenitSecondaryButton",
                   ),
                   subtitle: const Text(
                     "This is the subtitle",
                   ),
-                  trailing: ZenitFilledButton(
+                  trailing: ZenitSecondaryButton(
                     onPressed: () => print("Button pressed"),
-                    child: const Text("Filled Button"),
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    "A ListTile with a ZenitElevatedButton",
-                  ),
-                  subtitle: const Text(
-                    "This is the subtitle",
-                  ),
-                  trailing: ZenitElevatedButton(
-                    onPressed: () => print("Button pressed"),
-                    child: const Text("Elevated Button"),
+                    child: const Text("Secondary Button"),
                   ),
                 ),
               ],

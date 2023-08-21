@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages/button.dart';
 import 'package:zenit_ui_example/pages/checkbox.dart';

@@ -1,7 +1,17 @@
-import 'package:flutter/material.dart' as material;
+/// Flutter widgets and theme implementing the ZenitUI design language.
+///
+/// To use, `import 'package:zenit_ui/zenit_ui.dart';`
+///
+/// This library is mainly designed for desktop applications, but it can be used
+/// for mobile applications as well.
+library zenit_ui;
 
 // Zenit exports
 //
+// Material
+export 'package:flutter/material.dart';
+// Flutter base Widgets
+export 'package:flutter/widgets.dart';
 // Zenit buttons
 export 'package:zenit_ui/src/components/buttons/buttons.dart';
 // Zenit checkbox
@@ -43,26 +53,3 @@ export 'package:zenit_ui/src/layout/tab_view/tab_data.dart';
 export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';
-
-//Type Definitions
-
-//Switch
-typedef MaterialSwitch = material.Switch;
-
-//Theme
-typedef MaterialTheme = material.Theme;
-
-//TextField
-typedef MaterialTextField = material.TextField;
-
-//Slider
-typedef MaterialSlider = material.Slider;
-
-//RadioButton
-typedef MaterialRadioButton = material.Radio;
-
-//SwitchListTile
-typedef MaterialSwitchListTile = material.SwitchListTile;
-
-//Checkbox
-typedef MaterialCheckbox = material.Checkbox;

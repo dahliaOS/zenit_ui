@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
+import 'package:zenit_ui/src/extensions/extensions.dart';
+import 'package:zenit_ui/src/theme/text_theme.dart';
 
 export 'package:zenit_ui/src/extensions/extensions.dart';
 
@@ -64,9 +66,9 @@ ThemeData createZenitTheme({
 
   final darkMode = brightness == Brightness.dark;
   primaryColor ??= const Color(0xFF0073cf);
-  backgroundColor ??= (darkMode ? darkBackground : lightBackground);
-  foregroundColor ??= (darkMode ? darkForeground : lightForeground);
-  surfaceColor ??= foregroundColor.withAlpha(20);
+  backgroundColor ??= darkMode ? darkBackground : lightBackground;
+  foregroundColor ??= darkMode ? darkForeground : lightForeground;
+  surfaceColor ??= darkMode ? darkBackground.lighten() : lightBackground.darken();
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -99,7 +101,15 @@ ThemeData createZenitTheme({
     hoverElevation: 0,
     disabledElevation: 0,
     highlightElevation: 0,
-    shape: const StadiumBorder(),
+    sizeConstraints: BoxConstraints.tight(const Size.square(52)),
+    smallSizeConstraints: BoxConstraints.tight(const Size.square(44)),
+    largeSizeConstraints: BoxConstraints.tight(const Size.square(56)),
+    extendedSizeConstraints: const BoxConstraints.tightFor(height: 52),
+    iconSize: 24,
+    shape: RoundedRectangleBorder(
+      borderRadius: kDefaultBorderRadiusLarge,
+      side: BorderSide(color: foregroundColor.withOpacity(0.1)),
+    ),
   );
 
   // PageTransitionsTheme
@@ -131,6 +141,11 @@ ThemeData createZenitTheme({
     space: 1,
   );
 
+  // ListTile Theme
+  final listTileTheme = ListTileThemeData(
+    subtitleTextStyle: TextStyle(color: foregroundColor.darken(0.4)),
+  );
+
   if (brightness == Brightness.light) {
     return ThemeData.from(
       colorScheme: ColorScheme.light(
@@ -150,6 +165,8 @@ ThemeData createZenitTheme({
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
       dividerTheme: dividerTheme,
+      listTileTheme: listTileTheme,
+      textTheme: createTextTheme(foregroundColor),
     );
   } else {
     return ThemeData.from(
@@ -171,21 +188,9 @@ ThemeData createZenitTheme({
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
       dividerTheme: dividerTheme,
+      listTileTheme: listTileTheme,
+      textTheme: createTextTheme(foregroundColor),
     );
-  }
-}
-
-extension on Map<Object, ThemeExtension<dynamic>> {
-  T? maybeGet<T>() {
-    return this[T] as T?;
-  }
-
-  T get<T>() {
-    final element = maybeGet<T>();
-
-    if (element != null) return element;
-
-    throw Exception("No theme extension $T found in current ThemeData");
   }
 }
 

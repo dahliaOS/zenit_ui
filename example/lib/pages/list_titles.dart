@@ -53,7 +53,7 @@ class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
       subtitle: const Text(
         "This is the subtitle",
       ),
-      trailing: ZenitFilledButton(
+      trailing: ZenitSecondaryButton(
         onPressed: () => print("Button pressed"),
         child: const Text("Button"),
       ),

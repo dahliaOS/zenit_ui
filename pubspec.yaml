@@ -14,3 +14,27 @@ dependencies:
 
 dev_dependencies:
   lint: ^2.0.0
+
+
+flutter:
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: packages/zenit_ui/src/fonts/Inter-Thin.ttf
+          weight: 100
+        - asset: packages/zenit_ui/src/fonts/Inter-ExtraLight.ttf
+          weight: 200
+        - asset: packages/zenit_ui/src/fonts/Inter-Light.ttf
+          weight: 300
+        - asset: packages/zenit_ui/src/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: packages/zenit_ui/src/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: packages/zenit_ui/src/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: packages/zenit_ui/src/fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: packages/zenit_ui/src/fonts/Inter-ExtraBold.ttf
+          weight: 800
+        - asset: packages/zenit_ui/src/fonts/Inter-Black.ttf
+          weight: 900

@@ -38,8 +38,10 @@ class _ButtonBaseState extends State<ButtonBase> {
         enabled: widget.onPressed != null,
         child: Material(
           clipBehavior: Clip.antiAlias,
-          borderRadius: kDefaultBorderRadiusMedium,
           color: widget.backgroundColor ?? theme.surfaceColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: kDefaultBorderRadiusSmall,
+          ),
           child: InkWell(
             hoverColor: widget.hoverColor,
             splashColor: widget.splashColor,
@@ -52,8 +54,6 @@ class _ButtonBaseState extends State<ButtonBase> {
                 ),
                 child: DefaultTextStyle(
                   style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
                     color: widget.foregroundColor ?? theme.foregroundColor,
                   ),
                   child: Center(

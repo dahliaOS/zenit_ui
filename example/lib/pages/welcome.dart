@@ -3,8 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/title.dart';
 
-const kButtonWidth = 132.0;
-
 class ZenitWelcome extends StatefulWidget {
   const ZenitWelcome({super.key});
 

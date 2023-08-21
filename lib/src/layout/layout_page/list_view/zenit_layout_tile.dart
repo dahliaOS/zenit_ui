@@ -40,12 +40,11 @@ class ZenitLayoutTile extends StatelessWidget {
         title: DefaultTextStyle(
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
                 color: Theme.of(context).foregroundColor,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
           child: title!,
         ),
         iconColor: Theme.of(context).foregroundColor,
-        selectedColor: Theme.of(context).primaryColor,
+        selectedColor: Theme.of(context).foregroundColor,
         subtitle: subtitle,
         leading: SizedBox(width: 56, child: leading),
         trailing: trailing,

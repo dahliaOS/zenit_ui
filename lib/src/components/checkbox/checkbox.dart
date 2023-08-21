@@ -142,7 +142,7 @@ class _CheckboxPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const shape = RoundedRectangleBorder(borderRadius: kDefaultBorderRadiusMedium);
+    const shape = RoundedRectangleBorder(borderRadius: kDefaultBorderRadiusSmall);
     final rect = Offset.zero & size;
     final bgPath = shape.getOuterPath(rect);
     final backgroundPaint = Paint()
