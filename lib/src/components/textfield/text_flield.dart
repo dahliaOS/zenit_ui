@@ -292,7 +292,7 @@ InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: theme.elementColor,
+    fillColor: theme.surfaceColor,
     border: _kDefaultOutlineInputBorderInactive,
     enabledBorder: _kDefaultOutlineInputBorderInactive,
     disabledBorder: _kDefaultOutlineInputBorderInactive,

@@ -39,7 +39,7 @@ class _ButtonBaseState extends State<ButtonBase> {
         child: Material(
           clipBehavior: Clip.antiAlias,
           borderRadius: kDefaultBorderRadiusMedium,
-          color: widget.backgroundColor ?? theme.elementColor,
+          color: widget.backgroundColor ?? theme.surfaceColor,
           child: InkWell(
             hoverColor: widget.hoverColor,
             splashColor: widget.splashColor,

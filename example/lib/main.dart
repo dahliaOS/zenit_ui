@@ -34,10 +34,10 @@ class _MyAppState extends State<MyApp> {
           selected: selected,
         ),
         pageBuilder: (context, index) => examplePages[index].pageBuilder(context),
-        globalFloatingActionButton: FloatingActionButton.extended(
+        globalFloatingActionButton: FloatingActionButton(
           onPressed: () => setState(() => (themeMode < themeModes.length - 1) ? themeMode++ : themeMode = 0),
-          label: Text(resolveThemeName()),
-          icon: Icon(resolveThemeIcon()),
+          tooltip: resolveThemeName(),
+          child: Icon(resolveThemeIcon()),
         ),
       ),
     );

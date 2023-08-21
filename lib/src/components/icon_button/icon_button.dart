@@ -7,7 +7,7 @@ class ZenitIconButton extends StatelessWidget {
     required this.icon,
     this.hoverColor,
     this.onPressed,
-    this.borderRadius = kDefaultBorderRadiusBig,
+    this.borderRadius = kDefaultBorderRadiusExtraLarge,
     this.buttonSize = 40,
     this.iconSize = 24,
   });

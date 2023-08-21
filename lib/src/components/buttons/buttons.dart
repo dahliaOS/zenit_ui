@@ -17,7 +17,7 @@ class ZenitTextButton extends StatelessWidget {
     return ButtonBase(
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.primaryColor,
-      hoverColor: (foregroundColor ?? theme.primaryColor).withOpacity(0.25),
+      hoverColor: (foregroundColor ?? theme.primaryColor).withAlpha(50),
       splashColor: (foregroundColor ?? theme.primaryColor).withOpacity(0.25),
       backgroundColor: Colors.transparent,
       child: child,
@@ -47,11 +47,8 @@ class ZenitFilledButton extends StatelessWidget {
     return ButtonBase(
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.foregroundColor,
-      backgroundColor: backgroundColor ?? theme.elementColor,
-      hoverColor: Color.alphaBlend(
-        theme.foregroundColor.withOpacity(0.1),
-        backgroundColor ?? theme.elementColor,
-      ),
+      backgroundColor: backgroundColor ?? theme.surfaceColor,
+      hoverColor: (backgroundColor ?? theme.surfaceColor).withAlpha(10),
       child: child,
     );
   }
@@ -80,10 +77,7 @@ class ZenitElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.accentForegroundColor,
       backgroundColor: backgroundColor ?? theme.primaryColor,
-      hoverColor: Color.alphaBlend(
-        theme.foregroundColor.withOpacity(0.1),
-        backgroundColor ?? theme.elementColor,
-      ),
+      hoverColor: (backgroundColor ?? theme.surfaceColor).withAlpha(20),
       child: child,
     );
   }
@@ -113,7 +107,7 @@ class ZenitButton extends StatelessWidget {
     return ButtonBase(
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.foregroundColor,
-      backgroundColor: backgroundColor ?? theme.elementColor,
+      backgroundColor: backgroundColor ?? theme.surfaceColor,
       hoverColor: hoverColor,
       child: child,
     );

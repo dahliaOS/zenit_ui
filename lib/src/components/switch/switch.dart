@@ -117,7 +117,7 @@ class _SwitchPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    const shape = RoundedRectangleBorder(borderRadius: kDefaultBorderRadiusBig);
+    const shape = StadiumBorder();
     final rect = Offset.zero & size;
     final trackPath = shape.getOuterPath(rect);
 

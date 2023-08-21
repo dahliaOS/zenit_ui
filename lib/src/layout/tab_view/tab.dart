@@ -27,7 +27,7 @@ class ZenitTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = selected ? Theme.of(context).elementColor : Colors.transparent;
+    final backgroundColor = selected ? Theme.of(context).surfaceColor : Colors.transparent;
 
     return SizedBox(
       width: 200,
