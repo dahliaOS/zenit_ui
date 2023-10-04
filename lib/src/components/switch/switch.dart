@@ -20,7 +20,8 @@ class ZenitSwitch extends StatefulWidget {
   _ZenitSwitchState createState() => _ZenitSwitchState();
 }
 
-class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
+class _ZenitSwitchState extends State<ZenitSwitch>
+    with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
     duration: kDefaultAnimationDuration,
@@ -52,7 +53,8 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSwitchTheme switchTheme = widget.theme ?? ZenitTheme.switchTheme(context);
+    final ZenitSwitchTheme switchTheme =
+        widget.theme ?? ZenitTheme.switchTheme(context);
     final Color activeTrackColor = switchTheme.activeTrackColor;
     final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
     final Color activeThumbColor = switchTheme.activeThumbColor;
@@ -83,7 +85,8 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
                 inactiveThumbColor: inactiveThumbColor,
                 positionValue: _positionController.value,
                 hover: hover,
-                hoverColor: Theme.of(context).foregroundColor.withOpacity(0.05),
+                hoverColor:
+                    Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
               ),
               size: const Size(48, 24),
             ),
@@ -131,7 +134,8 @@ class _SwitchPainter extends CustomPainter {
 
     canvas.drawPath(trackPath, trackPaint);
 
-    final Offset thumbPosition = Offset(12 + (24 * positionValue), size.height / 2);
+    final Offset thumbPosition =
+        Offset(12 + (24 * positionValue), size.height / 2);
 
     if (hover) {
       final Paint hoverPaint = Paint()
@@ -146,6 +150,8 @@ class _SwitchPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _SwitchPainter old) {
-    return value != old.value || positionValue != old.positionValue || hover != old.hover;
+    return value != old.value ||
+        positionValue != old.positionValue ||
+        hover != old.hover;
   }
 }

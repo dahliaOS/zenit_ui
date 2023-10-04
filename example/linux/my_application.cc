@@ -40,25 +40,29 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "example");
+    gtk_header_bar_set_title(header_bar, "ZenitUI Example");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   } else {
-    gtk_window_set_title(window, "example");
+    gtk_window_set_title(window, "ZenitUI Example");
   }
 
-  gtk_window_set_default_size(window, 1280, 720);
-  gtk_widget_show(GTK_WIDGET(window));
+  GdkGeometry geometry_min;
+  geometry_min.min_width = 500;
+  geometry_min.min_height = 720;
+  gtk_window_set_geometry_hints(window, nullptr, &geometry_min, GDK_HINT_MIN_SIZE);
+
+  gtk_window_set_default_size(window, 1080, 720);
 
   g_autoptr(FlDartProject) project = fl_dart_project_new();
   fl_dart_project_set_dart_entrypoint_arguments(project, self->dart_entrypoint_arguments);
 
   FlView* view = fl_view_new(project);
-  gtk_widget_show(GTK_WIDGET(view));
   gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(view));
 
   fl_register_plugins(FL_PLUGIN_REGISTRY(view));
-
+  gtk_widget_show(GTK_WIDGET(view));
+  gtk_widget_show(GTK_WIDGET(window));
   gtk_widget_grab_focus(GTK_WIDGET(view));
 }
 

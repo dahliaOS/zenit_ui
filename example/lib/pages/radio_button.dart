@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/title.dart';
@@ -7,7 +6,8 @@ class ZenitRadioButtonExample extends StatefulWidget {
   const ZenitRadioButtonExample({super.key});
 
   @override
-  State<ZenitRadioButtonExample> createState() => _ZenitRadioButtonExampleState();
+  State<ZenitRadioButtonExample> createState() =>
+      _ZenitRadioButtonExampleState();
 }
 
 bool val = false;
@@ -46,7 +46,8 @@ class _ZenitRadioButtonExampleState extends State<ZenitRadioButtonExample> {
                 for (double d = 0; d < 3; d++) ...[
                   ZenitRadioButtonListTile<double>(
                     title: const Text("ZenitRadioButtonListTile"),
-                    subtitle: Text("ZenitRadioButtonListTile is ${d == groupValue ? "selected" : "not selected"}"),
+                    subtitle: Text(
+                        "ZenitRadioButtonListTile is ${d == groupValue ? "selected" : "not selected"}"),
                     value: d,
                     groupValue: groupValue,
                     onChanged: (value) => setState(() => groupValue = value!),

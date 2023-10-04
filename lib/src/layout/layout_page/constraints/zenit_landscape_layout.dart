@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
-import 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
-import 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitLandscapeLayout extends StatefulWidget {
   const ZenitLandscapeLayout({
@@ -13,15 +10,17 @@ class ZenitLandscapeLayout extends StatefulWidget {
     required this.onPageSelected,
     required this.destinationBuilder,
     this.controller,
-    this.appBar,
     this.globalFloatingActionButton,
-    this.margin = kDefaultPageMargin,
+    this.sidebarColor,
+    this.sidebarWidth = 256,
+    this.sidebarToolbar,
+    this.pageToolbarBuilder,
   });
 
   /// The number of pages in the [ZenitLandscapeLayout].
   final int length;
 
-  final ZenitNavigationLayoutBuilder destinationBuilder;
+  final ZenitNavigationSidebarBuilder destinationBuilder;
 
   /// The index of the selected page.
   final int selectedIndex;
@@ -35,14 +34,20 @@ class ZenitLandscapeLayout extends StatefulWidget {
   /// A controller that can control the index of the [ZenitLandscapeLayout].
   final ValueNotifier<int>? controller;
 
-  /// AppBar for the [ZenitLandscapeLayout]
-  final PreferredSizeWidget? appBar;
-
   /// Creates a global floating action button throughout all Pages
   final FloatingActionButton? globalFloatingActionButton;
 
-  /// Page Margin
-  final EdgeInsets margin;
+  /// Sets the color of the sidebar
+  final Color? sidebarColor;
+
+  /// The width of the sidebar
+  final double sidebarWidth;
+
+  // Toolbar on the top of the sidebar
+  final PreferredSizeWidget? sidebarToolbar;
+
+  // Toolbar on the top of the page
+  final PreferredSizeWidget? Function(BuildContext context, int index)? pageToolbarBuilder;
 
   @override
   State<ZenitLandscapeLayout> createState() => _ZenitLandscapeLayoutState();
@@ -74,6 +79,8 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
+    final Color sidebarColor =
+        widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
@@ -81,42 +88,50 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: 256,
-              child: Padding(
-                padding: widget.margin,
+              width: widget.sidebarWidth,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: sidebarColor,
+                ),
                 child: Scaffold(
-                  body: ZenitLayoutDestinationListView(
-                    length: widget.length,
-                    selectedIndex: selectedIndex,
-                    onTap: onTap,
-                    builder: widget.destinationBuilder,
+                  backgroundColor: sidebarColor,
+                  appBar: widget.sidebarToolbar,
+                  body: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ZenitLayoutDestinationListView(
+                      length: widget.length,
+                      selectedIndex: selectedIndex,
+                      onTap: onTap,
+                      builder: widget.destinationBuilder,
+                    ),
                   ),
                 ),
               ),
             ),
-            const VerticalDivider(),
+            VerticalDivider(
+              color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+            ),
             Expanded(
               child: SizedBox.expand(
-                child: ClipRRect(
-                  child: Padding(
-                    padding: widget.margin,
-                    child: ZenitNavigatorPopTransactionObserver(
-                      navigatorKey: _navigatorKey,
-                      child: Navigator(
-                        key: _navigatorKey,
-                        pages: [
-                          MaterialPage(
-                            key: ValueKey(_selectedIndex),
-                            child: widget.pageBuilder(context, _selectedIndex),
-                          ),
-                        ],
-                        onPopPage: (route, result) => route.didPop(result),
-                        observers: [
-                          ZenitNavigatorCanPopObserver.withContext(context),
-                          HeroController(),
-                        ],
+                child: ZenitNavigatorPopTransactionObserver(
+                  navigatorKey: _navigatorKey,
+                  child: Navigator(
+                    key: _navigatorKey,
+                    pages: [
+                      MaterialPage(
+                        key: ValueKey(_selectedIndex),
+                        child: Scaffold(
+                          backgroundColor: Theme.of(context).colorScheme.background,
+                          appBar: widget.pageToolbarBuilder?.call(context, _selectedIndex),
+                          body: widget.pageBuilder(context, _selectedIndex),
+                        ),
                       ),
-                    ),
+                    ],
+                    onPopPage: (route, result) => route.didPop(result),
+                    observers: [
+                      ZenitNavigatorCanPopObserver.withContext(context),
+                      HeroController(),
+                    ],
                   ),
                 ),
               ),

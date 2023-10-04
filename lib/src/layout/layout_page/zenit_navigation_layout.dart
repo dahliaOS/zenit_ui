@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_landscape_layout.dart';
 import 'package:zenit_ui/src/layout/layout_page/constraints/zenit_portrait_layout.dart';
 import 'package:zenit_ui/src/layout/navigator/zenit_navigator_messenger.dart';
 
-typedef ZenitNavigationLayoutBuilder = Widget Function(
+typedef ZenitNavigationSidebarBuilder = Widget Function(
   BuildContext context,
   int index,
   bool selected,
@@ -19,16 +18,19 @@ class ZenitNavigationLayout extends StatefulWidget {
     this.initialIndex,
     this.onPageSelected,
     this.controller,
-    this.appBar,
+    this.titlebar,
     this.globalFloatingActionButton,
-    this.margin = kDefaultPageMargin,
+    this.sidebarColor,
+    this.sidebarWidth = 256,
+    this.sidebarToolbar,
+    this.pageToolbarBuilder,
   });
 
   /// The number of pages in the [ZenitNavigationLayout].
   final int length;
 
   /// Builds a destination for the given index.
-  final ZenitNavigationLayoutBuilder destinationBuilder;
+  final ZenitNavigationSidebarBuilder destinationBuilder;
 
   /// Builds a page for the given index.
   final IndexedWidgetBuilder pageBuilder;
@@ -43,13 +45,22 @@ class ZenitNavigationLayout extends StatefulWidget {
   final ValueNotifier<int>? controller;
 
   /// The ZenitNavigationLayout AppBar
-  final PreferredSizeWidget? appBar;
+  final PreferredSizeWidget? titlebar;
 
   /// Creates a global floating action button throughout all Pages
   final Widget? globalFloatingActionButton;
 
-  /// Page Margin
-  final EdgeInsets margin;
+  /// Sets the color of the sidebar
+  final Color? sidebarColor;
+
+  /// Sets the width of the sidebar
+  final double sidebarWidth;
+
+  // Toolbar on the top of the sidebar
+  final PreferredSizeWidget? sidebarToolbar;
+
+  // Toolbar on the top of the page
+  final PreferredSizeWidget? Function(BuildContext context, int index)? pageToolbarBuilder;
 
   @override
   State<ZenitNavigationLayout> createState() => _ZenitNavigationLayoutState();
@@ -84,7 +95,8 @@ class _ZenitNavigationLayoutState extends State<ZenitNavigationLayout> {
     return ZenitNavigatorMessengerHost(
       child: Scaffold(
         floatingActionButton: widget.globalFloatingActionButton,
-        appBar: widget.appBar,
+        extendBodyBehindAppBar: true,
+        appBar: widget.titlebar,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             if (constraints.maxWidth < 620) {
@@ -95,8 +107,9 @@ class _ZenitNavigationLayoutState extends State<ZenitNavigationLayout> {
                 selectedIndex: _index,
                 onPageSelected: setIndex,
                 controller: widget.controller,
-                appBar: widget.appBar,
-                margin: widget.margin,
+                sidebarColor: widget.sidebarColor,
+                sidebarToolbar: widget.sidebarToolbar,
+                pageToolbarBuilder: widget.pageToolbarBuilder,
               );
             } else {
               return ZenitLandscapeLayout(
@@ -106,8 +119,10 @@ class _ZenitNavigationLayoutState extends State<ZenitNavigationLayout> {
                 selectedIndex: _index == -1 ? _previousIndex : _index,
                 onPageSelected: setIndex,
                 controller: widget.controller,
-                appBar: widget.appBar,
-                margin: widget.margin,
+                sidebarColor: widget.sidebarColor,
+                sidebarWidth: widget.sidebarWidth,
+                sidebarToolbar: widget.sidebarToolbar,
+                pageToolbarBuilder: widget.pageToolbarBuilder,
               );
             }
           },

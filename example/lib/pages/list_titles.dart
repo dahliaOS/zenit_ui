@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitListTilesExample extends StatefulWidget {

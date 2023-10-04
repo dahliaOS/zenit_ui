@@ -4,93 +4,90 @@ import 'package:flutter/material.dart';
 
 TextTheme createTextTheme(Color textColor) {
   return TextTheme(
-    displayLarge: _ZenitTextStyle(
+    displayLarge: TextStyle(
       fontSize: 64,
       fontWeight: FontWeight.w300,
-      textColor: textColor,
-    ),
-    displayMedium: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    displayMedium: TextStyle(
       fontSize: 48,
       fontWeight: FontWeight.w300,
-      textColor: textColor,
-    ),
-    displaySmall: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    displaySmall: TextStyle(
       fontSize: 30,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    headlineLarge: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    headlineLarge: TextStyle(
       fontSize: 32,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    headlineMedium: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    headlineMedium: TextStyle(
       fontSize: 28,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    headlineSmall: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    headlineSmall: TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    titleLarge: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    titleLarge: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    titleMedium: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    titleMedium: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    titleSmall: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    titleSmall: TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    bodyLarge: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    bodyLarge: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    bodyMedium: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    bodyMedium: TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    bodySmall: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    bodySmall: TextStyle(
       fontSize: 11,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    labelLarge: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    labelLarge: TextStyle(
       fontSize: 13,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    labelMedium: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    labelMedium: TextStyle(
       fontSize: 11,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
-    labelSmall: _ZenitTextStyle(
+      color: textColor,
+    ).asZenitTextStyle(),
+    labelSmall: TextStyle(
       fontSize: 9,
       fontWeight: FontWeight.normal,
-      textColor: textColor,
-    ),
+      color: textColor,
+    ).asZenitTextStyle(),
   );
 }
 
-class _ZenitTextStyle extends TextStyle {
-  final Color textColor;
-  const _ZenitTextStyle({
-    super.fontSize,
-    super.fontWeight,
-    required this.textColor,
-  }) : super(
-          fontFamily: 'Inter',
-          package: 'zenit_ui',
-          color: textColor,
-        );
+extension TextStyleX on TextStyle {
+  TextStyle asZenitTextStyle() {
+    return copyWith(
+      fontFamily: 'Inter',
+      package: 'zenit_ui',
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 }

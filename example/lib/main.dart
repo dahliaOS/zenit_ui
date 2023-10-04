@@ -1,24 +1,26 @@
-import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages.dart';
+import 'package:zenit_window_plugin/zenit_window_plugin.dart';
 
 void main() async {
   // Check for repainting
   //debugRepaintRainbowEnabled = true;
-
-  runApp(const MyApp());
+  await ZenitWindowTitlebar.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const ExampleApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ExampleApp extends StatefulWidget {
+  const ExampleApp({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<ExampleApp> createState() => _ExampleAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _ExampleAppState extends State<ExampleApp> {
   int themeMode = 0;
   Set<ThemeMode> themeModes = {ThemeMode.system, ThemeMode.light, ThemeMode.dark};
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,6 +29,17 @@ class _MyAppState extends State<MyApp> {
       theme: createZenitTheme(brightness: Brightness.light),
       darkTheme: createZenitTheme(brightness: Brightness.dark),
       home: ZenitNavigationLayout(
+        titlebar: const ZenitWindowTitlebar(),
+        sidebarWidth: 280,
+        sidebarToolbar: const ZenitToolbar(
+          title: ZenitWindowTitle(fallback: "ZenitUI Example"),
+          backgroundColor: Colors.transparent,
+        ),
+        pageToolbarBuilder: (context, index) => ZenitToolbar(
+          height: 48,
+          title: examplePages[index].titleBuilder(context),
+          backgroundColor: Colors.transparent,
+        ),
         length: examplePages.length,
         destinationBuilder: (context, index, selected) => ZenitLayoutTile(
           title: examplePages[index].titleBuilder(context),

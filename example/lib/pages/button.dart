@@ -23,15 +23,41 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ZenitPrimaryButton(
-              onPressed: () => print("PrimaryButton was clicked"),
-              foregroundColor: Colors.white,
-              child: const Text("PrimaryButton"),
+            SizedBox(
+              width: 160,
+              child: ZenitPrimaryButton(
+                onPressed: () => print("PrimaryButton was clicked"),
+                child: const Text("PrimaryButton"),
+              ),
             ),
-            const Gap(16),
-            ZenitSecondaryButton(
-              onPressed: () => print("FilledButton was clicked"),
-              child: const Text("SecondaryButton"),
+            const Gap(12),
+            SizedBox(
+              width: 160,
+              child: ZenitSecondaryButton(
+                onPressed: () => print("FilledButton was clicked"),
+                child: const Text("SecondaryButton"),
+              ),
+            ),
+          ],
+        ),
+        const Gap(12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 160,
+              child: ZenitTextButton(
+                onPressed: () => print("FilledButton was clicked"),
+                child: const Text("TextButton"),
+              ),
+            ),
+            const Gap(12),
+            SizedBox(
+              width: 160,
+              child: ZenitOutlineButton(
+                onPressed: () => print("FilledButton was clicked"),
+                child: const Text("OutlineButton"),
+              ),
             ),
           ],
         ),
@@ -50,9 +76,12 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
                   subtitle: const Text(
                     "This is the subtitle",
                   ),
-                  trailing: ZenitPrimaryButton(
-                    onPressed: () => print("Button pressed"),
-                    child: const Text("Primary Button"),
+                  trailing: SizedBox(
+                    width: 160,
+                    child: ZenitPrimaryButton(
+                      onPressed: () => print("Button pressed"),
+                      child: const Text("Primary Button"),
+                    ),
                   ),
                 ),
                 ListTile(
@@ -62,9 +91,42 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
                   subtitle: const Text(
                     "This is the subtitle",
                   ),
-                  trailing: ZenitSecondaryButton(
-                    onPressed: () => print("Button pressed"),
-                    child: const Text("Secondary Button"),
+                  trailing: SizedBox(
+                    width: 160,
+                    child: ZenitSecondaryButton(
+                      onPressed: () => print("Button pressed"),
+                      child: const Text("Secondary Button"),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    "A ListTile with a ZenitTextButton",
+                  ),
+                  subtitle: const Text(
+                    "This is the subtitle",
+                  ),
+                  trailing: SizedBox(
+                    width: 160,
+                    child: ZenitTextButton(
+                      onPressed: () => print("Button pressed"),
+                      child: const Text("Text Button"),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: const Text(
+                    "A ListTile with a ZenitOutlineButton",
+                  ),
+                  subtitle: const Text(
+                    "This is the subtitle",
+                  ),
+                  trailing: SizedBox(
+                    width: 160,
+                    child: ZenitOutlineButton(
+                      onPressed: () => print("Button pressed"),
+                      child: const Text("Outline Button"),
+                    ),
                   ),
                 ),
               ],

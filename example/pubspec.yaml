@@ -13,6 +13,9 @@ dependencies:
   zenit_ui:
     path: ../
   gap: ^3.0.0
+  zenit_window_plugin:
+    git: https://github.com/dahliaOS/zenit_window_plugin.git
+  handy_window: ^0.3.1
 
 dev_dependencies:
   flutter_lints: ^2.0.1

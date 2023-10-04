@@ -19,7 +19,8 @@ class ZenitRadioButton<T> extends StatefulWidget {
   State<ZenitRadioButton<T>> createState() => _ZenitRadioButtonState<T>();
 }
 
-class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTickerProviderStateMixin {
+class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>>
+    with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -36,7 +37,10 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTi
 
   @override
   void didUpdateWidget(covariant ZenitRadioButton<T> oldWidget) {
-    controller.animateTo(widget.value == widget.groupValue ? 1 : 0, curve: Curves.easeOut);
+    controller.animateTo(
+      widget.value == widget.groupValue ? 1 : 0,
+      curve: Curves.easeOut,
+    );
     if (widget == oldWidget) return;
     super.didUpdateWidget(oldWidget);
   }
@@ -74,9 +78,10 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTi
                   thumbColor: thumbColor,
                   animationValue: animation.value,
                   hover: hover,
-                  hoverColor: Theme.of(context).foregroundColor.withOpacity(0.05),
+                  hoverColor:
+                      Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
                 ),
-                size: const Size.square(24),
+                size: const Size.square(32),
               );
             },
           ),
@@ -118,22 +123,27 @@ class _RadioPainter extends CustomPainter {
 
     final Offset center = Offset(size.height / 2, size.width / 2);
 
+    // Draw Background
     canvas.drawCircle(center, 12, backgroundPaint);
 
+    // Draw hover
     if (hover) {
       final hoverPaint = Paint()
         ..color = hoverColor
         ..style = PaintingStyle.fill;
-      canvas.drawCircle(Offset(size.width / 2, size.height / 2), 20, hoverPaint);
+      canvas.drawCircle(center, 20, hoverPaint);
     }
 
+    // Draw thumb
     if (animationValue != 0) {
-      canvas.drawCircle(center, animationValue * 7, thumbPaint);
+      canvas.drawCircle(center, animationValue * 6, thumbPaint);
     }
   }
 
   @override
   bool shouldRepaint(covariant _RadioPainter old) {
-    return selected != old.selected || animationValue != old.animationValue || hover != old.hover;
+    return selected != old.selected ||
+        animationValue != old.animationValue ||
+        hover != old.hover;
   }
 }

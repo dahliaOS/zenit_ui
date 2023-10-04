@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitSection extends StatelessWidget {
   final Color? color;
@@ -24,7 +23,7 @@ class ZenitSection extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? kCardBorderRadius,
           side: BorderSide(
-            color: Theme.of(context).foregroundColor.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
           ),
         ),
         child: child,

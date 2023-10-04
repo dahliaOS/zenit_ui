@@ -16,6 +16,10 @@ export 'package:flutter/widgets.dart';
 export 'package:zenit_ui/src/components/buttons/buttons.dart';
 // Zenit checkbox
 export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
+// Zenit context menu
+export 'package:zenit_ui/src/components/context_menu/context_menu.dart';
+export 'package:zenit_ui/src/components/context_menu/context_menu_item.dart';
+export 'package:zenit_ui/src/components/context_menu/context_menu_region.dart';
 // Zenit Flat Button
 export 'package:zenit_ui/src/components/icon_button/icon_button.dart';
 // Zenit checkbox list tile
@@ -51,5 +55,7 @@ export 'package:zenit_ui/src/layout/tab_view/tab.dart';
 export 'package:zenit_ui/src/layout/tab_view/tab_data.dart';
 // Zenit tab view
 export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
+// Zenit Toolbar
+export 'package:zenit_ui/src/layout/toolbar/toolbar.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';

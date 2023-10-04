@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
-import 'package:zenit_ui/src/layout/layout_page/zenit_navigation_layout.dart';
-import 'package:zenit_ui/src/layout/navigator/zenit_navigator_observer.dart';
+import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitPortraitLayout extends StatefulWidget {
   const ZenitPortraitLayout({
@@ -13,14 +10,15 @@ class ZenitPortraitLayout extends StatefulWidget {
     required this.onPageSelected,
     required this.destinationBuilder,
     this.controller,
-    this.appBar,
-    this.margin = kDefaultPageMargin,
+    this.sidebarColor,
+    this.sidebarToolbar,
+    this.pageToolbarBuilder,
   });
 
   /// The number of pages in the [ZenitPortraitLayout].
   final int length;
 
-  final ZenitNavigationLayoutBuilder destinationBuilder;
+  final ZenitNavigationSidebarBuilder destinationBuilder;
 
   /// The index of the selected page.
   final int selectedIndex;
@@ -34,11 +32,14 @@ class ZenitPortraitLayout extends StatefulWidget {
   /// A controller that can control the index of the [ZenitPortraitLayout].
   final ValueNotifier<int>? controller;
 
-  /// AppBar for the [ZenitPortraitLayout]
-  final PreferredSizeWidget? appBar;
+  /// Sets the color of the sidebar
+  final Color? sidebarColor;
 
-  /// Page Margin
-  final EdgeInsets margin;
+  // Toolbar on the top of the sidebar
+  final PreferredSizeWidget? sidebarToolbar;
+
+  // Toolbar on the top of the page
+  final PreferredSizeWidget? Function(BuildContext context, int index)? pageToolbarBuilder;
 
   @override
   State<ZenitPortraitLayout> createState() => _ZenitPortraitLayoutState();
@@ -72,7 +73,11 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
   // The router for the indexed pages.
   MaterialPageRoute pageRoute(int index) {
     return MaterialPageRoute(
-      builder: (context) => widget.pageBuilder(context, index),
+      builder: (context) => Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: widget.pageToolbarBuilder?.call(context, index),
+        body: widget.pageBuilder(context, index),
+      ),
     );
   }
 
@@ -83,12 +88,24 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => !await navigator.maybePop().then(setPage),
-      child: Padding(
-        padding: widget.margin,
-        child: ZenitNavigatorPopTransactionObserver(
-          navigatorKey: _navigatorKey,
+    final sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    return PopScope(
+      onPopInvoked: (_) async => !await navigator.maybePop().then(setPage),
+      child: ZenitNavigatorPopTransactionObserver(
+        navigatorKey: _navigatorKey,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+            pageTransitionsTheme: const PageTransitionsTheme(
+              builders: {
+                TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+                TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
+              },
+            ),
+          ),
           child: Navigator(
             key: _navigatorKey,
             observers: [ZenitNavigatorCanPopObserver.withContext(context)],
@@ -96,12 +113,22 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
               return [
                 MaterialPageRoute(
                   builder: (context) {
-                    return Scaffold(
-                      body: ZenitLayoutDestinationListView(
-                        length: widget.length,
-                        selectedIndex: selectedIndex,
-                        onTap: onTap,
-                        builder: widget.destinationBuilder,
+                    return DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: sidebarColor,
+                      ),
+                      child: Scaffold(
+                        backgroundColor: sidebarColor,
+                        appBar: widget.sidebarToolbar,
+                        body: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: ZenitLayoutDestinationListView(
+                            length: widget.length,
+                            selectedIndex: -1,
+                            onTap: onTap,
+                            builder: widget.destinationBuilder,
+                          ),
+                        ),
                       ),
                     );
                   },

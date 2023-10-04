@@ -9,7 +9,7 @@ class ZenitIconButton extends StatelessWidget {
     this.onPressed,
     this.borderRadius = kDefaultBorderRadiusExtraLarge,
     this.buttonSize = 40,
-    this.iconSize = 24,
+    this.iconSize = 20,
   });
 
   final IconData? icon;
@@ -29,6 +29,7 @@ class ZenitIconButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       borderRadius: borderRadius,
+      hoverColor: hoverColor,
       child: SizedBox.square(
         dimension: buttonSize,
         child: Icon(

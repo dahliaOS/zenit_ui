@@ -11,11 +11,10 @@ mixin ZenitTheme {
   static ZenitSwitchTheme switchTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitSwitchTheme(
-      activeTrackColor: theme.primaryColor,
-      inactiveTrackColor: theme.surfaceColor,
+      activeTrackColor: theme.colorScheme.primary,
+      inactiveTrackColor: theme.colorScheme.surface,
       activeThumbColor: theme.colorScheme.background,
-      inactiveThumbColor:
-          theme.darkMode ? theme.foregroundColor.withOpacity(0.35) : theme.foregroundColor.withOpacity(0.35),
+      inactiveThumbColor: theme.colorScheme.onSurface.withOpacity(0.35),
       disabledTrackColor: theme.disabledColor,
       disabledThumbColor: theme.colorScheme.background,
     );
@@ -32,8 +31,8 @@ mixin ZenitTheme {
   static ZenitRadioButtonTheme radioButtonTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitRadioButtonTheme(
-      activeBackgroundColor: theme.primaryColor,
-      inactiveBackgroundColor: theme.surfaceColor,
+      activeBackgroundColor: theme.colorScheme.primary,
+      inactiveBackgroundColor: theme.colorScheme.surface,
       disabledBackgroundColor: theme.disabledColor,
       thumbColor: theme.colorScheme.background,
     );
@@ -42,8 +41,8 @@ mixin ZenitTheme {
   static ZenitCheckboxTheme checkboxTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitCheckboxTheme(
-      activeBackgroundColor: theme.primaryColor,
-      inactiveBackgroundColor: theme.surfaceColor,
+      activeBackgroundColor: theme.colorScheme.primary,
+      inactiveBackgroundColor: theme.colorScheme.surface,
       foregroundColor: theme.colorScheme.background,
       disabledBackgroundColor: theme.disabledColor,
     );
@@ -51,7 +50,7 @@ mixin ZenitTheme {
 }
 
 ThemeData createZenitTheme({
-  Brightness? brightness = Brightness.light,
+  Brightness brightness = Brightness.light,
   Color? primaryColor,
   Color? backgroundColor,
   Color? surfaceColor,
@@ -68,7 +67,8 @@ ThemeData createZenitTheme({
   primaryColor ??= const Color(0xFF0073cf);
   backgroundColor ??= darkMode ? darkBackground : lightBackground;
   foregroundColor ??= darkMode ? darkForeground : lightForeground;
-  surfaceColor ??= darkMode ? darkBackground.lighten() : lightBackground.darken();
+  surfaceColor ??= darkMode ? darkBackground.brighten(0.12) : lightBackground.darken(0.12);
+  final textTheme = createTextTheme(foregroundColor);
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -94,7 +94,7 @@ ThemeData createZenitTheme({
 
   // FloatingActionButton Theme
   final floatingActionButtonTheme = FloatingActionButtonThemeData(
-    backgroundColor: surfaceColor,
+    backgroundColor: backgroundColor.themedLightnessFromBrightness(brightness, 0.05),
     foregroundColor: foregroundColor,
     elevation: 0,
     focusElevation: 0,
@@ -108,7 +108,7 @@ ThemeData createZenitTheme({
     iconSize: 24,
     shape: RoundedRectangleBorder(
       borderRadius: kDefaultBorderRadiusLarge,
-      side: BorderSide(color: foregroundColor.withOpacity(0.1)),
+      side: BorderSide(color: foregroundColor.withOpacity(0.05)),
     ),
   );
 
@@ -137,20 +137,25 @@ ThemeData createZenitTheme({
 
   // Divider Theme
   final dividerTheme = DividerThemeData(
-    color: foregroundColor.withOpacity(0.2),
+    color: foregroundColor.withOpacity(0.1),
     space: 1,
   );
 
   // ListTile Theme
   final listTileTheme = ListTileThemeData(
-    subtitleTextStyle: TextStyle(color: foregroundColor.darken(0.4)),
+    subtitleTextStyle: TextStyle(
+      color: foregroundColor.darken(0.4),
+      fontSize: textTheme.bodyMedium?.fontSize,
+    ),
   );
 
   if (brightness == Brightness.light) {
     return ThemeData.from(
       colorScheme: ColorScheme.light(
         primary: primaryColor,
+        onPrimary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
         secondary: primaryColor,
+        onSecondary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
         background: backgroundColor,
         onBackground: foregroundColor,
         surface: surfaceColor,
@@ -166,13 +171,16 @@ ThemeData createZenitTheme({
       tooltipTheme: tooltipTheme,
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
-      textTheme: createTextTheme(foregroundColor),
+      textTheme: textTheme,
+      hoverColor: foregroundColor.withOpacity(0.05),
     );
   } else {
     return ThemeData.from(
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
+        onPrimary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
         secondary: primaryColor,
+        onSecondary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
         background: backgroundColor,
         onBackground: foregroundColor,
         surface: surfaceColor,
@@ -189,17 +197,15 @@ ThemeData createZenitTheme({
       tooltipTheme: tooltipTheme,
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
-      textTheme: createTextTheme(foregroundColor),
+      textTheme: textTheme,
+      hoverColor: foregroundColor.withOpacity(0.05),
     );
   }
 }
 
 extension ZenitThemeData on ThemeData {
-  Color get surfaceColor => colorScheme.surface;
-  Color get foregroundColor => textTheme.labelLarge?.color ?? Colors.white;
-  Color get primaryColor => colorScheme.primary;
   bool get darkMode => brightness == Brightness.dark;
-  Color get accentForegroundColor => primaryColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.3 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 }
 

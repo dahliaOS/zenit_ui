@@ -108,9 +108,9 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
                 checkmarkAnimationValue: curvedCheckmark.value,
                 dashAnimationValue: curvedDash.value,
                 hover: hover,
-                hoverColor: Theme.of(context).foregroundColor.withOpacity(0.05),
+                hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
               ),
-              size: const Size.square(24),
+              size: const Size.square(32),
             ),
           ),
         ),
@@ -143,7 +143,8 @@ class _CheckboxPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     const shape = RoundedRectangleBorder(borderRadius: kDefaultBorderRadiusSmall);
-    final rect = Offset.zero & size;
+    final center = Offset(size.width / 2, size.height / 2);
+    final rect = Rect.fromCenter(center: center, width: 24, height: 24);
     final bgPath = shape.getOuterPath(rect);
     final backgroundPaint = Paint()
       ..color = value != false ? activeBackgroundColor : inactiveBackgroundColor
@@ -162,29 +163,39 @@ class _CheckboxPainter extends CustomPainter {
       final hoverPaint = Paint()
         ..color = hoverColor
         ..style = PaintingStyle.fill;
-      canvas.drawCircle(Offset(size.width / 2, size.height / 2), 20, hoverPaint);
+      canvas.drawCircle(
+        center,
+        20,
+        hoverPaint,
+      );
     }
 
     switch (value) {
       case true:
         final checkmarkPath = Path()
-          ..moveTo(size.width * 0.279166667, size.height * 0.511250000)
-          ..lineTo(size.width * 0.416666667, size.height * 0.638333333)
-          ..lineTo(size.width * 0.720833333, size.height * 0.344583333);
+          ..moveTo(size.width * 0.33437500, size.width * 0.50843750)
+          ..lineTo(size.width * 0.43750000, size.width * 0.60375000)
+          ..lineTo(size.width * 0.66562500, size.width * 0.38343750);
         final checkmarkMetrics = checkmarkPath.computeMetrics().first;
         canvas.drawPath(
-          checkmarkMetrics.extractPath(0, checkmarkAnimationValue * checkmarkMetrics.length),
+          checkmarkMetrics.extractPath(
+            0,
+            checkmarkAnimationValue * checkmarkMetrics.length,
+          ),
           foregroundPaint,
         );
       case false:
         break;
       case null:
         final dashPath = Path()
-          ..moveTo(size.width * 0.3, size.height * 0.5)
-          ..lineTo(size.width * 0.7, size.height * 0.5);
+          ..moveTo(size.width * 0.35, size.height * 0.5)
+          ..lineTo(size.width * 0.65, size.height * 0.5);
 
         final dashMetrics = dashPath.computeMetrics().first;
-        canvas.drawPath(dashMetrics.extractPath(0, dashAnimationValue * dashMetrics.length), foregroundPaint);
+        canvas.drawPath(
+          dashMetrics.extractPath(0, dashAnimationValue * dashMetrics.length),
+          foregroundPaint,
+        );
     }
   }
 
