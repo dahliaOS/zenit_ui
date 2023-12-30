@@ -26,15 +26,18 @@ class ZenitIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      borderRadius: borderRadius,
-      hoverColor: hoverColor,
-      child: SizedBox.square(
-        dimension: buttonSize,
-        child: Icon(
-          icon,
-          size: iconSize,
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: borderRadius,
+        hoverColor: hoverColor,
+        child: SizedBox.square(
+          dimension: buttonSize,
+          child: Icon(
+            icon,
+            size: iconSize,
+          ),
         ),
       ),
     );

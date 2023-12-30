@@ -21,7 +21,7 @@ class SubPagesExample extends StatelessWidget {
 }
 
 class _SubPage extends StatelessWidget {
-  const _SubPage({super.key});
+  const _SubPage();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _SubPage extends StatelessWidget {
 }
 
 class _SubSubPage extends StatelessWidget {
-  const _SubSubPage({super.key});
+  const _SubSubPage();
 
   @override
   Widget build(BuildContext context) {

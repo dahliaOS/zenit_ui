@@ -20,6 +20,8 @@ export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
 export 'package:zenit_ui/src/components/context_menu/context_menu.dart';
 export 'package:zenit_ui/src/components/context_menu/context_menu_item.dart';
 export 'package:zenit_ui/src/components/context_menu/context_menu_region.dart';
+// Zenit Dialog
+export 'package:zenit_ui/src/components/dialog/dialog.dart';
 // Zenit Flat Button
 export 'package:zenit_ui/src/components/icon_button/icon_button.dart';
 // Zenit checkbox list tile
@@ -59,3 +61,7 @@ export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
 export 'package:zenit_ui/src/layout/toolbar/toolbar.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';
+// Zenit window
+export 'package:zenit_ui/src/window/window_backdrop.dart';
+export 'package:zenit_ui/src/window/window_buttons.dart';
+export 'package:zenit_ui/src/window/window_titlebar.dart';

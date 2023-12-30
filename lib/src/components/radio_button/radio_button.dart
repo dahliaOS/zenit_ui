@@ -19,8 +19,7 @@ class ZenitRadioButton<T> extends StatefulWidget {
   State<ZenitRadioButton<T>> createState() => _ZenitRadioButtonState<T>();
 }
 
-class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>>
-    with SingleTickerProviderStateMixin {
+class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -59,6 +58,8 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>>
     final activeBackgroundColor = theme.activeBackgroundColor;
     final inactiveBackgroundColor = theme.inactiveBackgroundColor;
     final thumbColor = theme.thumbColor;
+    final outlineColor = theme.outlineColor;
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => hover = true),
@@ -78,8 +79,8 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>>
                   thumbColor: thumbColor,
                   animationValue: animation.value,
                   hover: hover,
-                  hoverColor:
-                      Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                  hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                  outlineColor: outlineColor,
                 ),
                 size: const Size.square(32),
               );
@@ -98,6 +99,7 @@ class _RadioPainter extends CustomPainter {
   final Color thumbColor;
   final bool hover;
   final Color hoverColor;
+  final Color outlineColor;
 
   final double animationValue;
 
@@ -109,6 +111,7 @@ class _RadioPainter extends CustomPainter {
     required this.animationValue,
     required this.hover,
     required this.hoverColor,
+    required this.outlineColor,
   });
 
   @override
@@ -116,6 +119,11 @@ class _RadioPainter extends CustomPainter {
     final Paint backgroundPaint = Paint()
       ..color = selected ? activeBackgroundColor : inactiveBackgroundColor
       ..style = PaintingStyle.fill;
+
+    final Paint outlinePaint = Paint()
+      ..color = selected ? activeBackgroundColor : outlineColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
 
     final Paint thumbPaint = Paint()
       ..color = thumbColor
@@ -125,6 +133,7 @@ class _RadioPainter extends CustomPainter {
 
     // Draw Background
     canvas.drawCircle(center, 12, backgroundPaint);
+    canvas.drawCircle(center, 12, outlinePaint);
 
     // Draw hover
     if (hover) {
@@ -144,6 +153,11 @@ class _RadioPainter extends CustomPainter {
   bool shouldRepaint(covariant _RadioPainter old) {
     return selected != old.selected ||
         animationValue != old.animationValue ||
-        hover != old.hover;
+        hover != old.hover ||
+        hoverColor != old.hoverColor ||
+        outlineColor != old.outlineColor ||
+        activeBackgroundColor != old.activeBackgroundColor ||
+        inactiveBackgroundColor != old.inactiveBackgroundColor ||
+        thumbColor != old.thumbColor;
   }
 }

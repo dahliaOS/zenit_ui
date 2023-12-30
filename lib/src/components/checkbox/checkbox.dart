@@ -88,6 +88,7 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
     final foregroundColor = theme.foregroundColor;
     final curvedCheckmark = CurvedAnimation(parent: checkmarkController, curve: Curves.easeOut);
     final curvedDash = CurvedAnimation(parent: dashController, curve: Curves.easeOut);
+    final outlineColor = theme.outlineColor;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -107,6 +108,7 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
                 foregroundColor: foregroundColor,
                 checkmarkAnimationValue: curvedCheckmark.value,
                 dashAnimationValue: curvedDash.value,
+                outlineColor: outlineColor,
                 hover: hover,
                 hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
               ),
@@ -128,6 +130,7 @@ class _CheckboxPainter extends CustomPainter {
   final double dashAnimationValue;
   final bool hover;
   final Color hoverColor;
+  final Color outlineColor;
 
   const _CheckboxPainter({
     required this.value,
@@ -138,6 +141,7 @@ class _CheckboxPainter extends CustomPainter {
     required this.dashAnimationValue,
     required this.hover,
     required this.hoverColor,
+    required this.outlineColor,
   });
 
   @override
@@ -150,6 +154,11 @@ class _CheckboxPainter extends CustomPainter {
       ..color = value != false ? activeBackgroundColor : inactiveBackgroundColor
       ..style = PaintingStyle.fill;
 
+    final Paint outlinePaint = Paint()
+      ..color = value == true ? activeBackgroundColor : outlineColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
     final Paint foregroundPaint = Paint()
       ..color = foregroundColor
       ..style = PaintingStyle.stroke
@@ -158,6 +167,7 @@ class _CheckboxPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     canvas.drawPath(bgPath, backgroundPaint);
+    canvas.drawPath(bgPath, outlinePaint);
 
     if (hover) {
       final hoverPaint = Paint()
@@ -201,6 +211,14 @@ class _CheckboxPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _CheckboxPainter old) {
-    return value != old.value || checkmarkAnimationValue != old.checkmarkAnimationValue || hover != old.hover;
+    return value != old.value ||
+        checkmarkAnimationValue != old.checkmarkAnimationValue ||
+        hover != old.hover ||
+        dashAnimationValue != old.dashAnimationValue ||
+        hoverColor != old.hoverColor ||
+        outlineColor != old.outlineColor ||
+        activeBackgroundColor != old.activeBackgroundColor ||
+        inactiveBackgroundColor != old.inactiveBackgroundColor ||
+        foregroundColor != old.foregroundColor;
   }
 }

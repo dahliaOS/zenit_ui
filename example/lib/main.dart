@@ -1,6 +1,5 @@
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/pages.dart';
-import 'package:zenit_window_plugin/zenit_window_plugin.dart';
 
 void main() async {
   // Check for repainting

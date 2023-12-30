@@ -50,8 +50,13 @@ class ZenitTab extends StatelessWidget {
               onPressed: onClose,
               icon: Icons.close,
             ),
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: kDefaultBorderRadiusMedium,
+              side: selected
+                  ? BorderSide(
+                      color: Theme.of(context).colorScheme.outline,
+                    )
+                  : BorderSide.none,
             ),
             //TODO maybe find a better way because this is hacky af and very wrong
             visualDensity: const VisualDensity(vertical: -3),

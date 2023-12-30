@@ -12,6 +12,7 @@ class ButtonBase extends StatefulWidget {
     this.splashColor,
     this.borderSide,
     this.borderRadius,
+    this.fontWeight = FontWeight.w500,
   });
 
   final Widget? child;
@@ -25,6 +26,7 @@ class ButtonBase extends StatefulWidget {
   final Color? splashColor;
   final BorderSide? borderSide;
   final BorderRadius? borderRadius;
+  final FontWeight? fontWeight;
 
   @override
   _ButtonBaseState createState() => _ButtonBaseState();
@@ -59,8 +61,10 @@ class _ButtonBaseState extends State<ButtonBase> {
                 child: DefaultTextStyle(
                   style: TextStyle(
                     color: widget.foregroundColor ?? theme.colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.25,
+                    fontWeight: widget.fontWeight,
+                    letterSpacing: 0.2,
+                    fontFamily: "Inter",
+                    package: "zenit_ui",
                   ),
                   child: Center(
                     widthFactor: 1,

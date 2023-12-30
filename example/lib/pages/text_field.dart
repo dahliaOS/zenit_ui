@@ -14,22 +14,28 @@ class _ZenitTextFieldExampleState extends State<ZenitTextFieldExample> {
   final TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Gap(8),
-        const ExampleTitle("ZenitTextField"),
-        const Gap(24),
-        ZenitTextField(
-          hint: "Text Field! You can type here",
-          controller: controller,
-          onChanged: (value) => setState(() => text = controller.text),
-        ),
-        const Gap(8),
-        Text(
-          "Your Text is here:\n $text",
-          textAlign: TextAlign.center,
-        ),
-      ],
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Gap(8),
+          const ExampleTitle("ZenitTextField"),
+          const Gap(24),
+          SizedBox(
+            width: 256,
+            child: ZenitTextField(
+              hint: "Text Field! You can type here",
+              controller: controller,
+              onChanged: (value) => setState(() => text = controller.text),
+            ),
+          ),
+          const Gap(8),
+          Text(
+            "Your Text is here:\n $text",
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

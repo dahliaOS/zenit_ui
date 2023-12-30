@@ -79,8 +79,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final Color sidebarColor =
-        widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    final Color sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.surface;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(

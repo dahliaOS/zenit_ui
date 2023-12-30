@@ -51,14 +51,6 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
                 child: const Text("TextButton"),
               ),
             ),
-            const Gap(12),
-            SizedBox(
-              width: 160,
-              child: ZenitOutlineButton(
-                onPressed: () => print("FilledButton was clicked"),
-                child: const Text("OutlineButton"),
-              ),
-            ),
           ],
         ),
         const Gap(24),
@@ -111,21 +103,6 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
                     child: ZenitTextButton(
                       onPressed: () => print("Button pressed"),
                       child: const Text("Text Button"),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    "A ListTile with a ZenitOutlineButton",
-                  ),
-                  subtitle: const Text(
-                    "This is the subtitle",
-                  ),
-                  trailing: SizedBox(
-                    width: 160,
-                    child: ZenitOutlineButton(
-                      onPressed: () => print("Button pressed"),
-                      child: const Text("Outline Button"),
                     ),
                   ),
                 ),

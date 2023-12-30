@@ -20,8 +20,7 @@ class ZenitSwitch extends StatefulWidget {
   _ZenitSwitchState createState() => _ZenitSwitchState();
 }
 
-class _ZenitSwitchState extends State<ZenitSwitch>
-    with TickerProviderStateMixin {
+class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
   late final AnimationController _positionController = AnimationController(
     vsync: this,
     duration: kDefaultAnimationDuration,
@@ -53,12 +52,12 @@ class _ZenitSwitchState extends State<ZenitSwitch>
 
   @override
   Widget build(BuildContext context) {
-    final ZenitSwitchTheme switchTheme =
-        widget.theme ?? ZenitTheme.switchTheme(context);
+    final ZenitSwitchTheme switchTheme = widget.theme ?? ZenitTheme.switchTheme(context);
     final Color activeTrackColor = switchTheme.activeTrackColor;
     final Color inactiveTrackColor = switchTheme.inactiveTrackColor;
     final Color activeThumbColor = switchTheme.activeThumbColor;
     final Color inactiveThumbColor = switchTheme.inactiveThumbColor;
+    final Color outlineColor = switchTheme.outlineColor;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -85,10 +84,10 @@ class _ZenitSwitchState extends State<ZenitSwitch>
                 inactiveThumbColor: inactiveThumbColor,
                 positionValue: _positionController.value,
                 hover: hover,
-                hoverColor:
-                    Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                outlineColor: outlineColor,
               ),
-              size: const Size(48, 24),
+              size: const Size(44, 24),
             ),
           ),
         ),
@@ -106,6 +105,7 @@ class _SwitchPainter extends CustomPainter {
   final double positionValue;
   final bool hover;
   final Color hoverColor;
+  final Color outlineColor;
 
   const _SwitchPainter({
     required this.value,
@@ -116,26 +116,33 @@ class _SwitchPainter extends CustomPainter {
     required this.positionValue,
     required this.hover,
     required this.hoverColor,
+    required this.outlineColor,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     const shape = StadiumBorder();
-    final rect = Offset.zero & size;
+    final center = Offset(size.width / 2, size.height / 2);
+    final rect = Rect.fromCenter(center: center, width: 44, height: 24);
     final trackPath = shape.getOuterPath(rect);
 
     final Paint trackPaint = Paint()
       ..color = value ? activeTrackColor : inactiveTrackColor
       ..style = PaintingStyle.fill;
 
+    final Paint outlinePaint = Paint()
+      ..color = value ? activeTrackColor : outlineColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
     final Paint thumbPaint = Paint()
       ..color = value ? activeThumbColor : inactiveThumbColor
       ..style = PaintingStyle.fill;
 
     canvas.drawPath(trackPath, trackPaint);
+    canvas.drawPath(trackPath, outlinePaint);
 
-    final Offset thumbPosition =
-        Offset(12 + (24 * positionValue), size.height / 2);
+    final Offset thumbPosition = Offset(12 + (20 * positionValue), size.height / 2);
 
     if (hover) {
       final Paint hoverPaint = Paint()
@@ -145,13 +152,19 @@ class _SwitchPainter extends CustomPainter {
       canvas.drawCircle(thumbPosition, 20, hoverPaint);
     }
 
-    canvas.drawCircle(thumbPosition, 8, thumbPaint);
+    canvas.drawCircle(thumbPosition, size.height / 3, thumbPaint);
   }
 
   @override
   bool shouldRepaint(covariant _SwitchPainter old) {
     return value != old.value ||
         positionValue != old.positionValue ||
-        hover != old.hover;
+        hover != old.hover ||
+        outlineColor != old.outlineColor ||
+        activeTrackColor != old.activeTrackColor ||
+        inactiveTrackColor != old.inactiveTrackColor ||
+        activeThumbColor != old.activeThumbColor ||
+        inactiveThumbColor != old.inactiveThumbColor ||
+        hoverColor != old.hoverColor;
   }
 }

@@ -23,7 +23,7 @@ class ZenitSection extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? kCardBorderRadius,
           side: BorderSide(
-            color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+            color: Theme.of(context).colorScheme.outline,
           ),
         ),
         child: child,

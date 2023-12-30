@@ -31,8 +31,7 @@ class ZenitContextMenuBuilder extends StatefulWidget {
   });
 
   @override
-  State<ZenitContextMenuBuilder> createState() =>
-      _ZenitContextMenuBuilderState();
+  State<ZenitContextMenuBuilder> createState() => _ZenitContextMenuBuilderState();
 }
 
 class _ZenitContextMenuBuilderState extends State<ZenitContextMenuBuilder> {
@@ -102,8 +101,7 @@ class _ZenitContextMenuBuilderState extends State<ZenitContextMenuBuilder> {
         result.addAll(_buildShortcuts(selection.children));
       } else if (selection case ZenitContextMenuItem()) {
         if (selection.shortcut != null && selection.onPressed != null) {
-          result[selection.shortcut!] =
-              VoidCallbackIntent(selection.onPressed!);
+          result[selection.shortcut!] = VoidCallbackIntent(selection.onPressed!);
         }
       }
     }
@@ -150,7 +148,7 @@ MenuStyle _menuStyle(BuildContext context) {
     ),
     side: MaterialStatePropertyAll(
       BorderSide(
-        color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
+        color: Theme.of(context).colorScheme.outline,
       ),
     ),
     elevation: const MaterialStatePropertyAll(0),

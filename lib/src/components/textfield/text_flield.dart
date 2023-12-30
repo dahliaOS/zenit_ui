@@ -6,12 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 
 export 'package:flutter/services.dart'
-    show
-        SmartDashesType,
-        SmartQuotesType,
-        TextCapitalization,
-        TextInputAction,
-        TextInputType;
+    show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
 class ZenitTextField extends StatelessWidget {
   const ZenitTextField({
@@ -71,10 +66,10 @@ class ZenitTextField extends StatelessWidget {
     this.contextMenuBuilder,
     this.hint,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType = smartDashesType ??
-            (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ??
-            (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType =
+            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType =
+            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -90,9 +85,7 @@ class ZenitTextField extends StatelessWidget {
           'Obscured fields cannot be multiline.',
         ),
         assert(
-          maxLength == null ||
-              maxLength == TextField.noMaxLength ||
-              maxLength > 0,
+          maxLength == null || maxLength == TextField.noMaxLength || maxLength > 0,
         ),
         assert(
           !identical(textInputAction, TextInputAction.newline) ||
@@ -100,10 +93,8 @@ class ZenitTextField extends StatelessWidget {
               !identical(keyboardType, TextInputType.text),
           'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
         ),
-        keyboardType = keyboardType ??
-            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        enableInteractiveSelection =
-            enableInteractiveSelection ?? (!readOnly || !obscureText);
+        keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
+        enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText);
 
   final TextEditingController? controller;
 
@@ -233,12 +224,8 @@ class ZenitTextField extends StatelessWidget {
       cursorHeight: cursorHeight,
       cursorRadius: cursorRadius,
       cursorWidth: cursorWidth,
-      decoration: decoration
-              ?.applyDefaults(kDefaultInputDecoration)
-              .copyWith(hintText: hint) ??
-          const InputDecoration()
-              .applyDefaults(kDefaultInputDecoration)
-              .copyWith(hintText: hint),
+      decoration: decoration?.applyDefaults(kDefaultInputDecoration).copyWith(hintText: hint) ??
+          const InputDecoration().applyDefaults(kDefaultInputDecoration).copyWith(hintText: hint),
       dragStartBehavior: dragStartBehavior,
       enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
       enableInteractiveSelection: enableInteractiveSelection,
@@ -286,15 +273,11 @@ class ZenitTextField extends StatelessWidget {
   }
 }
 
-const double _kDefaultBorderWidth = 2.0;
-
 const BorderSide _kDefaultBorderSideInactive = BorderSide(
   color: Colors.transparent,
-  width: _kDefaultBorderWidth,
 );
 
-const OutlineInputBorder _kDefaultOutlineInputBorderInactive =
-    OutlineInputBorder(
+const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorder(
   borderSide: _kDefaultBorderSideInactive,
   borderRadius: kDefaultBorderRadiusMedium,
 );
@@ -302,23 +285,35 @@ const OutlineInputBorder _kDefaultOutlineInputBorderInactive =
 InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
   final BorderSide kDefaultBorderSideActive = BorderSide(
     color: theme.primaryColor,
-    width: _kDefaultBorderWidth,
+    width: 2,
+  );
+
+  final BorderSide kDefaultBorderSideNormal = BorderSide(
+    color: theme.colorScheme.outline,
   );
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
     fillColor: theme.colorScheme.surface,
-    border: _kDefaultOutlineInputBorderInactive,
-    enabledBorder: _kDefaultOutlineInputBorderInactive,
+    border: OutlineInputBorder(
+      borderSide: kDefaultBorderSideActive,
+      borderRadius: kDefaultBorderRadiusMedium,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: kDefaultBorderSideNormal,
+      borderRadius: kDefaultBorderRadiusMedium,
+    ),
     disabledBorder: _kDefaultOutlineInputBorderInactive,
     focusedBorder: OutlineInputBorder(
       borderSide: kDefaultBorderSideActive,
       borderRadius: kDefaultBorderRadiusMedium,
     ),
     labelStyle: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.75)),
-    floatingLabelBehavior: FloatingLabelBehavior.never,
-    alignLabelWithHint: true,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 16,
+    ),
+    isDense: true,
   );
 
   return kDefaultInputDecorationTheme;

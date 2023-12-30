@@ -12,6 +12,7 @@ class ZenitToolbar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle = true,
     this.border,
     this.height,
+    this.padding = const EdgeInsets.symmetric(horizontal: 6),
   });
 
   final List<Widget>? leadingActions;
@@ -22,14 +23,15 @@ class ZenitToolbar extends StatelessWidget implements PreferredSizeWidget {
   final Border? border;
   final bool centerTitle;
   final double? height;
+  final EdgeInsetsGeometry padding;
 
   @override
   Size get preferredSize => Size.fromHeight(height ?? 48);
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = backgroundColor ??
-        Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    final bgColor =
+        backgroundColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
     return SizedBox(
       height: preferredSize.height,
       child: DecoratedBox(
@@ -41,27 +43,33 @@ class ZenitToolbar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Align(
               alignment: Alignment.centerLeft,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: leadingActions ?? [],
+              child: Padding(
+                padding: EdgeInsets.only(left: padding.horizontal / 2),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: leadingActions ?? [],
+                ),
               ),
             ),
             Align(
               alignment: centerTitle ? Alignment.center : Alignment.centerLeft,
               child: DefaultTextStyle(
-                style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(fontWeight: FontWeight.w600) ??
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600) ??
                     titleStyle,
-                child: title ?? const SizedBox.shrink(),
+                child: Padding(
+                  padding: centerTitle ? EdgeInsets.zero : const EdgeInsets.only(left: 16.0),
+                  child: title,
+                ),
               ),
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: trailingActions ?? [],
+              child: Padding(
+                padding: EdgeInsets.only(right: padding.horizontal / 2),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: trailingActions ?? [],
+                ),
               ),
             ),
           ],
