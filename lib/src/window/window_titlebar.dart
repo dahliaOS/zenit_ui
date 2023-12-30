@@ -93,7 +93,6 @@ class _ZenitWindowTitlebarState extends State<ZenitWindowTitlebar> {
                   type: ZenitWindowButtonType.close,
                   onPressed: () async => window.close(),
                 ),
-                const SizedBox(width: 4),
               ],
             ),
           ),
