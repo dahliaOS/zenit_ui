@@ -27,7 +27,7 @@ jobs:
         run: flutter build web --release
         working-directory: ./example
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './example/build/web/'
   deploy:
