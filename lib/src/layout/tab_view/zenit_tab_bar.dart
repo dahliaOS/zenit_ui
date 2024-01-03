@@ -43,14 +43,16 @@ class _ZenitTabBarState extends State<ZenitTabBar> {
         SizedBox(
           height: 48,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            padding: const EdgeInsets.symmetric(vertical: 6.0),
             child: ListView.builder(
-              itemCount: widget.onAddTab != null ? widget.tabs.length + 1 : widget.tabs.length,
+              itemCount: widget.onAddTab != null
+                  ? widget.tabs.length + 1
+                  : widget.tabs.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 if (index < widget.tabs.length) {
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 2.0),
                     child: ZenitTab(
                       icon: widget.tabs.elementAt(index).leading,
                       title: widget.tabs.elementAt(index).title,
@@ -61,7 +63,8 @@ class _ZenitTabBarState extends State<ZenitTabBar> {
                   );
                 } else {
                   return IconButton(
-                    constraints: const BoxConstraints.tightFor(height: 40, width: 40),
+                    constraints:
+                        const BoxConstraints.tightFor(height: 36, width: 36),
                     padding: EdgeInsets.zero,
                     onPressed: widget.onAddTab,
                     icon: const Icon(Icons.add),

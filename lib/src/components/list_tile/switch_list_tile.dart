@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/components/switch/switch.dart';
+import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitSwitchListTile extends StatelessWidget {
   const ZenitSwitchListTile({
     super.key,
     required this.value,
     this.onChanged,
-    /* this.activeColor,
-    this.activeTrackColor,
-    this.inactiveThumbColor,
-    this.inactiveTrackColor, */
+    this.switchTheme,
     this.tileColor,
     this.activeThumbImage,
     this.inactiveThumbImage,
@@ -34,13 +32,7 @@ class ZenitSwitchListTile extends StatelessWidget {
 
   final ValueChanged<bool>? onChanged;
 
-  //final Color? activeColor;
-
-  //final Color? activeTrackColor;
-
-  //final Color? inactiveThumbColor;
-
-  //final Color? inactiveTrackColor;
+  final ZenitSwitchTheme? switchTheme;
 
   final Color? tileColor;
 
@@ -81,7 +73,11 @@ class ZenitSwitchListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      trailing: ZenitSwitch(value: value, onChanged: onChanged),
+      trailing: ZenitSwitch(
+        value: value,
+        onChanged: onChanged,
+        theme: switchTheme,
+      ),
       title: title,
       subtitle: subtitle,
       leading: secondary,

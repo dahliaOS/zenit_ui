@@ -1,17 +1,39 @@
-import 'package:flutter/material.dart' as material;
+/// Flutter widgets and theme implementing the ZenitUI design language.
+///
+/// To use, `import 'package:zenit_ui/zenit_ui.dart';`
+///
+/// This library is mainly designed for desktop applications, but it can be used
+/// for mobile applications as well.
+library zenit_ui;
 
 // Zenit exports
 //
+// Material
+export 'package:flutter/material.dart';
+// Flutter base Widgets
+export 'package:flutter/widgets.dart';
 // Zenit buttons
 export 'package:zenit_ui/src/components/buttons/buttons.dart';
 // Zenit checkbox
 export 'package:zenit_ui/src/components/checkbox/checkbox.dart';
+// Zenit context menu
+export 'package:zenit_ui/src/components/context_menu/context_menu.dart';
+export 'package:zenit_ui/src/components/context_menu/context_menu_item.dart';
+export 'package:zenit_ui/src/components/context_menu/context_menu_region.dart';
+// Zenit Dialog
+export 'package:zenit_ui/src/components/dialog/dialog.dart';
 // Zenit Flat Button
-export 'package:zenit_ui/src/components/icon_button/zenit_icon_button.dart';
+export 'package:zenit_ui/src/components/icon_button/icon_button.dart';
+// Zenit checkbox list tile
+export 'package:zenit_ui/src/components/list_tile/checkbox_list_tile.dart';
+// Zenit radio button list tile
+export 'package:zenit_ui/src/components/list_tile/radio_list_tile.dart';
 // Zenit switch list tile
 export 'package:zenit_ui/src/components/list_tile/switch_list_tile.dart';
 // Zenit radio button
 export 'package:zenit_ui/src/components/radio_button/radio_button.dart';
+// Zenit section
+export 'package:zenit_ui/src/components/section/section.dart';
 // Zenit slider
 export 'package:zenit_ui/src/components/slider/slider.dart';
 // Zenit switch
@@ -35,28 +57,11 @@ export 'package:zenit_ui/src/layout/tab_view/tab.dart';
 export 'package:zenit_ui/src/layout/tab_view/tab_data.dart';
 // Zenit tab view
 export 'package:zenit_ui/src/layout/tab_view/zenit_tab_bar.dart';
+// Zenit Toolbar
+export 'package:zenit_ui/src/layout/toolbar/toolbar.dart';
 // Zenit theme
 export 'package:zenit_ui/src/theme/theme.dart';
-
-//Type Definitions
-
-//Switch
-typedef MaterialSwitch = material.Switch;
-
-//Theme
-typedef MaterialTheme = material.Theme;
-
-//TextField
-typedef MaterialTextField = material.TextField;
-
-//Slider
-typedef MaterialSlider = material.Slider;
-
-//RadioButton
-typedef MaterialRadioButton = material.Radio;
-
-//SwitchListTile
-typedef MaterialSwitchListTile = material.SwitchListTile;
-
-//Checkbox
-typedef MaterialCheckbox = material.Checkbox;
+// Zenit window
+export 'package:zenit_ui/src/window/window_backdrop.dart';
+export 'package:zenit_ui/src/window/window_buttons.dart';
+export 'package:zenit_ui/src/window/window_titlebar.dart';

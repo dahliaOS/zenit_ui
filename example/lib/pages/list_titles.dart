@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
 class ZenitListTilesExample extends StatefulWidget {
@@ -9,7 +8,7 @@ class ZenitListTilesExample extends StatefulWidget {
 }
 
 class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
-  bool value = false;
+  bool? value = false;
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.bodyLarge;
@@ -21,16 +20,24 @@ class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
         ),
         defaultListTile(),
         switchListTile(),
+        checkboxListTile(),
+        radioButtonListTile(),
         buttonListTile(),
         const Divider(),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text("ListTiles in cards", style: textStyle),
+          child: Text("ListTiles in ZenitSections", style: textStyle),
         ),
-        Card(
+        ZenitSection(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [defaultListTile(), switchListTile(), buttonListTile()],
+            children: [
+              defaultListTile(),
+              switchListTile(),
+              checkboxListTile(),
+              radioButtonListTile(),
+              buttonListTile()
+            ],
           ),
         ),
       ],
@@ -45,7 +52,7 @@ class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
       subtitle: const Text(
         "This is the subtitle",
       ),
-      trailing: ZenitFilledButton(
+      trailing: ZenitSecondaryButton(
         onPressed: () => print("Button pressed"),
         child: const Text("Button"),
       ),
@@ -60,8 +67,35 @@ class _ZenitListTilesExampleState extends State<ZenitListTilesExample> {
       subtitle: const Text(
         "This is the subtitle",
       ),
-      value: value,
+      value: value ?? false,
       onChanged: (val) => setState(() => value = val),
+    );
+  }
+
+  ZenitRadioButtonListTile radioButtonListTile() {
+    return ZenitRadioButtonListTile<bool>(
+      title: const Text(
+        "ZenitRadioButtonListTile",
+      ),
+      subtitle: const Text(
+        "This is the subtitle",
+      ),
+      value: value,
+      groupValue: true,
+      onChanged: (val) => setState(() => value = !val!),
+    );
+  }
+
+  ZenitCheckboxListTile checkboxListTile() {
+    return ZenitCheckboxListTile(
+      title: const Text(
+        "ZenitCheckboxListTile",
+      ),
+      subtitle: const Text(
+        "This is the subtitle",
+      ),
+      value: value,
+      onChanged: (val) => setState(() => value = val!),
     );
   }
 

@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
 
 export 'package:flutter/services.dart'
     show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
@@ -67,8 +66,10 @@ class ZenitTextField extends StatelessWidget {
     this.contextMenuBuilder,
     this.hint,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType =
+            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType =
+            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -261,7 +262,7 @@ class ZenitTextField extends StatelessWidget {
       smartDashesType: smartDashesType,
       smartQuotesType: smartQuotesType,
       strutStyle: strutStyle,
-      style: const TextStyle(fontSize: 15).merge(style),
+      style: const TextStyle(fontSize: 14).merge(style),
       textAlign: textAlign,
       textAlignVertical: textAlignVertical,
       textCapitalization: textCapitalization,
@@ -272,11 +273,8 @@ class ZenitTextField extends StatelessWidget {
   }
 }
 
-const double _kDefaultBorderWidth = 2.0;
-
 const BorderSide _kDefaultBorderSideInactive = BorderSide(
   color: Colors.transparent,
-  width: _kDefaultBorderWidth,
 );
 
 const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorder(
@@ -287,23 +285,35 @@ const OutlineInputBorder _kDefaultOutlineInputBorderInactive = OutlineInputBorde
 InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
   final BorderSide kDefaultBorderSideActive = BorderSide(
     color: theme.primaryColor,
-    width: _kDefaultBorderWidth,
+    width: 2,
+  );
+
+  final BorderSide kDefaultBorderSideNormal = BorderSide(
+    color: theme.colorScheme.outline,
   );
 
   final kDefaultInputDecorationTheme = InputDecorationTheme(
     filled: true,
-    fillColor: theme.elementColor,
-    border: _kDefaultOutlineInputBorderInactive,
-    enabledBorder: _kDefaultOutlineInputBorderInactive,
+    fillColor: theme.colorScheme.surface,
+    border: OutlineInputBorder(
+      borderSide: kDefaultBorderSideActive,
+      borderRadius: kDefaultBorderRadiusMedium,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: kDefaultBorderSideNormal,
+      borderRadius: kDefaultBorderRadiusMedium,
+    ),
     disabledBorder: _kDefaultOutlineInputBorderInactive,
     focusedBorder: OutlineInputBorder(
       borderSide: kDefaultBorderSideActive,
       borderRadius: kDefaultBorderRadiusMedium,
     ),
-    labelStyle: TextStyle(color: theme.foregroundColor.withOpacity(0.75)),
-    floatingLabelBehavior: FloatingLabelBehavior.never,
-    alignLabelWithHint: true,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+    labelStyle: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.75)),
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: 16,
+      vertical: 16,
+    ),
+    isDense: true,
   );
 
   return kDefaultInputDecorationTheme;

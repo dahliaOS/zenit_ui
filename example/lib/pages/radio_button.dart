@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
+import 'package:zenit_ui_example/title.dart';
 
 class ZenitRadioButtonExample extends StatefulWidget {
   const ZenitRadioButtonExample({super.key});
 
   @override
-  State<ZenitRadioButtonExample> createState() => _ZenitRadioButtonExampleState();
+  State<ZenitRadioButtonExample> createState() =>
+      _ZenitRadioButtonExampleState();
 }
 
 bool val = false;
@@ -16,50 +17,45 @@ class _ZenitRadioButtonExampleState extends State<ZenitRadioButtonExample> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Column(
+        const Gap(8),
+        const ExampleTitle("ZenitRadioButton"),
+        const Gap(24),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ZenitRadioButton<double>(
-              value: 0,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
-            ),
-            const Gap(16),
-            ZenitRadioButton<double>(
-              value: 1,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
-            ),
-            const Gap(16),
-            ZenitRadioButton<double>(
-              value: 2,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
-            ),
+            for (double i = 0; i < 3; i++) ...[
+              ZenitRadioButton<double>(
+                value: i,
+                groupValue: groupValue,
+                onChanged: (value) => setState(() => groupValue = value!),
+              ),
+              const Gap(16),
+            ],
           ],
         ),
         const Gap(24),
-        Column(
-          children: [
-            ZenitRadioButton<double>(
-              value: 3,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
+        const ExampleSubtitle("ZenitRadioButtonListTile"),
+        const Gap(8),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.4 + 256,
+          child: ZenitSection(
+            child: Column(
+              children: [
+                for (double d = 0; d < 3; d++) ...[
+                  ZenitRadioButtonListTile<double>(
+                    title: const Text("ZenitRadioButtonListTile"),
+                    subtitle: Text(
+                        "ZenitRadioButtonListTile is ${d == groupValue ? "selected" : "not selected"}"),
+                    value: d,
+                    groupValue: groupValue,
+                    onChanged: (value) => setState(() => groupValue = value!),
+                  ),
+                ],
+              ],
             ),
-            const Gap(16),
-            ZenitRadioButton<double>(
-              value: 4,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
-            ),
-            const Gap(16),
-            ZenitRadioButton<double>(
-              value: 5,
-              groupValue: groupValue,
-              onChanged: (value) => setState(() => groupValue = value!),
-            ),
-          ],
+          ),
         ),
       ],
     );

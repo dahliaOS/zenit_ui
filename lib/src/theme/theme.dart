@@ -2,18 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
+import 'package:zenit_ui/src/extensions/extensions.dart';
+import 'package:zenit_ui/src/theme/text_theme.dart';
+
+export 'package:zenit_ui/src/extensions/extensions.dart';
 
 mixin ZenitTheme {
   static ZenitSwitchTheme switchTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitSwitchTheme(
-      activeTrackColor: theme.primaryColor,
-      inactiveTrackColor: theme.elementColor,
-      activeThumbColor: theme.colorScheme.background,
-      inactiveThumbColor:
-          theme.darkMode ? theme.foregroundColor.withOpacity(0.35) : theme.foregroundColor.withOpacity(0.35),
+      activeTrackColor: theme.colorScheme.primary,
+      inactiveTrackColor: theme.colorScheme.surface,
+      activeThumbColor: theme.colorScheme.onPrimary,
+      inactiveThumbColor: theme.colorScheme.onSurface.withOpacity(0.35),
       disabledTrackColor: theme.disabledColor,
       disabledThumbColor: theme.colorScheme.background,
+      outlineColor: theme.colorScheme.outline,
     );
   }
 
@@ -21,83 +25,68 @@ mixin ZenitTheme {
     final theme = Theme.of(context);
     return ZenitSliderTheme(
       activeTrackColor: theme.primaryColor,
-      trackColor: theme.primaryColor.withOpacity(0.25),
+      trackColor: theme.colorScheme.surface,
+      thumbColor: theme.colorScheme.onPrimary,
+      outlineColor: theme.colorScheme.outline,
     );
   }
 
   static ZenitRadioButtonTheme radioButtonTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitRadioButtonTheme(
-      activeBackgroundColor: theme.primaryColor,
-      inactiveBackgroundColor: theme.elementColor,
-      activeThumbColor: theme.colorScheme.background,
-      inactiveThumbColor: theme.elementColor,
+      activeBackgroundColor: theme.colorScheme.primary,
+      inactiveBackgroundColor: theme.colorScheme.surface,
       disabledBackgroundColor: theme.disabledColor,
+      thumbColor: theme.colorScheme.background,
+      outlineColor: theme.colorScheme.outline,
     );
   }
 
   static ZenitCheckboxTheme checkboxTheme(BuildContext context) {
     final theme = Theme.of(context);
     return ZenitCheckboxTheme(
-      activeBackgroundColor: theme.primaryColor,
-      inactiveBackgroundColor: theme.elementColor,
+      activeBackgroundColor: theme.colorScheme.primary,
+      inactiveBackgroundColor: theme.colorScheme.surface,
       foregroundColor: theme.colorScheme.background,
       disabledBackgroundColor: theme.disabledColor,
-    );
-  }
-}
-
-class ZenitElementColor extends ThemeExtension<ZenitElementColor> {
-  const ZenitElementColor({
-    required this.elementColor,
-  });
-
-  final Color? elementColor;
-
-  @override
-  ZenitElementColor copyWith({Color? elementColor, Color? newElementColor}) {
-    return ZenitElementColor(
-      elementColor: elementColor ?? this.elementColor,
-    );
-  }
-
-  @override
-  ZenitElementColor lerp(ZenitElementColor? other, double t) {
-    if (other is! ZenitElementColor) {
-      return this;
-    }
-    return ZenitElementColor(
-      elementColor: Color.lerp(elementColor, other.elementColor, t),
+      outlineColor: theme.colorScheme.outline,
     );
   }
 }
 
 ThemeData createZenitTheme({
-  Brightness? brightness = Brightness.light,
+  Brightness brightness = Brightness.light,
   Color? primaryColor,
   Color? backgroundColor,
   Color? surfaceColor,
-  Color? elementColor,
   Color? foregroundColor,
 }) {
   // Default Values
+
+  const Color lightBackground = Color(0xFFFFFFFF);
+  const Color lightForeground = Color(0xFF000000);
+  const Color darkBackground = Color(0xFF1A1A1A);
+  const Color darkForeground = Color(0xFFFAFAFA);
+
   final darkMode = brightness == Brightness.dark;
-  final primary = primaryColor ?? const Color(0xFF0073cf);
-  final foreground = foregroundColor ?? (darkMode ? const Color(0xffffffff) : const Color(0xFF000000));
-  final element = elementColor ?? (darkMode ? const Color(0xFF353535) : const Color(0xFFD9D9D9));
+  primaryColor ??= const Color(0xFF0073cf);
+  backgroundColor ??= darkMode ? darkBackground : lightBackground;
+  foregroundColor ??= darkMode ? darkForeground : lightForeground;
+  surfaceColor ??= darkMode ? const Color(0xFF272727) : const Color(0xFFE6E6E6);
+  final textTheme = createTextTheme(foregroundColor);
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
     backgroundColor: surfaceColor,
     titleTextStyle: TextStyle(
-      color: foreground,
+      color: foregroundColor,
       fontSize: 17,
       fontWeight: FontWeight.w600,
     ),
   );
 
   // Icon Theme
-  final iconTheme = IconThemeData(color: foreground);
+  final iconTheme = IconThemeData(color: foregroundColor);
 
   // Card Theme
   const cardTheme = CardTheme(
@@ -110,13 +99,22 @@ ThemeData createZenitTheme({
 
   // FloatingActionButton Theme
   final floatingActionButtonTheme = FloatingActionButtonThemeData(
-    backgroundColor: primaryColor,
-    foregroundColor: backgroundColor,
+    backgroundColor: surfaceColor,
+    foregroundColor: foregroundColor,
     elevation: 0,
     focusElevation: 0,
     hoverElevation: 0,
     disabledElevation: 0,
     highlightElevation: 0,
+    sizeConstraints: BoxConstraints.tight(const Size.square(52)),
+    smallSizeConstraints: BoxConstraints.tight(const Size.square(44)),
+    largeSizeConstraints: BoxConstraints.tight(const Size.square(56)),
+    extendedSizeConstraints: const BoxConstraints.tightFor(height: 52),
+    iconSize: 24,
+    shape: RoundedRectangleBorder(
+      borderRadius: kDefaultBorderRadiusLarge,
+      side: BorderSide(color: foregroundColor.withOpacity(0.075)),
+    ),
   );
 
   // PageTransitionsTheme
@@ -133,89 +131,89 @@ ThemeData createZenitTheme({
   // Tooltip Theme
   final tooltipTheme = TooltipThemeData(
     decoration: BoxDecoration(
-      color: surfaceColor,
-      borderRadius: kDefaultBorderRadiusMedium,
-      border: Border.all(
-        color: foreground.withOpacity(0.15),
-      ),
+      color: foregroundColor,
+      borderRadius: kDefaultBorderRadiusExtraLarge,
     ),
-    textStyle: TextStyle(color: foregroundColor),
+    textStyle: TextStyle(color: backgroundColor),
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-    waitDuration: const Duration(seconds: 1),
+    waitDuration: const Duration(milliseconds: 500),
+    showDuration: Duration.zero,
+  );
+
+  // Divider Theme
+  final dividerTheme = DividerThemeData(
+    color: foregroundColor.withOpacity(0.1),
+    space: 1,
+  );
+
+  // ListTile Theme
+  final listTileTheme = ListTileThemeData(
+    subtitleTextStyle: TextStyle(
+      color: foregroundColor.darken(0.4),
+      fontSize: textTheme.bodyMedium?.fontSize,
+    ),
   );
 
   if (brightness == Brightness.light) {
     return ThemeData.from(
       colorScheme: ColorScheme.light(
-        primary: primary,
-        secondary: primary,
-        background: backgroundColor ?? const Color(0xFFFAFAFA),
-        onBackground: foreground,
-        surface: surfaceColor ?? const Color(0xFFEBEBEB),
-        onSurface: foreground,
+        primary: primaryColor,
+        onPrimary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
+        secondary: primaryColor,
+        onSecondary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
+        background: backgroundColor,
+        onBackground: foregroundColor,
+        surface: surfaceColor,
+        onSurface: foregroundColor,
+        outline: foregroundColor.withOpacity(0.2),
       ),
     ).copyWith(
-      useMaterial3: false,
-      appBarTheme: appBarTheme,
-      primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFFFAFAFA),
+      primaryColor: primaryColor,
+      scaffoldBackgroundColor: backgroundColor,
       iconTheme: iconTheme,
       cardTheme: cardTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
-      extensions: [
-        ZenitElementColor(elementColor: element),
-      ],
+      dividerTheme: dividerTheme,
+      listTileTheme: listTileTheme,
+      textTheme: textTheme,
+      hoverColor: foregroundColor.withOpacity(0.05),
     );
   } else {
     return ThemeData.from(
       colorScheme: ColorScheme.dark(
-        primary: primary,
-        secondary: primary,
-        background: backgroundColor ?? const Color(0xFF1C1C1E),
-        onBackground: foreground,
-        surface: surfaceColor ?? const Color(0xFF252528),
-        onSurface: foreground,
+        primary: primaryColor,
+        onPrimary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
+        secondary: primaryColor,
+        onSecondary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
+        background: backgroundColor,
+        onBackground: foregroundColor,
+        surface: surfaceColor,
+        onSurface: foregroundColor,
+        outline: foregroundColor.withOpacity(0.2),
       ),
     ).copyWith(
-      useMaterial3: false,
-      primaryColor: primary,
-      scaffoldBackgroundColor: backgroundColor ?? const Color(0xFF1C1C1E),
+      primaryColor: primaryColor,
+      scaffoldBackgroundColor: backgroundColor,
       appBarTheme: appBarTheme,
       iconTheme: iconTheme,
       cardTheme: cardTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
       pageTransitionsTheme: pageTransitionsTheme,
       tooltipTheme: tooltipTheme,
-      extensions: [
-        ZenitElementColor(elementColor: element),
-      ],
+      dividerTheme: dividerTheme,
+      listTileTheme: listTileTheme,
+      textTheme: textTheme,
+      hoverColor: foregroundColor.withOpacity(0.05),
     );
   }
 }
 
-extension on Map<Object, ThemeExtension<dynamic>> {
-  T? maybeGet<T>() {
-    return this[T] as T?;
-  }
-
-  T get<T>() {
-    final element = maybeGet<T>();
-
-    if (element != null) return element;
-
-    throw Exception("No theme extension $T found in current ThemeData");
-  }
-}
-
 extension ZenitThemeData on ThemeData {
-  Color get surfaceColor => colorScheme.surface;
-  Color get elementColor => extensions.get<ZenitElementColor>().elementColor ?? colorScheme.background;
-  Color get foregroundColor => textTheme.button?.color ?? Colors.white;
-  Color get primaryColor => colorScheme.primary;
   bool get darkMode => brightness == Brightness.dark;
-  Color get accentForegroundColor => primaryColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  Color get accentForegroundColor =>
+      colorScheme.primary.computeLuminance() > 0.3 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 }
 
@@ -226,6 +224,7 @@ class ZenitSwitchTheme {
   final Color inactiveThumbColor;
   final Color disabledTrackColor;
   final Color disabledThumbColor;
+  final Color outlineColor;
 
   const ZenitSwitchTheme({
     required this.activeTrackColor,
@@ -234,33 +233,88 @@ class ZenitSwitchTheme {
     required this.inactiveThumbColor,
     required this.disabledTrackColor,
     required this.disabledThumbColor,
+    required this.outlineColor,
   });
+
+  ZenitSwitchTheme copyWith({
+    Color? activeTrackColor,
+    Color? inactiveTrackColor,
+    Color? activeThumbColor,
+    Color? inactiveThumbColor,
+    Color? disabledTrackColor,
+    Color? disabledThumbColor,
+    Color? outlineColor,
+  }) {
+    return ZenitSwitchTheme(
+      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
+      inactiveTrackColor: inactiveTrackColor ?? this.inactiveTrackColor,
+      activeThumbColor: activeThumbColor ?? this.activeThumbColor,
+      inactiveThumbColor: inactiveThumbColor ?? this.inactiveThumbColor,
+      disabledTrackColor: disabledTrackColor ?? this.disabledTrackColor,
+      disabledThumbColor: disabledThumbColor ?? this.disabledThumbColor,
+      outlineColor: outlineColor ?? this.outlineColor,
+    );
+  }
 }
 
 class ZenitSliderTheme {
   final Color activeTrackColor;
   final Color trackColor;
+  final Color outlineColor;
+  final Color thumbColor;
 
   const ZenitSliderTheme({
     required this.activeTrackColor,
     required this.trackColor,
+    required this.outlineColor,
+    required this.thumbColor,
   });
+
+  ZenitSliderTheme copyWith({
+    Color? activeTrackColor,
+    Color? trackColor,
+    Color? outlineColor,
+    Color? thumbColor,
+  }) {
+    return ZenitSliderTheme(
+      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
+      trackColor: trackColor ?? this.trackColor,
+      outlineColor: outlineColor ?? this.outlineColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+    );
+  }
 }
 
 class ZenitRadioButtonTheme {
   final Color activeBackgroundColor;
   final Color inactiveBackgroundColor;
-  final Color activeThumbColor;
-  final Color inactiveThumbColor;
   final Color disabledBackgroundColor;
+  final Color thumbColor;
+  final Color outlineColor;
 
   const ZenitRadioButtonTheme({
     required this.activeBackgroundColor,
     required this.inactiveBackgroundColor,
-    required this.activeThumbColor,
-    required this.inactiveThumbColor,
     required this.disabledBackgroundColor,
+    required this.thumbColor,
+    required this.outlineColor,
   });
+
+  ZenitRadioButtonTheme copyWith({
+    Color? activeBackgroundColor,
+    Color? inactiveBackgroundColor,
+    Color? disabledBackgroundColor,
+    Color? thumbColor,
+    Color? outlineColor,
+  }) {
+    return ZenitRadioButtonTheme(
+      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
+      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
+      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+      thumbColor: thumbColor ?? this.thumbColor,
+      outlineColor: outlineColor ?? this.outlineColor,
+    );
+  }
 }
 
 class ZenitCheckboxTheme {
@@ -268,11 +322,29 @@ class ZenitCheckboxTheme {
   final Color inactiveBackgroundColor;
   final Color foregroundColor;
   final Color disabledBackgroundColor;
+  final Color outlineColor;
 
   const ZenitCheckboxTheme({
     required this.activeBackgroundColor,
     required this.inactiveBackgroundColor,
     required this.foregroundColor,
     required this.disabledBackgroundColor,
+    required this.outlineColor,
   });
+
+  ZenitCheckboxTheme copyWith({
+    Color? activeBackgroundColor,
+    Color? inactiveBackgroundColor,
+    Color? foregroundColor,
+    Color? disabledBackgroundColor,
+    Color? outlineColor,
+  }) {
+    return ZenitCheckboxTheme(
+      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
+      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
+      foregroundColor: foregroundColor ?? this.foregroundColor,
+      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
+      outlineColor: outlineColor ?? this.outlineColor,
+    );
+  }
 }

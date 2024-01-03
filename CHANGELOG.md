@@ -1,3 +1,30 @@
+v0.0.12 / 2023-01-03
+===================
+Widgets:
+ * Rebuilt Checkbox, RadioButton, Switch and Slider based on CustomPainter
+ * Added a ContextMenu widget
+ * Added new Animations to some components
+ * Simplified ZenitIconButton
+ * Added ZenitCheckboxListTile and ZenitRadioButtonListTile and improved ZenitSwitchListTile
+ * Add hover effect to components
+ * New naming scheme for buttons (Primary, Secondary, Text and "Button" - made to be customized)
+ * Added ZenitSection (should be used instead of Card)
+ * Added Zenit(Window)Toolbar and ZenitWindowButtons
+ * Added ZenitDialog widget
+
+Theme:
+ * Adjusted the theme colours
+ * Added copyWith to every theme class of zenit widgets
+ * new extension on Color to add some features
+ * Changed the default font to Inter
+ * Added a custom text theme more suited for desktop applications
+ * Changed FAB to be Rectangular and reduced it's size
+ * Add slight outline to most components
+
+Windowing:
+ * Added HandyWindow and YaruWindow
+ * Added basic window management functionality
+
 v0.0.11 / 2023-07-19
 ===================
 

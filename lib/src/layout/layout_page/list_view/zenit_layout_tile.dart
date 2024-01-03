@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
-import 'package:zenit_ui/src/theme/theme.dart';
 
 class ZenitLayoutTile extends StatelessWidget {
   const ZenitLayoutTile({
@@ -32,20 +31,22 @@ class ZenitLayoutTile extends StatelessWidget {
     return Material(
       clipBehavior: Clip.antiAlias,
       color: isSelected ? Theme.of(context).colorScheme.surface : Colors.transparent,
-      borderRadius: kDefaultBorderRadiusSmall,
+      borderRadius: kDefaultBorderRadiusMedium,
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
         dense: true,
         selected: isSelected,
         title: DefaultTextStyle(
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: Theme.of(context).foregroundColor,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                color: isSelected
+                    ? Theme.of(context).colorScheme.onPrimary
+                    : Theme.of(context).colorScheme.onBackground,
               ),
           child: title!,
         ),
-        iconColor: Theme.of(context).foregroundColor,
-        selectedColor: Theme.of(context).primaryColor,
+        iconColor: Theme.of(context).colorScheme.onBackground,
+        selectedColor: Theme.of(context).colorScheme.onPrimary,
+        selectedTileColor: Theme.of(context).colorScheme.primary,
         subtitle: subtitle,
         leading: SizedBox(width: 56, child: leading),
         trailing: trailing,
