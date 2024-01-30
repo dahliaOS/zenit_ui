@@ -16,6 +16,7 @@ class _SliderExampleState extends State<SliderExample> {
       child: Padding(
         padding: const EdgeInsets.all(32.0),
         child: ZenitSlider(
+          divisions: 10,
           onChanged: (val) {
             setState(() {
               value = val;
