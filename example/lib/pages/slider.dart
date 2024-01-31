@@ -9,21 +9,34 @@ class SliderExample extends StatefulWidget {
 
 class _SliderExampleState extends State<SliderExample> {
   double value = 0.5;
+  double value2 = 0.5;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: ZenitSlider(
-          divisions: 10,
-          onChanged: (val) {
-            setState(() {
-              value = val;
-            });
-          },
-          value: value,
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ZenitSlider(
+            divisions: 10,
+            onChanged: (val) {
+              setState(() {
+                value = val;
+              });
+            },
+            value: value,
+          ),
+          const SizedBox(height: 32),
+          ZenitSlider(
+            onChanged: (val) {
+              setState(() {
+                value2 = val;
+              });
+            },
+            value: value2,
+          ),
+        ],
       ),
     );
   }

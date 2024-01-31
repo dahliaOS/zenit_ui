@@ -5,21 +5,17 @@ class ZenitSlider extends StatefulWidget {
   final double value;
   final ValueChanged<double> onChanged;
 
-  final Color? activeColor;
   final int? divisions;
-  final Color? trackColor;
   final MouseCursor? mouseCursor;
-  final Color? thumbColor;
+  final ZenitSliderTheme? sliderTheme;
 
   const ZenitSlider({
     super.key,
     required this.value,
     required this.onChanged,
-    this.activeColor,
     this.divisions,
-    this.trackColor,
     this.mouseCursor,
-    this.thumbColor,
+    this.sliderTheme,
   }) : assert(
           value >= 0.0 && value <= 1.0 && divisions == null ||
               divisions != null && divisions > 0 && divisions <= 100,
@@ -34,7 +30,7 @@ class _ZenitSliderState extends State<ZenitSlider> {
 
   @override
   Widget build(BuildContext context) {
-    final sliderTheme = ZenitTheme.sliderTheme(context);
+    final sliderTheme = widget.sliderTheme ?? ZenitTheme.sliderTheme(context);
     double newValue = widget.value;
     final double divident = 1 / (widget.divisions ?? 1);
     return LayoutBuilder(
@@ -62,9 +58,9 @@ class _ZenitSliderState extends State<ZenitSlider> {
               },
               child: CustomPaint(
                 painter: _SliderPainter(
-                  trackColor: widget.trackColor ?? sliderTheme.trackColor,
-                  activeColor: widget.activeColor ?? sliderTheme.activeTrackColor,
-                  thumbColor: widget.thumbColor ?? sliderTheme.thumbColor,
+                  trackColor: sliderTheme.trackColor,
+                  activeColor: sliderTheme.activeTrackColor,
+                  thumbColor: sliderTheme.thumbColor,
                   hover: hover,
                   hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
                   outlineColor: sliderTheme.outlineColor,
