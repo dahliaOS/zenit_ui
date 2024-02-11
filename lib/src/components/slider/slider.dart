@@ -32,7 +32,7 @@ class _ZenitSliderState extends State<ZenitSlider> {
   Widget build(BuildContext context) {
     final sliderTheme = widget.sliderTheme ?? ZenitTheme.sliderTheme(context);
     double newValue = widget.value;
-    final double divident = 1 / (widget.divisions ?? 1);
+    final double divisionsWidthRatio = 1 / (widget.divisions ?? 1);
     return LayoutBuilder(
       builder: (context, constraints) {
         return MouseRegion(
@@ -42,18 +42,24 @@ class _ZenitSliderState extends State<ZenitSlider> {
           child: Listener(
             onPointerPanZoomStart: (details) {
               newValue = details.localPosition.dx / (constraints.maxWidth);
-              if (widget.divisions != null) newValue = (newValue / divident).round() * divident;
+              if (widget.divisions != null) {
+                newValue = (newValue / divisionsWidthRatio).round() * divisionsWidthRatio;
+              }
               if (newValue >= 0.0 && newValue <= 1.0) widget.onChanged(newValue);
             },
             child: GestureDetector(
               onTapDown: (details) {
                 newValue = details.localPosition.dx / (constraints.maxWidth);
-                if (widget.divisions != null) newValue = (newValue / divident).round() * divident;
+                if (widget.divisions != null) {
+                  newValue = (newValue / divisionsWidthRatio).round() * divisionsWidthRatio;
+                }
                 if (newValue >= 0.0 && newValue <= 1.0) widget.onChanged(newValue);
               },
               onHorizontalDragUpdate: (details) {
                 newValue = details.localPosition.dx / (constraints.maxWidth);
-                if (widget.divisions != null) newValue = (newValue / divident).round() * divident;
+                if (widget.divisions != null) {
+                  newValue = (newValue / divisionsWidthRatio).round() * divisionsWidthRatio;
+                }
                 if (newValue >= 0.0 && newValue <= 1.0) widget.onChanged(newValue);
               },
               child: CustomPaint(
@@ -65,6 +71,7 @@ class _ZenitSliderState extends State<ZenitSlider> {
                   hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
                   outlineColor: sliderTheme.outlineColor,
                   value: widget.value,
+                  dividerColor: sliderTheme.dividerColor,
                   divisions: widget.divisions,
                 ),
                 size: Size(constraints.maxWidth, 48),
@@ -85,6 +92,7 @@ class _SliderPainter extends CustomPainter {
   final Color hoverColor;
   final Color thumbColor;
   final Color outlineColor;
+  final Color dividerColor;
   final int? divisions;
 
   _SliderPainter({
@@ -95,6 +103,7 @@ class _SliderPainter extends CustomPainter {
     required this.hoverColor,
     required this.thumbColor,
     required this.outlineColor,
+    required this.dividerColor,
     this.divisions,
   });
 
@@ -118,7 +127,7 @@ class _SliderPainter extends CustomPainter {
       ..strokeWidth = 1;
 
     final Paint dividerPaint = Paint()
-      ..color = outlineColor
+      ..color = dividerColor
       ..style = PaintingStyle.fill;
 
     double activeWidth() {
