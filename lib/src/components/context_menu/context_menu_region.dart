@@ -4,6 +4,7 @@ import 'package:zenit_ui/src/components/context_menu/context_menu.dart';
 class ZenitContextMenuRegion extends StatelessWidget {
   /// Creates an instance of [ZenitContextMenuRegion].
   const ZenitContextMenuRegion({
+    super.key,
     required this.child,
     required this.contextMenu,
   });
@@ -21,9 +22,7 @@ class ZenitContextMenuRegion extends StatelessWidget {
       builder: (context, controller, builderChild) => GestureDetector(
         onTap: controller.isOpen ? controller.close : null,
         onSecondaryTap: controller.isOpen ? controller.close : null,
-        onSecondaryTapUp: (_) => controller.isOpen
-            ? controller.close
-            : controller.open(position: _.localPosition),
+        onSecondaryTapUp: (event) => controller.isOpen ? controller.close : controller.open(position: event.localPosition),
         child: builderChild,
       ),
     );

@@ -56,7 +56,7 @@ class _ZenitTabViewExampleState extends State<ZenitTabViewExample> {
           },
           onAddTab: () {
             final color = Color(Random().nextInt(0xffffffff)).withAlpha(0xff);
-            final hex = color.value.toRadixString(16).replaceFirst("ff", "#");
+            final hex = color.toARGB32().toRadixString(16).replaceFirst("ff", "#");
             setState(() {
               tabs.add(TabData(title: "New Tab $hex", leading: const FlutterLogo()));
               pages.add(Container(

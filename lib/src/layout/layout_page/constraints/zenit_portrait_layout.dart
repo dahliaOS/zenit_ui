@@ -88,10 +88,9 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final sidebarColor =
-        widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    final sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
     return PopScope(
-      onPopInvoked: (_) async => !await navigator.maybePop().then(setPage),
+      onPopInvokedWithResult: (bool didPop, result) async => !await navigator.maybePop().then(setPage),
       child: ZenitNavigatorPopTransactionObserver(
         navigatorKey: _navigatorKey,
         child: Theme(

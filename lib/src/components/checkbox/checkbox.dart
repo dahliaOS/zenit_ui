@@ -110,7 +110,7 @@ class _ZenitCheckboxState extends State<ZenitCheckbox> with TickerProviderStateM
                 dashAnimationValue: curvedDash.value,
                 outlineColor: outlineColor,
                 hover: hover,
-                hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                hoverColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
               ),
               size: const Size.square(32),
             ),

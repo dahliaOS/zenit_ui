@@ -81,7 +81,7 @@ class _ZenitWindowButtonPainter extends CustomPainter {
       ..strokeWidth = 1.2;
 
     final Paint hoverPaint = Paint()
-      ..color = foregroundColor.withOpacity(0.1)
+      ..color = foregroundColor.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
 
     final Offset center = Offset(size.height / 2, size.width / 2);
@@ -107,8 +107,6 @@ class _ZenitWindowButtonPainter extends CustomPainter {
         drawRestore(canvas, buttonRect, foregroundPaint, foregroundColor);
       case ZenitWindowButtonType.minimize:
         drawMinimize(canvas, buttonRect, foregroundPaint);
-      default:
-        drawClose(canvas, buttonRect, foregroundPaint);
     }
   }
 
@@ -161,7 +159,7 @@ void drawRestoreMaximize(
   canvas.drawRect(rect, foregroundPaint);
   canvas.drawPath(
     path,
-    foregroundPaint..color = foregroundColor.withOpacity(0.5 * max),
+    foregroundPaint..color = foregroundColor.withValues(alpha: 0.5 * max),
   );
 }
 

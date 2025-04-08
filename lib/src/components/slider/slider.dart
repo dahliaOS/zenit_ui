@@ -61,7 +61,7 @@ class _ZenitSliderState extends State<ZenitSlider> {
                   activeColor: widget.activeColor ?? sliderTheme.activeTrackColor,
                   thumbColor: widget.thumbColor ?? sliderTheme.thumbColor,
                   hover: hover,
-                  hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                  hoverColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
                   outlineColor: sliderTheme.outlineColor,
                   value: widget.value,
                 ),

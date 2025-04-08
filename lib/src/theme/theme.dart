@@ -14,7 +14,7 @@ mixin ZenitTheme {
       activeTrackColor: theme.colorScheme.primary,
       inactiveTrackColor: theme.colorScheme.surface,
       activeThumbColor: theme.colorScheme.onPrimary,
-      inactiveThumbColor: theme.colorScheme.onSurface.withOpacity(0.35),
+      inactiveThumbColor: theme.colorScheme.onSurface.withValues(alpha: 0.35),
       disabledTrackColor: theme.disabledColor,
       disabledThumbColor: theme.colorScheme.background,
       outlineColor: theme.colorScheme.outline,
@@ -113,7 +113,7 @@ ThemeData createZenitTheme({
     iconSize: 24,
     shape: RoundedRectangleBorder(
       borderRadius: kDefaultBorderRadiusLarge,
-      side: BorderSide(color: foregroundColor.withOpacity(0.075)),
+      side: BorderSide(color: foregroundColor.withValues(alpha: 0.075)),
     ),
   );
 
@@ -142,7 +142,7 @@ ThemeData createZenitTheme({
 
   // Divider Theme
   final dividerTheme = DividerThemeData(
-    color: foregroundColor.withOpacity(0.1),
+    color: foregroundColor.withValues(alpha: 0.1),
     space: 1,
   );
 
@@ -165,7 +165,7 @@ ThemeData createZenitTheme({
         onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
-        outline: foregroundColor.withOpacity(0.2),
+        outline: foregroundColor.withValues(alpha: 0.2),
       ),
     ).copyWith(
       primaryColor: primaryColor,
@@ -178,7 +178,7 @@ ThemeData createZenitTheme({
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
       textTheme: textTheme,
-      hoverColor: foregroundColor.withOpacity(0.05),
+      hoverColor: foregroundColor.withValues(alpha: 0.05),
     );
   } else {
     return ThemeData.from(
@@ -191,7 +191,7 @@ ThemeData createZenitTheme({
         onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
-        outline: foregroundColor.withOpacity(0.2),
+        outline: foregroundColor.withValues(alpha: 0.2),
       ),
     ).copyWith(
       primaryColor: primaryColor,
@@ -205,15 +205,14 @@ ThemeData createZenitTheme({
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
       textTheme: textTheme,
-      hoverColor: foregroundColor.withOpacity(0.05),
+      hoverColor: foregroundColor.withValues(alpha: 0.05),
     );
   }
 }
 
 extension ZenitThemeData on ThemeData {
   bool get darkMode => brightness == Brightness.dark;
-  Color get accentForegroundColor =>
-      colorScheme.primary.computeLuminance() > 0.3 ? Colors.black : Colors.white;
+  Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.3 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 }
 

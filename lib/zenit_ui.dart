@@ -4,7 +4,7 @@
 ///
 /// This library is mainly designed for desktop applications, but it can be used
 /// for mobile applications as well.
-library zenit_ui;
+library;
 
 // Zenit exports
 //

@@ -29,7 +29,7 @@ class ButtonBase extends StatefulWidget {
   final FontWeight? fontWeight;
 
   @override
-  _ButtonBaseState createState() => _ButtonBaseState();
+  State<ButtonBase> createState() => _ButtonBaseState();
 }
 
 class _ButtonBaseState extends State<ButtonBase> {

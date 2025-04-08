@@ -17,7 +17,7 @@ class ZenitSwitch extends StatefulWidget {
   });
 
   @override
-  _ZenitSwitchState createState() => _ZenitSwitchState();
+  State<ZenitSwitch> createState() => _ZenitSwitchState();
 }
 
 class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin {
@@ -84,7 +84,7 @@ class _ZenitSwitchState extends State<ZenitSwitch> with TickerProviderStateMixin
                 inactiveThumbColor: inactiveThumbColor,
                 positionValue: _positionController.value,
                 hover: hover,
-                hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                hoverColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
                 outlineColor: outlineColor,
               ),
               size: const Size(44, 24),
