@@ -10,19 +10,17 @@ extension ColorX on Color {
 
   Color darken([double amount = 0.1]) {
     assert(amount >= 0 && amount <= 1);
-    return Color.alphaBlend(Colors.black.withOpacity(amount), this);
+    return Color.alphaBlend(Colors.black.withValues(alpha: amount), this);
   }
 
   Color brighten([double amount = 0.1]) {
     assert(amount >= 0 && amount <= 1);
-    return Color.alphaBlend(Colors.white.withOpacity(amount), this);
+    return Color.alphaBlend(Colors.white.withValues(alpha: amount), this);
   }
 
   Color themedLightness(BuildContext context, [double amount = 0.1]) {
     assert(amount >= 0 && amount <= 1);
-    return Theme.of(context).brightness == Brightness.dark
-        ? brighten(amount)
-        : darken(amount);
+    return Theme.of(context).brightness == Brightness.dark ? brighten(amount) : darken(amount);
   }
 
   Color themedLightnessFromBrightness(

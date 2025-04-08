@@ -122,36 +122,36 @@ class _ZenitContextMenuBuilderState extends State<ZenitContextMenuBuilder> {
 }
 
 const _menuItemStyle = ButtonStyle(
-  shape: MaterialStatePropertyAll(
+  shape: WidgetStatePropertyAll(
     RoundedRectangleBorder(
       borderRadius: kDefaultBorderRadiusMedium,
     ),
   ),
-  iconSize: MaterialStatePropertyAll(16),
-  elevation: MaterialStatePropertyAll(0),
+  iconSize: WidgetStatePropertyAll(16),
+  elevation: WidgetStatePropertyAll(0),
   visualDensity: VisualDensity(horizontal: -2, vertical: -3),
 );
 
 MenuStyle _menuStyle(BuildContext context) {
   return MenuStyle(
-    surfaceTintColor: MaterialStatePropertyAll(
+    surfaceTintColor: WidgetStatePropertyAll(
       Theme.of(context).colorScheme.surface,
     ),
-    backgroundColor: MaterialStatePropertyAll(
+    backgroundColor: WidgetStatePropertyAll(
       Theme.of(context).colorScheme.surface,
     ),
-    padding: const MaterialStatePropertyAll(EdgeInsets.all(6)),
-    shape: const MaterialStatePropertyAll(
+    padding: const WidgetStatePropertyAll(EdgeInsets.all(6)),
+    shape: const WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: kDefaultBorderRadiusLarge,
       ),
     ),
-    side: MaterialStatePropertyAll(
+    side: WidgetStatePropertyAll(
       BorderSide(
         color: Theme.of(context).colorScheme.outline,
       ),
     ),
-    elevation: const MaterialStatePropertyAll(0),
+    elevation: const WidgetStatePropertyAll(0),
     visualDensity: VisualDensity.standard,
   );
 }

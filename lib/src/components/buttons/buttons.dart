@@ -35,8 +35,8 @@ class ZenitPrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.colorScheme.onPrimary,
       backgroundColor: backgroundColor ?? theme.colorScheme.primary,
-      hoverColor: (backgroundColor ?? theme.colorScheme.onPrimary).withOpacity(0.1),
-      splashColor: (backgroundColor ?? theme.colorScheme.onPrimary).withOpacity(0.1),
+      hoverColor: (backgroundColor ?? theme.colorScheme.onPrimary).withValues(alpha: 0.1),
+      splashColor: (backgroundColor ?? theme.colorScheme.onPrimary).withValues(alpha: 0.1),
       borderSide: borderSide ?? BorderSide(color: theme.colorScheme.outline),
       borderRadius: borderRadius,
       child: child,
@@ -77,8 +77,8 @@ class ZenitSecondaryButton extends StatelessWidget {
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.colorScheme.onSurface,
       backgroundColor: backgroundColor ?? theme.colorScheme.surface,
-      hoverColor: (backgroundColor ?? theme.colorScheme.onSurface).withOpacity(0.1),
-      splashColor: (backgroundColor ?? theme.colorScheme.onSurface).withOpacity(0.1),
+      hoverColor: (backgroundColor ?? theme.colorScheme.onSurface).withValues(alpha: 0.1),
+      splashColor: (backgroundColor ?? theme.colorScheme.onSurface).withValues(alpha: 0.1),
       borderSide: borderSide ?? BorderSide(color: theme.colorScheme.outline),
       borderRadius: borderRadius,
       child: child,
@@ -119,9 +119,9 @@ class ZenitTextButton extends StatelessWidget {
       onPressed: onPressed,
       foregroundColor: foregroundColor ?? theme.colorScheme.primary,
       backgroundColor: backgroundColor ?? Colors.transparent,
-      hoverColor: (backgroundColor ?? theme.colorScheme.primary).withOpacity(0.1),
-      splashColor: (backgroundColor ?? theme.colorScheme.onPrimary).withOpacity(0.1),
-      borderSide: borderSide ?? BorderSide(color: theme.colorScheme.primary.withOpacity(0.25)),
+      hoverColor: (backgroundColor ?? theme.colorScheme.primary).withValues(alpha: 0.1),
+      splashColor: (backgroundColor ?? theme.colorScheme.onPrimary).withValues(alpha: 0.1),
+      borderSide: borderSide ?? BorderSide(color: theme.colorScheme.primary.withValues(alpha: 0.25)),
       borderRadius: borderRadius,
       fontWeight: FontWeight.w600,
       child: child,
@@ -222,11 +222,8 @@ class ZenitButton extends StatelessWidget {
       case ButtonType.text:
         return ZenitTextButton(
           onPressed: onPressed,
-          foregroundColor: foregroundColor ??
-              HSLColor.fromColor(theme.colorScheme.primary.themedLightness(context, 0.5))
-                  .withSaturation(1)
-                  .toColor(),
-          backgroundColor: backgroundColor ?? theme.primaryColor.withOpacity(0.3),
+          foregroundColor: foregroundColor ?? HSLColor.fromColor(theme.colorScheme.primary.themedLightness(context, 0.5)).withSaturation(1).toColor(),
+          backgroundColor: backgroundColor ?? theme.primaryColor.withValues(alpha: 0.3),
           splashColor: splashColor,
           hoverColor: hoverColor,
           borderSide: borderSide,

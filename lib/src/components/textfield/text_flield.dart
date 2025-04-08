@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 
-export 'package:flutter/services.dart'
-    show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
+export 'package:flutter/services.dart' show SmartDashesType, SmartQuotesType, TextCapitalization, TextInputAction, TextInputType;
 
 class ZenitTextField extends StatelessWidget {
   const ZenitTextField({
@@ -61,15 +60,12 @@ class ZenitTextField extends StatelessWidget {
     this.autofillHints = const <String>[],
     this.clipBehavior = Clip.hardEdge,
     this.restorationId,
-    this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contextMenuBuilder,
     this.hint,
   })  : assert(obscuringCharacter.length == 1),
-        smartDashesType =
-            smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-        smartQuotesType =
-            smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+        smartDashesType = smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+        smartQuotesType = smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
@@ -88,9 +84,7 @@ class ZenitTextField extends StatelessWidget {
           maxLength == null || maxLength == TextField.noMaxLength || maxLength > 0,
         ),
         assert(
-          !identical(textInputAction, TextInputAction.newline) ||
-              maxLines == 1 ||
-              !identical(keyboardType, TextInputType.text),
+          !identical(textInputAction, TextInputAction.newline) || maxLines == 1 || !identical(keyboardType, TextInputType.text),
           'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.',
         ),
         keyboardType = keyboardType ?? (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
@@ -200,8 +194,6 @@ class ZenitTextField extends StatelessWidget {
 
   final String? restorationId;
 
-  final bool scribbleEnabled;
-
   final bool enableIMEPersonalizedLearning;
 
   final EditableTextContextMenuBuilder? contextMenuBuilder;
@@ -251,7 +243,6 @@ class ZenitTextField extends StatelessWidget {
       onTap: onTap,
       readOnly: readOnly,
       restorationId: restorationId,
-      scribbleEnabled: scribbleEnabled,
       scrollController: scrollController,
       scrollPadding: scrollPadding,
       scrollPhysics: scrollPhysics,
@@ -308,7 +299,7 @@ InputDecorationTheme zenitInputDecorationTheme(ThemeData theme) {
       borderSide: kDefaultBorderSideActive,
       borderRadius: kDefaultBorderRadiusMedium,
     ),
-    labelStyle: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.75)),
+    labelStyle: TextStyle(color: theme.colorScheme.onSurface.withValues(alpha: 0.75)),
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 16,
       vertical: 16,

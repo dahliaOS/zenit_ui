@@ -30,8 +30,7 @@ class ZenitToolbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor =
-        backgroundColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    final bgColor = backgroundColor ?? Theme.of(context).colorScheme.surface.themedLightness(context, 0.05);
     return SizedBox(
       height: preferredSize.height,
       child: DecoratedBox(
@@ -54,8 +53,7 @@ class ZenitToolbar extends StatelessWidget implements PreferredSizeWidget {
             Align(
               alignment: centerTitle ? Alignment.center : Alignment.centerLeft,
               child: DefaultTextStyle(
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600) ??
-                    titleStyle,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600) ?? titleStyle,
                 child: Padding(
                   padding: centerTitle ? EdgeInsets.zero : const EdgeInsets.only(left: 16.0),
                   child: title,

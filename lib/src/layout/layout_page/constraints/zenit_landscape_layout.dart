@@ -108,7 +108,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
               ),
             ),
             VerticalDivider(
-              color: Theme.of(context).colorScheme.outline.withOpacity(0.1),
+              color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
             ),
             Expanded(
               child: SizedBox.expand(
@@ -126,6 +126,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                         ),
                       ),
                     ],
+                    //TODO: Check out the effect of this deprecation
                     onPopPage: (route, result) => route.didPop(result),
                     observers: [
                       ZenitNavigatorCanPopObserver.withContext(context),

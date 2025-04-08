@@ -13,7 +13,7 @@ class HoverBuilder extends StatefulWidget {
   });
 
   @override
-  _HoverBuilderState createState() => _HoverBuilderState();
+  State<HoverBuilder> createState() => _HoverBuilderState();
 }
 
 class _HoverBuilderState extends State<HoverBuilder> {

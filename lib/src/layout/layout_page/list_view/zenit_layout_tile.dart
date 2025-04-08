@@ -38,13 +38,11 @@ class ZenitLayoutTile extends StatelessWidget {
         selected: isSelected,
         title: DefaultTextStyle(
           style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: isSelected
-                    ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.onBackground,
+                color: isSelected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onSurface,
               ),
           child: title!,
         ),
-        iconColor: Theme.of(context).colorScheme.onBackground,
+        iconColor: Theme.of(context).colorScheme.onSurface,
         selectedColor: Theme.of(context).colorScheme.onPrimary,
         selectedTileColor: Theme.of(context).colorScheme.primary,
         subtitle: subtitle,

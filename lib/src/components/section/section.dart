@@ -18,7 +18,7 @@ class ZenitSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Material(
-        color: color ?? Theme.of(context).colorScheme.background,
+        color: color ?? Theme.of(context).colorScheme.surface,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius ?? kCardBorderRadius,

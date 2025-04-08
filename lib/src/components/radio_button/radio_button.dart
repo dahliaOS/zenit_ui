@@ -79,7 +79,7 @@ class _ZenitRadioButtonState<T> extends State<ZenitRadioButton<T>> with SingleTi
                   thumbColor: thumbColor,
                   animationValue: animation.value,
                   hover: hover,
-                  hoverColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.05),
+                  hoverColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.05),
                   outlineColor: outlineColor,
                 ),
                 size: const Size.square(32),
