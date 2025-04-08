@@ -1,11 +1,11 @@
 {
     "name": "ZenitUI Web Preview",
-    "short_name": "Example",
+    "short_name": "zenit_ui_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "ZenitUI Web Preview",
+    "description": "ZenitUI Web Preview.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

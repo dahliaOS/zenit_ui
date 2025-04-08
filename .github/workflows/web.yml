@@ -22,9 +22,9 @@ jobs:
       - name: Set up Pages
         uses: actions/configure-pages@v1
       - name: Get dependencies
-        run: flutter pub get && flutter pub upgrade
+        run: flutter clean && flutter pub get && flutter pub upgrade
       - name: Build Zenit UI for Web
-        run: flutter build web --release
+        run: flutter build web --release --wasm
         working-directory: ./example
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
