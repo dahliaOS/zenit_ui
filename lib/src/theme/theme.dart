@@ -28,6 +28,7 @@ mixin ZenitTheme {
       trackColor: theme.colorScheme.surface,
       thumbColor: theme.colorScheme.onPrimary,
       outlineColor: theme.colorScheme.outline,
+      dividerColor: theme.colorScheme.outline,
     );
   }
 
@@ -261,12 +262,14 @@ class ZenitSliderTheme {
   final Color trackColor;
   final Color outlineColor;
   final Color thumbColor;
+  final Color dividerColor;
 
   const ZenitSliderTheme({
     required this.activeTrackColor,
     required this.trackColor,
     required this.outlineColor,
     required this.thumbColor,
+    required this.dividerColor,
   });
 
   ZenitSliderTheme copyWith({
@@ -274,12 +277,14 @@ class ZenitSliderTheme {
     Color? trackColor,
     Color? outlineColor,
     Color? thumbColor,
+    Color? dividerColor,
   }) {
     return ZenitSliderTheme(
       activeTrackColor: activeTrackColor ?? this.activeTrackColor,
       trackColor: trackColor ?? this.trackColor,
       outlineColor: outlineColor ?? this.outlineColor,
       thumbColor: thumbColor ?? this.thumbColor,
+      dividerColor: dividerColor ?? this.dividerColor,
     );
   }
 }
