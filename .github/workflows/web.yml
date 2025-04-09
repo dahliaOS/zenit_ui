@@ -24,7 +24,7 @@ jobs:
       - name: Get dependencies
         run: flutter clean && flutter pub get && flutter pub upgrade
       - name: Build Zenit UI for Web
-        run: flutter build web --release --wasm && ls -l ./example/build/web/
+        run: flutter build web --release --wasm && ls -l build/web/
         working-directory: ./example
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
