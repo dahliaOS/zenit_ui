@@ -23,12 +23,10 @@ class ZenitLayoutDestinationListView extends StatefulWidget {
   final bool isPortrait;
 
   @override
-  State<ZenitLayoutDestinationListView> createState() =>
-      _ZenitLayoutDestinationListViewState();
+  State<ZenitLayoutDestinationListView> createState() => _ZenitLayoutDestinationListViewState();
 }
 
-class _ZenitLayoutDestinationListViewState
-    extends State<ZenitLayoutDestinationListView> {
+class _ZenitLayoutDestinationListViewState extends State<ZenitLayoutDestinationListView> {
   final controller = ScrollController();
 
   @override
@@ -49,8 +47,7 @@ class _ZenitLayoutDestinationListViewState
         selected: index == widget.selectedIndex,
         onTap: () => widget.onTap(index),
         child: Builder(
-          builder: (context) =>
-              widget.builder(context, index, index == widget.selectedIndex),
+          builder: (context) => widget.builder(context, index, index == widget.selectedIndex),
         ),
       ),
     );

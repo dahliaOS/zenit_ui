@@ -5,6 +5,7 @@ class ZenitTab extends StatelessWidget {
   const ZenitTab({
     super.key,
     this.title = "Tab",
+    this.tooltip = "",
     this.selected = true,
     this.icon = const FlutterLogo(
       size: 16,
@@ -15,6 +16,7 @@ class ZenitTab extends StatelessWidget {
   });
 
   final String title;
+  final String tooltip;
   final Widget? icon;
 
   final IconData? closeIcon;
@@ -31,36 +33,41 @@ class ZenitTab extends StatelessWidget {
       child: GestureDetector(
         onTertiaryTapUp: (_) => onClose?.call(),
         child: Tooltip(
-          message: title,
-          child: ListTile(
-            titleTextStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(overflow: TextOverflow.ellipsis),
-            onTap: onPressed,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 8),
-            selected: selected,
-            selectedColor: Theme.of(context).colorScheme.onSurface,
-            selectedTileColor: Theme.of(context).colorScheme.surface,
-            title: Text(
-              title,
-            ),
-            leading: SizedBox.square(dimension: 20, child: icon),
-            minLeadingWidth: 20,
-            trailing: ZenitIconButton(
-              iconSize: 16,
-              buttonSize: 24,
-              onPressed: onClose,
-              icon: Icons.close,
-            ),
+          message: tooltip,
+          child: Material(
+            color: selected ? Theme.of(context).colorScheme.surface : Colors.transparent,
+            clipBehavior: Clip.antiAlias,
             shape: RoundedRectangleBorder(
               borderRadius: kDefaultBorderRadiusMedium,
-              side: selected
-                  ? BorderSide(
-                      color: Theme.of(context).colorScheme.outline,
-                    )
-                  : BorderSide.none,
+              side: selected ? BorderSide(color: Theme.of(context).colorScheme.outline) : BorderSide.none,
             ),
-            //TODO maybe find a better way because this is hacky af and very wrong
-            visualDensity: const VisualDensity(vertical: -3),
-            dense: true,
+            child: InkWell(
+              onTap: onPressed,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  children: [
+                    SizedBox.square(dimension: 20, child: icon),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    if (onClose != null)
+                      ZenitIconButton(
+                        iconSize: 16,
+                        buttonSize: 24,
+                        onPressed: onClose,
+                        icon: closeIcon ?? Icons.close,
+                      ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),

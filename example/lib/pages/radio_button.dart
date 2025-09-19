@@ -6,8 +6,7 @@ class ZenitRadioButtonExample extends StatefulWidget {
   const ZenitRadioButtonExample({super.key});
 
   @override
-  State<ZenitRadioButtonExample> createState() =>
-      _ZenitRadioButtonExampleState();
+  State<ZenitRadioButtonExample> createState() => _ZenitRadioButtonExampleState();
 }
 
 bool val = false;
@@ -40,14 +39,13 @@ class _ZenitRadioButtonExampleState extends State<ZenitRadioButtonExample> {
         const Gap(8),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4 + 256,
-          child: ZenitSection(
+          child: Card(
             child: Column(
               children: [
                 for (double d = 0; d < 3; d++) ...[
                   ZenitRadioButtonListTile<double>(
                     title: const Text("ZenitRadioButtonListTile"),
-                    subtitle: Text(
-                        "ZenitRadioButtonListTile is ${d == groupValue ? "selected" : "not selected"}"),
+                    subtitle: Text("ZenitRadioButtonListTile is ${d == groupValue ? "selected" : "not selected"}"),
                     value: d,
                     groupValue: groupValue,
                     onChanged: (value) => setState(() => groupValue = value!),

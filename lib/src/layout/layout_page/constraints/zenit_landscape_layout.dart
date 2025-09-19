@@ -79,7 +79,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final Color sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.surface;
+    final Color sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.background;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
@@ -107,9 +107,9 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                 ),
               ),
             ),
-            VerticalDivider(
+            /* VerticalDivider(
               color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1),
-            ),
+            ), */
             Expanded(
               child: SizedBox.expand(
                 child: ZenitNavigatorPopTransactionObserver(

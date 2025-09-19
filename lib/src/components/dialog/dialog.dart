@@ -14,7 +14,7 @@ class ZenitDialog extends AlertDialog {
     super.contentTextStyle,
     super.actions,
     super.actionsPadding,
-    super.actionsAlignment,
+    super.actionsAlignment = MainAxisAlignment.spaceEvenly,
     super.actionsOverflowAlignment,
     super.actionsOverflowDirection,
     super.actionsOverflowButtonSpacing,
@@ -52,7 +52,7 @@ class ZenitDialog extends AlertDialog {
   double? get elevation => 0;
 
   @override
-  EdgeInsetsGeometry? get contentPadding => const EdgeInsets.all(28);
+  EdgeInsetsGeometry? get contentPadding => const EdgeInsets.all(24);
 
   @override
   Widget build(BuildContext context) {

@@ -21,8 +21,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  ZenitSection textStyleTitle(TextTheme textTheme) {
-    return ZenitSection(
+  Card textStyleTitle(TextTheme textTheme) {
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -49,8 +49,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  ZenitSection textStyleLabel(TextTheme textTheme) {
-    return ZenitSection(
+  Card textStyleLabel(TextTheme textTheme) {
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -77,8 +77,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  ZenitSection textStyleHeadline(TextTheme textTheme) {
-    return ZenitSection(
+  Card textStyleHeadline(TextTheme textTheme) {
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -105,8 +105,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  ZenitSection textStyleBody(TextTheme textTheme) {
-    return ZenitSection(
+  Card textStyleBody(TextTheme textTheme) {
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -133,8 +133,8 @@ class TextExamplePage extends StatelessWidget {
     );
   }
 
-  ZenitSection textStyleDisplay(TextTheme textTheme) {
-    return ZenitSection(
+  Card textStyleDisplay(TextTheme textTheme) {
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -15,21 +15,22 @@ class DialogExample extends StatelessWidget {
               title: const Text("ZenitDialog Widget"),
               icon: const FlutterLogo(),
               content: const Text(
-                  "Dialog content\nThis dialog is for demo purposes only.\nIt says it saves something but it actually doesn't.\nThose buttons are only there for show"),
+                  "Dialog content\nThis dialog is for demo purposes only.\nIt says it does something but it really doesn't.\nThose buttons are only there for show"),
               actions: [
                 SizedBox(
-                  width: 100,
-                  child: ZenitTextButton(
+                  width: 150,
+                  child: ZenitSecondaryButton(
                     child: const Text("Cancel"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                 ),
+                SizedBox(width: 2),
                 SizedBox(
-                  width: 100,
+                  width: 150,
                   child: ZenitPrimaryButton(
-                    child: const Text("Save"),
+                    child: const Text("Continue"),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

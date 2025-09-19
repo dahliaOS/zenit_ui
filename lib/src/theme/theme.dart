@@ -60,19 +60,34 @@ ThemeData createZenitTheme({
   Color? backgroundColor,
   Color? surfaceColor,
   Color? foregroundColor,
+  Color? outlineColor,
+  Color? disabledColor,
+  Color? hoverColor,
 }) {
   // Default Values
 
-  const Color lightBackground = Color(0xFFFFFFFF);
-  const Color lightForeground = Color(0xFF000000);
-  const Color darkBackground = Color(0xFF1A1A1A);
+  const Color lightBackgroundColor = Color(0xFFFAFAFA);
+  const Color lightForegroundColor = Color(0xFF000000);
+  const Color lightSurfaceColor = Color(0xFFFFFFFF);
+  const Color lightOutlineColor = Color(0xFFD2D2D2);
+  const Color lightDisabledColor = Color(0xFFAFAFAF);
+  const Color lightHoverColor = Color(0x08000000);
+  //---
+  const Color darkBackground = Color(0xFF1F1F1F);
   const Color darkForeground = Color(0xFFFAFAFA);
+  const Color darkSurfaceColor = Color(0xFF282828);
+  const Color darkOutlineColor = Color(0xFF454545);
+  const Color darkDisabledColor = Color(0xFF7A7A7A);
+  const Color darkHoverColor = Color(0x08FFFFFF);
 
   final darkMode = brightness == Brightness.dark;
-  primaryColor ??= const Color(0xFF0073cf);
-  backgroundColor ??= darkMode ? darkBackground : lightBackground;
-  foregroundColor ??= darkMode ? darkForeground : lightForeground;
-  surfaceColor ??= darkMode ? const Color(0xFF272727) : const Color(0xFFE6E6E6);
+  primaryColor ??= const Color(0xFF00B26E);
+  backgroundColor ??= darkMode ? darkBackground : lightBackgroundColor;
+  foregroundColor ??= darkMode ? darkForeground : lightForegroundColor;
+  surfaceColor ??= darkMode ? darkSurfaceColor : lightSurfaceColor;
+  outlineColor ??= darkMode ? darkOutlineColor : lightOutlineColor;
+  disabledColor ??= darkMode ? darkDisabledColor : lightDisabledColor;
+  hoverColor ??= darkMode ? darkHoverColor : lightHoverColor;
   final textTheme = createTextTheme(foregroundColor);
 
   // AppBar Theme
@@ -89,10 +104,12 @@ ThemeData createZenitTheme({
   final iconTheme = IconThemeData(color: foregroundColor);
 
   // Card Theme
-  const cardTheme = CardTheme(
+  final cardTheme = CardThemeData(
     clipBehavior: Clip.antiAlias,
+    color: backgroundColor,
     elevation: 0,
     shape: RoundedRectangleBorder(
+      side: BorderSide(width: 1, color: outlineColor),
       borderRadius: kCardBorderRadius,
     ),
   );
@@ -113,7 +130,7 @@ ThemeData createZenitTheme({
     iconSize: 24,
     shape: RoundedRectangleBorder(
       borderRadius: kDefaultBorderRadiusLarge,
-      side: BorderSide(color: foregroundColor.withValues(alpha: 0.075)),
+      side: BorderSide(color: outlineColor),
     ),
   );
 
@@ -131,18 +148,20 @@ ThemeData createZenitTheme({
   // Tooltip Theme
   final tooltipTheme = TooltipThemeData(
     decoration: BoxDecoration(
-      color: foregroundColor,
-      borderRadius: kDefaultBorderRadiusExtraLarge,
+      color: surfaceColor,
+      borderRadius: kDefaultBorderRadiusMedium,
+      border: Border.all(color: outlineColor),
     ),
-    textStyle: TextStyle(color: backgroundColor),
+    textStyle: TextStyle(color: foregroundColor),
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    margin: EdgeInsets.symmetric(vertical: 8),
     waitDuration: const Duration(milliseconds: 500),
     showDuration: Duration.zero,
   );
 
   // Divider Theme
   final dividerTheme = DividerThemeData(
-    color: foregroundColor.withValues(alpha: 0.1),
+    color: outlineColor,
     space: 1,
   );
 
@@ -158,14 +177,14 @@ ThemeData createZenitTheme({
     return ThemeData.from(
       colorScheme: ColorScheme.light(
         primary: primaryColor,
-        onPrimary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
+        onPrimary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
         secondary: primaryColor,
-        onSecondary: primaryColor.computeLuminance() > 0.3 ? foregroundColor : backgroundColor,
+        onSecondary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
         background: backgroundColor,
         onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
-        outline: foregroundColor.withValues(alpha: 0.2),
+        outline: outlineColor,
       ),
     ).copyWith(
       primaryColor: primaryColor,
@@ -178,20 +197,20 @@ ThemeData createZenitTheme({
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
       textTheme: textTheme,
-      hoverColor: foregroundColor.withValues(alpha: 0.05),
+      hoverColor: hoverColor,
     );
   } else {
     return ThemeData.from(
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
-        onPrimary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
+        onPrimary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
         secondary: primaryColor,
-        onSecondary: primaryColor.computeLuminance() > 0.3 ? backgroundColor : foregroundColor,
+        onSecondary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
         background: backgroundColor,
         onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
-        outline: foregroundColor.withValues(alpha: 0.2),
+        outline: outlineColor,
       ),
     ).copyWith(
       primaryColor: primaryColor,
@@ -205,14 +224,14 @@ ThemeData createZenitTheme({
       dividerTheme: dividerTheme,
       listTileTheme: listTileTheme,
       textTheme: textTheme,
-      hoverColor: foregroundColor.withValues(alpha: 0.05),
+      hoverColor: hoverColor,
     );
   }
 }
 
 extension ZenitThemeData on ThemeData {
   bool get darkMode => brightness == Brightness.dark;
-  Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.3 ? Colors.black : Colors.white;
+  Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.4 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 }
 

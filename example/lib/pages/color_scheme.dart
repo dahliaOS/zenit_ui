@@ -51,7 +51,7 @@ class ColorSchemeExamplePage extends StatelessWidget {
 SizedBox colorSchemeDisplay(Color color, String label) {
   return SizedBox(
     height: 64,
-    child: ZenitSection(
+    child: Card(
       color: color,
       child: Center(
         child: Text(

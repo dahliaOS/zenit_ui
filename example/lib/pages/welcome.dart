@@ -22,8 +22,7 @@ class _ZenitWelcomeState extends State<ZenitWelcome> {
           SizedBox(
             width: 500,
             height: 175,
-            child: ZenitSection(
-              borderRadius: BorderRadius.circular(24),
+            child: Card(
               child: Image.asset(
                 "assets/banner.png",
                 fit: BoxFit.cover,
@@ -78,8 +77,7 @@ class _ZenitWelcomeState extends State<ZenitWelcome> {
           SizedBox(
             width: 250,
             height: 80,
-            child: ZenitSection(
-              borderRadius: BorderRadius.circular(16),
+            child: Card(
               child: Image.asset(
                 Theme.of(context).darkMode ? "assets/dahliaos_banner_dark.png" : "assets/dahliaos_banner_light.png",
                 fit: BoxFit.cover,

@@ -2,16 +2,10 @@ import 'package:gap/gap.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 import 'package:zenit_ui_example/title.dart';
 
-class ZenitButtonExample extends StatefulWidget {
+class ZenitButtonExample extends StatelessWidget {
   const ZenitButtonExample({super.key});
+  final _kButtonWidth = 160.0;
 
-  @override
-  State<ZenitButtonExample> createState() => _ZenitButtonExampleState();
-}
-
-bool val = true;
-
-class _ZenitButtonExampleState extends State<ZenitButtonExample> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,34 +17,11 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              width: 160,
-              child: ZenitPrimaryButton(
-                onPressed: () => print("PrimaryButton was clicked"),
-                child: const Text("PrimaryButton"),
-              ),
-            ),
+            _filledButton(),
             const Gap(12),
-            SizedBox(
-              width: 160,
-              child: ZenitSecondaryButton(
-                onPressed: () => print("FilledButton was clicked"),
-                child: const Text("SecondaryButton"),
-              ),
-            ),
-          ],
-        ),
-        const Gap(12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 160,
-              child: ZenitTextButton(
-                onPressed: () => print("FilledButton was clicked"),
-                child: const Text("TextButton"),
-              ),
-            ),
+            _solidButton(),
+            const Gap(12),
+            _textButton(),
           ],
         ),
         const Gap(24),
@@ -58,59 +29,59 @@ class _ZenitButtonExampleState extends State<ZenitButtonExample> {
         const Gap(8),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.4 + 256,
-          child: ZenitSection(
+          child: Card(
             child: Column(
               children: [
-                ListTile(
-                  title: const Text(
-                    "A ListTile with a ZenitPrimaryButton",
-                  ),
-                  subtitle: const Text(
-                    "This is the subtitle",
-                  ),
-                  trailing: SizedBox(
-                    width: 160,
-                    child: ZenitPrimaryButton(
-                      onPressed: () => print("Button pressed"),
-                      child: const Text("Primary Button"),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    "A ListTile with a ZenitSecondaryButton",
-                  ),
-                  subtitle: const Text(
-                    "This is the subtitle",
-                  ),
-                  trailing: SizedBox(
-                    width: 160,
-                    child: ZenitSecondaryButton(
-                      onPressed: () => print("Button pressed"),
-                      child: const Text("Secondary Button"),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: const Text(
-                    "A ListTile with a ZenitTextButton",
-                  ),
-                  subtitle: const Text(
-                    "This is the subtitle",
-                  ),
-                  trailing: SizedBox(
-                    width: 160,
-                    child: ZenitTextButton(
-                      onPressed: () => print("Button pressed"),
-                      child: const Text("Text Button"),
-                    ),
-                  ),
-                ),
+                _buttonListTile(trailing: _filledButton(), buttonName: "ZenitFilledButton"),
+                _buttonListTile(trailing: _solidButton(), buttonName: "ZenitSolidButton"),
+                _buttonListTile(trailing: _textButton(), buttonName: "ZenitTextButton"),
               ],
             ),
           ),
         ),
       ],
+    );
+  }
+
+  ListTile _buttonListTile({required Widget trailing, required String buttonName}) {
+    return ListTile(
+      title: Text(
+        "A ListTile with a $buttonName",
+      ),
+      subtitle: const Text(
+        "This is the subtitle",
+      ),
+      trailing: trailing,
+    );
+  }
+
+  SizedBox _textButton() {
+    return SizedBox(
+      width: _kButtonWidth,
+      child: ZenitTextButton(
+        onPressed: () => print("FilledButton was clicked"),
+        child: const Text("TextButton"),
+      ),
+    );
+  }
+
+  SizedBox _solidButton() {
+    return SizedBox(
+      width: _kButtonWidth,
+      child: ZenitSecondaryButton(
+        onPressed: () => print("SolidButton was clicked"),
+        child: const Text("SolidButton"),
+      ),
+    );
+  }
+
+  SizedBox _filledButton() {
+    return SizedBox(
+      width: _kButtonWidth,
+      child: ZenitPrimaryButton(
+        onPressed: () => print("TextButton was clicked"),
+        child: const Text("FilledButton"),
+      ),
     );
   }
 }
