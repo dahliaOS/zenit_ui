@@ -4,54 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/extensions/extensions.dart';
 import 'package:zenit_ui/src/theme/text_theme.dart';
+import 'package:zenit_ui/src/theme/zenit_checkbox_theme.dart';
+import 'package:zenit_ui/src/theme/zenit_radio_button_theme.dart';
+import 'package:zenit_ui/src/theme/zenit_slider_theme.dart';
+import 'package:zenit_ui/src/theme/zenit_switch_theme.dart';
 
 export 'package:zenit_ui/src/extensions/extensions.dart';
+export 'package:zenit_ui/src/theme/text_theme.dart';
+export 'package:zenit_ui/src/theme/zenit_checkbox_theme.dart';
+export 'package:zenit_ui/src/theme/zenit_radio_button_theme.dart';
+export 'package:zenit_ui/src/theme/zenit_slider_theme.dart';
+export 'package:zenit_ui/src/theme/zenit_switch_theme.dart';
 
 mixin ZenitTheme {
-  static ZenitSwitchTheme switchTheme(BuildContext context) {
-    final theme = Theme.of(context);
-    return ZenitSwitchTheme(
-      activeTrackColor: theme.colorScheme.primary,
-      inactiveTrackColor: theme.colorScheme.surface,
-      activeThumbColor: theme.colorScheme.onPrimary,
-      inactiveThumbColor: theme.colorScheme.onSurface.withValues(alpha: 0.35),
-      disabledTrackColor: theme.disabledColor,
-      disabledThumbColor: theme.colorScheme.background,
-      outlineColor: theme.colorScheme.outline,
-    );
-  }
-
-  static ZenitSliderTheme sliderTheme(BuildContext context) {
-    final theme = Theme.of(context);
-    return ZenitSliderTheme(
-      activeTrackColor: theme.primaryColor,
-      trackColor: theme.colorScheme.surface,
-      thumbColor: theme.colorScheme.onPrimary,
-      outlineColor: theme.colorScheme.outline,
-    );
-  }
-
-  static ZenitRadioButtonTheme radioButtonTheme(BuildContext context) {
-    final theme = Theme.of(context);
-    return ZenitRadioButtonTheme(
-      activeBackgroundColor: theme.colorScheme.primary,
-      inactiveBackgroundColor: theme.colorScheme.surface,
-      disabledBackgroundColor: theme.disabledColor,
-      thumbColor: theme.colorScheme.background,
-      outlineColor: theme.colorScheme.outline,
-    );
-  }
-
-  static ZenitCheckboxTheme checkboxTheme(BuildContext context) {
-    final theme = Theme.of(context);
-    return ZenitCheckboxTheme(
-      activeBackgroundColor: theme.colorScheme.primary,
-      inactiveBackgroundColor: theme.colorScheme.surface,
-      foregroundColor: theme.colorScheme.background,
-      disabledBackgroundColor: theme.disabledColor,
-      outlineColor: theme.colorScheme.outline,
-    );
-  }
+  static ZenitSwitchTheme switchTheme(BuildContext context) => Theme.of(context).zenitSwitchTheme;
+  static ZenitSliderTheme sliderTheme(BuildContext context) => Theme.of(context).zenitSliderTheme;
+  static ZenitRadioButtonTheme radioButtonTheme(BuildContext context) => Theme.of(context).zenitRadioButtonTheme;
+  static ZenitCheckboxTheme checkboxTheme(BuildContext context) => Theme.of(context).zenitCheckboxTheme;
 }
 
 ThemeData createZenitTheme({
@@ -173,6 +142,38 @@ ThemeData createZenitTheme({
     ),
   );
 
+  final Iterable<ThemeExtension<dynamic>> themeExtensions = [
+    ZenitSwitchTheme(
+      activeTrackColor: primaryColor,
+      inactiveTrackColor: surfaceColor,
+      activeThumbColor: foregroundColor,
+      inactiveThumbColor: foregroundColor.withValues(alpha: 0.35),
+      disabledTrackColor: disabledColor,
+      disabledThumbColor: backgroundColor,
+      outlineColor: outlineColor,
+    ),
+    ZenitSliderTheme(
+      activeTrackColor: primaryColor,
+      trackColor: surfaceColor,
+      outlineColor: outlineColor,
+      thumbColor: foregroundColor,
+    ),
+    ZenitRadioButtonTheme(
+      activeBackgroundColor: primaryColor,
+      inactiveBackgroundColor: surfaceColor,
+      disabledBackgroundColor: disabledColor,
+      thumbColor: backgroundColor,
+      outlineColor: outlineColor,
+    ),
+    ZenitCheckboxTheme(
+      activeBackgroundColor: primaryColor,
+      inactiveBackgroundColor: surfaceColor,
+      foregroundColor: backgroundColor,
+      disabledBackgroundColor: disabledColor,
+      outlineColor: outlineColor,
+    ),
+  ];
+
   if (brightness == Brightness.light) {
     return ThemeData.from(
       colorScheme: ColorScheme.light(
@@ -198,6 +199,7 @@ ThemeData createZenitTheme({
       listTileTheme: listTileTheme,
       textTheme: textTheme,
       hoverColor: hoverColor,
+      extensions: themeExtensions,
     );
   } else {
     return ThemeData.from(
@@ -225,6 +227,7 @@ ThemeData createZenitTheme({
       listTileTheme: listTileTheme,
       textTheme: textTheme,
       hoverColor: hoverColor,
+      extensions: themeExtensions,
     );
   }
 }
@@ -233,136 +236,8 @@ extension ZenitThemeData on ThemeData {
   bool get darkMode => brightness == Brightness.dark;
   Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.4 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
-}
-
-class ZenitSwitchTheme {
-  final Color activeTrackColor;
-  final Color inactiveTrackColor;
-  final Color activeThumbColor;
-  final Color inactiveThumbColor;
-  final Color disabledTrackColor;
-  final Color disabledThumbColor;
-  final Color outlineColor;
-
-  const ZenitSwitchTheme({
-    required this.activeTrackColor,
-    required this.inactiveTrackColor,
-    required this.activeThumbColor,
-    required this.inactiveThumbColor,
-    required this.disabledTrackColor,
-    required this.disabledThumbColor,
-    required this.outlineColor,
-  });
-
-  ZenitSwitchTheme copyWith({
-    Color? activeTrackColor,
-    Color? inactiveTrackColor,
-    Color? activeThumbColor,
-    Color? inactiveThumbColor,
-    Color? disabledTrackColor,
-    Color? disabledThumbColor,
-    Color? outlineColor,
-  }) {
-    return ZenitSwitchTheme(
-      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
-      inactiveTrackColor: inactiveTrackColor ?? this.inactiveTrackColor,
-      activeThumbColor: activeThumbColor ?? this.activeThumbColor,
-      inactiveThumbColor: inactiveThumbColor ?? this.inactiveThumbColor,
-      disabledTrackColor: disabledTrackColor ?? this.disabledTrackColor,
-      disabledThumbColor: disabledThumbColor ?? this.disabledThumbColor,
-      outlineColor: outlineColor ?? this.outlineColor,
-    );
-  }
-}
-
-class ZenitSliderTheme {
-  final Color activeTrackColor;
-  final Color trackColor;
-  final Color outlineColor;
-  final Color thumbColor;
-
-  const ZenitSliderTheme({
-    required this.activeTrackColor,
-    required this.trackColor,
-    required this.outlineColor,
-    required this.thumbColor,
-  });
-
-  ZenitSliderTheme copyWith({
-    Color? activeTrackColor,
-    Color? trackColor,
-    Color? outlineColor,
-    Color? thumbColor,
-  }) {
-    return ZenitSliderTheme(
-      activeTrackColor: activeTrackColor ?? this.activeTrackColor,
-      trackColor: trackColor ?? this.trackColor,
-      outlineColor: outlineColor ?? this.outlineColor,
-      thumbColor: thumbColor ?? this.thumbColor,
-    );
-  }
-}
-
-class ZenitRadioButtonTheme {
-  final Color activeBackgroundColor;
-  final Color inactiveBackgroundColor;
-  final Color disabledBackgroundColor;
-  final Color thumbColor;
-  final Color outlineColor;
-
-  const ZenitRadioButtonTheme({
-    required this.activeBackgroundColor,
-    required this.inactiveBackgroundColor,
-    required this.disabledBackgroundColor,
-    required this.thumbColor,
-    required this.outlineColor,
-  });
-
-  ZenitRadioButtonTheme copyWith({
-    Color? activeBackgroundColor,
-    Color? inactiveBackgroundColor,
-    Color? disabledBackgroundColor,
-    Color? thumbColor,
-    Color? outlineColor,
-  }) {
-    return ZenitRadioButtonTheme(
-      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
-      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
-      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
-      thumbColor: thumbColor ?? this.thumbColor,
-      outlineColor: outlineColor ?? this.outlineColor,
-    );
-  }
-}
-
-class ZenitCheckboxTheme {
-  final Color activeBackgroundColor;
-  final Color inactiveBackgroundColor;
-  final Color foregroundColor;
-  final Color disabledBackgroundColor;
-  final Color outlineColor;
-
-  const ZenitCheckboxTheme({
-    required this.activeBackgroundColor,
-    required this.inactiveBackgroundColor,
-    required this.foregroundColor,
-    required this.disabledBackgroundColor,
-    required this.outlineColor,
-  });
-
-  ZenitCheckboxTheme copyWith({
-    Color? activeBackgroundColor,
-    Color? inactiveBackgroundColor,
-    Color? foregroundColor,
-    Color? disabledBackgroundColor,
-    Color? outlineColor,
-  }) {
-    return ZenitCheckboxTheme(
-      activeBackgroundColor: activeBackgroundColor ?? this.activeBackgroundColor,
-      inactiveBackgroundColor: inactiveBackgroundColor ?? this.inactiveBackgroundColor,
-      foregroundColor: foregroundColor ?? this.foregroundColor,
-      disabledBackgroundColor: disabledBackgroundColor ?? this.disabledBackgroundColor,
-      outlineColor: outlineColor ?? this.outlineColor,
-    );
-  }
+  ZenitSwitchTheme get zenitSwitchTheme => extension<ZenitSwitchTheme>()!;
+  ZenitSliderTheme get zenitSliderTheme => extension<ZenitSliderTheme>()!;
+  ZenitRadioButtonTheme get zenitRadioButtonTheme => extension<ZenitRadioButtonTheme>()!;
+  ZenitCheckboxTheme get zenitCheckboxTheme => extension<ZenitCheckboxTheme>()!;
 }
