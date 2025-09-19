@@ -56,6 +56,7 @@ ThemeData createZenitTheme({
   disabledColor ??= darkMode ? darkDisabledColor : lightDisabledColor;
   hoverColor ??= darkMode ? darkHoverColor : lightHoverColor;
   final textTheme = createTextTheme(foregroundColor);
+  final onPrimary = primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor;
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -144,7 +145,7 @@ ThemeData createZenitTheme({
     ZenitSwitchTheme(
       activeTrackColor: primaryColor,
       inactiveTrackColor: surfaceColor,
-      activeThumbColor: foregroundColor,
+      activeThumbColor: onPrimary,
       //TODO don't like this...
       inactiveThumbColor: foregroundColor.withValues(alpha: 0.35),
       disabledTrackColor: disabledColor,
@@ -177,9 +178,9 @@ ThemeData createZenitTheme({
     return ThemeData.from(
       colorScheme: ColorScheme.light(
         primary: primaryColor,
-        onPrimary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
+        onPrimary: onPrimary,
         secondary: primaryColor,
-        onSecondary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
+        onSecondary: onPrimary,
         surface: surfaceColor,
         onSurface: foregroundColor,
         outline: outlineColor,
@@ -202,9 +203,9 @@ ThemeData createZenitTheme({
     return ThemeData.from(
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
-        onPrimary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
+        onPrimary: onPrimary,
         secondary: primaryColor,
-        onSecondary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
+        onSecondary: onPrimary,
         surface: surfaceColor,
         onSurface: foregroundColor,
         outline: outlineColor,
