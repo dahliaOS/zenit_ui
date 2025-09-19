@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/extensions/extensions.dart';
@@ -147,6 +145,7 @@ ThemeData createZenitTheme({
       activeTrackColor: primaryColor,
       inactiveTrackColor: surfaceColor,
       activeThumbColor: foregroundColor,
+      //TODO don't like this...
       inactiveThumbColor: foregroundColor.withValues(alpha: 0.35),
       disabledTrackColor: disabledColor,
       disabledThumbColor: backgroundColor,
@@ -181,8 +180,6 @@ ThemeData createZenitTheme({
         onPrimary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
         secondary: primaryColor,
         onSecondary: primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor,
-        background: backgroundColor,
-        onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
         outline: outlineColor,
@@ -208,8 +205,6 @@ ThemeData createZenitTheme({
         onPrimary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
         secondary: primaryColor,
         onSecondary: primaryColor.computeLuminance() > 0.4 ? backgroundColor : foregroundColor,
-        background: backgroundColor,
-        onBackground: foregroundColor,
         surface: surfaceColor,
         onSurface: foregroundColor,
         outline: outlineColor,
