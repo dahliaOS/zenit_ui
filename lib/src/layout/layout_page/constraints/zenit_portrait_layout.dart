@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:zenit_ui/src/layout/layout_page/list_view/zenit_layout_destination_list_view.dart';
 import 'package:zenit_ui/zenit_ui.dart';
 
@@ -74,7 +75,7 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
   MaterialPageRoute pageRoute(int index) {
     return MaterialPageRoute(
       builder: (context) => Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: widget.pageToolbarBuilder?.call(context, index),
         body: widget.pageBuilder(context, index),
       ),
@@ -88,7 +89,7 @@ class _ZenitPortraitLayoutState extends State<ZenitPortraitLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.background.themedLightness(context, 0.05);
+    final sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.surface.themedLightness(context, 0.05);
     return PopScope(
       onPopInvokedWithResult: (bool didPop, result) async => !await navigator.maybePop().then(setPage),
       child: ZenitNavigatorPopTransactionObserver(

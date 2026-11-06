@@ -23,7 +23,7 @@ class ZenitPrimaryButton extends StatelessWidget {
     this.backgroundColor,
     this.hoverColor,
     this.splashColor,
-    this.borderSide,
+    this.borderSide = BorderSide.none,
     this.borderRadius,
     this.child,
   });
@@ -222,7 +222,8 @@ class ZenitButton extends StatelessWidget {
       case ButtonType.text:
         return ZenitTextButton(
           onPressed: onPressed,
-          foregroundColor: foregroundColor ?? HSLColor.fromColor(theme.colorScheme.primary.themedLightness(context, 0.5)).withSaturation(1).toColor(),
+          foregroundColor: foregroundColor ??
+              HSLColor.fromColor(theme.colorScheme.primary.themedLightness(context, 0.5)).withSaturation(1).toColor(),
           backgroundColor: backgroundColor ?? theme.primaryColor.withValues(alpha: 0.3),
           splashColor: splashColor,
           hoverColor: hoverColor,

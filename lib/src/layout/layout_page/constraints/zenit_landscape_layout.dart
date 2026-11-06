@@ -79,7 +79,7 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    final Color sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.background;
+    final Color sidebarColor = widget.sidebarColor ?? Theme.of(context).colorScheme.surface;
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
@@ -120,14 +120,13 @@ class _ZenitLandscapeLayoutState extends State<ZenitLandscapeLayout> {
                       MaterialPage(
                         key: ValueKey(_selectedIndex),
                         child: Scaffold(
-                          backgroundColor: Theme.of(context).colorScheme.background,
+                          backgroundColor: Theme.of(context).colorScheme.surface,
                           appBar: widget.pageToolbarBuilder?.call(context, _selectedIndex),
                           body: widget.pageBuilder(context, _selectedIndex),
                         ),
                       ),
                     ],
-                    //TODO: Check out the effect of this deprecation
-                    onPopPage: (route, result) => route.didPop(result),
+                    onDidRemovePage: (_) {},
                     observers: [
                       ZenitNavigatorCanPopObserver.withContext(context),
                       HeroController(),

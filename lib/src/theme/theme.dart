@@ -3,6 +3,7 @@ import 'package:zenit_ui/src/constants/constants.dart';
 import 'package:zenit_ui/src/extensions/extensions.dart';
 import 'package:zenit_ui/src/theme/text_theme.dart';
 import 'package:zenit_ui/src/theme/zenit_checkbox_theme.dart';
+import 'package:zenit_ui/src/theme/zenit_colors.dart';
 import 'package:zenit_ui/src/theme/zenit_radio_button_theme.dart';
 import 'package:zenit_ui/src/theme/zenit_slider_theme.dart';
 import 'package:zenit_ui/src/theme/zenit_switch_theme.dart';
@@ -33,16 +34,16 @@ ThemeData createZenitTheme({
 }) {
   // Default Values
 
-  const Color lightBackgroundColor = Color(0xFFFAFAFA);
+  const Color lightBackgroundColor = Color(0xFFF6F6F6);
   const Color lightForegroundColor = Color(0xFF000000);
   const Color lightSurfaceColor = Color(0xFFFFFFFF);
   const Color lightOutlineColor = Color(0xFFD2D2D2);
   const Color lightDisabledColor = Color(0xFFAFAFAF);
   const Color lightHoverColor = Color(0x08000000);
   //---
-  const Color darkBackground = Color(0xFF1F1F1F);
+  const Color darkBackground = Color(0xFF1E1E1E);
   const Color darkForeground = Color(0xFFFAFAFA);
-  const Color darkSurfaceColor = Color(0xFF282828);
+  const Color darkSurfaceColor = Color(0xFF262626);
   const Color darkOutlineColor = Color(0xFF454545);
   const Color darkDisabledColor = Color(0xFF7A7A7A);
   const Color darkHoverColor = Color(0x08FFFFFF);
@@ -57,6 +58,16 @@ ThemeData createZenitTheme({
   hoverColor ??= darkMode ? darkHoverColor : lightHoverColor;
   final textTheme = createTextTheme(foregroundColor);
   final onPrimary = primaryColor.computeLuminance() > 0.4 ? foregroundColor : backgroundColor;
+  final componentColor = darkMode ? const Color(0xFF3A3A3A) : const Color(0xFFF5F5F5);
+  final onComponentColor = foregroundColor;
+  final successColor = const Color(0xFF00B26E);
+  final errorColor = const Color(0xFFFF3B30);
+  final warningColor = const Color(0xFFFF9500);
+  final infoColor = const Color(0xFF5AC8FA);
+  final onSuccessColor = successColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  final onErrorColor = errorColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  final onWarningColor = warningColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+  final onInfoColor = infoColor.computeLuminance() > 0.4 ? Colors.black : Colors.white;
 
   // AppBar Theme
   final appBarTheme = AppBarTheme(
@@ -74,7 +85,7 @@ ThemeData createZenitTheme({
   // Card Theme
   final cardTheme = CardThemeData(
     clipBehavior: Clip.antiAlias,
-    color: backgroundColor,
+    color: surfaceColor,
     elevation: 0,
     shape: RoundedRectangleBorder(
       side: BorderSide(width: 1, color: outlineColor),
@@ -172,6 +183,24 @@ ThemeData createZenitTheme({
       disabledBackgroundColor: disabledColor,
       outlineColor: outlineColor,
     ),
+    ZenitColorThemeExtension(
+        primary: primaryColor,
+        onPrimary: onPrimary,
+        background: backgroundColor,
+        onBackground: foregroundColor,
+        surface: surfaceColor,
+        onSurface: foregroundColor,
+        component: componentColor,
+        onComponent: onComponentColor,
+        error: errorColor,
+        onError: onErrorColor,
+        success: successColor,
+        onSuccess: onSuccessColor,
+        warning: warningColor,
+        onWarning: onWarningColor,
+        info: infoColor,
+        onInfo: onInfoColor,
+        outline: outlineColor)
   ];
 
   if (brightness == Brightness.light) {
@@ -228,7 +257,30 @@ ThemeData createZenitTheme({
   }
 }
 
-extension ZenitThemeData on ThemeData {
+ThemeData materialZenitTheme({
+  required Color primaryColor,
+  Color? onPrimaryColor,
+  Color? backgroundColor,
+  Color? onBackgroundColor,
+  Color? surfaceColor,
+  Color? onSurfaceColor,
+  Color? componentColor,
+  Color? onComponentColor,
+  Color? successColor = Colors.green,
+  Color? onSuccessColor,
+  Color? errorColor = Colors.red,
+  Color? onErrorColor,
+  Color? warningColor = Colors.orange,
+  Color? onWarningColor,
+  Color? infoColor = Colors.amber,
+  Color? onInfoColor,
+  Color? outlineColor,
+  Color? iconColor,
+}) {
+  return ThemeData();
+}
+
+extension ZenitThemeDataX on ThemeData {
   bool get darkMode => brightness == Brightness.dark;
   Color get accentForegroundColor => colorScheme.primary.computeLuminance() > 0.4 ? Colors.black : Colors.white;
   Color computedForegroundColor(Color color) => color.computeLuminance() > 0.4 ? Colors.black : Colors.white;
@@ -236,4 +288,95 @@ extension ZenitThemeData on ThemeData {
   ZenitSliderTheme get zenitSliderTheme => extension<ZenitSliderTheme>()!;
   ZenitRadioButtonTheme get zenitRadioButtonTheme => extension<ZenitRadioButtonTheme>()!;
   ZenitCheckboxTheme get zenitCheckboxTheme => extension<ZenitCheckboxTheme>()!;
+}
+
+class ZenitThemeData {
+  final Map<Object, ThemeExtension<dynamic>> extensions;
+
+  final Brightness brightness;
+
+  final Color primary;
+  final Color onPrimary;
+  final Color background;
+  final Color onBackground;
+  final Color surface;
+  final Color onSurface;
+  final Color outline;
+  final Color component;
+  final Color onComponent;
+  final Color success;
+  final Color error;
+  final Color warning;
+  final Color info;
+
+  factory ZenitThemeData({
+    List<ThemeExtension<dynamic>>? extensions,
+    Brightness? brightness,
+    Color? primary,
+    Color? onPrimary,
+    Color? background,
+    Color? onBackground,
+    Color? surface,
+    Color? onSurface,
+    Color? outline,
+    Color? component,
+    Color? onComponent,
+    Color? success,
+    Color? error,
+    Color? warning,
+    Color? info,
+  }) {
+    bool isDarkMode = brightness == Brightness.dark;
+    brightness ??= Brightness.light;
+    primary ??= const Color(0xFF00B26E);
+    onPrimary ??= primary.computeLuminance() > 0.4 ? Colors.black : Colors.white;
+    background ??= isDarkMode ? const Color(0xFF1F1F1F) : const Color(0xFFFAFAFA);
+    onBackground ??= isDarkMode ? const Color(0xFFFAFAFA) : const Color(0xFF000000);
+    surface ??= isDarkMode ? const Color(0xFF282828) : const Color(0xFFFFFFFF);
+    onSurface ??= isDarkMode ? const Color(0xFFFAFAFA) : const Color(0xFF000000);
+    outline ??= isDarkMode ? const Color(0xFF454545) : const Color(0xFFD2D2D2);
+    component ??= isDarkMode ? const Color(0xFF3A3A3A) : const Color(0xFFF5F5F5);
+    onComponent ??= isDarkMode ? const Color(0xFFFAFAFA) : const Color(0xFF000000);
+    success ??= const Color(0xFF00B26E);
+    error ??= const Color(0xFFFF3B30);
+    warning ??= const Color(0xFFFF9500);
+    info ??= const Color(0xFF5AC8FA);
+    return ZenitThemeData._(
+      brightness: brightness,
+      primary: primary,
+      onPrimary: onPrimary,
+      background: background,
+      onBackground: onBackground,
+      surface: surface,
+      onSurface: onSurface,
+      outline: outline,
+      component: component,
+      onComponent: onComponent,
+      success: success,
+      error: error,
+      warning: warning,
+      info: info,
+      extensions: {
+        for (final ext in extensions ?? []) ext.runtimeType: ext,
+      },
+    );
+  }
+
+  const ZenitThemeData._({
+    required this.brightness,
+    required this.extensions,
+    required this.primary,
+    required this.onPrimary,
+    required this.background,
+    required this.onBackground,
+    required this.surface,
+    required this.onSurface,
+    required this.outline,
+    required this.component,
+    required this.onComponent,
+    required this.success,
+    required this.error,
+    required this.warning,
+    required this.info,
+  });
 }

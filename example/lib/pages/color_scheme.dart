@@ -10,9 +10,8 @@ class ColorSchemeExamplePage extends StatelessWidget {
       child: Column(
         children: [
           // Background
-          //TODO - Check in on the change from background to surface
-          colorSchemeDisplay(cs.background, "Background"),
-          colorSchemeDisplay(cs.onBackground, "On Background"),
+          colorSchemeDisplay(cs.surface, "Background"),
+          colorSchemeDisplay(cs.onSurface, "On Background"),
           // Surface
           colorSchemeDisplay(cs.surface, "Surface"),
           colorSchemeDisplay(cs.onSurface, "On Surface"),
